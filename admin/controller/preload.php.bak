@@ -1,0 +1,64 @@
+<?php
+	$dir=dirname(__FILE__) . '/';
+
+	$files=glob($dir . '*/*.php');
+
+	foreach ($files as $file){
+		$content=file_get_contents($file);
+
+		$matches=array();
+
+		preg_match_all('/.*\$this\->load\->model\([^\.]*?\).*/i', $content, $matches);
+
+		//echo '<pre>';print_r(array_shift($matches));echo '</pre>';
+
+		if($matches=array_shift($matches)){
+
+			$match=array();
+
+			foreach($matches as $load){
+				$match[]=preg_replace('/(.*\$this\->load\->model\()|(\).*)/', '', $load);
+			}
+
+			//echo '<pre>';print_r(array_unique($match));echo '</pre>';
+
+			$protected = "\tprotected \$preload_model = array(" . implode(', ', array_unique($match)) . ');';
+
+			//echo '<pre>', $protected, '</pre>';
+
+			$extends = 'extends Controller {';
+
+			$content = preg_replace('/.*\$this\->load\->model\([^\.]*?\).*\n(\s*\n)?/i', '', strtr($content, array($extends=>$extends . "\n" . $protected . "\n")));
+		}
+
+		$matches=array();
+
+		preg_match_all('/.*\$this\->load\->language\([^\.]*?\).*/i', $content, $matches);
+
+		//echo '<pre>';print_r(array_shift($matches));echo '</pre>';
+
+		if($matches=array_shift($matches)){
+
+			$match=array();
+
+			foreach($matches as $load){
+				$match[]=preg_replace('/(.*\$this\->load\->language\()|(\).*)/', '', $load);
+			}
+
+			//echo '<pre>';print_r(array_unique($match));echo '</pre>';
+
+			$protected = "\t" . 'protected $preload_language = array(' . implode(', ', array_unique($match)) . ');';
+
+			//echo '<pre>', $protected, '</pre>';
+
+			$extends = 'extends Controller {';
+
+			$content = preg_replace('/.*\$this\->load\->language\([^\.]*?\).*\n(\s*\n)?/i', '', strtr($content, array($extends=>$extends . "\n" . $protected . "\n")));
+
+			$content = preg_replace('/.*\$this\->data\[.*?\][\=\s]*\$this\->language\->get\([^\.]*?\)[;\s]*\n(\s*\n)?/', '', $content);
+		}
+
+		file_put_contents($file, $content);
+	}
+
+?>
