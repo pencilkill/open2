@@ -22,6 +22,7 @@ $_['column_model']               = '商品型號';
 $_['column_image']               = '圖片';
 $_['column_price']               = '價格';
 $_['column_quantity']            = '數量';
+$_['column_sort_order']			 = '排序';
 $_['column_status']              = '狀態';
 $_['column_action']              = '管理';
 

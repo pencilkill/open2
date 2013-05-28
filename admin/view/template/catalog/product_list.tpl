@@ -43,6 +43,11 @@
                 <?php } else { ?>
                 <a href="<?php echo $sort_quantity; ?>"><?php echo $column_quantity; ?></a>
                 <?php } ?></td>
+              <td class="left"><?php if ($sort == 'p.sort_order') { ?>
+                <a href="<?php echo $sort_sort_order; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_sort_order; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_sort_order; ?>"><?php echo $column_sort_order; ?></a>
+                <?php } ?></td>
               <td class="left"><?php if ($sort == 'p.status') { ?>
                 <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
                 <?php } else { ?>
@@ -59,6 +64,7 @@
               <td><input type="text" name="filter_model" value="<?php echo $filter_model; ?>" /></td>
               <td align="left"><input type="text" name="filter_price" value="<?php echo $filter_price; ?>" size="8"/></td>
               <td align="right"><input type="text" name="filter_quantity" value="<?php echo $filter_quantity; ?>" style="text-align: right;" /></td>
+              <td></td>
               <td><select name="filter_status">
                   <option value="*"></option>
                   <?php if ($filter_status) { ?>
@@ -71,7 +77,8 @@
                   <?php } else { ?>
                   <option value="0"><?php echo $text_disabled; ?></option>
                   <?php } ?>
-                </select></td>
+                </select>
+              </td>
               <td align="right"><a onclick="filter();" class="button"><?php echo $button_filter; ?></a></td>
             </tr>
             <?php if ($products) { ?>
@@ -98,7 +105,13 @@
                 <?php } else { ?>
                 <span style="color: #008000;"><?php echo $product['quantity']; ?></span>
                 <?php } ?></td>
-              <td class="left"><?php echo $product['status']; ?></td>
+               <td class="left"><input postId="<?php echo $product['product_id']; ?>" postType="product" name="sort_order" type="text" size="4" value="<?php echo $product['sort_order']; ?>"></td>
+	            <td class="left">
+	            	<select name="status" postId="<?php echo $product['product_id']; ?>" postType="product">
+						<option value="0"><?php echo $text_disabled; ?></option>
+						<option value="1" <?php if($product['status']=='1') echo 'selected="selected"'?>><?php echo $text_enabled; ?></option>
+					</select>
+				</td>
               <td class="right"><?php foreach ($product['action'] as $action) { ?>
                 [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
                 <?php } ?></td>
@@ -119,47 +132,47 @@
 <script type="text/javascript"><!--
 function filter() {
 	url = 'index.php?route=catalog/product&token=<?php echo $token; ?>';
-	
+
 	var filter_name = $('input[name=\'filter_name\']').attr('value');
-	
+
 	if (filter_name) {
 		url += '&filter_name=' + encodeURIComponent(filter_name);
 	}
-	
+
 	var filter_model = $('input[name=\'filter_model\']').attr('value');
-	
+
 	if (filter_model) {
 		url += '&filter_model=' + encodeURIComponent(filter_model);
 	}
-	
+
 	var filter_price = $('input[name=\'filter_price\']').attr('value');
-	
+
 	if (filter_price) {
 		url += '&filter_price=' + encodeURIComponent(filter_price);
 	}
-	
+
 	var filter_quantity = $('input[name=\'filter_quantity\']').attr('value');
-	
+
 	if (filter_quantity) {
 		url += '&filter_quantity=' + encodeURIComponent(filter_quantity);
 	}
-	
+
 	var filter_status = $('select[name=\'filter_status\']').attr('value');
-	
+
 	if (filter_status != '*') {
 		url += '&filter_status=' + encodeURIComponent(filter_status);
-	}	
+	}
 
 	location = url;
 }
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('#form input').keydown(function(e) {
 	if (e.keyCode == 13) {
 		filter();
 	}
 });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('input[name=\'filter_name\']').autocomplete({
 	delay: 0,
@@ -167,7 +180,7 @@ $('input[name=\'filter_name\']').autocomplete({
 		$.ajax({
 			url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
 			dataType: 'json',
-			success: function(json) {		
+			success: function(json) {
 				response($.map(json, function(item) {
 					return {
 						label: item.name,
@@ -176,10 +189,10 @@ $('input[name=\'filter_name\']').autocomplete({
 				}));
 			}
 		});
-	}, 
+	},
 	select: function(event, ui) {
 		$('input[name=\'filter_name\']').val(ui.item.label);
-						
+
 		return false;
 	},
 	focus: function(event, ui) {
@@ -193,7 +206,7 @@ $('input[name=\'filter_model\']').autocomplete({
 		$.ajax({
 			url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>&filter_model=' +  encodeURIComponent(request.term),
 			dataType: 'json',
-			success: function(json) {		
+			success: function(json) {
 				response($.map(json, function(item) {
 					return {
 						label: item.model,
@@ -202,15 +215,15 @@ $('input[name=\'filter_model\']').autocomplete({
 				}));
 			}
 		});
-	}, 
+	},
 	select: function(event, ui) {
 		$('input[name=\'filter_model\']').val(ui.item.label);
-						
+
 		return false;
 	},
 	focus: function(event, ui) {
       	return false;
    	}
 });
-//--></script> 
+//--></script>
 <?php echo $footer; ?>
