@@ -23,6 +23,14 @@ class ModelCatalogNews extends Model {
 			}
 		}
 
+		if (isset($data['news_layout'])) {
+			foreach ($data['news_layout'] as $store_id => $layout) {
+				if ($layout['layout_id']) {
+					$this->db->query("INSERT INTO " . DB_PREFIX . "news_to_layout SET news_id = '" . (int)$news_id . "', store_id = '" . (int)$store_id . "', layout_id = '" . (int)$layout['layout_id'] . "'");
+				}
+			}
+		}
+
 		if ($data['keyword']) {
 			$data['query']='news_id=' . (int)$news_id;
 
@@ -57,6 +65,16 @@ class ModelCatalogNews extends Model {
 			}
 		}
 
+		$this->db->query("DELETE FROM " . DB_PREFIX . "news_to_layout WHERE news_id = '" . (int)$news_id . "'");
+
+		if (isset($data['news_layout'])) {
+			foreach ($data['news_layout'] as $store_id => $layout) {
+				if ($layout['layout_id']) {
+					$this->db->query("INSERT INTO " . DB_PREFIX . "news_to_layout SET news_id = '" . (int)$news_id . "', store_id = '" . (int)$store_id . "', layout_id = '" . (int)$layout['layout_id'] . "'");
+				}
+			}
+		}
+
 		$this->db->delete(DB_PREFIX . 'url_alias', array('query'=>'news_id='.(int)$news_id));
 
 		if ($data['keyword']) {
@@ -72,6 +90,7 @@ class ModelCatalogNews extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "news WHERE news_id = '" . (int)$news_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "news_description WHERE news_id = '" . (int)$news_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "news_to_store WHERE news_id = '" . (int)$news_id . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "news_to_layout WHERE news_id = '" . (int)$news_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'news_id=" . (int)$news_id . "'");
 
 		$this->cache->delete('news');
@@ -159,6 +178,18 @@ class ModelCatalogNews extends Model {
 		}
 
 		return $news_store_data;
+	}
+
+	public function getNewsLayouts($news_id) {
+		$news_layout_data = array();
+
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "news_to_layout WHERE news_id = '" . (int)$news_id . "'");
+
+		foreach ($query->rows as $result) {
+			$news_layout_data[$result['store_id']] = $result['layout_id'];
+		}
+
+		return $news_layout_data;
 	}
 
 	public function getTotalNewses() {

@@ -2,7 +2,7 @@
 class ControllerCatalogNews extends Controller {
 	protected $preload_language=array('catalog/news');
 
-	protected $preload_model = array('catalog/news', 'localisation/language', 'setting/store');
+	protected $preload_model = array('catalog/news', 'localisation/language', 'setting/store', 'design/layout');
 
 	private $error = array();
 
@@ -352,6 +352,16 @@ class ControllerCatalogNews extends Controller {
 		} else {
 			$this->data['date_added'] = date('Y-m-d');
 		}
+
+		if (isset($this->request->post['news_layout'])) {
+			$this->data['news_layout'] = $this->request->post['news_layout'];
+		} elseif (isset($this->request->get['news_id'])) {
+			$this->data['news_layout'] = $this->model_catalog_news->getNewsLayouts($this->request->get['news_id']);
+		} else {
+			$this->data['news_layout'] = array();
+		}
+
+		$this->data['layouts'] = $this->model_design_layout->getLayouts();
 
 		$this->template = 'catalog/news_form.tpl';
 		$this->children = array(

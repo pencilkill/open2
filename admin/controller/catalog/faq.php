@@ -1,6 +1,6 @@
 <?php
 class ControllerCatalogFaq extends Controller {
-	protected $preload_model = array('catalog/faq', 'localisation/language', 'setting/store');
+	protected $preload_model = array('catalog/faq', 'localisation/language', 'setting/store', 'design/layout');
 
 	protected $preload_language=array('catalog/faq');
 
@@ -346,6 +346,16 @@ class ControllerCatalogFaq extends Controller {
 		} else {
 			$this->data['sort_order'] = 0;
 		}
+
+		if (isset($this->request->post['faq_layout'])) {
+			$this->data['faq_layout'] = $this->request->post['faq_layout'];
+		} elseif (isset($this->request->get['faq_id'])) {
+			$this->data['faq_layout'] = $this->model_catalog_faq->getFaqLayouts($this->request->get['faq_id']);
+		} else {
+			$this->data['faq_layout'] = array();
+		}
+
+		$this->data['layouts'] = $this->model_design_layout->getLayouts();
 
 		$this->template = 'catalog/faq_form.tpl';
 		$this->children = array(

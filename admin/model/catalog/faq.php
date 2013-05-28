@@ -23,6 +23,14 @@ class ModelCatalogFaq extends Model {
 			}
 		}
 
+		if (isset($data['faq_layout'])) {
+			foreach ($data['faq_layout'] as $store_id => $layout) {
+				if ($layout['layout_id']) {
+					$this->db->query("INSERT INTO " . DB_PREFIX . "faq_to_layout SET faq_id = '" . (int)$faq_id . "', store_id = '" . (int)$store_id . "', layout_id = '" . (int)$layout['layout_id'] . "'");
+				}
+			}
+		}
+
 		if ($data['keyword']) {
 			$data['query']='faq_id=' . (int)$faq_id;
 
@@ -57,6 +65,16 @@ class ModelCatalogFaq extends Model {
 			}
 		}
 
+		$this->db->query("DELETE FROM " . DB_PREFIX . "faq_to_layout WHERE faq_id = '" . (int)$faq_id . "'");
+
+		if (isset($data['faq_layout'])) {
+			foreach ($data['faq_layout'] as $store_id => $layout) {
+				if ($layout['layout_id']) {
+					$this->db->query("INSERT INTO " . DB_PREFIX . "faq_to_layout SET faq_id = '" . (int)$faq_id . "', store_id = '" . (int)$store_id . "', layout_id = '" . (int)$layout['layout_id'] . "'");
+				}
+			}
+		}
+
 		$this->db->delete(DB_PREFIX . 'url_alias', array('query'=>'faq_id='.(int)$faq_id));
 
 		if ($data['keyword']) {
@@ -72,6 +90,7 @@ class ModelCatalogFaq extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "faq WHERE faq_id = '" . (int)$faq_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "faq_description WHERE faq_id = '" . (int)$faq_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "faq_to_store WHERE faq_id = '" . (int)$faq_id . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "faq_to_layout WHERE faq_id = '" . (int)$faq_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'faq_id=" . (int)$faq_id . "'");
 
 		$this->cache->delete('faq');
@@ -159,6 +178,18 @@ class ModelCatalogFaq extends Model {
 		}
 
 		return $faq_store_data;
+	}
+
+	public function getFaqLayouts($faq_id) {
+		$faq_layout_data = array();
+
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "faq_to_layout WHERE faq_id = '" . (int)$faq_id . "'");
+
+		foreach ($query->rows as $result) {
+			$faq_layout_data[$result['store_id']] = $result['layout_id'];
+		}
+
+		return $faq_layout_data;
 	}
 
 	public function getTotalFaqs() {
