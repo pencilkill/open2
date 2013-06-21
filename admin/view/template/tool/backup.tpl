@@ -14,7 +14,7 @@
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/backup.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#restore').submit();" class="button"><?php echo $button_restore; ?></a><a onclick="$('#backup').submit();" class="button"><?php echo $button_backup; ?></a><a onclick="$('#import').submit();" class="button"><?php echo $button_import; ?></a></div>
+      <div class="buttons"><a onclick="$('#restore').submit();" class="button"><?php echo $button_restore; ?></a><a onclick="$('#backup').submit();" class="button"><?php echo $button_backup; ?></a></div>
     </div>
     <div class="content">
       <form action="<?php echo $restore; ?>" method="post" enctype="multipart/form-data" id="restore">
@@ -42,24 +42,7 @@
           </tr>
         </table>
       </form>
-      <form action="<?php echo $import; ?>" method="post" enctype="multipart/form-data" id="import">
-        <table class="form">
-          <tr>
-            <td><?php echo $entry_import; ?></td>
-            <td><input type="file" name="import" /></td>
-          </tr>
-          <tr style="display:none;">
-            <td><?php echo $entry_model?></td>
-            <td><div id="formelement"></div></td>
-          </tr>
-        </table>
-      </form>
     </div>
   </div>
 </div>
-<script type="text/javascript">
-$.get('<?php echo html_entity_decode($formelement); ?>',function(data){
-	$('#formelement').append($(data).find('#form').html());
-});
-</script>
 <?php echo $footer; ?>

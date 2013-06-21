@@ -59,18 +59,14 @@ class ControllerToolBackup extends Controller {
       		'separator' => ' :: '
       		);
 
-      		$this->data['formelement'] = $this->url->link('catalog/product/insert', 'token=' . $this->session->data['token'], 'SSL');
+      	$this->data['restore'] = $this->url->link('tool/backup', 'token=' . $this->session->data['token'], 'SSL');
 
-      		$this->data['restore'] = $this->url->link('tool/backup', 'token=' . $this->session->data['token'], 'SSL');
+      	$this->data['backup'] = $this->url->link('tool/backup/backup', 'token=' . $this->session->data['token'], 'SSL');
 
-      		$this->data['backup'] = $this->url->link('tool/backup/backup', 'token=' . $this->session->data['token'], 'SSL');
+      	$this->data['tables'] = $this->model_tool_backup->getTables();
 
-      		$this->data['import'] = $this->url->link('tool/backup/import', 'token=' . $this->session->data['token'], 'SSL');
-
-      		$this->data['tables'] = $this->model_tool_backup->getTables();
-
-      		$this->template = 'tool/backup.tpl';
-      		$this->children = array(
+      	$this->template = 'tool/backup.tpl';
+      	$this->children = array(
 		'common/header',
 		'common/footer'
 		);
@@ -97,100 +93,6 @@ class ControllerToolBackup extends Controller {
 
 			$this->redirect($this->url->link('tool/backup', 'token=' . $this->session->data['token'], 'SSL'));
 		}
-	}
-
-	public function import() {
-		if (!isset($this->request->files['import'])) {
-			$this->session->data['error'] = $this->language->get('error_backup');
-
-		} elseif ($this->request->server['REQUEST_METHOD'] == 'POST' && $this->user->hasPermission('modify', 'tool/backup')) {
-			if (is_uploaded_file($this->request->files['import']['tmp_name'])) {
-				//$content = file_get_contents($this->request->files['import']['tmp_name']);
-				$content = true;
-			} else {
-				$content = false;
-			}
-
-			if ($content) {
-				ini_set('memory', '1024M');
-				ini_set('max_execution_time', '3600');
-
-				$excel = new Excel();
-
-				$excel->initialized($this->request->files['import']['tmp_name']);
-
-				$totalRow=(int)$excel->allRow;
-
-				$beginRow = 2;
-
-				$limit = 99;
-
-				do{
-					$endRow= ($limit && (($beginRow + $limit) < $totalRow)) ? ($beginRow + $limit) : $totalRow;
-
-					$data=$excel->fetch($beginRow, $endRow);
-
-					$this->dataInsert($data, $import);
-
-					unset($data);
-
-					$beginRow=$endRow + 1;
-
-				}while($endRow < $totalRow);
-
-				$this->session->data['success'] = $this->language->get('text_success');
-
-			} else {
-				$this->error['warning'] = $this->language->get('error_empty');
-			}
-
-		} else {
-			$this->session->data['error'] = $this->language->get('error_permission');
-
-		}
-		$this->redirect($this->url->link('tool/backup', 'token=' . $this->session->data['token'], 'SSL'));
-	}
-
-	public function dataInsert($data, $import) {
-		//		默認關閉
-		return true;
-
-		$this->db->trans_begin();
-
-		foreach($data as $row){
-			$add=$this->request->post;
-
-			//			數據整合 ...
-
-			//			echo '<pre>';print_r($add);echo '</pre>';
-			//			exit();
-
-			$this->model_catalog_product->addProduct($add);
-
-			unset($add);
-		}
-
-		$this->db->trans_commit();
-
-		unset($data);
-
-		return true;
-	}
-
-	public function dataDelete() {
-		//		默認關閉
-		return true;
-
-		ini_set('memory', '1024M');
-		ini_set('max_execution_time', '3600');
-
-		$query=$this->db->query("SELECT product_id FROM " . DB_PREFIX . "product");
-
-		foreach ($query->rows as $row){
-			$this->model_catalog_product->deleteProduct($row['product_id']);
-		}
-
-		return true;
 	}
 }
 ?>

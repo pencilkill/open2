@@ -18,7 +18,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['links'] = $this->document->getLinks();
 		$this->data['styles'] = $this->document->getStyles();
 		$this->data['scripts'] = $this->document->getScripts();
-		
+
 		$this->data['lang'] = $this->language->get('code');
 		$this->data['direction'] = $this->language->get('direction');
 
@@ -92,6 +92,7 @@ class ControllerCommonHeader extends Controller {
 
 			$this->data['news'] = $this->url->link('catalog/news', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['faq'] = $this->url->link('catalog/faq', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['import'] = $this->url->link('tool/import', 'token=' . $this->session->data['token'], 'SSL');
 
 			$this->data['stores'] = array();
 

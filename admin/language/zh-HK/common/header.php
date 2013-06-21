@@ -81,5 +81,6 @@ $_['text_length_class']                = '長度單位';
 $_['text_zone']                        = '國家地區';
 
 $_['text_news']                        = '最新消息';
-$_['text_faq']                        = '產品Q&A';
+$_['text_faq']                         = '商品Q&A';
+$_['text_import']                      = '商品匯入';
 ?>
