@@ -609,7 +609,6 @@
                         }
                         
                         if (response) {
-                        	console.log(response);
                             response = eval("(" + response + ")");
                         } else {
                             response = {};
