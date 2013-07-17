@@ -28,8 +28,10 @@ class ControllerToolImport extends Controller {
 		        	$output .= 'alert("錯誤：建議您做少量多次匯入，避免操作失敗！");';
 					$output .= 'window.parent.location.href = window.parent.location.href;';
 		        	$output .= '</script>';
-
+		        	
+		        	ob_clean();
 		        	echo $output;
+		        	exit();
 		        }
 			});
 
@@ -60,9 +62,9 @@ class ControllerToolImport extends Controller {
 				$output .= 'window.parent.location.href = window.parent.location.href;';
 	        	$output .= '</script>';
 
+	        	ob_clean();
 	        	echo $output;
-
-	        	die();
+	        	exit();
 			}
 			catch(Exception $e)
 			{
@@ -179,41 +181,6 @@ class ControllerToolImport extends Controller {
 
 			if(isset($row['model'])){
 				$add['model'] = $row['model'];
-			}
-			if(isset($row['name'])){
-				$add['product_description'][3]['name'] = $row['name'];
-			}
-			if(isset($row['link'])){
-				$add['product_description'][3]['pplj'] = urldecode($row['link']);
-			}
-			if(isset($row['brand'])){
-				$add['product_description'][3]['ppmc'] = $row['brand'];
-			}
-			if(isset($row['size'])){
-				$add['product_description'][3]['zycf'] = $row['size'];
-			}
-			if(isset($row['application'])){
-				$add['product_description'][3]['syff'] = $row['application'];
-			}
-			if(isset($row['sheet'])){
-				$link = urldecode($row['sheet']);
-				if(parse_url($link, PHP_URL_SCHEME) != ''){
-					$add['product_description'][3]['sypf'] = substr($link, strrpos($link, '/') + 1);
-					$add['product_description'][3]['dslk'] = $link;
-				}else{
-					$pdf = $row['sheet'];
-					if($pdf && (pathinfo($pdf, PATHINFO_EXTENSION)=='' || pathinfo($pdf, PATHINFO_EXTENSION)!='pdf')){
-						$pdf = $pdf . '.pdf';
-					}
-					$add['product_description'][3]['sypf'] = $pdf;
-					$add['product_description'][3]['dslk'] = $pdf ? 'data_sheet/' . $pdf : $pdf;
-				}
-			}
-			if(isset($row['introduction'])){
-				$add['product_description'][3]['jyjs'] = $row['introduction'];
-			}
-			if(isset($row['description'])){
-				$add['product_description'][3]['description'] = $row['description'];
 			}
 
 			$add['product_category'] = array($category_id);
