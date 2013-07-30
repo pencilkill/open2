@@ -1,9 +1,9 @@
 <?php
 // Heading
-$_['heading_title']     	= '產品Q&A';
+$_['heading_title']     	= '商品問答';
 
 // Text
-$_['text_success']      	= '已成功修改產品Q&A!';
+$_['text_success']      	= '已成功修改商品問答!';
 $_['text_default']      	= '預設';
 
 // Column
