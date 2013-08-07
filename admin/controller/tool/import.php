@@ -28,7 +28,7 @@ class ControllerToolImport extends Controller {
 		        	$output .= 'alert("錯誤：建議您做少量多次匯入，避免操作失敗！");';
 					$output .= 'window.parent.location.href = window.parent.location.href;';
 		        	$output .= '</script>';
-		        	
+
 		        	ob_clean();
 		        	echo $output;
 		        	exit();
@@ -102,7 +102,9 @@ class ControllerToolImport extends Controller {
        		'text'      => $this->language->get('heading_title'),
 			'href'      => $this->url->link('tool/import', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
-      		);
+      	);
+
+      	$this->data['tmpl_new'] = html_entity_decode($this->url->link('catalog/product/insert', 'token=' . $this->session->data['token'], 'SSL'), ENT_QUOTES, 'UTF-8');
 
       	$this->data['import'] = $this->url->link('tool/import', 'token=' . $this->session->data['token'], 'SSL');
 
@@ -114,7 +116,6 @@ class ControllerToolImport extends Controller {
       		$this->data['tmpl_doc'] = HTTPS_IMAGE . 'productImportTemplate.doc';
       	}
 
-		$this->data['tmpl_new'] = html_entity_decode($this->url->link('catalog/product/insert', 'token=' . $this->session->data['token'], 'SSL'), ENT_QUOTES, 'UTF-8');
 
       	$this->template = 'tool/import.tpl';
       	$this->children = array(

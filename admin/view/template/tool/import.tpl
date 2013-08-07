@@ -45,11 +45,15 @@
     </div>
   </div>
 </div>
+<?php // 使用 iframe 完成整個頁面加載?>
+<iframe id="iframeTemplate" name="iframeTemplate" src="<?php echo $tmpl_new?>" frameborder='0' style="display:none;"></iframe>
 <script type="text/javascript">
 jQuery(function($){
-	$.get('<?php echo $tmpl_new?>', {}, function(data){
-		$('#productTemplate').html($(data).find('#form').html());
-		$('#productImport').attr('onclick', "$('#import').submit();$('#loadImport').show();");
+	$('#iframeTemplate').load(function(){
+		$(window.frames["iframeTemplate"].document).ready(function(){
+			$('#productTemplate').html($(window.frames["iframeTemplate"].document).find('#form').html());
+			$('#productImport').attr('onclick', "$('#import').submit();$('#loadImport').show();");
+		});
 	});
 });
 </script>
