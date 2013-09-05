@@ -84,8 +84,8 @@ jQuery(function($){
           <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
         </ul>
       </li>
-	  <li><a href="<?php echo $news; ?>" class="top"><?php echo $text_news; ?></a></li>
-      <li><a href="<?php echo $faq; ?>" class="top"><?php echo $text_faq; ?></a></li>
+	  <li id="news"><a href="<?php echo $news; ?>" class="top"><?php echo $text_news; ?></a></li>
+      <li id="faq"><a href="<?php echo $faq; ?>" class="top"><?php echo $text_faq; ?></a></li>
       <li id="extension"><a class="top"><?php echo $text_extension; ?></a>
         <ul>
           <li><a href="<?php echo $module; ?>"><?php echo $text_module; ?></a></li>
@@ -161,6 +161,7 @@ jQuery(function($){
           <li><a href="<?php echo $error_log; ?>"><?php echo $text_error_log; ?></a></li>
           <li><a href="<?php echo $backup; ?>"><?php echo $text_backup; ?></a></li>
           <li><a href="<?php echo $import; ?>"><?php echo $text_import; ?></a></li>
+          <li><a href="<?php echo $cache; ?>"><?php echo $text_cache; ?></a></li>
         </ul>
       </li>
       <li id="reports"><a class="top"><?php echo $text_reports; ?></a>

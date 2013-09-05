@@ -26,7 +26,7 @@ define('DIR_TEMPLATE', DIR_PATH . 'catalog/view/theme/');
 define('DIR_CONFIG', DIR_PATH . 'system/config/');
 define('DIR_IMAGE', DIR_PATH . 'upload/');
 define('DIR_CACHE', DIR_PATH . 'cache/');
-define('DIR_DOWNLOAD', DIR_PATH . 'download/');
+define('DIR_DOWNLOAD', DIR_PATH . 'upload/download/');
 define('DIR_LOGS', DIR_PATH . 'cache/');
 
 define('DIR_EXTENSION', DIR_PATH . 'extension/');

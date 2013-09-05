@@ -76,7 +76,7 @@ class ControllerCatalogCategory extends Controller {
 
 		$this->data['categories'] = array();
 
-		$results = $this->model_catalog_category->getCategories(0);
+		$results = $this->model_catalog_category->getChildren((int)$this->request->get['category_id']);
 
 		foreach ($results as $result) {
 			$action = array();
@@ -84,6 +84,10 @@ class ControllerCatalogCategory extends Controller {
 			$action[] = array(
 				'text' => $this->language->get('text_edit'),
 				'href' => $this->url->link('catalog/category/update', 'token=' . $this->session->data['token'] . '&category_id=' . $result['category_id'], 'SSL')
+			);
+			$action[] = array(
+				'text' => $this->language->get('text_categoies'),
+				'href' => $this->url->link('catalog/category/index', 'token=' . $this->session->data['token'] . '&category_id=' . $result['category_id'], 'SSL')
 			);
 
 			$this->data['categories'][] = array(

@@ -83,4 +83,5 @@ $_['text_zone']                        = '國家地區';
 $_['text_news']                        = '最新消息';
 $_['text_faq']                         = '商品問答';
 $_['text_import']                      = '商品匯入';
+$_['text_cache']                       = '緩存管理';
 ?>

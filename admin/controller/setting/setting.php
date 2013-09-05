@@ -934,5 +934,9 @@ class ControllerSettingSetting extends Controller {
 
 		$this->response->setOutput(json_encode($json));
 	}
+
+	public function clearCache(){
+		$this->cache->clear();
+	}
 }
 ?>

@@ -8,12 +8,13 @@ $_['text_default']               = '默認';
 $_['text_image_manager']         = '圖片管理';
 $_['text_browse']              	 = '選擇圖像';
 $_['text_clear']                 = '清除圖像';
+$_['text_categoies']             = '分類';
 
 // Column
 $_['column_name']                = '分類名稱';
 $_['column_sort_order']          = '分類順序';
 $_['column_status']          	 = '分類狀態';
-$_['column_action']              = '編輯分類';
+$_['column_action']              = '操作';
 
 // Entry
 $_['entry_name']                 = '分類名稱：';
