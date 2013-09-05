@@ -98,7 +98,13 @@ require_once(DIR_SYSTEM . 'library/response.php');
 require_once(DIR_SYSTEM . 'library/session.php');
 require_once(DIR_SYSTEM . 'library/template.php');
 
+require_once(DIR_SYSTEM . 'library/fck.php');
+
 // Extension
-require_once(DIR_EXTENSION . 'fck.php');
-require_once(DIR_EXTENSION . 'excel.php');
+if(is_file(DIR_EXTENSION . 'startup.php')){
+	$exts = require_once(DIR_EXTENSION . 'startup.php');
+	foreach($exts as $ext){
+		require_once($ext);
+	}
+}
 ?>
