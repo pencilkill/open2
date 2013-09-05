@@ -4,7 +4,7 @@
  * @author Sam,sam@ozchamp.net
  *
  */
-require_once DIR_EXTENSION . 'PHPExcel.php';
+require_once __DIR__ . '/Excel/PHPExcel.php';
 class Excel
 {
 	public $currentSheet;
