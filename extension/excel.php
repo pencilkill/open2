@@ -15,9 +15,11 @@ class Excel
 
 	public $sheetIndex=0;
 
-	public $allColumn;
+	public $highestColumn;
 
-	public $allRow;
+	public $highestColumnIndex;
+
+	public $highestRow;
 
 	public function initialized($filePath) {
 		if (file_exists($filePath)) {
@@ -85,40 +87,42 @@ class Excel
 
 		//$this->currentSheet = $PHPExcel->getActiveSheet();
 
-		$this->allColumn=$this->currentSheet->getHighestColumn();
+		$this->highestColumn=$this->currentSheet->getHighestColumn();	// e.g. F
 
-		$this->allRow=$this->currentSheet->getHighestRow();
+		$this->highestColumnIndex = PHPExcel_Cell::columnIndexFromString($this->highestColumn);	// e.g. 5
+
+		$this->highestRow=$this->currentSheet->getHighestRow();	// e.g. 10
 	}
 
 	public function fetch($beginRow=NULL, $endRow=NULL){
 		$currentSheet=$this->currentSheet;
 
-		$allColumn=$this->allColumn;
+		$highestColumnIndex=$this->highestColumnIndex;
 
-		$allRow=$this->allRow;
+		$highestRow=$this->highestRow;
 
 		$dataSrc=$data=array();
 
 		//獲取列標題
-		for($currentColumn= 'A';$currentColumn<= $allColumn; $currentColumn++){
-			$val = $currentSheet->getCellByColumnAndRow(ord($currentColumn) - 65, 1)->getValue();//ord()將字符轉爲十進制數
+		for($currentColumnIndex=0; $currentColumnIndex<= $highestColumnIndex; $currentColumnIndex++){
+			$val = $currentSheet->getCellByColumnAndRow($currentColumnIndex, 1)->getValue();
 
-			$dataSrc[ord($currentColumn) - 65]=strtolower(trim($val));
+			$dataSrc[$currentColumnIndex]=strtolower(trim($val));
 		}
 
 		//echo implode("\t", $dataSrc);
 
 		$beginRow=$beginRow ? $beginRow : 2;
 
-		$endRow=$endRow ? $endRow : $allRow;
+		$endRow=$endRow ? $endRow : $highestRow;
 
 		for($currentRow = $beginRow ;$currentRow <= $endRow ;$currentRow++){
 			$dataRow=array();
 
-			for($currentColumn= 'A';$currentColumn<= $allColumn; $currentColumn++){
-				$val = $currentSheet->getCellByColumnAndRow(ord($currentColumn) - 65,$currentRow)->getValue();//ord()將字符轉爲十進制數
+			for($currentColumnIndex=0; $currentColumnIndex<= $highestColumnIndex; $currentColumnIndex++){
+				$val = $currentSheet->getCellByColumnAndRow($currentColumnIndex,$currentRow)->getValue();
 
-				$dataRow[$dataSrc[ord($currentColumn) - 65]]=$val;
+				$dataRow[$dataSrc[$currentColumnIndex]]=$val;
 
 				//單元級數據處理 ... 格式化日期等
 			}
