@@ -31,7 +31,7 @@ define('DIR_DOWNLOAD', DIR_PATH . 'upload/download/');
 define('DIR_LOGS', DIR_PATH . 'cache/');
 define('DIR_CATALOG', DIR_PATH . 'catalog/');
 
-define('DIR_EXTENSION', DIR_PATH . 'extension/');
+define('DIR_EXT', DIR_PATH . 'ext/');
 // DB
 require_once DIR_PATH . 'database.php';
 ?>

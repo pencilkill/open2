@@ -133,8 +133,6 @@ class ControllerToolImport extends Controller {
 
 		if(empty($category_id)) return false;
 
-		require_once DIR_EXTENSION . 'excel.php';
-
 		ini_set('memory', '1024M');
 		ini_set('max_execution_time', '36000');
 

@@ -6,7 +6,6 @@ define('DIR_PATH', strtr(dirname(__FILE__) . '/', array('\\'=>'/','\/'=>'/')));
 define('HTTP_PATH', strtr('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'], array(strtr($_SERVER['SCRIPT_FILENAME'], array(DIR_PATH=>''))=>'')));
 define('HTTP_SERVER', HTTP_PATH);
 define('HTTP_IMAGE', HTTP_PATH . 'upload/');
-define('HTTP_ADMIN', HTTP_PATH . 'admin/');
 
 // HTTPS
 if(isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))){
@@ -29,7 +28,7 @@ define('DIR_CACHE', DIR_PATH . 'cache/');
 define('DIR_DOWNLOAD', DIR_PATH . 'upload/download/');
 define('DIR_LOGS', DIR_PATH . 'cache/');
 
-define('DIR_EXTENSION', DIR_PATH . 'extension/');
+define('DIR_EXT', DIR_PATH . 'ext/');
 
 // DB
 require_once DIR_PATH . 'database.php';
