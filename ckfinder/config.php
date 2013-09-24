@@ -30,12 +30,14 @@ function CheckAuthentication()
 	// ... where $_SESSION['IsAuthorized'] is set to "true" as soon as the
 	// user logs in your system. To be able to use session variables don't
 	// forget to add session_start() at the top of this file.
-
+	/*
 	if(isset($_SESSION['user_id'])){
 		return true;
 	}else{
 		return false;
 	}
+	*/
+	return true;
 }
 
 // LicenseKey : Paste your license key here. If left blank, CKFinder will be

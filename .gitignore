@@ -5,5 +5,7 @@
 .settings/
 
 !index.html
+!/upload/download
+!/upload/import
 
 
