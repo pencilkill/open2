@@ -85,7 +85,6 @@ jQuery(function($){
         </ul>
       </li>
 	  <li id="news"><a href="<?php echo $news; ?>" class="top"><?php echo $text_news; ?></a></li>
-      <li id="faq"><a href="<?php echo $faq; ?>" class="top"><?php echo $text_faq; ?></a></li>
       <li id="extension"><a class="top"><?php echo $text_extension; ?></a>
         <ul>
           <li><a href="<?php echo $module; ?>"><?php echo $text_module; ?></a></li>

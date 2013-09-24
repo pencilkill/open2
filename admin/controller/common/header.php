@@ -91,7 +91,6 @@ class ControllerCommonHeader extends Controller {
 			$this->data['zone'] = $this->url->link('localisation/zone', 'token=' . $this->session->data['token'], 'SSL');
 
 			$this->data['news'] = $this->url->link('catalog/news', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['faq'] = $this->url->link('catalog/faq', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['import'] = $this->url->link('tool/import', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['cache'] = $this->url->link('tool/cache', 'token=' . $this->session->data['token'], 'SSL');
 
