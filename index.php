@@ -14,15 +14,6 @@ if (!defined('DIR_APPLICATION')) {
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
 
-// Registry
-$registry = new Registry();
-// Database
-$db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-$registry->set('db', $db);
-var_dump($registry->get('db')->get('banner'));
-die();
-
-
 // Application Classes
 require_once(DIR_SYSTEM . 'library/customer.php');
 require_once(DIR_SYSTEM . 'library/affiliate.php');
