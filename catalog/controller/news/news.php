@@ -105,7 +105,7 @@ class ControllerNewsNews extends Controller {
 		}
   	}
 
-	public function news() {
+	public function info() {
 		$this->data['breadcrumbs'] = array();
 
       	$this->data['breadcrumbs'][] = array(
@@ -139,7 +139,7 @@ class ControllerNewsNews extends Controller {
 
       		$this->data['title'] = $news_info['title'];
 
-			$this->data['date_added'] = date("Y-m-d A h:i:s", strtotime($news_info['date_added']));
+			$this->data['date_added'] = date("Y-m-d", strtotime($news_info['date_added']));
 
 			$this->data['description'] = html_entity_decode($news_info['description']);
 
