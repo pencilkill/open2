@@ -32,6 +32,11 @@
 	              <?php } else { ?>
 	              <a href="<?php echo $sort_sort_order; ?>"><?php echo $column_sort_order; ?></a>
 	              <?php } ?></td>
+	            <td class="right"><?php if ($sort == 'n.date_added') { ?>
+	              <a href="<?php echo $sort_date_added; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date_added; ?></a>
+	              <?php } else { ?>
+	              <a href="<?php echo $sort_date_added; ?>"><?php echo $column_date_added; ?></a>
+	              <?php } ?></td>
 	            <td class="right"><?php if ($sort == 'n.status') { ?>
 	              <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
 	              <?php } else { ?>
@@ -41,6 +46,27 @@
 	          </tr>
 	        </thead>
 	        <tbody>
+	          <tr class="filter">
+              <td></td>
+              <td><input type="text" name="filter_title" value="<?php echo $filter_title; ?>" /></td>
+              <td class="right"></td>
+              <td class="right"></td>
+              <td class="right"><select name="filter_status">
+                  <option value="*"></option>
+                  <?php if ($filter_status) { ?>
+                  <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                  <?php } else { ?>
+                  <option value="1"><?php echo $text_enabled; ?></option>
+                  <?php } ?>
+                  <?php if (!is_null($filter_status) && !$filter_status) { ?>
+                  <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                  <?php } else { ?>
+                  <option value="0"><?php echo $text_disabled; ?></option>
+                  <?php } ?>
+                </select>
+              </td>
+              <td align="right"><a onclick="filter();" class="button"><?php echo $button_filter; ?></a></td>
+            </tr>
 	          <?php if ($newses) { ?>
 	          <?php foreach ($newses as $news) { ?>
 	          <tr>
@@ -51,6 +77,7 @@
 	              <?php } ?></td>
 	            <td class="left"><?php echo $news['title']; ?></td>
 	            <td class="right"><input postId="<?php echo $news['news_id']; ?>" postType="news" name="sort_order" type="text" size="4" value="<?php echo $news['sort_order']; ?>"></td>
+	            <td class="right"><?php echo $news['date_added']; ?></td>
 	            <td class="right">
 	            	<select name="status" postId="<?php echo $news['news_id']; ?>" postType="news">
 						<option value="0"><?php echo $text_disabled; ?></option>
@@ -64,7 +91,7 @@
 	          <?php } ?>
 	          <?php } else { ?>
 	          <tr>
-	            <td class="center" colspan="5"><?php echo $text_no_results; ?></td>
+	            <td class="center" colspan="6"><?php echo $text_no_results; ?></td>
 	          </tr>
 	          <?php } ?>
 	        </tbody>
@@ -74,4 +101,36 @@
 	  </div>
 	</div>
 </div>
+<script type="text/javascript"><!--
+function filter() {
+	url = 'index.php?route=catalog/news&token=<?php echo $token; ?>';
+
+	var filter_title = $('input[name=\'filter_title\']').attr('value');
+
+	if (filter_title) {
+		url += '&filter_title=' + encodeURIComponent(filter_title);
+	}
+
+	var filter_date_added = $('input[name=\'filter_date_added\']').attr('value');
+
+	if (filter_date_added) {
+		url += '&filter_model=' + encodeURIComponent(filter_date_added);
+	}
+
+	var filter_status = $('select[name=\'filter_status\']').attr('value');
+
+	if (filter_status != '*') {
+		url += '&filter_status=' + encodeURIComponent(filter_status);
+	}
+
+	location = url;
+}
+//--></script>
+<script type="text/javascript"><!--
+$('#form input').keydown(function(e) {
+	if (e.keyCode == 13) {
+		filter();
+	}
+});
+//--></script>
 <?php echo $footer; ?>

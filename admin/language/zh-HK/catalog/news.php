@@ -7,23 +7,20 @@ $_['text_success']      	= '已成功修改最新消息!';
 $_['text_default']      	= '預設';
 
 // Column
-$_['column_title']      	= '消息標題';
+$_['column_title']      	= '標題';
 $_['column_sort_order'] 	= '排序';
-$_['column_date_time'] 		= '消息日期';
-$_['column_status'] 		= '消息狀態';
+$_['column_date_added'] 	= '日期';
+$_['column_status'] 		= '狀態';
 $_['column_action']     	= '管理';
 
 // Entry
-$_['entry_title']       	= '消息標題:';
-$_['entry_description'] 	= '消息內容:';
-$_['entry_status']          = '消息狀態:';
+$_['entry_title']       	= '標題:';
+$_['entry_description'] 	= '內容:';
+$_['entry_status']          = '狀態:';
 $_['entry_store']       	= '網店:';
 $_['entry_keyword']     	= '關鍵字:';
-$_['entry_sketch']     		= '簡要內容:';
-$_['entry_date_time']     	= '消息日期:';
+$_['entry_date_added']     	= '日期:';
 $_['entry_sort_order']  	= '選擇排序:';
-$_['entry_marqueue']  		= '跑馬燈:';
-$_['entry_recommend']  		= '推薦首頁:';
 
 // Error
 $_['error_permission']  = '警告: 您沒有權限更改設置!';

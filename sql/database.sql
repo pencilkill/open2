@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 09 月 24 日 01:47
+-- 生成日期: 2013 年 09 月 24 日 01:57
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.0
 
@@ -1415,7 +1415,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `news_id` int(11) NOT NULL AUTO_INCREMENT,
   `sort_order` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_added` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`news_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
@@ -1424,7 +1424,7 @@ CREATE TABLE IF NOT EXISTS `news` (
 --
 
 INSERT INTO `news` (`news_id`, `sort_order`, `status`, `date_added`) VALUES
-(13, 3, 1, '2013-01-31 00:00:00');
+(13, 3, 1, '2013-01-31');
 
 -- --------------------------------------------------------
 

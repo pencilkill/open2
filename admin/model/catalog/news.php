@@ -106,8 +106,21 @@ class ModelCatalogNews extends Model {
 		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "news n LEFT JOIN " . DB_PREFIX . "news_description nd ON (n.news_id = nd.news_id) WHERE nd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
+			if(!empty($data['filter_title'])){
+				$sql .= " AND LCASE(nd.title) LIKE '%" . $this->db->escape(utf8_strtolower($data['filter_title'])) . "%'";
+			}
+
+			if(!empty($data['filter_date_added'])){
+				$sql .= " AND n.date_added = '" . $data['filter_date_added'] . "'";
+			}
+
+			if(isset($data['filter_status']) && !is_null($data['filter_status'])){
+				$sql .= " AND n.status = '" . $data['filter_status'] . "'";
+			}
+
 			$sort_data = array(
 				'nd.title',
+				'n.date_added',
 				'n.sort_order',
 				'n.status'
 			);

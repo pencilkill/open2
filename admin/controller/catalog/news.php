@@ -22,6 +22,18 @@ class ControllerCatalogNews extends Controller {
 
 			$url = '';
 
+			if (isset($this->request->get['filter_title'])) {
+				$url .= '&filter_title=' . urlencode(html_entity_decode($this->request->get['filter_title'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_date_added'])) {
+				$url .= '&filter_date_added=' . urlencode(html_entity_decode($this->request->get['filter_date_added'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_status'])) {
+				$url .= '&filter_status=' . $this->request->get['filter_status'];
+			}
+
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
@@ -34,7 +46,7 @@ class ControllerCatalogNews extends Controller {
 				$url .= '&order=' . $this->request->get['order'];
 			}
 
-			$this->redirect($this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url));
+			$this->redirect($this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
 
 		$this->getForm();
@@ -50,6 +62,18 @@ class ControllerCatalogNews extends Controller {
 
 			$url = '';
 
+			if (isset($this->request->get['filter_title'])) {
+				$url .= '&filter_title=' . urlencode(html_entity_decode($this->request->get['filter_title'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_date_added'])) {
+				$url .= '&filter_date_added=' . urlencode(html_entity_decode($this->request->get['filter_date_added'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_status'])) {
+				$url .= '&filter_status=' . $this->request->get['filter_status'];
+			}
+
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
@@ -62,7 +86,7 @@ class ControllerCatalogNews extends Controller {
 				$url .= '&order=' . $this->request->get['order'];
 			}
 
-			$this->redirect($this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url));
+			$this->redirect($this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
 
 		$this->getForm();
@@ -80,6 +104,18 @@ class ControllerCatalogNews extends Controller {
 
 			$url = '';
 
+			if (isset($this->request->get['filter_title'])) {
+				$url .= '&filter_title=' . urlencode(html_entity_decode($this->request->get['filter_title'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_date_added'])) {
+				$url .= '&filter_date_added=' . urlencode(html_entity_decode($this->request->get['filter_date_added'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_status'])) {
+				$url .= '&filter_status=' . $this->request->get['filter_status'];
+			}
+
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
@@ -92,7 +128,7 @@ class ControllerCatalogNews extends Controller {
 				$url .= '&order=' . $this->request->get['order'];
 			}
 
-			$this->redirect($this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url));
+			$this->redirect($this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
 
 		$this->getList();
@@ -103,6 +139,24 @@ class ControllerCatalogNews extends Controller {
 			$page = $this->request->get['page'];
 		} else {
 			$page = 1;
+		}
+
+		if (isset($this->request->get['filter_title'])) {
+			$filter_title = $this->request->get['filter_title'];
+		} else {
+			$filter_title = null;
+		}
+
+		if (isset($this->request->get['filter_date_added'])) {
+			$filter_date_added = $this->request->get['filter_date_added'];
+		} else {
+			$filter_date_added = null;
+		}
+
+		if (isset($this->request->get['filter_status'])) {
+			$filter_status = $this->request->get['filter_status'];
+		} else {
+			$filter_status = null;
 		}
 
 		if (isset($this->request->get['sort'])) {
@@ -119,6 +173,18 @@ class ControllerCatalogNews extends Controller {
 
 		$url = '';
 
+		if (isset($this->request->get['filter_title'])) {
+			$url .= '&filter_title=' . urlencode(html_entity_decode($this->request->get['filter_title'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_date_added'])) {
+			$url .= '&filter_date_added=' . urlencode(html_entity_decode($this->request->get['filter_date_added'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_status'])) {
+			$url .= '&filter_status=' . $this->request->get['filter_status'];
+		}
+
 		if (isset($this->request->get['page'])) {
 			$url .= '&page=' . $this->request->get['page'];
 		}
@@ -134,30 +200,33 @@ class ControllerCatalogNews extends Controller {
   		$this->document->breadcrumbs = array();
 
    		$this->document->breadcrumbs[] = array(
-       		'href'      => $this->url->link('common/home', '&token=' . $this->session->data['token']),
+       		'href'      => $this->url->link('common/home', '&token=' . $this->session->data['token'], 'SSL'),
        		'text'      => $this->language->get('text_home'),
       		'separator' => FALSE
    		);
 
    		$this->document->breadcrumbs[] = array(
-       		'href'      => $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url),
+       		'href'      => $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url, 'SSL'),
        		'text'      => $this->language->get('heading_title'),
       		'separator' => ' :: '
    		);
 
-		$this->data['insert'] = $this->url->link('catalog/news/insert', '&token=' . $this->session->data['token'] . $url);
-		$this->data['delete'] = $this->url->link('catalog/news/delete', '&token=' . $this->session->data['token'] . $url);
+		$this->data['insert'] = $this->url->link('catalog/news/insert', '&token=' . $this->session->data['token'] . $url, 'SSL');
+		$this->data['delete'] = $this->url->link('catalog/news/delete', '&token=' . $this->session->data['token'] . $url, 'SSL');
 
 		$this->data['newses'] = array();
 
 		$data = array(
+			'filter_title' => $filter_title,
+			'filter_date_added' => $filter_date_added,
+			'filter_status' => $filter_status,
 			'sort'  => $sort,
 			'order' => $order,
 			'start' => ($page - 1) * $this->config->get('config_admin_limit'),
 			'limit' => $this->config->get('config_admin_limit')
 		);
 
-		$total = $this->model_catalog_news->getTotalNewses();
+		$total = $this->model_catalog_news->getTotalNewses($data);
 
 		$results = $this->model_catalog_news->getNewses($data);
 
@@ -166,18 +235,21 @@ class ControllerCatalogNews extends Controller {
 
 			$action[] = array(
 				'text' => $this->language->get('text_edit'),
-				'href' => $this->url->link('catalog/news/update', '&token=' . $this->session->data['token'] . '&news_id=' . $result['news_id'] . $url)
+				'href' => $this->url->link('catalog/news/update', '&token=' . $this->session->data['token'] . '&news_id=' . $result['news_id'] . $url, 'SSL')
 			);
 
 			$this->data['newses'][] = array(
 				'news_id' => $result['news_id'],
 				'title'      => $result['title'],
 				'sort_order' => $result['sort_order'],
+				'date_added' => $result['date_added'],
 				'status' => $result['status'],
 				'selected'   => isset($this->request->post['selected']) && in_array($result['news_id'], $this->request->post['selected']),
 				'action'     => $action
 			);
 		}
+
+		$this->data['token'] = $this->session->data['token'];
 
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -195,6 +267,18 @@ class ControllerCatalogNews extends Controller {
 
 		$url = '';
 
+		if (isset($this->request->get['filter_title'])) {
+			$url .= '&filter_title=' . urlencode(html_entity_decode($this->request->get['filter_title'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_date_added'])) {
+			$url .= '&filter_date_added=' . urlencode(html_entity_decode($this->request->get['filter_date_added'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_status'])) {
+			$url .= '&filter_status=' . $this->request->get['filter_status'];
+		}
+
 		if ($order == 'ASC') {
 			$url .= '&order=DESC';
 		} else {
@@ -205,11 +289,24 @@ class ControllerCatalogNews extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$this->data['sort_title'] = $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . '&sort=nd.title' . $url);
-		$this->data['sort_sort_order'] = $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . '&sort=n.sort_order' . $url);
-		$this->data['sort_status'] = $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . '&sort=n.status' . $url);
+		$this->data['sort_title'] = $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . '&sort=nd.title' . $url, 'SSL');
+		$this->data['sort_date_added'] = $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . '&sort=n.date_added' . $url, 'SSL');
+		$this->data['sort_sort_order'] = $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . '&sort=n.sort_order' . $url, 'SSL');
+		$this->data['sort_status'] = $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . '&sort=n.status' . $url, 'SSL');
 
 		$url = '';
+
+		if (isset($this->request->get['filter_title'])) {
+			$url .= '&filter_title=' . urlencode(html_entity_decode($this->request->get['filter_title'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_date_added'])) {
+			$url .= '&filter_date_added=' . urlencode(html_entity_decode($this->request->get['filter_date_added'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_status'])) {
+			$url .= '&filter_status=' . $this->request->get['filter_status'];
+		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
@@ -224,9 +321,13 @@ class ControllerCatalogNews extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_admin_limit');
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url . '&page={page}');
+		$pagination->url = $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
 
 		$this->data['pagination'] = $pagination->render();
+
+		$this->data['filter_title'] = $filter_title;
+      	$this->data['filter_date_added'] = $filter_date_added;
+      	$this->data['filter_status'] = $filter_status;
 
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;
@@ -263,6 +364,18 @@ class ControllerCatalogNews extends Controller {
 
 		$url = '';
 
+		if (isset($this->request->get['filter_title'])) {
+			$url .= '&filter_title=' . urlencode(html_entity_decode($this->request->get['filter_title'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_date_added'])) {
+			$url .= '&filter_date_added=' . urlencode(html_entity_decode($this->request->get['filter_date_added'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_status'])) {
+			$url .= '&filter_status=' . $this->request->get['filter_status'];
+		}
+
 		if (isset($this->request->get['page'])) {
 			$url .= '&page=' . $this->request->get['page'];
 		}
@@ -278,24 +391,24 @@ class ControllerCatalogNews extends Controller {
   		$this->document->breadcrumbs = array();
 
    		$this->document->breadcrumbs[] = array(
-       		'href'      => $this->url->link('common/home', '&token=' . $this->session->data['token']),
+       		'href'      => $this->url->link('common/home', '&token=' . $this->session->data['token'], 'SSL'),
        		'text'      => $this->language->get('text_home'),
       		'separator' => FALSE
    		);
 
    		$this->document->breadcrumbs[] = array(
-       		'href'      => $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url),
+       		'href'      => $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url, 'SSL'),
        		'text'      => $this->language->get('heading_title'),
       		'separator' => ' :: '
    		);
 
 		if (!isset($this->request->get['news_id'])) {
-			$this->data['action'] = $this->url->link('catalog/news/insert', '&token=' . $this->session->data['token'] . $url);
+			$this->data['action'] = $this->url->link('catalog/news/insert', '&token=' . $this->session->data['token'] . $url, 'SSL');
 		} else {
-			$this->data['action'] = $this->url->link('catalog/news/update', '&token=' . $this->session->data['token'] . '&news_id=' . $this->request->get['news_id'] . $url);
+			$this->data['action'] = $this->url->link('catalog/news/update', '&token=' . $this->session->data['token'] . '&news_id=' . $this->request->get['news_id'] . $url, 'SSL');
 		}
 
-		$this->data['cancel'] = $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url);
+		$this->data['cancel'] = $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url, 'SSL');
 
 		if (isset($this->request->get['news_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
 			$news_info = $this->model_catalog_news->getNews($this->request->get['news_id']);
@@ -378,11 +491,11 @@ class ControllerCatalogNews extends Controller {
 		}
 
 		foreach ($this->request->post['news_description'] as $language_id => $value) {
-			if ((strlen(utf8_decode($value['title'])) < 1) || (strlen(utf8_decode($value['title'])) > 32)) {
+			if ((utf8_strlen($value['title']) < 1) || (utf8_strlen($value['title']) > 64)) {
 				$this->error['title'][$language_id] = $this->language->get('error_title');
 			}
 
-			if (strlen(utf8_decode($value['description'])) < 1) {
+			if (utf8_strlen($value['description']) < 1) {
 				$this->error['description'][$language_id] = $this->language->get('error_description');
 			}
 		}
