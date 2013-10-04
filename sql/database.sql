@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 09 月 24 日 01:57
+-- 生成日期: 2013 年 10 月 04 日 10:26
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.0
 
@@ -884,10 +884,10 @@ CREATE TABLE IF NOT EXISTS `currency` (
 --
 
 INSERT INTO `currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_place`, `value`, `status`, `date_modified`) VALUES
-(1, 'Pound Sterling', 'GBP', '£', '', '2', 0.02110000, 0, '2013-09-23 02:31:49'),
-(6, 'US Dollar', 'USD', '$', '', '2', 0.03380000, 0, '2013-09-23 02:31:49'),
-(3, 'Euro', 'EUR', '', '€', '2', 0.02500000, 0, '2013-09-23 02:31:49'),
-(5, 'New Taiwan Dollar', 'TWD', '$', '', '0', 1.00000000, 1, '2013-09-23 02:31:49');
+(1, 'Pound Sterling', 'GBP', '£', '', '2', 0.02090000, 0, '2013-09-28 01:02:44'),
+(6, 'US Dollar', 'USD', '$', '', '2', 0.03380000, 0, '2013-09-28 01:02:44'),
+(3, 'Euro', 'EUR', '', '€', '2', 0.02500000, 0, '2013-09-28 01:02:44'),
+(5, 'New Taiwan Dollar', 'TWD', '$', '', '0', 1.00000000, 1, '2013-09-28 04:01:03');
 
 -- --------------------------------------------------------
 
@@ -1179,11 +1179,10 @@ CREATE TABLE IF NOT EXISTS `information_description` (
 --
 
 INSERT INTO `information_description` (`information_id`, `language_id`, `title`, `description`) VALUES
-(4, 2, 'About Us', '&lt;p&gt;\r\n	About Us&lt;/p&gt;\r\n'),
 (5, 2, 'Terms &amp; Conditions', '&lt;p&gt;\r\n	Terms &amp;amp; Conditions&lt;/p&gt;\r\n'),
 (3, 2, 'Privacy Policy', '&lt;p&gt;\r\n	Privacy Policy&lt;/p&gt;\r\n'),
 (6, 2, 'Delivery Information', '&lt;p&gt;\r\n	Delivery Information&lt;/p&gt;\r\n'),
-(4, 3, 'About Us', '&lt;p&gt;\r\n	About Us&lt;/p&gt;\r\n'),
+(4, 2, 'About Us', '&lt;p&gt;\r\n	About Us&lt;/p&gt;\r\n'),
 (5, 3, 'Terms &amp; Conditions', '&lt;p&gt;\r\n	Terms &amp;amp; Conditions&lt;/p&gt;\r\n'),
 (3, 3, 'Privacy Policy', '&lt;p&gt;\r\n	Privacy Policy&lt;/p&gt;\r\n'),
 (6, 3, 'Delivery Information', '&lt;p&gt;\r\n	Delivery Information&lt;/p&gt;\r\n');
@@ -1200,6 +1199,13 @@ CREATE TABLE IF NOT EXISTS `information_to_layout` (
   `layout_id` int(11) NOT NULL,
   PRIMARY KEY (`information_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- 转存表中的数据 `information_to_layout`
+--
+
+INSERT INTO `information_to_layout` (`information_id`, `store_id`, `layout_id`) VALUES
+(4, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -1260,7 +1266,7 @@ CREATE TABLE IF NOT EXISTS `layout` (
   `layout_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`layout_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=13 ;
 
 --
 -- 转存表中的数据 `layout`
@@ -1277,7 +1283,8 @@ INSERT INTO `layout` (`layout_id`, `name`) VALUES
 (8, 'Contact'),
 (9, 'Sitemap'),
 (10, 'Affiliate'),
-(11, 'Information');
+(11, 'Information'),
+(12, 'News');
 
 -- --------------------------------------------------------
 
@@ -1291,14 +1298,14 @@ CREATE TABLE IF NOT EXISTS `layout_route` (
   `store_id` int(11) NOT NULL,
   `route` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`layout_route_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=32 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=34 ;
 
 --
 -- 转存表中的数据 `layout_route`
 --
 
 INSERT INTO `layout_route` (`layout_route_id`, `layout_id`, `store_id`, `route`) VALUES
-(30, 6, 0, 'account'),
+(32, 6, 0, 'account/'),
 (17, 10, 0, 'affiliate/'),
 (29, 3, 0, 'product/category'),
 (26, 1, 0, 'common/home'),
@@ -1306,7 +1313,8 @@ INSERT INTO `layout_route` (`layout_route_id`, `layout_id`, `store_id`, `route`)
 (24, 11, 0, 'information/information'),
 (22, 5, 0, 'product/manufacturer'),
 (23, 7, 0, 'checkout/'),
-(31, 8, 0, 'information/contact');
+(31, 8, 0, 'information/contact'),
+(33, 12, 0, 'news/');
 
 -- --------------------------------------------------------
 
@@ -1446,7 +1454,7 @@ CREATE TABLE IF NOT EXISTS `news_description` (
 --
 
 INSERT INTO `news_description` (`news_id`, `language_id`, `title`, `keyword`, `description`) VALUES
-(13, 2, ' 標題: 標題: 標題: 標題: 標題:', '消息關鍵字:消息關鍵字:消息關鍵字:消息關鍵字:消息關鍵字:', '&lt;p&gt;\r\n	&amp;nbsp;標題: 標題: 標題: 標題: 標題:&lt;/p&gt;\r\n&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p&gt;\r\n	&amp;nbsp;標題: 標題: 標題: 標題: 標題:&amp;nbsp;標題: 標題: 標題: 標題: 標題:&amp;nbsp;標題: 標題: 標題: 標題: 標題:&lt;/p&gt;\r\n');
+(13, 2, '消息標題', '消息關鍵字', '&lt;p&gt;\r\n	消息內容&lt;/p&gt;\r\n');
 
 -- --------------------------------------------------------
 
@@ -2660,7 +2668,7 @@ CREATE TABLE IF NOT EXISTS `setting` (
   `value` text COLLATE utf8_bin NOT NULL,
   `serialized` tinyint(1) NOT NULL,
   PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3312 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4779 ;
 
 --
 -- 转存表中的数据 `setting`
@@ -2703,14 +2711,6 @@ INSERT INTO `setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `seria
 (94, 0, 'voucher', 'voucher_status', '1', 0),
 (102, 0, 'free_checkout', 'free_checkout_status', '1', 0),
 (103, 0, 'free_checkout', 'free_checkout_order_status_id', '1', 0),
-(3308, 0, 'config', 'config_error_display', '0', 0),
-(3309, 0, 'config', 'config_error_log', '0', 0),
-(3310, 0, 'config', 'config_error_filename', 'error.txt', 0),
-(3311, 0, 'config', 'config_google_analytics', '&lt;script&gt; \r\n  (function(i,s,o,g,r,a,m){i[''GoogleAnalyticsObject'']=r;i[r]=i[r]||function(){ \r\n  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), \r\n  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) \r\n  })(window,document,''script'',''//www.google-analytics.com/analytics.js'',''ga''); \r\n \r\n  ga(''create'', ''UA-40899042-1'', ''ivy-bride.com''); \r\n  ga(''send'', ''pageview''); \r\n \r\n&lt;/script&gt;', 0),
-(3307, 0, 'config', 'config_compression', '0', 0),
-(3306, 0, 'config', 'config_encryption', '122c78205ddebdd284abc447c115035f', 0),
-(3305, 0, 'config', 'config_maintenance', '1', 0),
-(3304, 0, 'config', 'config_seo_url', '0', 0),
 (1656, 0, 'news', 'news_module', 'a:1:{i:0;a:7:{s:5:"limit";s:1:"5";s:8:"headline";s:1:"1";s:8:"numchars";s:3:"120";s:9:"layout_id";s:1:"6";s:8:"position";s:11:"content_top";s:6:"status";s:1:"1";s:10:"sort_order";s:0:"";}}', 1),
 (1655, 0, 'news', 'news_headline_chars', '120', 0),
 (1654, 0, 'news', 'news_newspage_addthis', '0', 0),
@@ -2723,92 +2723,99 @@ INSERT INTO `setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `seria
 (1650, 0, 'news', 'news_thumb_width', '80', 0),
 (1651, 0, 'news', 'news_thumb_height', '80', 0),
 (1652, 0, 'news', 'news_popup_width', '800', 0),
-(3303, 0, 'config', 'config_use_ssl', '0', 0),
-(3302, 0, 'config', 'config_fraud_status_id', '7', 0),
-(3301, 0, 'config', 'config_fraud_score', '', 0),
-(3300, 0, 'config', 'config_fraud_key', '', 0),
-(3299, 0, 'config', 'config_fraud_detection', '0', 0),
-(3298, 0, 'config', 'config_alert_emails', '', 0),
-(3297, 0, 'config', 'config_account_mail', '0', 0),
-(3296, 0, 'config', 'config_alert_mail', '0', 0),
-(3295, 0, 'config', 'config_smtp_timeout', '5', 0),
-(3294, 0, 'config', 'config_smtp_port', '25', 0),
-(3293, 0, 'config', 'config_smtp_password', '', 0),
-(3292, 0, 'config', 'config_smtp_username', '', 0),
-(3291, 0, 'config', 'config_smtp_host', '', 0),
-(3290, 0, 'config', 'config_mail_parameter', '', 0),
-(3288, 0, 'config', 'config_image_cart_height', '47', 0),
-(3289, 0, 'config', 'config_mail_protocol', 'smtp', 0),
-(3287, 0, 'config', 'config_image_cart_width', '47', 0),
-(3285, 0, 'config', 'config_image_wishlist_width', '47', 0),
-(3286, 0, 'config', 'config_image_wishlist_height', '47', 0),
-(3284, 0, 'config', 'config_image_compare_height', '90', 0),
-(3283, 0, 'config', 'config_image_compare_width', '90', 0),
-(3282, 0, 'config', 'config_image_related_height', '80', 0),
-(3281, 0, 'config', 'config_image_related_width', '80', 0),
-(3280, 0, 'config', 'config_image_additional_height', '74', 0),
-(3279, 0, 'config', 'config_image_additional_width', '74', 0),
-(3278, 0, 'config', 'config_image_product_height', '80', 0),
-(3277, 0, 'config', 'config_image_product_width', '80', 0),
-(3276, 0, 'config', 'config_image_popup_height', '500', 0),
-(3275, 0, 'config', 'config_image_popup_width', '500', 0),
-(3274, 0, 'config', 'config_image_thumb_height', '228', 0),
-(3273, 0, 'config', 'config_image_thumb_width', '228', 0),
-(3272, 0, 'config', 'config_image_category_height', '80', 0),
-(3271, 0, 'config', 'config_image_category_width', '80', 0),
-(3270, 0, 'config', 'config_icon', 'data/cart.png', 0),
-(3269, 0, 'config', 'config_log', '', 0),
-(3268, 0, 'config', 'config_return_status_id', '2', 0),
-(3267, 0, 'config', 'config_commission', '5', 0),
-(3266, 0, 'config', 'config_affiliate_id', '4', 0),
-(3265, 0, 'config', 'config_stock_status_id', '5', 0),
-(3264, 0, 'config', 'config_stock_checkout', '0', 0),
-(3263, 0, 'config', 'config_stock_warning', '0', 0),
-(3262, 0, 'config', 'config_stock_display', '0', 0),
-(3261, 0, 'config', 'config_complete_status_id', '5', 0),
-(3260, 0, 'config', 'config_order_status_id', '1', 0),
-(3259, 0, 'config', 'config_invoice_prefix', 'INV-2012-00', 0),
-(3258, 0, 'config', 'config_order_edit', '100', 0),
-(3257, 0, 'config', 'config_checkout_id', '5', 0),
-(3256, 0, 'config', 'config_guest_checkout', '1', 0),
-(3255, 0, 'config', 'config_cart_weight', '0', 0),
-(3254, 0, 'config', 'config_account_id', '3', 0),
-(3253, 0, 'config', 'config_customer_price', '0', 0),
-(3252, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:"1";}', 1),
-(3251, 0, 'config', 'config_customer_group_id', '1', 0),
-(3250, 0, 'config', 'config_customer_online', '0', 0),
-(3249, 0, 'config', 'config_tax_customer', 'shipping', 0),
-(3248, 0, 'config', 'config_tax_default', 'shipping', 0),
-(3247, 0, 'config', 'config_vat', '0', 0),
-(3246, 0, 'config', 'config_tax', '1', 0),
-(3245, 0, 'config', 'config_voucher_max', '1000', 0),
-(3244, 0, 'config', 'config_voucher_min', '1', 0),
-(3243, 0, 'config', 'config_upload_allowed', 'jpg, JPG, jpeg, gif, png, txt', 0),
-(3242, 0, 'config', 'config_download', '0', 0),
-(3241, 0, 'config', 'config_review_status', '0', 0),
-(3240, 0, 'config', 'config_product_count', '0', 0),
-(3239, 0, 'config', 'config_admin_limit', '10', 0),
-(3238, 0, 'config', 'config_catalog_limit', '15', 0),
-(3237, 0, 'config', 'config_weight_class_id', '1', 0),
-(3236, 0, 'config', 'config_length_class_id', '1', 0),
-(3235, 0, 'config', 'config_currency_auto', '1', 0),
-(3234, 0, 'config', 'config_currency', 'TWD', 0),
-(3233, 0, 'config', 'config_admin_language', 'zh_HK', 0),
-(3232, 0, 'config', 'config_language', 'zh_HK', 0),
-(3231, 0, 'config', 'config_zone_id', '3151', 0),
-(3230, 0, 'config', 'config_country_id', '206', 0),
-(3227, 0, 'config', 'config_meta_description', 'My Store', 0),
-(3228, 0, 'config', 'config_template', 'default', 0),
-(3229, 0, 'config', 'config_layout_id', '1', 0),
+(4774, 0, 'config', 'config_compression', '0', 0),
+(4775, 0, 'config', 'config_error_display', '1', 0),
+(4776, 0, 'config', 'config_error_log', '0', 0),
+(4777, 0, 'config', 'config_error_filename', 'error.txt', 0),
+(4778, 0, 'config', 'config_google_analytics', '&lt;script&gt; \r\n  (function(i,s,o,g,r,a,m){i[''GoogleAnalyticsObject'']=r;i[r]=i[r]||function(){ \r\n  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), \r\n  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) \r\n  })(window,document,''script'',''//www.google-analytics.com/analytics.js'',''ga''); \r\n \r\n  ga(''create'', ''UA-40899042-1'', ''ivy-bride.com''); \r\n  ga(''send'', ''pageview''); \r\n \r\n&lt;/script&gt;', 0),
+(4773, 0, 'config', 'config_encryption', '122c78205ddebdd284abc447c115035f', 0),
+(4772, 0, 'config', 'config_maintenance', '0', 0),
+(4771, 0, 'config', 'config_seo_url', '0', 0),
+(4770, 0, 'config', 'config_use_ssl', '0', 0),
+(4769, 0, 'config', 'config_fraud_status_id', '7', 0),
+(4768, 0, 'config', 'config_fraud_score', '', 0),
+(4767, 0, 'config', 'config_fraud_key', '', 0),
+(4766, 0, 'config', 'config_fraud_detection', '0', 0),
+(4765, 0, 'config', 'config_alert_emails', '', 0),
+(4764, 0, 'config', 'config_account_mail', '0', 0),
+(4763, 0, 'config', 'config_alert_mail', '0', 0),
+(4762, 0, 'config', 'config_smtp_timeout', '5', 0),
+(4759, 0, 'config', 'config_smtp_username', 'oz_sam@163.com', 0),
+(4760, 0, 'config', 'config_smtp_password', 'oz3661000', 0),
+(4761, 0, 'config', 'config_smtp_port', '25', 0),
+(4758, 0, 'config', 'config_smtp_host', 'smtp.163.com', 0),
+(4757, 0, 'config', 'config_mail_protocol', 'smtp', 0),
+(4756, 0, 'config', 'config_image_cart_height', '47', 0),
+(4755, 0, 'config', 'config_image_cart_width', '47', 0),
+(4754, 0, 'config', 'config_image_wishlist_height', '47', 0),
+(4753, 0, 'config', 'config_image_wishlist_width', '47', 0),
+(4752, 0, 'config', 'config_image_compare_height', '90', 0),
+(4751, 0, 'config', 'config_image_compare_width', '90', 0),
+(4750, 0, 'config', 'config_image_related_height', '80', 0),
+(4749, 0, 'config', 'config_image_related_width', '80', 0),
+(4748, 0, 'config', 'config_image_additional_height', '74', 0),
+(4747, 0, 'config', 'config_image_additional_width', '74', 0),
+(4746, 0, 'config', 'config_image_product_height', '80', 0),
+(4745, 0, 'config', 'config_image_product_width', '80', 0),
+(4744, 0, 'config', 'config_image_popup_height', '500', 0),
+(4743, 0, 'config', 'config_image_popup_width', '500', 0),
+(4742, 0, 'config', 'config_image_thumb_height', '228', 0),
+(4741, 0, 'config', 'config_image_thumb_width', '228', 0),
+(4740, 0, 'config', 'config_image_category_height', '80', 0),
+(4739, 0, 'config', 'config_image_category_width', '80', 0),
+(4738, 0, 'config', 'config_icon', 'data/cart.png', 0),
+(4737, 0, 'config', 'config_log', '', 0),
+(4736, 0, 'config', 'config_return_status_id', '2', 0),
+(4735, 0, 'config', 'config_commission', '5', 0),
+(4734, 0, 'config', 'config_affiliate_id', '4', 0),
+(4733, 0, 'config', 'config_stock_status_id', '5', 0),
+(4732, 0, 'config', 'config_stock_checkout', '0', 0),
+(4731, 0, 'config', 'config_stock_warning', '0', 0),
+(4730, 0, 'config', 'config_stock_display', '0', 0),
+(4729, 0, 'config', 'config_complete_status_id', '5', 0),
+(4728, 0, 'config', 'config_order_status_id', '1', 0),
+(4727, 0, 'config', 'config_invoice_prefix', 'INV-2012-00', 0),
+(4726, 0, 'config', 'config_order_edit', '100', 0),
+(4725, 0, 'config', 'config_checkout_id', '5', 0),
+(4724, 0, 'config', 'config_guest_checkout', '1', 0),
+(4723, 0, 'config', 'config_cart_weight', '0', 0),
+(4722, 0, 'config', 'config_account_id', '3', 0),
+(4721, 0, 'config', 'config_customer_price', '0', 0),
+(4720, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:"1";}', 1),
+(4719, 0, 'config', 'config_customer_group_id', '1', 0),
+(4718, 0, 'config', 'config_customer_online', '0', 0),
+(4717, 0, 'config', 'config_tax_customer', 'shipping', 0),
+(4716, 0, 'config', 'config_tax_default', 'shipping', 0),
+(4715, 0, 'config', 'config_vat', '0', 0),
+(4714, 0, 'config', 'config_tax', '1', 0),
+(4713, 0, 'config', 'config_voucher_max', '1000', 0),
+(4712, 0, 'config', 'config_voucher_min', '1', 0),
+(4711, 0, 'config', 'config_upload_allowed', 'jpg, JPG, jpeg, gif, png, txt', 0),
+(4710, 0, 'config', 'config_download', '0', 0),
+(4709, 0, 'config', 'config_review_status', '0', 0),
+(4708, 0, 'config', 'config_product_count', '1', 0),
+(4707, 0, 'config', 'config_admin_limit', '20', 0),
+(4706, 0, 'config', 'config_catalog_limit', '15', 0),
+(4705, 0, 'config', 'config_weight_class_id', '1', 0),
+(4704, 0, 'config', 'config_length_class_id', '1', 0),
+(4703, 0, 'config', 'config_currency_auto', '1', 0),
+(4702, 0, 'config', 'config_currency', 'TWD', 0),
+(4701, 0, 'config', 'config_admin_language', 'zh_HK', 0),
+(4700, 0, 'config', 'config_language', 'zh_HK', 0),
+(4699, 0, 'config', 'config_zone_id', '3151', 0),
+(4698, 0, 'config', 'config_country_id', '206', 0),
+(4697, 0, 'config', 'config_layout_id', '4', 0),
+(4696, 0, 'config', 'config_template', 'default', 0),
+(4695, 0, 'config', 'config_meta_description', 'My Store', 0),
 (2181, 0, 'banner', 'banner_module', 'a:1:{i:0;a:7:{s:9:"banner_id";s:1:"6";s:5:"width";s:3:"182";s:6:"height";s:3:"182";s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"3";}}', 1),
 (2183, 0, 'slideshow', 'slideshow_module', 'a:1:{i:0;a:7:{s:9:"banner_id";s:1:"8";s:5:"width";s:3:"980";s:6:"height";s:3:"280";s:9:"layout_id";s:1:"1";s:8:"position";s:11:"content_top";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
-(3226, 0, 'config', 'config_title', 'Your Store', 0),
-(3225, 0, 'config', 'config_fax', '', 0),
-(3224, 0, 'config', 'config_telephone', '123456789', 0),
-(3223, 0, 'config', 'config_email', 'sam@ozchamp.net', 0),
-(3222, 0, 'config', 'config_address', 'Address 1', 0),
-(3221, 0, 'config', 'config_owner', 'Your Name', 0),
-(3220, 0, 'config', 'config_name', 'Your Store', 0);
+(4694, 0, 'config', 'config_title', 'Your Store', 0),
+(4693, 0, 'config', 'config_fax', '', 0),
+(4692, 0, 'config', 'config_telephone', '123456789', 0),
+(4691, 0, 'config', 'config_email', 'sam@ozchamp.net', 0),
+(4690, 0, 'config', 'config_address', 'Address 1', 0),
+(4689, 0, 'config', 'config_owner', 'Your Name', 0),
+(4688, 0, 'config', 'config_name', 'Your Store', 0);
 
 -- --------------------------------------------------------
 
@@ -3389,7 +3396,7 @@ CREATE TABLE IF NOT EXISTS `url_alias` (
   `query` varchar(255) COLLATE utf8_bin NOT NULL,
   `keyword` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`url_alias_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=790 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=791 ;
 
 --
 -- 转存表中的数据 `url_alias`
@@ -3401,7 +3408,7 @@ INSERT INTO `url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
 (503, 'category_id=26', 'pc'),
 (505, 'category_id=27', 'mac'),
 (785, 'manufacturer_id=8', 'apple'),
-(778, 'information_id=4', 'about_us'),
+(790, 'information_id=4', 'about_us'),
 (780, 'product_id=42', 'test'),
 (767, 'category_id=34', 'mp3-players'),
 (536, 'category_id=36', 'Normal');

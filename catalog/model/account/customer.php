@@ -40,7 +40,6 @@ class ModelAccountCustomer extends Model {
 
 		$mail = new Mail();
 		$mail->protocol = $this->config->get('config_mail_protocol');
-		$mail->parameter = $this->config->get('config_mail_parameter');
 		$mail->hostname = $this->config->get('config_smtp_host');
 		$mail->username = $this->config->get('config_smtp_username');
 		$mail->password = $this->config->get('config_smtp_password');

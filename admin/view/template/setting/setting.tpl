@@ -699,21 +699,12 @@
             <tr>
               <td><?php echo $entry_mail_protocol; ?></td>
               <td><select name="config_mail_protocol">
-                  <?php if ($config_mail_protocol == 'mail') { ?>
-                  <option value="mail" selected="selected"><?php echo $text_mail; ?></option>
-                  <?php } else { ?>
-                  <option value="mail"><?php echo $text_mail; ?></option>
-                  <?php } ?>
                   <?php if ($config_mail_protocol == 'smtp') { ?>
                   <option value="smtp" selected="selected"><?php echo $text_smtp; ?></option>
                   <?php } else { ?>
                   <option value="smtp"><?php echo $text_smtp; ?></option>
                   <?php } ?>
                 </select></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_mail_parameter; ?></td>
-              <td><input type="text" name="config_mail_parameter" value="<?php echo $config_mail_parameter; ?>" /></td>
             </tr>
             <tr>
               <td><?php echo $entry_smtp_host; ?></td>

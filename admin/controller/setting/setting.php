@@ -659,12 +659,6 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_mail_protocol'] = $this->config->get('config_mail_protocol');
 		}
 
-		if (isset($this->request->post['config_mail_parameter'])) {
-			$this->data['config_mail_parameter'] = $this->request->post['config_mail_parameter'];
-		} else {
-			$this->data['config_mail_parameter'] = $this->config->get('config_mail_parameter');
-		}
-
 		if (isset($this->request->post['config_smtp_host'])) {
 			$this->data['config_smtp_host'] = $this->request->post['config_smtp_host'];
 		} else {
