@@ -39,22 +39,24 @@ class ModelAccountCustomer extends Model {
 		$message .= $this->config->get('config_name');
 
 		$mail = new Mail();
-		$mail->protocol = $this->config->get('config_mail_protocol');
-		$mail->hostname = $this->config->get('config_smtp_host');
-		$mail->username = $this->config->get('config_smtp_username');
-		$mail->password = $this->config->get('config_smtp_password');
-		$mail->port = $this->config->get('config_smtp_port');
-		$mail->timeout = $this->config->get('config_smtp_timeout');
-		$mail->setTo($data['email']);
-		$mail->setFrom($this->config->get('config_email'));
-		$mail->setSender($this->config->get('config_name'));
-		$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
-		$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
+
+		$mail->Host = $this->config->get('config_smtp_host');
+		$mail->Username = $this->config->get('config_smtp_username');
+		$mail->Password = $this->config->get('config_smtp_password');
+		$mail->Port = $this->config->get('config_smtp_port');
+		$mail->Timeout = $this->config->get('config_smtp_timeout');
+
+		$mail->Sender = $this->config->get('config_smtp_username');
+
+		$mail->setFrom($this->config->get('config_email'), $this->config->get('config_name'));
+		$mail->AddAddress($data['email']);
+		$mail->Subject = html_entity_decode($subject, ENT_QUOTES, 'UTF-8');
+		$mail->MsgHTML(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 		$mail->send();
 
 		// Send to main admin email if new account email is enabled
 		if ($this->config->get('config_account_mail')) {
-			$mail->setTo($this->config->get('config_email'));
+			$mail->AddAddress($this->config->get('config_email'));
 			$mail->send();
 
 			// Send to additional alert emails if new account email is enabled
@@ -62,7 +64,7 @@ class ModelAccountCustomer extends Model {
 
 			foreach ($emails as $email) {
 				if (strlen($email) > 0 && preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email)) {
-					$mail->setTo($email);
+					$mail->AddAddress($email);
 					$mail->send();
 				}
 			}
