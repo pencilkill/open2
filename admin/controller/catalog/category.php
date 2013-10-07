@@ -76,7 +76,13 @@ class ControllerCatalogCategory extends Controller {
 
 		$this->data['categories'] = array();
 
-		$results = $this->model_catalog_category->getChildren((int)$this->request->get['category_id']);
+		$category_id = 0;
+
+		if(isset($this->request->get['category_id'])){
+			$category_id = (int)$this->request->get['category_id'];
+		}
+
+		$results = $this->model_catalog_category->getChildren($category_id);
 
 		foreach ($results as $result) {
 			$action = array();

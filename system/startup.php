@@ -1,7 +1,7 @@
 <?php
 // Error Reporting
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set('display_errors',0);
 
 // Check Version
 if (version_compare(phpversion(), '5.1.0', '<') == true) {
@@ -46,7 +46,7 @@ if (ini_get('magic_quotes_gpc')) {
 }
 
 if (!ini_get('date.timezone')) {
-	date_default_timezone_set('UTC');
+	date_default_timezone_set('PRC');
 }
 
 // Windows IIS Compatibility
