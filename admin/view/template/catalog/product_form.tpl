@@ -237,22 +237,23 @@
             </tr>
             <tr>
               <td><?php echo $entry_category; ?></td>
-              <td><div class="scrollbox">
+              <td>
+              	<div class="scrollbox">
                   <?php $class = 'odd'; ?>
                   <?php foreach ($categories as $category) { ?>
                   <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
                   <div class="<?php echo $class; ?>">
                     <?php if (in_array($category['category_id'], $product_category)) { ?>
-                    <input type="checkbox" name="product_category[]" value="<?php echo $category['category_id']; ?>" checked="checked" />
+                    <input type="radio" name="product_category[]" value="<?php echo $category['category_id']; ?>" checked="checked" />
                     <?php echo $category['name']; ?>
                     <?php } else { ?>
-                    <input type="checkbox" name="product_category[]" value="<?php echo $category['category_id']; ?>" />
+                    <input type="radio" name="product_category[]" value="<?php echo $category['category_id']; ?>" />
                     <?php echo $category['name']; ?>
                     <?php } ?>
                   </div>
                   <?php } ?>
                 </div>
-                <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a></td>
+                </td>
             </tr>
             <tr>
               <td><?php echo $entry_store; ?></td>

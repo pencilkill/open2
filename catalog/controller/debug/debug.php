@@ -11,6 +11,18 @@ class ControllerDebugDebug extends Controller {
 			$this->redirect(HTTP_PATH);
 			exit;
 		}
+
+		$this->load->model('localisation/tw_zone');
+
+		$this->data['cities'] = $this->model_localisation_tw_zone->getCities();
+
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/debug/debug.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/debug/debug.tpl';
+		} else {
+			$this->template = 'default/template/debug/debug.tpl';
+		}
+
+		$this->response->setOutput($this->render());
 	}
 
 	public function mail() {

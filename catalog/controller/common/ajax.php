@@ -9,40 +9,38 @@ class ControllerCommonAjax extends Controller{
 		// Nothing instresting happened in default action
 	}
 
-	public function twzones(){
-		$zones_data = array();
-		if(isset($this->request->get['city_id']) && (int)$this->request->get['city_id']){
-			$zones_data = $this->model_localisation_twzone->getZonesByCityId((int)$this->request->get['city_id']);
+	public function twzone(){
+		$return = '';
+
+		if(! isset($this->request->get['zone_id'])){
+			return $return;
 		}
 
-		$zones = '';
-		if(isset($this->request->get['city_id']) && $this->request->get['opts']){
-			$kf = 'zone_id';
-			$nf = 'zone_name';
-			$def = null;
+		$this->load->model('localisation/tw_zone');
 
-			if(isset($this->request->get['kf']) && $this->request->get['kf']){
-				$kf = $this->request->get['kf'];
-			}
-			if(isset($this->request->get['nf']) && $this->request->get['nf']){
-				$nf = $this->request->get['nf'];
-			}
-			if(isset($this->request->get['def']) && $this->request->get['def']){
-				$def = $this->request->get['def'];
-			}
+		$twzones = $this->model_localisation_tw_zone->getZonesByCityId($this->request->get['zone_id']);	// Actually, getting counties By TW zone_id
 
-			foreach($zones_data as $zone){
-				if($def==$zone[$kf]){
-					$zones .= '<option value="'.$zone[$kf].'" selected="selected">'.$zone[$nf].'</option>';
+		if(isset($this->request->get['opt']) && $this->request->get['opt']){
+			$kf = 'county_id';
+			$nf = 'name';
+			$def = array();
+
+			if(isset($this->request->get['kf'])) $kf = $this->request->get['kf'];
+			if(isset($this->request->get['nf'])) $nf = $this->request->get['nf'];
+			if(isset($this->request->get['def'])) $def = is_array($this->request->get['def']) ? $this->request->get['def'] : array($this->request->get['def']);
+
+			foreach($twzones as $twzone){
+				if(in_array($twzone[$kf], $def)){
+					$return .= '<option value="'.$twzone[$kf].'" selected="selected">'.$twzone[$nf].'</option>';
 				}else{
-					$zones .= '<option value="'.$zone[$kf].'">'.$zone[$nf].'</option>';
+					$return .= '<option value="'.$twzone[$kf].'">'.$twzone[$nf].'</option>';
 				}
 			}
 		}else{
-			$zones = json_encode($zones_data);
+			$return = json_encode($return);
 		}
 
-		$this->response->setOutput($zones);
+		$this->response->setOutput($return);
 	}
 
 }
