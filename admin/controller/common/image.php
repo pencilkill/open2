@@ -8,7 +8,7 @@ class ControllerCommonImage extends Controller {
 		$data = array();
 
 		if ($this->validate()) {
-			$filename = time().basename($this->request->files['image']['name']);
+			$filename = uniqid().'.'.end(explode('.', basename($this->request->files['image']['name'])));
 
 			if (@move_uploaded_file($this->request->files['image']['tmp_name'], DIR_IMAGE . $filename)) {
 	  			chmod(DIR_IMAGE . $filename, 0777);

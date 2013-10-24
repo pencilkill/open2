@@ -65,20 +65,6 @@ final class Loader {
 		}
 	}
 
-	public function database($driver, $hostname, $username, $password, $database, $prefix = NULL, $charset = 'UTF8') {
-		$file  = DIR_SYSTEM . 'database/' . $driver . '.php';
-		$class = 'Database' . preg_replace('/[^a-zA-Z0-9]/', '', $driver);
-
-		if (file_exists($file)) {
-			include_once($file);
-
-			$this->registry->set(str_replace('/', '_', $driver), new $class());
-		} else {
-			trigger_error('Error: Could not load database ' . $driver . '!');
-			exit();
-		}
-	}
-
 	public function config($config) {
 		$this->config->load($config);
 	}

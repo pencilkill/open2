@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 10 月 07 日 12:12
+-- 生成日期: 2013 年 10 月 08 日 01:15
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.0
 
@@ -997,7 +997,7 @@ CREATE TABLE IF NOT EXISTS `customer_online` (
   `referer` text COLLATE utf8_bin NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`ip`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -1417,7 +1417,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `date_added` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`news_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=14 ;
 
 --
 -- 转存表中的数据 `news`
@@ -1435,11 +1435,11 @@ INSERT INTO `news` (`news_id`, `sort_order`, `status`, `date_added`) VALUES
 CREATE TABLE IF NOT EXISTS `news_description` (
   `news_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `keyword` varchar(255) NOT NULL,
-  `description` text NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `keyword` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `description` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`news_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- 转存表中的数据 `news_description`
@@ -1471,7 +1471,7 @@ CREATE TABLE IF NOT EXISTS `news_to_store` (
   `news_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   PRIMARY KEY (`news_id`,`store_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- 转存表中的数据 `news_to_store`
@@ -2965,11 +2965,11 @@ CREATE TABLE IF NOT EXISTS `tw_zone` (
   `county_id` int(11) NOT NULL AUTO_INCREMENT,
   `zone_id` int(11) NOT NULL,
   `sort_order` int(11) NOT NULL DEFAULT '0',
-  `postcode` varchar(32) NOT NULL DEFAULT '',
-  `name` varchar(128) NOT NULL,
+  `postcode` varchar(32) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `name` varchar(128) CHARACTER SET utf8 NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`county_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='郵區號' AUTO_INCREMENT=377 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=377 ;
 
 --
 -- 转存表中的数据 `tw_zone`

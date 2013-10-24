@@ -62,7 +62,7 @@ class ModelLocalisationTwZone extends Model {
 		return $query->rows;
 	}
 
-	public function getZonesByCountryId($zone_id) {
+	public function getZonesByCityId($zone_id) {
 		$zone_data = $this->cache->get('tw_zone.' . (int)$zone_id);
 
 		if (!$zone_data) {
@@ -82,7 +82,7 @@ class ModelLocalisationTwZone extends Model {
 		return $query->row['total'];
 	}
 
-	public function getTotalZonesByCountryId($zone_id) {
+	public function getTotalZonesByCityId($zone_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "tw_zone WHERE zone_id = '" . (int)$zone_id . "'");
 
 		return $query->row['total'];

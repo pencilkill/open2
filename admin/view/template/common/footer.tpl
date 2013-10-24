@@ -1,5 +1,6 @@
 </div>
 <div id="footer"><?php echo $text_footer; ?></div>
+<?php if($islogged):?>
 <script type="text/javascript">
 <!-- 日期選擇 -->
 $(function(){
@@ -138,5 +139,6 @@ function edit(o){
 <!-- FCK格式化 -->
 <?php echo Fck::htmlReplaceAll('fck');?>
 <!-- //FCK格式化 -->
+<?php endif;?>
 </body>
 </html>

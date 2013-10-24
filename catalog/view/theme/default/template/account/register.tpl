@@ -55,7 +55,7 @@
         <tr>
           <td><?php echo $entry_company; ?></td>
           <td><input type="text" name="company" value="<?php echo $company; ?>" /></td>
-        </tr>        
+        </tr>
         <tr style="display: <?php echo (count($customer_groups) > 1 ? 'table-row' : 'none'); ?>;">
           <td><?php echo $entry_customer_group; ?></td>
           <td><?php foreach ($customer_groups as $customer_group) { ?>
@@ -69,7 +69,7 @@
             <br />
             <?php } ?>
             <?php } ?></td>
-        </tr>      
+        </tr>
         <tr id="company-id-display">
           <td><span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?></td>
           <td><input type="text" name="company_id" value="<?php echo $company_id; ?>" />
@@ -196,14 +196,14 @@
 <script type="text/javascript"><!--
 $('input[name=\'customer_group_id\']:checked').live('change', function() {
 	var customer_group = [];
-	
+
 <?php foreach ($customer_groups as $customer_group) { ?>
 	customer_group[<?php echo $customer_group['customer_group_id']; ?>] = [];
 	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['company_id_display'] = '<?php echo $customer_group['company_id_display']; ?>';
 	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['company_id_required'] = '<?php echo $customer_group['company_id_required']; ?>';
 	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['tax_id_display'] = '<?php echo $customer_group['tax_id_display']; ?>';
 	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['tax_id_required'] = '<?php echo $customer_group['tax_id_required']; ?>';
-<?php } ?>	
+<?php } ?>
 
 	if (customer_group[this.value]) {
 		if (customer_group[this.value]['company_id_display'] == '1') {
@@ -211,31 +211,31 @@ $('input[name=\'customer_group_id\']:checked').live('change', function() {
 		} else {
 			$('#company-id-display').hide();
 		}
-		
+
 		if (customer_group[this.value]['company_id_required'] == '1') {
 			$('#company-id-required').show();
 		} else {
 			$('#company-id-required').hide();
 		}
-		
+
 		if (customer_group[this.value]['tax_id_display'] == '1') {
 			$('#tax-id-display').show();
 		} else {
 			$('#tax-id-display').hide();
 		}
-		
+
 		if (customer_group[this.value]['tax_id_required'] == '1') {
 			$('#tax-id-required').show();
 		} else {
 			$('#tax-id-required').hide();
-		}	
+		}
 	}
 });
 
 $('input[name=\'customer_group_id\']:checked').trigger('change');
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
-$('select[name=\'country_id\']').bind('change', function() {
+$('select[name=\'country_id\']').on('change', function() {
 	$.ajax({
 		url: 'index.php?route=account/register/country&country_id=' + this.value,
 		dataType: 'json',
@@ -244,30 +244,30 @@ $('select[name=\'country_id\']').bind('change', function() {
 		},
 		complete: function() {
 			$('.wait').remove();
-		},			
+		},
 		success: function(json) {
 			if (json['postcode_required'] == '1') {
 				$('#postcode-required').show();
 			} else {
 				$('#postcode-required').hide();
 			}
-			
+
 			html = '<option value=""><?php echo $text_select; ?></option>';
-			
+
 			if (json['zone'] != '') {
 				for (i = 0; i < json['zone'].length; i++) {
         			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
-	    			
+
 					if (json['zone'][i]['zone_id'] == '<?php echo $zone_id; ?>') {
 	      				html += ' selected="selected"';
 	    			}
-	
+
 	    			html += '>' + json['zone'][i]['name'] + '</option>';
 				}
 			} else {
 				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
 			}
-			
+
 			$('select[name=\'zone_id\']').html(html);
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
@@ -276,12 +276,14 @@ $('select[name=\'country_id\']').bind('change', function() {
 	});
 });
 
+
+
 $('select[name=\'country_id\']').trigger('change');
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('.colorbox').colorbox({
 	width: 640,
 	height: 480
 });
-//--></script> 
+//--></script>
 <?php echo $footer; ?>
