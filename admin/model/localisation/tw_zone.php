@@ -1,13 +1,13 @@
 <?php
 class ModelLocalisationTwZone extends Model {
 	public function addZone($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "tw_zone SET status = '" . (int)$data['status'] . "', name = '" . $this->db->escape($data['name']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', zone_id = '" . (int)$data['zone_id'] . "'");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "tw_zone SET status = '" . (int)$data['status'] . "', name = " . $this->db->escape($data['name']) . ", postcode = " . $this->db->escape($data['postcode']) . ", zone_id = '" . (int)$data['zone_id'] . "'");
 
 		$this->cache->delete('tw_zone');
 	}
 
 	public function editZone($zone_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "tw_zone SET status = '" . (int)$data['status'] . "', name = '" . $this->db->escape($data['name']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', zone_id = '" . (int)$data['zone_id'] . "' WHERE zone_id = '" . (int)$zone_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "tw_zone SET status = '" . (int)$data['status'] . "', name = " . $this->db->escape($data['name']) . ", postcode = " . $this->db->escape($data['postcode']) . ", zone_id = '" . (int)$data['zone_id'] . "' WHERE zone_id = '" . (int)$zone_id . "'");
 
 		$this->cache->delete('tw_zone');
 	}

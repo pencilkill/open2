@@ -10,11 +10,11 @@ class ModelReportCustomer extends Model {
 		}
 				
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(o.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(o.date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(o.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(o.date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
 		}
 		
 		$sql .= ") tmp GROUP BY tmp.customer_id ORDER BY total DESC";
@@ -46,11 +46,11 @@ class ModelReportCustomer extends Model {
 		}
 						
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(o.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(o.date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(o.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(o.date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
 		}
 						
 		$query = $this->db->query($sql);
@@ -62,11 +62,11 @@ class ModelReportCustomer extends Model {
 		$sql = "SELECT cr.customer_id, CONCAT(c.firstname, ' ', c.lastname) AS customer, c.email, cgd.name AS customer_group, c.status, SUM(cr.points) AS points, COUNT(o.order_id) AS orders, SUM(o.total) AS total FROM " . DB_PREFIX . "customer_reward cr LEFT JOIN `" . DB_PREFIX . "customer` c ON (cr.customer_id = c.customer_id) LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) LEFT JOIN `" . DB_PREFIX . "order` o ON (cr.order_id = o.order_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 		
 		if (!empty($data['filter_date_start'])) {
-			$sql .= "DATE(cr.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= "DATE(cr.date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= "DATE(cr.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= "DATE(cr.date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
 		}
 				
 		$sql .= " GROUP BY cr.customer_id ORDER BY points DESC";
@@ -94,11 +94,11 @@ class ModelReportCustomer extends Model {
 		$implode = array();
 		
 		if (!empty($data['filter_date_start'])) {
-			$implode[] = "DATE(cr.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$implode[] = "DATE(cr.date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$implode[] = "DATE(cr.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$implode[] = "DATE(cr.date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
 		}
 		
 		if ($implode) {
@@ -126,11 +126,11 @@ class ModelReportCustomer extends Model {
 		$sql = "SELECT ct.customer_id, CONCAT(c.firstname, ' ', c.lastname) AS customer, c.email, cgd.name AS customer_group, c.status, SUM(ct.amount) AS total FROM " . DB_PREFIX . "customer_transaction ct LEFT JOIN `" . DB_PREFIX . "customer` c ON (ct.customer_id = c.customer_id) LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 		
 		if (!empty($data['filter_date_start'])) {
-			$sql .= "DATE(ct.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= "DATE(ct.date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= "DATE(ct.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= "DATE(ct.date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
 		}
 				
 		$sql .= " GROUP BY ct.customer_id ORDER BY total DESC";
@@ -158,11 +158,11 @@ class ModelReportCustomer extends Model {
 		$implode = array();
 		
 		if (!empty($data['filter_date_start'])) {
-			$implode[] = "DATE(cr.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$implode[] = "DATE(cr.date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$implode[] = "DATE(cr.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$implode[] = "DATE(cr.date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
 		}
 		
 		if ($implode) {

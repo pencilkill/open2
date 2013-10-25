@@ -197,15 +197,15 @@ class ControllerCatalogNews extends Controller {
 			$url .= '&order=' . $this->request->get['order'];
 		}
 
-  		$this->document->breadcrumbs = array();
+  		$this->data['breadcrumbs'] = array();
 
-   		$this->document->breadcrumbs[] = array(
+   		$this->data['breadcrumbs'][] = array(
        		'href'      => $this->url->link('common/home', '&token=' . $this->session->data['token'], 'SSL'),
        		'text'      => $this->language->get('text_home'),
       		'separator' => FALSE
    		);
 
-   		$this->document->breadcrumbs[] = array(
+   		$this->data['breadcrumbs'][] = array(
        		'href'      => $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url, 'SSL'),
        		'text'      => $this->language->get('heading_title'),
       		'separator' => ' :: '
@@ -388,15 +388,15 @@ class ControllerCatalogNews extends Controller {
 			$url .= '&order=' . $this->request->get['order'];
 		}
 
-  		$this->document->breadcrumbs = array();
+  		$this->data['breadcrumbs'] = array();
 
-   		$this->document->breadcrumbs[] = array(
+   		$this->data['breadcrumbs'][] = array(
        		'href'      => $this->url->link('common/home', '&token=' . $this->session->data['token'], 'SSL'),
        		'text'      => $this->language->get('text_home'),
       		'separator' => FALSE
    		);
 
-   		$this->document->breadcrumbs[] = array(
+   		$this->data['breadcrumbs'][] = array(
        		'href'      => $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url, 'SSL'),
        		'text'      => $this->language->get('heading_title'),
       		'separator' => ' :: '

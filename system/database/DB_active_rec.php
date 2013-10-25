@@ -399,18 +399,6 @@ class CI_DB_active_record extends CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
-	 * orwhere() is an alias of or_where()
-	 * this function is here for backwards compatibility, as
-	 * orwhere() has been deprecated
-	 */
-	function orwhere($key, $value = NULL, $escape = TRUE)
-	{
-		return $this->or_where($key, $value, $escape);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
 	 * Where
 	 *
 	 * Called by where() or orwhere()
@@ -672,18 +660,6 @@ class CI_DB_active_record extends CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
-	 * orlike() is an alias of or_like()
-	 * this function is here for backwards compatibility, as
-	 * orlike() has been deprecated
-	 */
-	function orlike($field, $match = '', $side = 'both')
-	{
-		return $this->or_like($field, $match, $side);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
 	 * Like
 	 *
 	 * Called by like() or orlike()
@@ -776,18 +752,6 @@ class CI_DB_active_record extends CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
-	 * groupby() is an alias of group_by()
-	 * this function is here for backwards compatibility, as
-	 * groupby() has been deprecated
-	 */
-	function groupby($by)
-	{
-		return $this->group_by($by);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
 	 * Sets the HAVING value
 	 *
 	 * Separates multiple calls with AND
@@ -802,18 +766,6 @@ class CI_DB_active_record extends CI_DB_driver {
 		return $this->_having($key, $value, 'AND ', $escape);
 	}
 
-	// --------------------------------------------------------------------
-
-	/**
-	 * orhaving() is an alias of or_having()
-	 * this function is here for backwards compatibility, as
-	 * orhaving() has been deprecated
-	 */
-
-	function orhaving($key, $value = '', $escape = TRUE)
-	{
-		return $this->or_having($key, $value, $escape);
-	}
 	// --------------------------------------------------------------------
 
 	/**
@@ -934,18 +886,6 @@ class CI_DB_active_record extends CI_DB_driver {
 		}
 
 		return $this;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * orderby() is an alias of order_by()
-	 * this function is here for backwards compatibility, as
-	 * orderby() has been deprecated
-	 */
-	function orderby($orderby, $direction = '')
-	{
-		return $this->order_by($orderby, $direction);
 	}
 
 	// --------------------------------------------------------------------
@@ -1147,18 +1087,6 @@ class CI_DB_active_record extends CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
-	 * getwhere() is an alias of get_where()
-	 * this function is here for backwards compatibility, as
-	 * getwhere() has been deprecated
-	 */
-	function getwhere($table = '', $where = null, $limit = null, $offset = null)
-	{
-		return $this->get_where($table, $where, $limit, $offset);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
 	 * Insert
 	 *
 	 * Compiles an insert string and runs the query
@@ -1197,7 +1125,8 @@ class CI_DB_active_record extends CI_DB_driver {
 
 			$table = $this->ar_from[0];
 		}
-		 $this->filter($set,$table);
+
+		$this->filter($set,$table);
 
 		$sql = $this->_insert($this->_protect_identifiers($table, TRUE, NULL, FALSE), array_keys($this->ar_set), array_values($this->ar_set));
 
@@ -1261,7 +1190,7 @@ class CI_DB_active_record extends CI_DB_driver {
 			$this->limit($limit);
 		}
 
-		 $this->filter($set,$table);
+		$this->filter($set,$table);
 
 		$sql = $this->_update($this->_protect_identifiers($table, TRUE, NULL, FALSE), $this->ar_set, $this->ar_where, $this->ar_orderby, $this->ar_limit);
 

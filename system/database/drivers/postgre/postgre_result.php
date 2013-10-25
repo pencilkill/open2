@@ -25,7 +25,27 @@
  * @link		http://codeigniter.com/user_guide/database/
  */
 class CI_DB_postgre_result extends CI_DB_result {
+	var $row = array();
+	var $rows = array();
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * sam@ozchamp.net
+	 * Initialize for opencart row and rows
+	 * Seeing CI_DB_driver->query()
+	 * @access	public
+	 * @return	resource
+	 */
+	function initialize(){
+		$this->num_rows = $this->num_rows();
+
+		$this->row = $this->row_array(0);
+
+		$this->rows = $this->result_array();
+
+		return $this->result_id;
+	}
 	/**
 	 * Number of rows in the result set
 	 *
@@ -36,7 +56,7 @@ class CI_DB_postgre_result extends CI_DB_result {
 	{
 		return @pg_num_rows($this->result_id);
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -67,7 +87,7 @@ class CI_DB_postgre_result extends CI_DB_result {
 		{
 			$field_names[] = pg_field_name($this->result_id, $i);
 		}
-		
+
 		return $field_names;
 	}
 
@@ -95,7 +115,7 @@ class CI_DB_postgre_result extends CI_DB_result {
 
 			$retval[] = $F;
 		}
-		
+
 		return $retval;
 	}
 
@@ -105,7 +125,7 @@ class CI_DB_postgre_result extends CI_DB_result {
 	 * Free the result
 	 *
 	 * @return	null
-	 */		
+	 */
 	function free_result()
 	{
 		if (is_resource($this->result_id))
@@ -146,7 +166,7 @@ class CI_DB_postgre_result extends CI_DB_result {
 	{
 		return pg_fetch_assoc($this->result_id);
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -161,7 +181,7 @@ class CI_DB_postgre_result extends CI_DB_result {
 	{
 		return pg_fetch_object($this->result_id);
 	}
-	
+
 }
 
 

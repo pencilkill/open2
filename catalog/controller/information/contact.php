@@ -10,14 +10,6 @@ class ControllerInformationContact extends Controller {
     	if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$mail = new Mail();
 
-			$mail->Host = $this->config->get('config_smtp_host');
-			$mail->Username = $this->config->get('config_smtp_username');
-			$mail->Password = $this->config->get('config_smtp_password');
-			$mail->Port = $this->config->get('config_smtp_port');
-			$mail->Timeout = $this->config->get('config_smtp_timeout');
-
-			$mail->Sender = $this->config->get('config_smtp_username');
-
 	  		$mail->setFrom($this->request->post['email'], $this->request->post['name']);
 			$mail->AddAddress($this->config->get('config_email'));
 	  		$mail->Subject = html_entity_decode(sprintf($this->language->get('email_subject'), $this->request->post['name']), ENT_QUOTES, 'UTF-8');

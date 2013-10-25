@@ -150,7 +150,8 @@ $config['AccessControl'][] = Array(
 		'fileView' => true,
 		'fileUpload' => true,
 		'fileRename' => true,
-		'fileDelete' => true);
+		'fileDelete' => true
+);
 
 /*
 For example, if you want to restrict the upload, rename or delete of files in

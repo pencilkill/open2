@@ -1,7 +1,7 @@
 <?php
 class ModelCheckoutVoucher extends Model {
 	public function addVoucher($order_id, $data) {
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "voucher SET order_id = '" . (int)$order_id . "', code = '" . $this->db->escape($data['code']) . "', from_name = '" . $this->db->escape($data['from_name']) . "', from_email = '" . $this->db->escape($data['from_email']) . "', to_name = '" . $this->db->escape($data['to_name']) . "', to_email = '" . $this->db->escape($data['to_email']) . "', voucher_theme_id = '" . (int)$data['voucher_theme_id'] . "', message = '" . $this->db->escape($data['message']) . "', amount = '" . (float)$data['amount'] . "', status = '1', date_added = NOW()");
+      	$this->db->query("INSERT INTO " . DB_PREFIX . "voucher SET order_id = '" . (int)$order_id . "', code = " . $this->db->escape($data['code']) . ", from_name = " . $this->db->escape($data['from_name']) . ", from_email = " . $this->db->escape($data['from_email']) . ", to_name = " . $this->db->escape($data['to_name']) . ", to_email = " . $this->db->escape($data['to_email']) . ", voucher_theme_id = '" . (int)$data['voucher_theme_id'] . "', message = " . $this->db->escape($data['message']) . ", amount = '" . (float)$data['amount'] . "', status = '1', date_added = NOW()");
 
 		return $this->db->getLastId();
 	}
@@ -9,7 +9,7 @@ class ModelCheckoutVoucher extends Model {
 	public function getVoucher($code) {
 		$status = true;
 
-		$voucher_query = $this->db->query("SELECT *, vtd.name AS theme FROM " . DB_PREFIX . "voucher v LEFT JOIN " . DB_PREFIX . "voucher_theme vt ON (v.voucher_theme_id = vt.voucher_theme_id) LEFT JOIN " . DB_PREFIX . "voucher_theme_description vtd ON (vt.voucher_theme_id = vtd.voucher_theme_id) WHERE v.code = '" . $this->db->escape($code) . "' AND vtd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND v.status = '1'");
+		$voucher_query = $this->db->query("SELECT *, vtd.name AS theme FROM " . DB_PREFIX . "voucher v LEFT JOIN " . DB_PREFIX . "voucher_theme vt ON (v.voucher_theme_id = vt.voucher_theme_id) LEFT JOIN " . DB_PREFIX . "voucher_theme_description vtd ON (vt.voucher_theme_id = vtd.voucher_theme_id) WHERE v.code = " . $this->db->escape($code) . " AND vtd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND v.status = '1'");
 
 		if ($voucher_query->num_rows) {
 			if ($voucher_query->row['order_id']) {
@@ -103,14 +103,6 @@ class ModelCheckoutVoucher extends Model {
 				}
 
 				$mail = new Mail();
-
-				$mail->Host = $this->config->get('config_smtp_host');
-				$mail->Username = $this->config->get('config_smtp_username');
-				$mail->Password = $this->config->get('config_smtp_password');
-				$mail->Port = $this->config->get('config_smtp_port');
-				$mail->Timeout = $this->config->get('config_smtp_timeout');
-
-				$mail->Sender = $this->config->get('config_smtp_username');
 
 				$mail->setFrom($this->config->get('config_email'), $order_info['store_name']);
 				$mail->AddAddress($voucher['to_email']);

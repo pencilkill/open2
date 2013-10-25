@@ -13,14 +13,6 @@
  *
 	$mail = new Mail();
 
-	$mail->Host = $this->config->get('config_smtp_host');
-	$mail->Username = $this->config->get('config_smtp_username');
-	$mail->Password = $this->config->get('config_smtp_password');
-	$mail->Port = $this->config->get('config_smtp_port');
-	$mail->Timeout = $this->config->get('config_smtp_timeout');
-
-	$mail->Sender = $this->config->get('config_smtp_username');
-
 	$mail->SetFrom('cmd.dos@hotmail.com', $this->config->get('config_name'));
 	$mail->AddAddress('sam@ozchamp.net');
     $mail->Subject = html_entity_decode($subject, ENT_QUOTES, 'UTF-8');
@@ -42,8 +34,28 @@ class Mail{
 		if(! class_exists('Mailer')){
 			throw new Exception('Can not load mailer !');
 		}
+		// Using clone without changing orignal object
+		$config = clone Registry::instance()->get('config');
 
 		$this->driver = new Mailer(false);
+
+		//
+		$this->driver->UseSendmailOptions = false;
+		//
+		$this->driver->CharSet = 'UTF-8';
+		$this->driver->IsSMTP();
+		$this->driver->SMTPAuth = true;
+		$this->driver->SMTPKeepAlive = true;
+		//...
+		$this->driver->IsHTML(true);
+
+		$this->driver->Host = $config->get('config_smtp_host');
+		$this->driver->Username = $config->get('config_smtp_username');
+		$this->driver->Password = $config->get('config_smtp_password');
+		$this->driver->Port = $config->get('config_smtp_port');
+		$this->driver->Timeout = $config->get('config_smtp_timeout');
+
+		$this->driver->Sender = $config->get('config_smtp_username');
 	}
 	// Working as it is without any checking
 	public function __set($property, $value){

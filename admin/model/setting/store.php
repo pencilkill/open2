@@ -1,7 +1,7 @@
 <?php
 class ModelSettingStore extends Model {
 	public function addStore($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "store SET name = '" . $this->db->escape($data['config_name']) . "', `url` = '" . $this->db->escape($data['config_url']) . "', `ssl` = '" . $this->db->escape($data['config_ssl']) . "'");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "store SET name = " . $this->db->escape($data['config_name']) . ", `url` = " . $this->db->escape($data['config_url']) . ", `ssl` = " . $this->db->escape($data['config_ssl']) . "");
 		
 		$this->cache->delete('store');
 		
@@ -9,7 +9,7 @@ class ModelSettingStore extends Model {
 	}
 	
 	public function editStore($store_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "store SET name = '" . $this->db->escape($data['config_name']) . "', `url` = '" . $this->db->escape($data['config_url']) . "', `ssl` = '" . $this->db->escape($data['config_ssl']) . "' WHERE store_id = '" . (int)$store_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "store SET name = " . $this->db->escape($data['config_name']) . ", `url` = " . $this->db->escape($data['config_url']) . ", `ssl` = " . $this->db->escape($data['config_ssl']) . " WHERE store_id = '" . (int)$store_id . "'");
 						
 		$this->cache->delete('store');
 	}
@@ -53,13 +53,13 @@ class ModelSettingStore extends Model {
 	}
 	
 	public function getTotalStoresByLanguage($language) {
-      	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "setting WHERE `key` = 'config_language' AND `value` = '" . $this->db->escape($language) . "' AND store_id != '0'");
+      	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "setting WHERE `key` = 'config_language' AND `value` = " . $this->db->escape($language) . " AND store_id != '0'");
 		
 		return $query->row['total'];		
 	}
 	
 	public function getTotalStoresByCurrency($currency) {
-      	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "setting WHERE `key` = 'config_currency' AND `value` = '" . $this->db->escape($currency) . "' AND store_id != '0'");
+      	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "setting WHERE `key` = 'config_currency' AND `value` = " . $this->db->escape($currency) . " AND store_id != '0'");
 		
 		return $query->row['total'];		
 	}

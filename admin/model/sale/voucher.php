@@ -1,11 +1,11 @@
 <?php
 class ModelSaleVoucher extends Model {
 	public function addVoucher($data) {
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "voucher SET code = '" . $this->db->escape($data['code']) . "', from_name = '" . $this->db->escape($data['from_name']) . "', from_email = '" . $this->db->escape($data['from_email']) . "', to_name = '" . $this->db->escape($data['to_name']) . "', to_email = '" . $this->db->escape($data['to_email']) . "', voucher_theme_id = '" . (int)$data['voucher_theme_id'] . "', message = '" . $this->db->escape($data['message']) . "', amount = '" . (float)$data['amount'] . "', status = '" . (int)$data['status'] . "', date_added = NOW()");
+      	$this->db->query("INSERT INTO " . DB_PREFIX . "voucher SET code = " . $this->db->escape($data['code']) . ", from_name = " . $this->db->escape($data['from_name']) . ", from_email = " . $this->db->escape($data['from_email']) . ", to_name = " . $this->db->escape($data['to_name']) . ", to_email = " . $this->db->escape($data['to_email']) . ", voucher_theme_id = '" . (int)$data['voucher_theme_id'] . "', message = " . $this->db->escape($data['message']) . ", amount = '" . (float)$data['amount'] . "', status = '" . (int)$data['status'] . "', date_added = NOW()");
 	}
 
 	public function editVoucher($voucher_id, $data) {
-      	$this->db->query("UPDATE " . DB_PREFIX . "voucher SET code = '" . $this->db->escape($data['code']) . "', from_name = '" . $this->db->escape($data['from_name']) . "', from_email = '" . $this->db->escape($data['from_email']) . "', to_name = '" . $this->db->escape($data['to_name']) . "', to_email = '" . $this->db->escape($data['to_email']) . "', voucher_theme_id = '" . (int)$data['voucher_theme_id'] . "', message = '" . $this->db->escape($data['message']) . "', amount = '" . (float)$data['amount'] . "', status = '" . (int)$data['status'] . "' WHERE voucher_id = '" . (int)$voucher_id . "'");
+      	$this->db->query("UPDATE " . DB_PREFIX . "voucher SET code = " . $this->db->escape($data['code']) . ", from_name = " . $this->db->escape($data['from_name']) . ", from_email = " . $this->db->escape($data['from_email']) . ", to_name = " . $this->db->escape($data['to_name']) . ", to_email = " . $this->db->escape($data['to_email']) . ", voucher_theme_id = '" . (int)$data['voucher_theme_id'] . "', message = " . $this->db->escape($data['message']) . ", amount = '" . (float)$data['amount'] . "', status = '" . (int)$data['status'] . "' WHERE voucher_id = '" . (int)$voucher_id . "'");
 	}
 
 	public function deleteVoucher($voucher_id) {
@@ -20,7 +20,7 @@ class ModelSaleVoucher extends Model {
 	}
 
 	public function getVoucherByCode($code) {
-      	$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "voucher WHERE code = '" . $this->db->escape($code) . "'");
+      	$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "voucher WHERE code = " . $this->db->escape($code) . "");
 
 		return $query->row;
 	}
@@ -118,14 +118,6 @@ class ModelSaleVoucher extends Model {
 
 				$mail = new Mail();
 
-				$mail->Host = $this->config->get('config_smtp_host');
-				$mail->Username = $this->config->get('config_smtp_username');
-				$mail->Password = $this->config->get('config_smtp_password');
-				$mail->Port = $this->config->get('config_smtp_port');
-				$mail->Timeout = $this->config->get('config_smtp_timeout');
-
-				$mail->Sender = $this->config->get('config_smtp_username');
-
 				$mail->setFrom($this->config->get('config_email'), $order_info['store_name']);
 				$mail->AddAddress($voucher_info['to_email']);
 				$mail->Subject = html_entity_decode(sprintf($language->get('text_subject'), $voucher_info['from_name']), ENT_QUOTES, 'UTF-8');
@@ -161,14 +153,6 @@ class ModelSaleVoucher extends Model {
 				$template->data['message'] = nl2br($voucher_info['message']);
 
 				$mail = new Mail();
-
-				$mail->Host = $this->config->get('config_smtp_host');
-				$mail->Username = $this->config->get('config_smtp_username');
-				$mail->Password = $this->config->get('config_smtp_password');
-				$mail->Port = $this->config->get('config_smtp_port');
-				$mail->Timeout = $this->config->get('config_smtp_timeout');
-
-				$mail->Sender = $this->config->get('config_smtp_username');
 
 				$mail->setFrom($this->config->get('config_email'), $this->config->get('config_name'));
 				$mail->AddAddress($voucher_info['to_email']);

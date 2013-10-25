@@ -74,7 +74,7 @@ class ControllerCommonLogin extends Controller {
 
 			$this->data['redirect'] = $this->url->link($route, $url, 'SSL');
 		} else {
-			$this->data['redirect'] = $this->url->link($defaultRoute, $url, 'SSL');
+			$this->data['redirect'] = $this->url->link($defaultRoute, '', 'SSL');
 		}
 
 		$this->data['forgotten'] = $this->url->link('common/forgotten', '', 'SSL');

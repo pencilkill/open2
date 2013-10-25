@@ -1,10 +1,19 @@
 <?php
+/**
+ *
+ * @author Sam@ozchamp.net
+ * This DB class was not the opencart orignal DB class
+ * It is using codeigniter DAO which was a little changed to be compatible with opencart
+ * Try to read the driver method named 'query' and the result class method named 'initialize'
+ *
+ * Most of all DAO method access except cache cause the opencart has cache system owned itself
+ *
+ * TODO The dbprefix is still not supportted well cause there are so many scene using query method directly while the time is short ~~~
+ */
 class DB {
-	private $connection;
-	private $active_record;
 	private $driver=null;
 
-	public function __construct($driver, $hostname, $username, $password, $database, $dbprefix = '', $active_record =true) {
+	public function __construct($driver, $hostname, $username, $password, $database, $dbprefix = '', $char_set = 'UTF-8', $active_record = true) {
 		require_once(DIR_DATABASE.'CI_function.php');
 		require_once(DIR_DATABASE.'DB_driver.php');
 		if ($active_record)
@@ -32,40 +41,20 @@ class DB {
 			'username'	=> $username,
 			'password'	=> $password,
 			'database'	=> $database,
-			'dbprefix'  => $dbprefix
+			//'dbprefix'  => $dbprefix,
+			'dbprefix'  => '',	// be signed in each db action scene, this is still not updated
+			'char_set'  => $char_set
 		);
 		/*
 		 * CI_DB_mysql_driver 繼承 CI_DB
 		 */
 		$this->driver = new $CI_DB_new_driver($params);
 		$this->driver->initialize();
-		$this->connection = $this->driver->conn_id;
-		$this->active_record  =(boolean)$active_record;
-		if (!$this->connection) {
+
+		if (! $this->driver->conn_id) {
 			exit('Error: Could not make a database connection using ' . $username . '@' . $hostname);
 		}
   	}
-
-  	public function query($sql) {
-		$result = $this->driver->query($sql);
-  		if(is_object($result)&& $result instanceof CI_DB_result){
-			$query = new stdClass();
-			$query->row = $result->row_array();
-			$query->rows = $result->result_array();
-			$query->num_rows = $result->num_rows();
-
-			return $query;
-  		}else{
-  			return true;
-  		}
-  	}
-
-	public function escape($value) {
-		if($this->active_record){
-			return $value;
-		}
-		return $this->driver->escape($value);
-	}
 
   	public function countAffected() {
     	return $this->driver->affected_rows();
@@ -74,10 +63,6 @@ class DB {
   	public function getLastId() {
   		return $this->driver->insert_id();
   	}
-
-	public function __destruct() {
-		//$this->driver->close($this->connection);
-	}
 
 	public function __call($method,$args){
 	   return call_user_func_array(array($this->driver,$method),$args);

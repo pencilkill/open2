@@ -25,6 +25,28 @@
  * @link		http://codeigniter.com/user_guide/database/
  */
 class CI_DB_mysql_result extends CI_DB_result {
+	var $row = array();
+	var $rows = array();
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * sam@ozchamp.net
+	 * Initialize for opencart row and rows
+	 * Seeing CI_DB_driver->query()
+	 * @access	public
+	 * @return	resource
+	 */
+	function initialize(){
+		$this->num_rows = $this->num_rows();
+
+		$this->row = $this->row_array(0);
+
+		$this->rows = $this->result_array();
+
+		return $this->result_id;
+	}
+	// --------------------------------------------------------------------
 
 	/**
 	 * Number of rows in the result set

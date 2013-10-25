@@ -25,7 +25,27 @@
  * @link		http://codeigniter.com/user_guide/database/
  */
 class CI_DB_sqlite_result extends CI_DB_result {
-	
+	var $row = array();
+	var $rows = array();
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * sam@ozchamp.net
+	 * Initialize for opencart row and rows
+	 * Seeing CI_DB_driver->query()
+	 * @access	public
+	 * @return	resource
+	 */
+	function initialize(){
+		$this->num_rows = $this->num_rows();
+
+		$this->row = $this->row_array(0);
+
+		$this->rows = $this->result_array();
+
+		return $this->result_id;
+	}
 	/**
 	 * Number of rows in the result set
 	 *
@@ -36,7 +56,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	{
 		return @sqlite_num_rows($this->result_id);
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -67,7 +87,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 		{
 			$field_names[] = sqlite_field_name($this->result_id, $i);
 		}
-		
+
 		return $field_names;
 	}
 
@@ -95,7 +115,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 
 			$retval[] = $F;
 		}
-		
+
 		return $retval;
 	}
 
@@ -105,7 +125,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 * Free the result
 	 *
 	 * @return	null
-	 */		
+	 */
 	function free_result()
 	{
 		// Not implemented in SQLite
@@ -142,7 +162,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	{
 		return sqlite_fetch_array($this->result_id);
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -168,7 +188,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 				return $obj;
 			} else {
 				return NULL;
-			} 
+			}
 		}
 	}
 

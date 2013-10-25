@@ -1,6 +1,12 @@
 <?php
 final class Registry {
+	private static $instance;
+
 	private $data = array();
+
+	public function __construct(){
+		self::$instance = & $this;
+	}
 
 	public function get($key) {
 		return (isset($this->data[$key]) ? $this->data[$key] : NULL);
@@ -12,6 +18,10 @@ final class Registry {
 
 	public function has($key) {
     	return isset($this->data[$key]);
+  	}
+
+  	public static function instance(){
+  		return self::$instance;
   	}
 }
 ?>

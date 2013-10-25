@@ -6,22 +6,22 @@ class ControllerDevDev extends Controller {
 
 	private $error = array();
 
-	public $template = './template/dev.tpl';
+	public function __construct($registry){
+		parent::__construct($registry);
+
+		if(! $this->validate()){
+			$this->forward('error/not_found');
+		}
+
+		$this->template = 'dev/dev.tpl';
+	}
 
 	public function index(){
-		if(! $this->validate()){
-			$this->redirect(HTTP_PATH);
-			exit;
-		}
 		//$this->load->model('catalog/product');
 
 		//$this->response->setOutput($this->render());
 	}
 	public function cii(){
-		if(! $this->validate()){
-			$this->redirect(HTTP_PATH);
-			exit;
-		}
 		if($this->request->server['REQUEST_METHOD'] == 'POST'){
 			if(empty($this->request->post['cii'])){
 				$this->error[] = 'Cii is required !';
@@ -248,11 +248,6 @@ class ControllerDevDev extends Controller {
 	}
 
 	public function export(){
-		if(! $this->validate()){
-			$this->redirect(HTTP_PATH);
-			exit;
-		}
-
 		$this->load->ext('Excel');
 
 		$header = array('姓名','郵箱','等級','狀態','訂閱','註冊時間');

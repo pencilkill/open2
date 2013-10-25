@@ -1,14 +1,14 @@
 <?php
 class ModelSaleAffiliate extends Model {
 	public function addAffiliate($data) {
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "affiliate SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', company = '" . $this->db->escape($data['company']) . "', address_1 = '" . $this->db->escape($data['address_1']) . "', address_2 = '" . $this->db->escape($data['address_2']) . "', city = '" . $this->db->escape($data['city']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', country_id = '" . (int)$data['country_id'] . "', zone_id = '" . (int)$data['zone_id'] . "', code = '" . $this->db->escape($data['code']) . "', commission = '" . (float)$data['commission'] . "', tax = '" . $this->db->escape($data['tax']) . "', payment = '" . $this->db->escape($data['payment']) . "', cheque = '" . $this->db->escape($data['cheque']) . "', paypal = '" . $this->db->escape($data['paypal']) . "', bank_name = '" . $this->db->escape($data['bank_name']) . "', bank_branch_number = '" . $this->db->escape($data['bank_branch_number']) . "', bank_swift_code = '" . $this->db->escape($data['bank_swift_code']) . "', bank_account_name = '" . $this->db->escape($data['bank_account_name']) . "', bank_account_number = '" . $this->db->escape($data['bank_account_number']) . "', status = '" . (int)$data['status'] . "', date_added = NOW()");
+      	$this->db->query("INSERT INTO " . DB_PREFIX . "affiliate SET firstname = " . $this->db->escape($data['firstname']) . ", lastname = " . $this->db->escape($data['lastname']) . ", email = " . $this->db->escape($data['email']) . ", telephone = " . $this->db->escape($data['telephone']) . ", fax = " . $this->db->escape($data['fax']) . ", salt = " . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . ", password = " . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . ", company = " . $this->db->escape($data['company']) . ", address_1 = " . $this->db->escape($data['address_1']) . ", address_2 = " . $this->db->escape($data['address_2']) . ", city = " . $this->db->escape($data['city']) . ", postcode = " . $this->db->escape($data['postcode']) . ", country_id = '" . (int)$data['country_id'] . "', zone_id = '" . (int)$data['zone_id'] . "', code = " . $this->db->escape($data['code']) . ", commission = '" . (float)$data['commission'] . "', tax = " . $this->db->escape($data['tax']) . ", payment = " . $this->db->escape($data['payment']) . ", cheque = " . $this->db->escape($data['cheque']) . ", paypal = " . $this->db->escape($data['paypal']) . ", bank_name = " . $this->db->escape($data['bank_name']) . ", bank_branch_number = " . $this->db->escape($data['bank_branch_number']) . ", bank_swift_code = " . $this->db->escape($data['bank_swift_code']) . ", bank_account_name = " . $this->db->escape($data['bank_account_name']) . ", bank_account_number = " . $this->db->escape($data['bank_account_number']) . ", status = '" . (int)$data['status'] . "', date_added = NOW()");
 	}
 
 	public function editAffiliate($affiliate_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "affiliate SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', company = '" . $this->db->escape($data['company']) . "', address_1 = '" . $this->db->escape($data['address_1']) . "', address_2 = '" . $this->db->escape($data['address_2']) . "', city = '" . $this->db->escape($data['city']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', country_id = '" . (int)$data['country_id'] . "', zone_id = '" . (int)$data['zone_id'] . "', code = '" . $this->db->escape($data['code']) . "', commission = '" . (float)$data['commission'] . "', tax = '" . $this->db->escape($data['tax']) . "', payment = '" . $this->db->escape($data['payment']) . "', cheque = '" . $this->db->escape($data['cheque']) . "', paypal = '" . $this->db->escape($data['paypal']) . "', bank_name = '" . $this->db->escape($data['bank_name']) . "', bank_branch_number = '" . $this->db->escape($data['bank_branch_number']) . "', bank_swift_code = '" . $this->db->escape($data['bank_swift_code']) . "', bank_account_name = '" . $this->db->escape($data['bank_account_name']) . "', bank_account_number = '" . $this->db->escape($data['bank_account_number']) . "', status = '" . (int)$data['status'] . "' WHERE affiliate_id = '" . (int)$affiliate_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "affiliate SET firstname = " . $this->db->escape($data['firstname']) . ", lastname = " . $this->db->escape($data['lastname']) . ", email = " . $this->db->escape($data['email']) . ", telephone = " . $this->db->escape($data['telephone']) . ", fax = " . $this->db->escape($data['fax']) . ", company = " . $this->db->escape($data['company']) . ", address_1 = " . $this->db->escape($data['address_1']) . ", address_2 = " . $this->db->escape($data['address_2']) . ", city = " . $this->db->escape($data['city']) . ", postcode = " . $this->db->escape($data['postcode']) . ", country_id = '" . (int)$data['country_id'] . "', zone_id = '" . (int)$data['zone_id'] . "', code = " . $this->db->escape($data['code']) . ", commission = '" . (float)$data['commission'] . "', tax = " . $this->db->escape($data['tax']) . ", payment = " . $this->db->escape($data['payment']) . ", cheque = " . $this->db->escape($data['cheque']) . ", paypal = " . $this->db->escape($data['paypal']) . ", bank_name = " . $this->db->escape($data['bank_name']) . ", bank_branch_number = " . $this->db->escape($data['bank_branch_number']) . ", bank_swift_code = " . $this->db->escape($data['bank_swift_code']) . ", bank_account_name = " . $this->db->escape($data['bank_account_name']) . ", bank_account_number = " . $this->db->escape($data['bank_account_number']) . ", status = '" . (int)$data['status'] . "' WHERE affiliate_id = '" . (int)$affiliate_id . "'");
 
       	if ($data['password']) {
-        	$this->db->query("UPDATE " . DB_PREFIX . "affiliate SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "' WHERE affiliate_id = '" . (int)$affiliate_id . "'");
+        	$this->db->query("UPDATE " . DB_PREFIX . "affiliate SET salt = " . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . ", password = " . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . " WHERE affiliate_id = '" . (int)$affiliate_id . "'");
       	}
 	}
 
@@ -24,7 +24,7 @@ class ModelSaleAffiliate extends Model {
 	}
 
 	public function getAffiliateByEmail($email) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "affiliate WHERE LCASE(email) = '" . $this->db->escape(strtolower($email)) . "'");
+		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "affiliate WHERE LCASE(email) = " . $this->db->escape(strtolower($email)) . "");
 
 		return $query->row;
 	}
@@ -39,11 +39,11 @@ class ModelSaleAffiliate extends Model {
 		}
 
 		if (!empty($data['filter_email'])) {
-			$implode[] = "a.email = '" . $this->db->escape($data['filter_email']) . "'";
+			$implode[] = "a.email = " . $this->db->escape($data['filter_email']) . "";
 		}
 
 		if (!empty($data['filter_code'])) {
-			$implode[] = "a.code = '" . $this->db->escape($data['filter_code']) . "'";
+			$implode[] = "a.code = " . $this->db->escape($data['filter_code']) . "";
 		}
 
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
@@ -55,7 +55,7 @@ class ModelSaleAffiliate extends Model {
 		}
 
 		if (!empty($data['filter_date_added'])) {
-			$implode[] = "DATE(a.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+			$implode[] = "DATE(a.date_added) = DATE(" . $this->db->escape($data['filter_date_added']) . ")";
 		}
 
 		if ($implode) {
@@ -117,14 +117,6 @@ class ModelSaleAffiliate extends Model {
 
 			$mail = new Mail();
 
-			$mail->Host = $this->config->get('config_smtp_host');
-			$mail->Username = $this->config->get('config_smtp_username');
-			$mail->Password = $this->config->get('config_smtp_password');
-			$mail->Port = $this->config->get('config_smtp_port');
-			$mail->Timeout = $this->config->get('config_smtp_timeout');
-
-			$mail->Sender = $this->config->get('config_smtp_username');
-
 			$mail->setFrom($this->config->get('config_email'), $this->config->get('config_name'));
 			$mail->AddAddress($affiliate_info['email']);
 			$mail->Subject = html_entity_decode(sprintf($this->language->get('text_approve_subject'), $this->config->get('config_name')), ENT_QUOTES, 'UTF-8');
@@ -149,7 +141,7 @@ class ModelSaleAffiliate extends Model {
 		}
 
 		if (!empty($data['filter_email'])) {
-			$implode[] = "email = '" . $this->db->escape($data['filter_email']) . "'";
+			$implode[] = "email = " . $this->db->escape($data['filter_email']) . "";
 		}
 
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
@@ -161,7 +153,7 @@ class ModelSaleAffiliate extends Model {
 		}
 
 		if (!empty($data['filter_date_added'])) {
-			$implode[] = "DATE(date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+			$implode[] = "DATE(date_added) = DATE(" . $this->db->escape($data['filter_date_added']) . ")";
 		}
 
 		if ($implode) {
@@ -195,7 +187,7 @@ class ModelSaleAffiliate extends Model {
 		$affiliate_info = $this->getAffiliate($affiliate_id);
 
 		if ($affiliate_info) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "affiliate_transaction SET affiliate_id = '" . (int)$affiliate_id . "', order_id = '" . (float)$order_id . "', description = '" . $this->db->escape($description) . "', amount = '" . (float)$amount . "', date_added = NOW()");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "affiliate_transaction SET affiliate_id = '" . (int)$affiliate_id . "', order_id = '" . (float)$order_id . "', description = " . $this->db->escape($description) . ", amount = '" . (float)$amount . "', date_added = NOW()");
 
 			$this->language->load('mail/affiliate');
 
@@ -203,14 +195,6 @@ class ModelSaleAffiliate extends Model {
 			$message .= sprintf($this->language->get('text_transaction_total'), $this->currency->format($this->getTransactionTotal($affiliate_id), $this->config->get('config_currency')));
 
 			$mail = new Mail();
-
-			$mail->Host = $this->config->get('config_smtp_host');
-			$mail->Username = $this->config->get('config_smtp_username');
-			$mail->Password = $this->config->get('config_smtp_password');
-			$mail->Port = $this->config->get('config_smtp_port');
-			$mail->Timeout = $this->config->get('config_smtp_timeout');
-
-			$mail->Sender = $this->config->get('config_smtp_username');
 
 			$mail->setFrom($this->config->get('config_email'), $this->config->get('config_name'));
 			$mail->AddAddress($affiliate_info['email']);

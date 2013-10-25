@@ -10,11 +10,11 @@ class ModelReportSale extends Model {
 		}
 		
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(o.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(o.date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(o.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(o.date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
 		}
 		
 		$sql .= " GROUP BY o.order_id) tmp";
@@ -90,11 +90,11 @@ class ModelReportSale extends Model {
 		}
 				
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
 		}
 
 		$query = $this->db->query($sql);
@@ -112,11 +112,11 @@ class ModelReportSale extends Model {
 		}
 		
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(o.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(o.date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(o.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(o.date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
 		}
 		
 		if (!empty($data['filter_group'])) {
@@ -168,11 +168,11 @@ class ModelReportSale extends Model {
 		}
 				
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
 		}
 		
 		if (!empty($data['filter_group'])) {
@@ -214,11 +214,11 @@ class ModelReportSale extends Model {
 		}
 		
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
 		}
 		
 		if (!empty($data['filter_group'])) {
@@ -270,11 +270,11 @@ class ModelReportSale extends Model {
 		}
 				
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+			$sql .= " AND DATE(date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+			$sql .= " AND DATE(date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
 		}
 		
 		if (!empty($data['filter_group'])) {

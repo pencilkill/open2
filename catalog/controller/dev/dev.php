@@ -6,15 +6,16 @@ class ControllerDevDev extends Controller {
 
 	private $error = array();
 
-	public function index(){
+	public function __construct($registry){
+		parent::__construct($registry);
+
 		if(! $this->validate()){
-			$this->redirect(HTTP_PATH);
-			exit;
+			$this->forward('error/not_found');
 		}
+	}
 
-		$this->load->model('localisation/tw_zone');
-
-		$this->data['cities'] = $this->model_localisation_tw_zone->getCities();
+	public function index(){
+		// ...
 
 		$this->template = $this->config->get('config_template') .'/template/dev/dev.tpl';
 
@@ -22,23 +23,10 @@ class ControllerDevDev extends Controller {
 	}
 
 	public function mail() {
-		if(! $this->validate()){
-			$this->redirect(HTTP_PATH);
-			exit;
-		}
-
 		$subject = 'OpenCart郵件測試-主題';
 		$html = '<h1>OpenCart郵件測試</h1>OpenCart郵件測試內容<br/>OpenCart郵件測試內容<br/><br/>OpenCart郵件測試內容<br/>OpenCart郵件測試內容<br/>';
 
 		$mail = new Mail();
-
-		$mail->Host = $this->config->get('config_smtp_host');
-		$mail->Username = $this->config->get('config_smtp_username');
-		$mail->Password = $this->config->get('config_smtp_password');
-		$mail->Port = $this->config->get('config_smtp_port');
-		$mail->Timeout = $this->config->get('config_smtp_timeout');
-
-		$mail->Sender = $this->config->get('config_smtp_username');
 
 		$mail->SetFrom('cmd.dos@hotmail.com', $this->config->get('config_name'));
 		$mail->AddAddress('sam@ozchamp.net');
@@ -54,11 +42,6 @@ class ControllerDevDev extends Controller {
 	}
 	// Checking folder perms, actually backend's common/home will check too
 	public function folder(){
-		if(! $this->validate()){
-			$this->redirect(HTTP_PATH);
-			exit;
-		}
-
 		$folders = array(
 			DIR_IMAGE,
 			DIR_CACHE,
@@ -88,10 +71,6 @@ class ControllerDevDev extends Controller {
 	}
 
 	public function cii(){
-		if(! $this->validate()){
-			$this->redirect(HTTP_PATH);
-			exit;
-		}
 		if($this->request->server['REQUEST_METHOD'] == 'POST'){
 			if(empty($this->request->post['cii'])){
 				$this->error[] = 'Cii is required !';
@@ -292,6 +271,16 @@ class ControllerDevDev extends Controller {
 		$this->template = $this->config->get('config_template') .'/template/dev/cii.tpl';
 
 		$this->response->setOutput($this->render());
+	}
+
+	public function bus() {
+		// Using clone without modify orignal object
+		$config = clone Registry::instance()->get('config');
+		var_dump($config->get('config_smtp_host'));
+		$config->set('config_smtp_host', 'abc');
+		var_dump($config->get('config_smtp_host'));
+		$config = Registry::instance()->get('config');
+		var_dump($config->get('config_smtp_host'));
 	}
 
 	private function validate(){

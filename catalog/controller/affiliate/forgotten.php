@@ -26,14 +26,6 @@ class ControllerAffiliateForgotten extends Controller {
 
 			$mail = new Mail();
 
-			$mail->Host = $this->config->get('config_smtp_host');
-			$mail->Username = $this->config->get('config_smtp_username');
-			$mail->Password = $this->config->get('config_smtp_password');
-			$mail->Port = $this->config->get('config_smtp_port');
-			$mail->Timeout = $this->config->get('config_smtp_timeout');
-
-			$mail->Sender = $this->config->get('config_smtp_username');
-
 			$mail->setFrom($this->config->get('config_email'), $this->config->get('config_name'));
 			$mail->AddAddress($this->request->post['email']);
 			$mail->Subject = html_entity_decode($subject, ENT_QUOTES, 'UTF-8');

@@ -376,8 +376,8 @@ class CI_DB_driver {
 			$this->stmt_id		= FALSE;
 		}
 
-		// oci8 vars must be set before calling this
-		$RES->num_rows	= $RES->num_rows();
+		// result driver initialize, sam@ozchamp.net
+		$RES->initialize();
 
 		// Is query caching enabled?  If so, we'll serialize the
 		// result object and save it to a cache file.
