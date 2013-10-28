@@ -13,25 +13,18 @@
 class DB {
 	private $driver=null;
 
-	public function __construct($driver, $hostname, $username, $password, $database, $dbprefix = '', $char_set = 'UTF-8', $active_record = true) {
+	public function __construct($driver, $hostname, $username, $password, $database, $dbprefix = '', $char_set = 'UTF-8') {
 		require_once(DIR_DATABASE.'CI_function.php');
-		require_once(DIR_DATABASE.'DB_driver.php');
-		if ($active_record)
-		{
- 			require_once(DIR_DATABASE.'DB_active_rec.php');
 
-			if ( ! class_exists('CI_DB'))
-			{
-				eval('class CI_DB extends CI_DB_active_record { }');
-			}
-		}
-		else
+		require_once(DIR_DATABASE.'DB_driver.php');
+
+ 		require_once(DIR_DATABASE.'DB_active_rec.php');
+
+		if ( ! class_exists('CI_DB'))
 		{
-			if ( ! class_exists('CI_DB'))
-			{
-				eval('class CI_DB extends CI_DB_driver { }');
-			}
+			eval('class CI_DB extends CI_DB_active_record { }');
 		}
+
 		require_once(DIR_DATABASE.'drivers/'.$driver.'/'.$driver.'_driver.php');
 
 		$CI_DB_new_driver = 'CI_DB_'.$driver.'_driver';
@@ -49,6 +42,7 @@ class DB {
 		 * CI_DB_mysql_driver 繼承 CI_DB
 		 */
 		$this->driver = new $CI_DB_new_driver($params);
+
 		$this->driver->initialize();
 
 		if (! $this->driver->conn_id) {

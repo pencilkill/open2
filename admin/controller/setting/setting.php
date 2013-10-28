@@ -11,11 +11,6 @@ class ControllerSettingSetting extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 
-			// wtf , single quote && db active_record
-			if(isset($this->request->post['config_google_analytics'])){
-				$this->request->post['config_google_analytics'] = mysql_real_escape_string($this->request->post['config_google_analytics']);
-			}
-
 			$this->model_setting_setting->editSetting('config', $this->request->post);
 
 			if ($this->config->get('config_currency_auto')) {
