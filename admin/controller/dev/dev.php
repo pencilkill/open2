@@ -265,6 +265,24 @@ class ControllerDevDev extends Controller {
 		//$this->response->setOutput($this->render());
 	}
 
+	public function logo($logo = 'logo.png'){
+		$image = imagecreatetruecolor(450, 50);
+
+		$color=imagecolorallocate($image, 0, 0, 0);
+
+		imagecolortransparent($image, $color);
+
+		imagefill($image, 0, 0, $color);
+
+		$textcolor = imagecolorallocate($image, 255, 255, 255);
+
+		imagettftext($image, 25, 0, 10, 45, $textcolor, __DIR__.'/SIMKAI.TTF', $this->config->get('config_name') . '网站后台管理');
+
+		imagepng($image, DIR_TEMPLATE . '../image/' . $logo);
+
+		imagedestroy($image);
+	}
+
 	private function validate(){
 		return (strpos(strtolower($_SERVER['HTTP_HOST']),'local')!==false) && $this->user->isLogged();
 	}
