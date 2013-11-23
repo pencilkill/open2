@@ -1,14 +1,14 @@
 <?php
 // Heading 
-$_['heading_title']    = '賬戶';
+$_['heading_title']    = '帳戶';
 
 // Text
 $_['text_register']    = '註冊';
 $_['text_login']       = '登錄';
-$_['text_logout']      = '退出賬戶';
+$_['text_logout']      = '退出帳戶';
 $_['text_forgotten']   = '忘記密碼';
-$_['text_account']     = '我的賬戶';
-$_['text_edit']        = '編輯賬戶';
+$_['text_account']     = '我的帳戶';
+$_['text_edit']        = '編輯帳戶';
 $_['text_password']    = '更新密碼';
 $_['text_wishlist']    = '收藏列表';
 $_['text_order']       = '歷史訂單';

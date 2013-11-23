@@ -21,13 +21,13 @@ $_['text_pagination']       = '顯示 {start} - {end} 之 {total} (共計 {pages
 $_['text_separator']        = ' &raquo; ';
 
 // Buttons
-$_['button_add_address']    = '添加地址';
+$_['button_add_address']    = '新增地址';
 $_['button_back']           = '返回';
 $_['button_continue']       = '繼續';
 $_['button_cart']           = '加入購物車';
 $_['button_compare']        = '對比';
 $_['button_wishlist']       = '收藏';
-$_['button_checkout']       = '去結賬';
+$_['button_checkout']       = '去結帳';
 $_['button_confirm']        = '確認訂單';
 $_['button_coupon']         = '使用折扣券';
 $_['button_delete']         = '刪除';

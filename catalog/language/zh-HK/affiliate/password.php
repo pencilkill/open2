@@ -3,8 +3,8 @@
 $_['heading_title']  = '更改密碼';
 
 // Text
-$_['text_account']   = '我的賬戶';
-$_['text_password']  = '您的賬戶密碼';
+$_['text_account']   = '我的帳戶';
+$_['text_password']  = '您的帳戶密碼';
 $_['text_success']   = '成功： 您的密碼已更新。';
 
 // Entry

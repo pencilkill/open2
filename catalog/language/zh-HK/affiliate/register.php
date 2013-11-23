@@ -3,14 +3,14 @@
 $_['heading_title']             = '加盟計劃';
 
 // Text
-$_['text_account']              = '我的賬戶';
+$_['text_account']              = '我的帳戶';
 $_['text_register']             = '加盟用戶註冊';
 $_['text_account_already']      = '歡迎來到我們網站，如果您是新用戶，請填寫下面的表單進行註冊。如果您已經是本站的會員，請您直接<a href="%s">登錄</a>。';
-$_['text_signup']               = '創建一個新賬戶， 請完整填寫下表：';
+$_['text_signup']               = '創建一個新帳戶， 請完整填寫下表：';
 $_['text_your_details']         = '您的個人資料';
 $_['text_your_address']         = '您的詳細地址';
 $_['text_payment']              = '支付信息';
-$_['text_your_password']        = '您的賬戶密碼';
+$_['text_your_password']        = '您的帳戶密碼';
 $_['text_cheque']               = '支票';
 $_['text_paypal']               = 'PayPal';
 $_['text_bank']                 = '銀行轉賬';
@@ -33,11 +33,11 @@ $_['entry_zone']                = '地區/省份：';
 $_['entry_tax']                 = '稅號：';
 $_['entry_payment']             = '支付方式：';
 $_['entry_cheque']              = '支票受益人：';
-$_['entry_paypal']              = 'PayPal 郵件賬戶：';
+$_['entry_paypal']              = 'PayPal 郵件帳戶：';
 $_['entry_bank_name']           = '銀行名稱：';
 $_['entry_bank_branch_number']  = 'ABA/BSB 號 (分行號)：';
 $_['entry_bank_swift_code']     = 'SWIFT 號：';
-$_['entry_bank_account_name']   = '賬戶名：';
+$_['entry_bank_account_name']   = '帳戶名：';
 $_['entry_bank_account_number'] = '賬  號：';
 $_['entry_password']            = '輸入密碼：';
 $_['entry_confirm']             = '確認密碼：';

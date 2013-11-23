@@ -1,11 +1,11 @@
 <?php
 // Heading 
-$_['heading_title']                  = '結賬';
+$_['heading_title']                  = '結帳';
 
 // Text
 $_['text_cart']                      = '購物車';
-$_['text_checkout_option']           = '第 1 步： 結賬選項';
-$_['text_checkout_account']          = '第 2 步： 賬戶 &amp; 運單詳細';
+$_['text_checkout_option']           = '第 1 步： 結帳選項';
+$_['text_checkout_account']          = '第 2 步： 帳戶 &amp; 運單詳細';
 $_['text_checkout_payment_address']  = '第 2 步： 運單地址';
 $_['text_checkout_shipping_address'] = '第 3 步： 貨運地址';
 $_['text_checkout_shipping_method']  = '第 4 步： 貨運方式';
@@ -14,22 +14,22 @@ $_['text_checkout_confirm']          = '第 6 步： 確認訂單';
 $_['text_modify']                    = '更新 &raquo;';
 $_['text_new_customer']              = '新客戶';
 $_['text_returning_customer']        = '註冊用戶';
-$_['text_checkout']                  = '結賬選項：';
-$_['text_i_am_returning_customer']   = '我已註冊賬戶';
-$_['text_register']                  = '註冊賬戶';
-$_['text_guest']                     = '直接結賬';
-$_['text_register_account']          = '註冊一個賬戶以便您更快捷地購物， 查看訂單狀態， 查看採購的歷史記錄， 和更多的管理項目。';
+$_['text_checkout']                  = '結帳選項：';
+$_['text_i_am_returning_customer']   = '我已註冊帳戶';
+$_['text_register']                  = '註冊帳戶';
+$_['text_guest']                     = '直接結帳';
+$_['text_register_account']          = '註冊一個帳戶以便您更快捷地購物， 查看訂單狀態， 查看採購的歷史記錄， 和更多的管理項目。';
 $_['text_forgotten']                 = '忘了密碼';
 $_['text_items']                     = '%s 件商品 - %s';
 $_['text_your_details']              = '我的個人信息';
 $_['text_your_address']              = '我的地址';
 $_['text_your_password']             = '我的密碼';
 $_['text_agree']                     = '我已經閱讀並同意 <a class="colorbox" href="%s" alt="%s"><b>%s</b></a> 條款';
-$_['text_address_new']               = '添加一個新地址';
+$_['text_address_new']               = '新增一個新地址';
 $_['text_address_existing']          = '使用現存地址';
 $_['text_shipping_method']           = '請選擇一個貨運方式。';
 $_['text_payment_method']            = '請選擇一個支付方式。';
-$_['text_comments']                  = '添加訂單備註';
+$_['text_comments']                  = '新增訂單備註';
 
 // Column
 $_['column_name']                    = '品名';
@@ -47,7 +47,7 @@ $_['entry_firstname']                = '您的名字：';
 $_['entry_lastname']                 = '您的姓氏：';
 $_['entry_telephone']                = '電話：';
 $_['entry_fax']                      = '傳真：';
-$_['entry_account']                  = '賬戶：';
+$_['entry_account']                  = '帳戶：';
 $_['entry_company']                  = '&nbsp;&nbsp;&nbsp;公司名稱：';
 $_['entry_customer_group']           = '公司類型：';
 $_['entry_company_id']               = '公司編碼：';

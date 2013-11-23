@@ -4,11 +4,11 @@ $_['heading_title']         = '客戶設置';
 
 // Text
 $_['text_success']          = '成功： 您已成功更新客戶設置！';
-$_['text_default']          = '默認';
-$_['text_approved']         = '您已經啟動 %s 賬戶！';
+$_['text_default']          = '預設';
+$_['text_approved']         = '您已經啟動 %s 帳戶！';
 $_['text_wait']             = '請等待！';
 $_['text_balance']          = '餘額：';
-$_['text_add_blacklist']    = '添加到黑名單';
+$_['text_add_blacklist']    = '新增到黑名單';
 $_['text_remove_blacklist'] = '從黑名單中刪除';
 
 // Column
@@ -18,12 +18,12 @@ $_['column_customer_group'] = '用戶組';
 $_['column_status']         = '狀態';
 $_['column_login']          = '登錄';
 $_['column_approved']       = '啟用';
-$_['column_date_added']     = '添加日期';
+$_['column_date_added']     = '新增日期';
 $_['column_description']    = '描述';
 $_['column_amount']         = '合計';
 $_['column_points']         = '積分';
 $_['column_ip']             = 'IP';
-$_['column_total']          = '總賬戶數';
+$_['column_total']          = '總帳戶數';
 $_['column_action']         = '管理';
 
 // Entry
@@ -46,7 +46,7 @@ $_['entry_city']            = '城市：';
 $_['entry_postcode']        = '郵編：';
 $_['entry_country']         = '國家：';
 $_['entry_zone']            = '區域/省/市：';
-$_['entry_default']         = '&nbsp;&nbsp;默認地址：';
+$_['entry_default']         = '&nbsp;&nbsp;預設地址：';
 $_['entry_amount']          = '合計：';
 $_['entry_points']          = '積分：<br /><span class="help">使用'-'來扣除積分</span>';
 $_['entry_description']     = '說明：';

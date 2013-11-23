@@ -5,7 +5,7 @@ $_['heading_title']        = '郵件通知';
 // Text
 $_['text_success']         = '您的郵件已成功發送！';
 $_['text_sent']            = '您的郵件已成功發送給 %s of %s 收件人！';
-$_['text_default']         = '默認';
+$_['text_default']         = '預設';
 $_['text_newsletter']      = '所有資訊訂閱者';
 $_['text_customer_all']    = '所有客戶';
 $_['text_customer_group']  = '客戶組';

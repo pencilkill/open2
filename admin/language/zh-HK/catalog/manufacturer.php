@@ -4,7 +4,7 @@ $_['heading_title']              = '品牌管理';
 
 // Text
 $_['text_success']               = '成功： 您已成功更新品牌商！';
-$_['text_default']               = '默認';
+$_['text_default']               = '預設';
 $_['text_image_manager']         = '圖像管理';
 $_['text_browse']                = '選擇圖像';
 $_['text_clear']                 = '清除圖像';

@@ -3,7 +3,7 @@
 $_['heading_title']    = '購買禮品券';
 
 // Text
-$_['text_account']     = '賬戶';
+$_['text_account']     = '帳戶';
 $_['text_voucher']     = '禮品券';
 $_['text_description'] = '此禮品券將會在您支付後郵件給收券人。';
 $_['text_agree']       = '我明白此禮品券不可以退還。';

@@ -12,7 +12,7 @@ $_['column_name']          = '稅種';
 $_['column_rate']          = '稅率';
 $_['column_type']          = '類型';
 $_['column_geo_zone']      = '區域';
-$_['column_date_added']    = '添加日期';
+$_['column_date_added']    = '新增日期';
 $_['column_date_modified'] = '更改日期';
 $_['column_action']        = '管理';
 

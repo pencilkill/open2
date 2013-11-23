@@ -24,7 +24,7 @@ $_['entry_captcha']     = '在下面的輸入框中輸入驗證碼：';
 
 // Error
 $_['error_permission']  = '警告： 您沒有權限更改用戶！';
-$_['error_account']     = '警告： 您不能刪除自己的賬戶！';
+$_['error_account']     = '警告： 您不能刪除自己的帳戶！';
 $_['error_exists']      = '警告： 用戶品已存在！';
 $_['error_username']    = '用戶名必須在3至20個字符之間！';
 $_['error_password']    = '密碼長度必須在4至20個字符之間！';

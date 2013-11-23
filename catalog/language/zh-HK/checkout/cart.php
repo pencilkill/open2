@@ -4,13 +4,13 @@
 $_['heading_title']          = '購物車內的商品';
 
 // Text
-$_['text_success']           = '成功添加商品<a href="%s">%s</a> 到您的 <a href="%s">購物車</a>！';
+$_['text_success']           = '成功新增商品<a href="%s">%s</a> 到您的 <a href="%s">購物車</a>！';
 $_['text_remove']            = '您已成功更新了購物車！';
 $_['text_coupon']            = '您已經成功使用折扣券！';
 $_['text_voucher']           = '您已經成功使用禮品券！';
 $_['text_reward']            = '您已經成功使用積分！';
 $_['text_shipping']          = '您的預估運費已經成功使用！';
-$_['text_login']             = '警告： 您必須<a href="%s">登錄</a> 或 <a href="%s">創建新賬戶</a> 後才能顯示單價！';
+$_['text_login']             = '警告： 您必須<a href="%s">登錄</a> 或 <a href="%s">創建新帳戶</a> 後才能顯示單價！';
 $_['text_points']            = '積分： %s';
 $_['text_items']             = '%s 個商品 - %s';
 $_['text_next']              = '下一步您想要做什麼？';

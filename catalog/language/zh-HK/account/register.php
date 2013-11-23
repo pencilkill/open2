@@ -4,13 +4,13 @@
 $_['heading_title']        = '用戶註冊';
 
 // Text
-$_['text_account']         = '我的賬戶';
+$_['text_account']         = '我的帳戶';
 $_['text_register']        = '用戶註冊';
 $_['text_account_already'] = '歡迎來到我們網站，如果您是新用戶，請填寫下面的表單進行註冊。如果您已經是本站的會員，請您直接<a href="%s">登錄</a>。';
 $_['text_your_details']    = '您的個人資料';
 $_['text_your_address']    = '您的詳細地址';
 $_['text_newsletter']      = '選擇訂閱方式';
-$_['text_your_password']   = '您的賬戶密碼';
+$_['text_your_password']   = '您的帳戶密碼';
 $_['text_agree']           = '我已經閱讀並同意 <a class="colorbox" href="%s" alt="%s"><b>%s</b></a>條款';
 
 // Entry
@@ -19,7 +19,7 @@ $_['entry_lastname']       = '您的姓氏：';
 $_['entry_email']          = '電子郵箱：';
 $_['entry_telephone']      = '聯繫電話：';
 $_['entry_fax']            = '&nbsp;&nbsp;傳真號碼：';
-$_['entry_account']        = '賬戶：';
+$_['entry_account']        = '帳戶：';
 $_['entry_company']        = '&nbsp;&nbsp;公司名稱：';
 $_['entry_customer_group'] = '公司類型：';
 $_['entry_company_id']     = '公司編碼:';

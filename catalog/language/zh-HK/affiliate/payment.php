@@ -10,7 +10,7 @@ $_['text_your_password']        = '我的密碼';
 $_['text_cheque']               = '支票';
 $_['text_paypal']               = 'PayPal';
 $_['text_bank']                 = '銀行轉賬';
-$_['text_success']              = '成功： 你的賬戶已成功更新。';
+$_['text_success']              = '成功： 你的帳戶已成功更新。';
 
 // Entry
 $_['entry_tax']                 = '稅號：';
@@ -20,6 +20,6 @@ $_['entry_paypal']              = 'PayPal 郵件賬號：';
 $_['entry_bank_name']           = '銀行名稱：';
 $_['entry_bank_branch_number']  = 'ABA/BSB 號 (分行號)：';
 $_['entry_bank_swift_code']     = 'SWIFT 號：';
-$_['entry_bank_account_name']   = '賬戶名：';
+$_['entry_bank_account_name']   = '帳戶名：';
 $_['entry_bank_account_number'] = '賬  號：';
 ?>

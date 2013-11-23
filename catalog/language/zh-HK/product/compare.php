@@ -17,7 +17,7 @@ $_['text_summary']      = '概要';
 $_['text_weight']       = '重量';
 $_['text_dimension']    = '尺寸 (L x W x H)';
 $_['text_compare']      = '對比(%s)';
-$_['text_success']      = '成功： 您已經添加 <a href="%s">%s</a> 到您的 <a href="%s">商品對比表</a>！';
+$_['text_success']      = '成功： 您已經新增 <a href="%s">%s</a> 到您的 <a href="%s">商品對比表</a>！';
 $_['text_remove']       = '您已經成功更新商品對比表。';
 $_['text_empty']        = '您還沒有選擇任何商品來進行對比。';
 ?>

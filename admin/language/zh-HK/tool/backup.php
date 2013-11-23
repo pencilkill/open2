@@ -10,7 +10,7 @@ $_['text_success']     = '成功：您已成功導入數據庫！';
 $_['entry_restore']    = '恢復備份：';
 $_['entry_backup']     = '數據備份：';
 $_['entry_import']     = '恢復商品：';
-$_['entry_model']      = '商品默認：';
+$_['entry_model']      = '商品預設：';
 
 // Error
 $_['error_permission'] = '警告：您沒有權限修改備份！';

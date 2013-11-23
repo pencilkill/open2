@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 10 月 08 日 01:15
+-- 生成日期: 2013 年 11 月 23 日 12:39
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.0
 
@@ -29,20 +29,27 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `address` (
   `address_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
-  `firstname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `lastname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `company` varchar(32) COLLATE utf8_bin NOT NULL,
-  `company_id` varchar(32) COLLATE utf8_bin NOT NULL,
-  `tax_id` varchar(32) COLLATE utf8_bin NOT NULL,
-  `address_1` varchar(128) COLLATE utf8_bin NOT NULL,
-  `address_2` varchar(128) COLLATE utf8_bin NOT NULL,
-  `city` varchar(128) COLLATE utf8_bin NOT NULL,
-  `postcode` varchar(10) COLLATE utf8_bin NOT NULL,
+  `firstname` varchar(32) NOT NULL DEFAULT '',
+  `lastname` varchar(32) NOT NULL DEFAULT '',
+  `company` varchar(32) NOT NULL,
+  `company_id` varchar(32) NOT NULL,
+  `tax_id` varchar(32) NOT NULL,
+  `address_1` varchar(128) NOT NULL,
+  `address_2` varchar(128) NOT NULL,
+  `city` varchar(128) NOT NULL,
+  `postcode` varchar(10) NOT NULL,
   `country_id` int(11) NOT NULL DEFAULT '0',
   `zone_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`address_id`),
   KEY `customer_id` (`customer_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `address`
+--
+
+INSERT INTO `address` (`address_id`, `customer_id`, `firstname`, `lastname`, `company`, `company_id`, `tax_id`, `address_1`, `address_2`, `city`, `postcode`, `country_id`, `zone_id`) VALUES
+(1, 1, '千點距', 'sam', 'ozchamp', '12963022', '', 'No.1, Road ozchamp', 'No.1, Road ozchamp2', 'FuJian', 'admin', 206, 3979);
 
 -- --------------------------------------------------------
 
@@ -52,38 +59,38 @@ CREATE TABLE IF NOT EXISTS `address` (
 
 CREATE TABLE IF NOT EXISTS `affiliate` (
   `affiliate_id` int(11) NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `lastname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `email` varchar(96) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `telephone` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `fax` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `password` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `salt` varchar(9) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `company` varchar(32) COLLATE utf8_bin NOT NULL,
-  `website` varchar(255) COLLATE utf8_bin NOT NULL,
-  `address_1` varchar(128) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `address_2` varchar(128) COLLATE utf8_bin NOT NULL,
-  `city` varchar(128) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `postcode` varchar(10) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `firstname` varchar(32) NOT NULL DEFAULT '',
+  `lastname` varchar(32) NOT NULL DEFAULT '',
+  `email` varchar(96) NOT NULL DEFAULT '',
+  `telephone` varchar(32) NOT NULL DEFAULT '',
+  `fax` varchar(32) NOT NULL DEFAULT '',
+  `password` varchar(40) NOT NULL DEFAULT '',
+  `salt` varchar(9) NOT NULL DEFAULT '',
+  `company` varchar(32) NOT NULL,
+  `website` varchar(255) NOT NULL,
+  `address_1` varchar(128) NOT NULL DEFAULT '',
+  `address_2` varchar(128) NOT NULL,
+  `city` varchar(128) NOT NULL DEFAULT '',
+  `postcode` varchar(10) NOT NULL DEFAULT '',
   `country_id` int(11) NOT NULL,
   `zone_id` int(11) NOT NULL,
-  `code` varchar(64) COLLATE utf8_bin NOT NULL,
+  `code` varchar(64) NOT NULL,
   `commission` decimal(4,2) NOT NULL DEFAULT '0.00',
-  `tax` varchar(64) COLLATE utf8_bin NOT NULL,
-  `payment` varchar(6) COLLATE utf8_bin NOT NULL,
-  `cheque` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `paypal` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `bank_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `bank_branch_number` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `bank_swift_code` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `bank_account_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `bank_account_number` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `ip` varchar(40) COLLATE utf8_bin NOT NULL,
+  `tax` varchar(64) NOT NULL,
+  `payment` varchar(6) NOT NULL,
+  `cheque` varchar(100) NOT NULL DEFAULT '',
+  `paypal` varchar(64) NOT NULL DEFAULT '',
+  `bank_name` varchar(64) NOT NULL DEFAULT '',
+  `bank_branch_number` varchar(64) NOT NULL DEFAULT '',
+  `bank_swift_code` varchar(64) NOT NULL DEFAULT '',
+  `bank_account_name` varchar(64) NOT NULL DEFAULT '',
+  `bank_account_number` varchar(64) NOT NULL DEFAULT '',
+  `ip` varchar(40) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `approved` tinyint(1) NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`affiliate_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -95,11 +102,11 @@ CREATE TABLE IF NOT EXISTS `affiliate_transaction` (
   `affiliate_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
   `affiliate_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
-  `description` text COLLATE utf8_bin NOT NULL,
+  `description` text NOT NULL,
   `amount` decimal(15,4) NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`affiliate_transaction_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -112,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `attribute` (
   `attribute_group_id` int(11) NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`attribute_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- 转存表中的数据 `attribute`
@@ -140,9 +147,9 @@ INSERT INTO `attribute` (`attribute_id`, `attribute_group_id`, `sort_order`) VAL
 CREATE TABLE IF NOT EXISTS `attribute_description` (
   `attribute_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `name` varchar(64) NOT NULL,
   PRIMARY KEY (`attribute_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `attribute_description`
@@ -181,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `attribute_group` (
   `attribute_group_id` int(11) NOT NULL AUTO_INCREMENT,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`attribute_group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `attribute_group`
@@ -202,9 +209,9 @@ INSERT INTO `attribute_group` (`attribute_group_id`, `sort_order`) VALUES
 CREATE TABLE IF NOT EXISTS `attribute_group_description` (
   `attribute_group_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `name` varchar(64) NOT NULL,
   PRIMARY KEY (`attribute_group_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `attribute_group_description`
@@ -228,10 +235,10 @@ INSERT INTO `attribute_group_description` (`attribute_group_id`, `language_id`, 
 
 CREATE TABLE IF NOT EXISTS `banner` (
   `banner_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `name` varchar(64) NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`banner_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `banner`
@@ -249,10 +256,10 @@ INSERT INTO `banner` (`banner_id`, `name`, `status`) VALUES
 CREATE TABLE IF NOT EXISTS `banner_image` (
   `banner_image_id` int(11) NOT NULL AUTO_INCREMENT,
   `banner_id` int(11) NOT NULL,
-  `link` varchar(255) COLLATE utf8_bin NOT NULL,
-  `image` varchar(255) COLLATE utf8_bin NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
   PRIMARY KEY (`banner_image_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=78 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
 
 --
 -- 转存表中的数据 `banner_image`
@@ -276,9 +283,9 @@ CREATE TABLE IF NOT EXISTS `banner_image_description` (
   `banner_image_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `banner_id` int(11) NOT NULL,
-  `title` varchar(64) COLLATE utf8_bin NOT NULL,
+  `title` varchar(64) NOT NULL,
   PRIMARY KEY (`banner_image_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `banner_image_description`
@@ -306,7 +313,7 @@ INSERT INTO `banner_image_description` (`banner_image_id`, `language_id`, `banne
 
 CREATE TABLE IF NOT EXISTS `category` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
-  `image` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `top` tinyint(1) NOT NULL,
   `column` int(3) NOT NULL,
@@ -315,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`category_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=59 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=59 ;
 
 --
 -- 转存表中的数据 `category`
@@ -370,13 +377,13 @@ INSERT INTO `category` (`category_id`, `image`, `parent_id`, `top`, `column`, `s
 CREATE TABLE IF NOT EXISTS `category_description` (
   `category_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `description` text COLLATE utf8_bin NOT NULL,
-  `meta_description` varchar(255) COLLATE utf8_bin NOT NULL,
-  `meta_keyword` varchar(255) COLLATE utf8_bin NOT NULL,
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `description` text NOT NULL,
+  `meta_description` varchar(255) NOT NULL,
+  `meta_keyword` varchar(255) NOT NULL,
   PRIMARY KEY (`category_id`,`language_id`),
   KEY `name` (`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `category_description`
@@ -420,44 +427,7 @@ INSERT INTO `category_description` (`category_id`, `language_id`, `name`, `descr
 (56, 2, 'test 24', '', '', ''),
 (57, 2, 'Tablets', '', '', ''),
 (58, 2, 'test 25', '', '', ''),
-(28, 3, 'Monitors', '', '', ''),
-(33, 3, 'Cameras', '', '', ''),
-(32, 3, 'Web Cameras', '', '', ''),
-(31, 3, 'Scanners', '', '', ''),
-(30, 3, 'Printers', '', '', ''),
-(29, 3, 'Mice and Trackballs', '', '', ''),
-(27, 3, 'Mac', '', '', ''),
-(26, 3, 'PC', '', '', ''),
-(17, 3, 'Software', '', '', ''),
-(25, 3, 'Components', '', '', ''),
-(24, 3, 'Phones &amp; PDAs', '', '', ''),
-(20, 2, 'Desktops', '&lt;p&gt;\r\n	Example of category description text&lt;/p&gt;\r\n', 'Example of category description', ''),
-(35, 3, 'test 1', '', '', ''),
-(36, 3, 'test 2', '', '', ''),
-(37, 3, 'test 5', '', '', ''),
-(38, 3, 'test 4', '', '', ''),
-(39, 3, 'test 6', '', '', ''),
-(40, 3, 'test 7', '', '', ''),
-(41, 3, 'test 8', '', '', ''),
-(42, 3, 'test 9', '', '', ''),
-(43, 3, 'test 11', '', '', ''),
-(34, 3, 'MP3 Players', '&lt;p&gt;\r\n	Shop Laptop feature only the best laptop deals on the market. By comparing laptop deals from the likes of PC World, Comet, Dixons, The Link and Carphone Warehouse, Shop Laptop has the most comprehensive selection of laptops on the internet. At Shop Laptop, we pride ourselves on offering customers the very best laptop deals. From refurbished laptops to netbooks, Shop Laptop ensures that every laptop - in every colour, style, size and technical spec - is featured on the site at the lowest possible price.&lt;/p&gt;\r\n', '', ''),
-(18, 3, 'Laptops &amp; Notebooks', '&lt;p&gt;\r\n	Shop Laptop feature only the best laptop deals on the market. By comparing laptop deals from the likes of PC World, Comet, Dixons, The Link and Carphone Warehouse, Shop Laptop has the most comprehensive selection of laptops on the internet. At Shop Laptop, we pride ourselves on offering customers the very best laptop deals. From refurbished laptops to netbooks, Shop Laptop ensures that every laptop - in every colour, style, size and technical spec - is featured on the site at the lowest possible price.&lt;/p&gt;\r\n', '', ''),
-(44, 3, 'test 12', '', '', ''),
-(45, 3, 'Windows', '', '', ''),
-(46, 3, 'Macs', '', '', ''),
-(47, 3, 'test 15', '', '', ''),
-(48, 3, 'test 16', '', '', ''),
-(49, 3, 'test 17', '', '', ''),
-(50, 3, 'test 18', '', '', ''),
-(51, 3, 'test 19', '', '', ''),
-(52, 3, 'test 20', '', '', ''),
-(53, 3, 'test 21', '', '', ''),
-(54, 3, 'test 22', '', '', ''),
-(55, 3, 'test 23', '', '', ''),
-(56, 3, 'test 24', '', '', ''),
-(57, 3, 'Tablets', '', '', ''),
-(58, 3, 'test 25', '', '', '');
+(20, 2, 'Desktops', '&lt;p&gt;\r\n	Example of category description text&lt;/p&gt;\r\n', 'Example of category description', '');
 
 -- --------------------------------------------------------
 
@@ -470,7 +440,7 @@ CREATE TABLE IF NOT EXISTS `category_to_layout` (
   `store_id` int(11) NOT NULL,
   `layout_id` int(11) NOT NULL,
   PRIMARY KEY (`category_id`,`store_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -482,7 +452,7 @@ CREATE TABLE IF NOT EXISTS `category_to_store` (
   `category_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   PRIMARY KEY (`category_id`,`store_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `category_to_store`
@@ -536,14 +506,14 @@ INSERT INTO `category_to_store` (`category_id`, `store_id`) VALUES
 
 CREATE TABLE IF NOT EXISTS `country` (
   `country_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) COLLATE utf8_bin NOT NULL,
-  `iso_code_2` varchar(2) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `iso_code_3` varchar(3) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `address_format` text COLLATE utf8_bin NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `iso_code_2` varchar(2) NOT NULL DEFAULT '',
+  `iso_code_3` varchar(3) NOT NULL DEFAULT '',
+  `address_format` text NOT NULL,
   `postcode_required` tinyint(1) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`country_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=240 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=240 ;
 
 --
 -- 转存表中的数据 `country`
@@ -755,7 +725,7 @@ INSERT INTO `country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `addres
 (203, 'Sweden', 'SE', 'SWE', '', 0, 1),
 (204, 'Switzerland', 'CH', 'CHE', '', 0, 1),
 (205, 'Syrian Arab Republic', 'SY', 'SYR', '', 0, 1),
-(206, 'Taiwan', 'TW', 'TWN', '', 0, 1),
+(206, '台 灣', 'TW', 'TWN', '', 0, 1),
 (207, 'Tajikistan', 'TJ', 'TJK', '', 0, 1),
 (208, 'Tanzania, United Republic of', 'TZ', 'TZA', '', 0, 1),
 (209, 'Thailand', 'TH', 'THA', '', 0, 1),
@@ -798,9 +768,9 @@ INSERT INTO `country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `addres
 
 CREATE TABLE IF NOT EXISTS `coupon` (
   `coupon_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) COLLATE utf8_bin NOT NULL,
-  `code` varchar(10) COLLATE utf8_bin NOT NULL,
-  `type` char(1) COLLATE utf8_bin NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `code` varchar(10) NOT NULL,
+  `type` char(1) NOT NULL,
   `discount` decimal(15,4) NOT NULL,
   `logged` tinyint(1) NOT NULL,
   `shipping` tinyint(1) NOT NULL,
@@ -808,11 +778,11 @@ CREATE TABLE IF NOT EXISTS `coupon` (
   `date_start` date NOT NULL DEFAULT '0000-00-00',
   `date_end` date NOT NULL DEFAULT '0000-00-00',
   `uses_total` int(11) NOT NULL,
-  `uses_customer` varchar(11) COLLATE utf8_bin NOT NULL,
+  `uses_customer` varchar(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`coupon_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `coupon`
@@ -837,7 +807,7 @@ CREATE TABLE IF NOT EXISTS `coupon_history` (
   `amount` decimal(15,4) NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`coupon_history_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -850,7 +820,7 @@ CREATE TABLE IF NOT EXISTS `coupon_product` (
   `coupon_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   PRIMARY KEY (`coupon_product_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -860,26 +830,26 @@ CREATE TABLE IF NOT EXISTS `coupon_product` (
 
 CREATE TABLE IF NOT EXISTS `currency` (
   `currency_id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `code` varchar(3) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `symbol_left` varchar(12) COLLATE utf8_bin NOT NULL,
-  `symbol_right` varchar(12) COLLATE utf8_bin NOT NULL,
-  `decimal_place` char(1) COLLATE utf8_bin NOT NULL,
+  `title` varchar(32) NOT NULL DEFAULT '',
+  `code` varchar(3) NOT NULL DEFAULT '',
+  `symbol_left` varchar(12) NOT NULL,
+  `symbol_right` varchar(12) NOT NULL,
+  `decimal_place` char(1) NOT NULL,
   `value` float(15,8) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`currency_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `currency`
 --
 
 INSERT INTO `currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_place`, `value`, `status`, `date_modified`) VALUES
-(1, 'Pound Sterling', 'GBP', '£', '', '2', 0.02120000, 0, '2013-10-07 01:45:04'),
-(6, 'US Dollar', 'USD', '$', '', '2', 0.03400000, 0, '2013-10-07 01:45:04'),
-(3, 'Euro', 'EUR', '', '€', '2', 0.02510000, 0, '2013-10-07 01:45:04'),
-(5, 'New Taiwan Dollar', 'TWD', '$', '', '0', 1.00000000, 1, '2013-10-07 12:05:26');
+(1, 'Pound Sterling', 'GBP', '£', '', '2', 0.02110000, 0, '2013-10-29 10:46:13'),
+(6, 'US Dollar', 'USD', '$', '', '2', 0.03400000, 0, '2013-10-29 10:46:13'),
+(3, 'Euro', 'EUR', '', '€', '2', 0.02470000, 0, '2013-10-29 10:46:13'),
+(5, 'New Taiwan Dollar', 'TWD', 'NT$', '', '0', 1.00000000, 1, '2013-10-29 10:50:50');
 
 -- --------------------------------------------------------
 
@@ -890,25 +860,32 @@ INSERT INTO `currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_r
 CREATE TABLE IF NOT EXISTS `customer` (
   `customer_id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` int(11) NOT NULL DEFAULT '0',
-  `firstname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `lastname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `email` varchar(96) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `telephone` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `fax` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `password` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `salt` varchar(9) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `cart` text COLLATE utf8_bin,
-  `wishlist` text COLLATE utf8_bin,
+  `firstname` varchar(32) NOT NULL DEFAULT '',
+  `lastname` varchar(32) NOT NULL DEFAULT '',
+  `email` varchar(96) NOT NULL DEFAULT '',
+  `telephone` varchar(32) NOT NULL DEFAULT '',
+  `fax` varchar(32) NOT NULL DEFAULT '',
+  `password` varchar(40) NOT NULL DEFAULT '',
+  `salt` varchar(9) NOT NULL DEFAULT '',
+  `cart` text,
+  `wishlist` text,
   `newsletter` tinyint(1) NOT NULL DEFAULT '0',
   `address_id` int(11) NOT NULL DEFAULT '0',
   `customer_group_id` int(11) NOT NULL,
-  `ip` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `ip` varchar(40) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL,
   `approved` tinyint(1) NOT NULL,
-  `token` varchar(255) COLLATE utf8_bin NOT NULL,
+  `token` varchar(255) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`customer_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `customer`
+--
+
+INSERT INTO `customer` (`customer_id`, `store_id`, `firstname`, `lastname`, `email`, `telephone`, `fax`, `password`, `salt`, `cart`, `wishlist`, `newsletter`, `address_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
+(1, 0, '千點距', 'sam', 'cmd.dos@hotmail.com', '01+23456789', '0988019579', '5794105c40feda5e2ab730e9140aa5f321986e23', 'ceaad429f', 'a:1:{s:43:"47:YToxOntpOjIyNTtzOjEwOiIyMDExLTA0LTIyIjt9";i:1;}', 'a:1:{i:0;s:2:"47";}', 1, 1, 1, '127.0.0.1', 1, 1, '', '2013-10-15 18:49:15');
 
 -- --------------------------------------------------------
 
@@ -925,7 +902,7 @@ CREATE TABLE IF NOT EXISTS `customer_group` (
   `tax_id_required` int(1) NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`customer_group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- 转存表中的数据 `customer_group`
@@ -943,10 +920,10 @@ INSERT INTO `customer_group` (`customer_group_id`, `approval`, `company_id_displ
 CREATE TABLE IF NOT EXISTS `customer_group_description` (
   `customer_group_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(32) COLLATE utf8_bin NOT NULL,
-  `description` text COLLATE utf8_bin NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `description` text NOT NULL,
   PRIMARY KEY (`customer_group_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `customer_group_description`
@@ -965,11 +942,18 @@ INSERT INTO `customer_group_description` (`customer_group_id`, `language_id`, `n
 CREATE TABLE IF NOT EXISTS `customer_ip` (
   `customer_ip_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
-  `ip` varchar(40) COLLATE utf8_bin NOT NULL,
+  `ip` varchar(40) NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`customer_ip_id`),
   KEY `ip` (`ip`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `customer_ip`
+--
+
+INSERT INTO `customer_ip` (`customer_ip_id`, `customer_id`, `ip`, `date_added`) VALUES
+(1, 1, '127.0.0.1', '2013-10-15 18:49:19');
 
 -- --------------------------------------------------------
 
@@ -979,10 +963,10 @@ CREATE TABLE IF NOT EXISTS `customer_ip` (
 
 CREATE TABLE IF NOT EXISTS `customer_ip_blacklist` (
   `customer_ip_blacklist_id` int(11) NOT NULL AUTO_INCREMENT,
-  `ip` varchar(40) COLLATE utf8_bin NOT NULL,
+  `ip` varchar(40) NOT NULL,
   PRIMARY KEY (`customer_ip_blacklist_id`),
   KEY `ip` (`ip`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -991,13 +975,13 @@ CREATE TABLE IF NOT EXISTS `customer_ip_blacklist` (
 --
 
 CREATE TABLE IF NOT EXISTS `customer_online` (
-  `ip` varchar(40) COLLATE utf8_bin NOT NULL,
+  `ip` varchar(40) NOT NULL,
   `customer_id` int(11) NOT NULL,
-  `url` text COLLATE utf8_bin NOT NULL,
-  `referer` text COLLATE utf8_bin NOT NULL,
+  `url` text NOT NULL,
+  `referer` text NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`ip`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1009,11 +993,11 @@ CREATE TABLE IF NOT EXISTS `customer_reward` (
   `customer_reward_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL DEFAULT '0',
   `order_id` int(11) NOT NULL DEFAULT '0',
-  `description` text COLLATE utf8_bin NOT NULL,
+  `description` text NOT NULL,
   `points` int(8) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`customer_reward_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1025,11 +1009,11 @@ CREATE TABLE IF NOT EXISTS `customer_transaction` (
   `customer_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
-  `description` text COLLATE utf8_bin NOT NULL,
+  `description` text NOT NULL,
   `amount` decimal(15,4) NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`customer_transaction_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1039,12 +1023,12 @@ CREATE TABLE IF NOT EXISTS `customer_transaction` (
 
 CREATE TABLE IF NOT EXISTS `download` (
   `download_id` int(11) NOT NULL AUTO_INCREMENT,
-  `filename` varchar(128) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `mask` varchar(128) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `filename` varchar(128) NOT NULL DEFAULT '',
+  `mask` varchar(128) NOT NULL DEFAULT '',
   `remaining` int(11) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`download_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1055,9 +1039,9 @@ CREATE TABLE IF NOT EXISTS `download` (
 CREATE TABLE IF NOT EXISTS `download_description` (
   `download_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `name` varchar(64) NOT NULL DEFAULT '',
   PRIMARY KEY (`download_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1067,10 +1051,10 @@ CREATE TABLE IF NOT EXISTS `download_description` (
 
 CREATE TABLE IF NOT EXISTS `extension` (
   `extension_id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(32) COLLATE utf8_bin NOT NULL,
-  `code` varchar(32) COLLATE utf8_bin NOT NULL,
+  `type` varchar(32) NOT NULL,
+  `code` varchar(32) NOT NULL,
   PRIMARY KEY (`extension_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=444 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=444 ;
 
 --
 -- 转存表中的数据 `extension`
@@ -1113,12 +1097,12 @@ INSERT INTO `extension` (`extension_id`, `type`, `code`) VALUES
 
 CREATE TABLE IF NOT EXISTS `geo_zone` (
   `geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `description` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `name` varchar(32) NOT NULL DEFAULT '',
+  `description` varchar(255) NOT NULL DEFAULT '',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`geo_zone_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `geo_zone`
@@ -1140,7 +1124,7 @@ CREATE TABLE IF NOT EXISTS `information` (
   `sort_order` int(3) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`information_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `information`
@@ -1161,10 +1145,10 @@ INSERT INTO `information` (`information_id`, `bottom`, `sort_order`, `status`) V
 CREATE TABLE IF NOT EXISTS `information_description` (
   `information_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `title` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `description` text COLLATE utf8_bin NOT NULL,
+  `title` varchar(64) NOT NULL DEFAULT '',
+  `description` text NOT NULL,
   PRIMARY KEY (`information_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `information_description`
@@ -1190,7 +1174,7 @@ CREATE TABLE IF NOT EXISTS `information_to_layout` (
   `store_id` int(11) NOT NULL,
   `layout_id` int(11) NOT NULL,
   PRIMARY KEY (`information_id`,`store_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `information_to_layout`
@@ -1209,7 +1193,7 @@ CREATE TABLE IF NOT EXISTS `information_to_store` (
   `information_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   PRIMARY KEY (`information_id`,`store_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `information_to_store`
@@ -1229,17 +1213,17 @@ INSERT INTO `information_to_store` (`information_id`, `store_id`) VALUES
 
 CREATE TABLE IF NOT EXISTS `language` (
   `language_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `code` varchar(5) COLLATE utf8_bin NOT NULL,
-  `locale` varchar(255) COLLATE utf8_bin NOT NULL,
-  `image` varchar(64) COLLATE utf8_bin NOT NULL,
-  `directory` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `filename` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `name` varchar(32) NOT NULL DEFAULT '',
+  `code` varchar(5) NOT NULL,
+  `locale` varchar(255) NOT NULL,
+  `image` varchar(64) NOT NULL,
+  `directory` varchar(32) NOT NULL DEFAULT '',
+  `filename` varchar(64) NOT NULL DEFAULT '',
   `sort_order` int(3) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`language_id`),
   KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `language`
@@ -1256,9 +1240,9 @@ INSERT INTO `language` (`language_id`, `name`, `code`, `locale`, `image`, `direc
 
 CREATE TABLE IF NOT EXISTS `layout` (
   `layout_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `name` varchar(64) NOT NULL,
   PRIMARY KEY (`layout_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- 转存表中的数据 `layout`
@@ -1288,9 +1272,9 @@ CREATE TABLE IF NOT EXISTS `layout_route` (
   `layout_route_id` int(11) NOT NULL AUTO_INCREMENT,
   `layout_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
-  `route` varchar(255) COLLATE utf8_bin NOT NULL,
+  `route` varchar(255) NOT NULL,
   PRIMARY KEY (`layout_route_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=34 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=34 ;
 
 --
 -- 转存表中的数据 `layout_route`
@@ -1318,7 +1302,7 @@ CREATE TABLE IF NOT EXISTS `length_class` (
   `length_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `value` decimal(15,8) NOT NULL,
   PRIMARY KEY (`length_class_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `length_class`
@@ -1338,10 +1322,10 @@ INSERT INTO `length_class` (`length_class_id`, `value`) VALUES
 CREATE TABLE IF NOT EXISTS `length_class_description` (
   `length_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
-  `title` varchar(32) COLLATE utf8_bin NOT NULL,
-  `unit` varchar(4) COLLATE utf8_bin NOT NULL,
+  `title` varchar(32) NOT NULL,
+  `unit` varchar(4) NOT NULL,
   PRIMARY KEY (`length_class_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `length_class_description`
@@ -1363,11 +1347,11 @@ INSERT INTO `length_class_description` (`length_class_id`, `language_id`, `title
 
 CREATE TABLE IF NOT EXISTS `manufacturer` (
   `manufacturer_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `image` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `name` varchar(64) NOT NULL DEFAULT '',
+  `image` varchar(255) DEFAULT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`manufacturer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- 转存表中的数据 `manufacturer`
@@ -1391,7 +1375,7 @@ CREATE TABLE IF NOT EXISTS `manufacturer_to_store` (
   `manufacturer_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   PRIMARY KEY (`manufacturer_id`,`store_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `manufacturer_to_store`
@@ -1417,7 +1401,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `date_added` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`news_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- 转存表中的数据 `news`
@@ -1435,11 +1419,11 @@ INSERT INTO `news` (`news_id`, `sort_order`, `status`, `date_added`) VALUES
 CREATE TABLE IF NOT EXISTS `news_description` (
   `news_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `title` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `keyword` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `description` text CHARACTER SET utf8 NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `keyword` varchar(255) NOT NULL,
+  `description` text NOT NULL,
   PRIMARY KEY (`news_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `news_description`
@@ -1459,7 +1443,7 @@ CREATE TABLE IF NOT EXISTS `news_to_layout` (
   `store_id` int(11) NOT NULL,
   `layout_id` int(11) NOT NULL,
   PRIMARY KEY (`news_id`,`store_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1471,7 +1455,7 @@ CREATE TABLE IF NOT EXISTS `news_to_store` (
   `news_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   PRIMARY KEY (`news_id`,`store_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `news_to_store`
@@ -1488,10 +1472,10 @@ INSERT INTO `news_to_store` (`news_id`, `store_id`) VALUES
 
 CREATE TABLE IF NOT EXISTS `option` (
   `option_id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(32) COLLATE utf8_bin NOT NULL,
+  `type` varchar(32) NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- 转存表中的数据 `option`
@@ -1520,9 +1504,9 @@ INSERT INTO `option` (`option_id`, `type`, `sort_order`) VALUES
 CREATE TABLE IF NOT EXISTS `option_description` (
   `option_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(128) COLLATE utf8_bin NOT NULL,
+  `name` varchar(128) NOT NULL,
   PRIMARY KEY (`option_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `option_description`
@@ -1562,10 +1546,10 @@ INSERT INTO `option_description` (`option_id`, `language_id`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `option_value` (
   `option_value_id` int(11) NOT NULL AUTO_INCREMENT,
   `option_id` int(11) NOT NULL,
-  `image` varchar(255) COLLATE utf8_bin NOT NULL,
+  `image` varchar(255) NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`option_value_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=52 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
 
 --
 -- 转存表中的数据 `option_value`
@@ -1600,9 +1584,9 @@ CREATE TABLE IF NOT EXISTS `option_value_description` (
   `option_value_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL,
-  `name` varchar(128) COLLATE utf8_bin NOT NULL,
+  `name` varchar(128) NOT NULL,
   PRIMARY KEY (`option_value_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `option_value_description`
@@ -1650,64 +1634,71 @@ INSERT INTO `option_value_description` (`option_value_id`, `language_id`, `optio
 CREATE TABLE IF NOT EXISTS `order` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `invoice_no` int(11) NOT NULL DEFAULT '0',
-  `invoice_prefix` varchar(26) COLLATE utf8_bin NOT NULL,
+  `invoice_prefix` varchar(26) NOT NULL,
   `store_id` int(11) NOT NULL DEFAULT '0',
-  `store_name` varchar(64) COLLATE utf8_bin NOT NULL,
-  `store_url` varchar(255) COLLATE utf8_bin NOT NULL,
+  `store_name` varchar(64) NOT NULL,
+  `store_url` varchar(255) NOT NULL,
   `customer_id` int(11) NOT NULL DEFAULT '0',
   `customer_group_id` int(11) NOT NULL DEFAULT '0',
-  `firstname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `lastname` varchar(32) COLLATE utf8_bin NOT NULL,
-  `email` varchar(96) COLLATE utf8_bin NOT NULL,
-  `telephone` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `fax` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `payment_firstname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `payment_lastname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `payment_company` varchar(32) COLLATE utf8_bin NOT NULL,
-  `payment_company_id` varchar(32) COLLATE utf8_bin NOT NULL,
-  `payment_tax_id` varchar(32) COLLATE utf8_bin NOT NULL,
-  `payment_address_1` varchar(128) COLLATE utf8_bin NOT NULL,
-  `payment_address_2` varchar(128) COLLATE utf8_bin NOT NULL,
-  `payment_city` varchar(128) COLLATE utf8_bin NOT NULL,
-  `payment_postcode` varchar(10) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `payment_country` varchar(128) COLLATE utf8_bin NOT NULL,
+  `firstname` varchar(32) NOT NULL DEFAULT '',
+  `lastname` varchar(32) NOT NULL,
+  `email` varchar(96) NOT NULL,
+  `telephone` varchar(32) NOT NULL DEFAULT '',
+  `fax` varchar(32) NOT NULL DEFAULT '',
+  `payment_firstname` varchar(32) NOT NULL DEFAULT '',
+  `payment_lastname` varchar(32) NOT NULL DEFAULT '',
+  `payment_company` varchar(32) NOT NULL,
+  `payment_company_id` varchar(32) NOT NULL,
+  `payment_tax_id` varchar(32) NOT NULL,
+  `payment_address_1` varchar(128) NOT NULL,
+  `payment_address_2` varchar(128) NOT NULL,
+  `payment_city` varchar(128) NOT NULL,
+  `payment_postcode` varchar(10) NOT NULL DEFAULT '',
+  `payment_country` varchar(128) NOT NULL,
   `payment_country_id` int(11) NOT NULL,
-  `payment_zone` varchar(128) COLLATE utf8_bin NOT NULL,
+  `payment_zone` varchar(128) NOT NULL,
   `payment_zone_id` int(11) NOT NULL,
-  `payment_address_format` text COLLATE utf8_bin NOT NULL,
-  `payment_method` varchar(128) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `payment_code` varchar(128) COLLATE utf8_bin NOT NULL,
-  `shipping_firstname` varchar(32) COLLATE utf8_bin NOT NULL,
-  `shipping_lastname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `shipping_company` varchar(32) COLLATE utf8_bin NOT NULL,
-  `shipping_address_1` varchar(128) COLLATE utf8_bin NOT NULL,
-  `shipping_address_2` varchar(128) COLLATE utf8_bin NOT NULL,
-  `shipping_city` varchar(128) COLLATE utf8_bin NOT NULL,
-  `shipping_postcode` varchar(10) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `shipping_country` varchar(128) COLLATE utf8_bin NOT NULL,
+  `payment_address_format` text NOT NULL,
+  `payment_method` varchar(128) NOT NULL DEFAULT '',
+  `payment_code` varchar(128) NOT NULL,
+  `shipping_firstname` varchar(32) NOT NULL,
+  `shipping_lastname` varchar(32) NOT NULL DEFAULT '',
+  `shipping_company` varchar(32) NOT NULL,
+  `shipping_address_1` varchar(128) NOT NULL,
+  `shipping_address_2` varchar(128) NOT NULL,
+  `shipping_city` varchar(128) NOT NULL,
+  `shipping_postcode` varchar(10) NOT NULL DEFAULT '',
+  `shipping_country` varchar(128) NOT NULL,
   `shipping_country_id` int(11) NOT NULL,
-  `shipping_zone` varchar(128) COLLATE utf8_bin NOT NULL,
+  `shipping_zone` varchar(128) NOT NULL,
   `shipping_zone_id` int(11) NOT NULL,
-  `shipping_address_format` text COLLATE utf8_bin NOT NULL,
-  `shipping_method` varchar(128) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `shipping_code` varchar(128) COLLATE utf8_bin NOT NULL,
-  `comment` text COLLATE utf8_bin NOT NULL,
+  `shipping_address_format` text NOT NULL,
+  `shipping_method` varchar(128) NOT NULL DEFAULT '',
+  `shipping_code` varchar(128) NOT NULL,
+  `comment` text NOT NULL,
   `total` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `order_status_id` int(11) NOT NULL DEFAULT '0',
   `affiliate_id` int(11) NOT NULL,
   `commission` decimal(15,4) NOT NULL,
   `language_id` int(11) NOT NULL,
   `currency_id` int(11) NOT NULL,
-  `currency_code` varchar(3) COLLATE utf8_bin NOT NULL,
+  `currency_code` varchar(3) NOT NULL,
   `currency_value` decimal(15,8) NOT NULL DEFAULT '1.00000000',
-  `ip` varchar(40) COLLATE utf8_bin NOT NULL,
-  `forwarded_ip` varchar(40) COLLATE utf8_bin NOT NULL,
-  `user_agent` varchar(255) COLLATE utf8_bin NOT NULL,
-  `accept_language` varchar(255) COLLATE utf8_bin NOT NULL,
+  `ip` varchar(40) NOT NULL,
+  `forwarded_ip` varchar(40) NOT NULL,
+  `user_agent` varchar(255) NOT NULL,
+  `accept_language` varchar(255) NOT NULL,
   `date_added` datetime NOT NULL,
   `date_modified` datetime NOT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `order`
+--
+
+INSERT INTO `order` (`order_id`, `invoice_no`, `invoice_prefix`, `store_id`, `store_name`, `store_url`, `customer_id`, `customer_group_id`, `firstname`, `lastname`, `email`, `telephone`, `fax`, `payment_firstname`, `payment_lastname`, `payment_company`, `payment_company_id`, `payment_tax_id`, `payment_address_1`, `payment_address_2`, `payment_city`, `payment_postcode`, `payment_country`, `payment_country_id`, `payment_zone`, `payment_zone_id`, `payment_address_format`, `payment_method`, `payment_code`, `shipping_firstname`, `shipping_lastname`, `shipping_company`, `shipping_address_1`, `shipping_address_2`, `shipping_city`, `shipping_postcode`, `shipping_country`, `shipping_country_id`, `shipping_zone`, `shipping_zone_id`, `shipping_address_format`, `shipping_method`, `shipping_code`, `comment`, `total`, `order_status_id`, `affiliate_id`, `commission`, `language_id`, `currency_id`, `currency_code`, `currency_value`, `ip`, `forwarded_ip`, `user_agent`, `accept_language`, `date_added`, `date_modified`) VALUES
+(1, 0, 'INV-2012-00', 0, 'Your Store', 'http://localhost/opencart/', 1, 1, '千點距', 'sam', 'cmd.dos@hotmail.com', '01+23456789', '0988019579', '千點距', 'sam', 'ozchamp', '12963022', '', 'No.1, Road ozchamp', 'No.1, Road ozchamp2', 'FuJian', 'admin', '台 灣', 206, '南投縣', 3979, '', 'Cash On Delivery', 'cod', '千點距', 'sam', 'ozchamp', 'No.1, Road ozchamp', 'No.1, Road ozchamp2', 'FuJian', 'admin', '台 灣', 206, '南投縣', 3979, '', '固定運費率', 'flat.flat', '', '677.0000', 0, 0, '0.0000', 2, 5, 'TWD', '1.00000000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 5.1; rv:24.0) Gecko/20100101 Firefox/24.0', 'zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3', '2013-10-18 12:53:20', '2013-10-18 12:53:20');
 
 -- --------------------------------------------------------
 
@@ -1719,12 +1710,12 @@ CREATE TABLE IF NOT EXISTS `order_download` (
   `order_download_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `order_product_id` int(11) NOT NULL,
-  `name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `filename` varchar(128) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `mask` varchar(128) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `name` varchar(64) NOT NULL DEFAULT '',
+  `filename` varchar(128) NOT NULL DEFAULT '',
+  `mask` varchar(128) NOT NULL DEFAULT '',
   `remaining` int(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`order_download_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1735,59 +1726,59 @@ CREATE TABLE IF NOT EXISTS `order_download` (
 CREATE TABLE IF NOT EXISTS `order_fraud` (
   `order_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
-  `country_match` varchar(3) COLLATE utf8_bin NOT NULL,
-  `country_code` varchar(2) COLLATE utf8_bin NOT NULL,
-  `high_risk_country` varchar(3) COLLATE utf8_bin NOT NULL,
+  `country_match` varchar(3) NOT NULL,
+  `country_code` varchar(2) NOT NULL,
+  `high_risk_country` varchar(3) NOT NULL,
   `distance` int(11) NOT NULL,
-  `ip_region` varchar(255) COLLATE utf8_bin NOT NULL,
-  `ip_city` varchar(255) COLLATE utf8_bin NOT NULL,
+  `ip_region` varchar(255) NOT NULL,
+  `ip_city` varchar(255) NOT NULL,
   `ip_latitude` decimal(10,6) NOT NULL,
   `ip_longitude` decimal(10,6) NOT NULL,
-  `ip_isp` varchar(255) COLLATE utf8_bin NOT NULL,
-  `ip_org` varchar(255) COLLATE utf8_bin NOT NULL,
+  `ip_isp` varchar(255) NOT NULL,
+  `ip_org` varchar(255) NOT NULL,
   `ip_asnum` int(11) NOT NULL,
-  `ip_user_type` varchar(255) COLLATE utf8_bin NOT NULL,
-  `ip_country_confidence` varchar(3) COLLATE utf8_bin NOT NULL,
-  `ip_region_confidence` varchar(3) COLLATE utf8_bin NOT NULL,
-  `ip_city_confidence` varchar(3) COLLATE utf8_bin NOT NULL,
-  `ip_postal_confidence` varchar(3) COLLATE utf8_bin NOT NULL,
-  `ip_postal_code` varchar(10) COLLATE utf8_bin NOT NULL,
+  `ip_user_type` varchar(255) NOT NULL,
+  `ip_country_confidence` varchar(3) NOT NULL,
+  `ip_region_confidence` varchar(3) NOT NULL,
+  `ip_city_confidence` varchar(3) NOT NULL,
+  `ip_postal_confidence` varchar(3) NOT NULL,
+  `ip_postal_code` varchar(10) NOT NULL,
   `ip_accuracy_radius` int(11) NOT NULL,
-  `ip_net_speed_cell` varchar(255) COLLATE utf8_bin NOT NULL,
+  `ip_net_speed_cell` varchar(255) NOT NULL,
   `ip_metro_code` int(3) NOT NULL,
   `ip_area_code` int(3) NOT NULL,
-  `ip_time_zone` varchar(255) COLLATE utf8_bin NOT NULL,
-  `ip_region_name` varchar(255) COLLATE utf8_bin NOT NULL,
-  `ip_domain` varchar(255) COLLATE utf8_bin NOT NULL,
-  `ip_country_name` varchar(255) COLLATE utf8_bin NOT NULL,
-  `ip_continent_code` varchar(2) COLLATE utf8_bin NOT NULL,
-  `ip_corporate_proxy` varchar(3) COLLATE utf8_bin NOT NULL,
-  `anonymous_proxy` varchar(3) COLLATE utf8_bin NOT NULL,
+  `ip_time_zone` varchar(255) NOT NULL,
+  `ip_region_name` varchar(255) NOT NULL,
+  `ip_domain` varchar(255) NOT NULL,
+  `ip_country_name` varchar(255) NOT NULL,
+  `ip_continent_code` varchar(2) NOT NULL,
+  `ip_corporate_proxy` varchar(3) NOT NULL,
+  `anonymous_proxy` varchar(3) NOT NULL,
   `proxy_score` int(3) NOT NULL,
-  `is_trans_proxy` varchar(3) COLLATE utf8_bin NOT NULL,
-  `free_mail` varchar(3) COLLATE utf8_bin NOT NULL,
-  `carder_email` varchar(3) COLLATE utf8_bin NOT NULL,
-  `high_risk_username` varchar(3) COLLATE utf8_bin NOT NULL,
-  `high_risk_password` varchar(3) COLLATE utf8_bin NOT NULL,
-  `bin_match` varchar(10) COLLATE utf8_bin NOT NULL,
-  `bin_country` varchar(2) COLLATE utf8_bin NOT NULL,
-  `bin_name_match` varchar(3) COLLATE utf8_bin NOT NULL,
-  `bin_name` varchar(255) COLLATE utf8_bin NOT NULL,
-  `bin_phone_match` varchar(3) COLLATE utf8_bin NOT NULL,
-  `bin_phone` varchar(32) COLLATE utf8_bin NOT NULL,
-  `customer_phone_in_billing_location` varchar(8) COLLATE utf8_bin NOT NULL,
-  `ship_forward` varchar(3) COLLATE utf8_bin NOT NULL,
-  `city_postal_match` varchar(3) COLLATE utf8_bin NOT NULL,
-  `ship_city_postal_match` varchar(3) COLLATE utf8_bin NOT NULL,
+  `is_trans_proxy` varchar(3) NOT NULL,
+  `free_mail` varchar(3) NOT NULL,
+  `carder_email` varchar(3) NOT NULL,
+  `high_risk_username` varchar(3) NOT NULL,
+  `high_risk_password` varchar(3) NOT NULL,
+  `bin_match` varchar(10) NOT NULL,
+  `bin_country` varchar(2) NOT NULL,
+  `bin_name_match` varchar(3) NOT NULL,
+  `bin_name` varchar(255) NOT NULL,
+  `bin_phone_match` varchar(3) NOT NULL,
+  `bin_phone` varchar(32) NOT NULL,
+  `customer_phone_in_billing_location` varchar(8) NOT NULL,
+  `ship_forward` varchar(3) NOT NULL,
+  `city_postal_match` varchar(3) NOT NULL,
+  `ship_city_postal_match` varchar(3) NOT NULL,
   `score` decimal(10,5) NOT NULL,
-  `explanation` text COLLATE utf8_bin NOT NULL,
+  `explanation` text NOT NULL,
   `risk_score` decimal(10,5) NOT NULL,
   `queries_remaining` int(11) NOT NULL,
-  `maxmind_id` varchar(8) COLLATE utf8_bin NOT NULL,
-  `error` text COLLATE utf8_bin NOT NULL,
+  `maxmind_id` varchar(8) NOT NULL,
+  `error` text NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`order_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1800,10 +1791,10 @@ CREATE TABLE IF NOT EXISTS `order_history` (
   `order_id` int(11) NOT NULL,
   `order_status_id` int(5) NOT NULL,
   `notify` tinyint(1) NOT NULL DEFAULT '0',
-  `comment` text COLLATE utf8_bin NOT NULL,
+  `comment` text NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`order_history_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1813,10 +1804,10 @@ CREATE TABLE IF NOT EXISTS `order_history` (
 
 CREATE TABLE IF NOT EXISTS `order_misc` (
   `order_id` int(11) NOT NULL,
-  `key` varchar(64) COLLATE utf8_bin NOT NULL,
-  `value` text COLLATE utf8_bin NOT NULL,
+  `key` varchar(64) NOT NULL,
+  `value` text NOT NULL,
   PRIMARY KEY (`order_id`,`key`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1830,11 +1821,27 @@ CREATE TABLE IF NOT EXISTS `order_option` (
   `order_product_id` int(11) NOT NULL,
   `product_option_id` int(11) NOT NULL,
   `product_option_value_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(255) COLLATE utf8_bin NOT NULL,
-  `value` text COLLATE utf8_bin NOT NULL,
-  `type` varchar(32) COLLATE utf8_bin NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `value` text NOT NULL,
+  `type` varchar(32) NOT NULL,
   PRIMARY KEY (`order_option_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
+--
+-- 转存表中的数据 `order_option`
+--
+
+INSERT INTO `order_option` (`order_option_id`, `order_id`, `order_product_id`, `product_option_id`, `product_option_value_id`, `name`, `value`, `type`) VALUES
+(1, 1, 1, 227, 19, 'Image', 'Large', 'image'),
+(2, 1, 1, 217, 4, 'Select', 'Red', 'select'),
+(3, 1, 1, 218, 5, 'Radio', 'Small', 'radio'),
+(4, 1, 1, 223, 9, 'Checkbox', 'Checkbox 2', 'checkbox'),
+(5, 1, 1, 208, 0, 'Text', 'Text options', 'text'),
+(6, 1, 1, 209, 0, 'Textarea', 'Textarea options', 'textarea'),
+(7, 1, 1, 219, 0, 'Date', '2011-02-20', 'date'),
+(8, 1, 1, 221, 0, 'Time', '22:25', 'time'),
+(9, 1, 1, 220, 0, 'Date &amp; Time', '2011-02-20 22:25', 'datetime'),
+(10, 1, 2, 225, 0, 'Delivery Date', '2011-04-22', 'date');
 
 -- --------------------------------------------------------
 
@@ -1846,15 +1853,23 @@ CREATE TABLE IF NOT EXISTS `order_product` (
   `order_product_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_bin NOT NULL,
-  `model` varchar(64) COLLATE utf8_bin NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `model` varchar(64) NOT NULL,
   `quantity` int(4) NOT NULL,
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `total` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `tax` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `reward` int(8) NOT NULL,
   PRIMARY KEY (`order_product_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- 转存表中的数据 `order_product`
+--
+
+INSERT INTO `order_product` (`order_product_id`, `order_id`, `product_id`, `name`, `model`, `quantity`, `price`, `total`, `tax`, `reward`) VALUES
+(1, 1, 42, 'Apple Cinema 30&quot;', 'Product 15', 3, '124.0000', '372.0000', '0.0000', 300),
+(2, 1, 47, 'HP LP3065', 'Product 21', 3, '100.0000', '300.0000', '0.0000', 900);
 
 -- --------------------------------------------------------
 
@@ -1865,9 +1880,9 @@ CREATE TABLE IF NOT EXISTS `order_product` (
 CREATE TABLE IF NOT EXISTS `order_status` (
   `order_status_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
-  `name` varchar(32) COLLATE utf8_bin NOT NULL,
+  `name` varchar(32) NOT NULL,
   PRIMARY KEY (`order_status_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- 转存表中的数据 `order_status`
@@ -1887,21 +1902,7 @@ INSERT INTO `order_status` (`order_status_id`, `language_id`, `name`) VALUES
 (1, 2, 'Pending'),
 (16, 2, 'Voided'),
 (15, 2, 'Processed'),
-(14, 2, 'Expired'),
-(2, 3, 'Processing'),
-(3, 3, 'Shipped'),
-(7, 3, 'Canceled'),
-(5, 3, 'Complete'),
-(8, 3, 'Denied'),
-(9, 3, 'Canceled Reversal'),
-(10, 3, 'Failed'),
-(11, 3, 'Refunded'),
-(12, 3, 'Reversed'),
-(13, 3, 'Chargeback'),
-(1, 3, 'Pending'),
-(16, 3, 'Voided'),
-(15, 3, 'Processed'),
-(14, 3, 'Expired');
+(14, 2, 'Expired');
 
 -- --------------------------------------------------------
 
@@ -1912,14 +1913,23 @@ INSERT INTO `order_status` (`order_status_id`, `language_id`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `order_total` (
   `order_total_id` int(10) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
-  `code` varchar(32) COLLATE utf8_bin NOT NULL,
-  `title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `text` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `code` varchar(32) NOT NULL,
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `text` varchar(255) NOT NULL DEFAULT '',
   `value` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`order_total_id`),
   KEY `idx_orders_total_orders_id` (`order_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `order_total`
+--
+
+INSERT INTO `order_total` (`order_total_id`, `order_id`, `code`, `title`, `text`, `value`, `sort_order`) VALUES
+(1, 1, 'sub_total', '商品總額', 'NT$672', '672.0000', 1),
+(2, 1, 'shipping', '固定運費率', 'NT$5', '5.0000', 3),
+(3, 1, 'total', '訂單總額', 'NT$677', '677.0000', 9);
 
 -- --------------------------------------------------------
 
@@ -1931,17 +1941,17 @@ CREATE TABLE IF NOT EXISTS `order_voucher` (
   `order_voucher_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `voucher_id` int(11) NOT NULL,
-  `description` varchar(255) COLLATE utf8_bin NOT NULL,
-  `code` varchar(10) COLLATE utf8_bin NOT NULL,
-  `from_name` varchar(64) COLLATE utf8_bin NOT NULL,
-  `from_email` varchar(96) COLLATE utf8_bin NOT NULL,
-  `to_name` varchar(64) COLLATE utf8_bin NOT NULL,
-  `to_email` varchar(96) COLLATE utf8_bin NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `code` varchar(10) NOT NULL,
+  `from_name` varchar(64) NOT NULL,
+  `from_email` varchar(96) NOT NULL,
+  `to_name` varchar(64) NOT NULL,
+  `to_email` varchar(96) NOT NULL,
   `voucher_theme_id` int(11) NOT NULL,
-  `message` text COLLATE utf8_bin NOT NULL,
+  `message` text NOT NULL,
   `amount` decimal(15,4) NOT NULL,
   PRIMARY KEY (`order_voucher_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1951,17 +1961,17 @@ CREATE TABLE IF NOT EXISTS `order_voucher` (
 
 CREATE TABLE IF NOT EXISTS `product` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
-  `model` varchar(64) COLLATE utf8_bin NOT NULL,
-  `sku` varchar(64) COLLATE utf8_bin NOT NULL,
-  `upc` varchar(12) COLLATE utf8_bin NOT NULL,
-  `ean` varchar(14) COLLATE utf8_bin NOT NULL,
-  `jan` varchar(13) COLLATE utf8_bin NOT NULL,
-  `isbn` varchar(13) COLLATE utf8_bin NOT NULL,
-  `mpn` varchar(64) COLLATE utf8_bin NOT NULL,
-  `location` varchar(128) COLLATE utf8_bin NOT NULL,
+  `model` varchar(64) NOT NULL,
+  `sku` varchar(64) NOT NULL,
+  `upc` varchar(12) NOT NULL,
+  `ean` varchar(14) NOT NULL,
+  `jan` varchar(13) NOT NULL,
+  `isbn` varchar(13) NOT NULL,
+  `mpn` varchar(64) NOT NULL,
+  `location` varchar(128) NOT NULL,
   `quantity` int(4) NOT NULL DEFAULT '0',
   `stock_status_id` int(11) NOT NULL,
-  `image` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
   `manufacturer_id` int(11) NOT NULL,
   `shipping` tinyint(1) NOT NULL DEFAULT '1',
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
@@ -1982,7 +1992,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `viewed` int(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=50 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=50 ;
 
 --
 -- 转存表中的数据 `product`
@@ -1991,7 +2001,7 @@ CREATE TABLE IF NOT EXISTS `product` (
 INSERT INTO `product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`) VALUES
 (28, 'Product 1', '', '', '', '', '', '', '', 939, 7, 'data/demo/htc_touch_hd_1.jpg', 5, 1, '100.0000', 200, 9, '2009-02-03', '146.40000000', 2, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 16:06:50', '2011-09-30 01:05:39', 0),
 (29, 'Product 2', '', '', '', '', '', '', '', 999, 6, 'data/demo/palm_treo_pro_1.jpg', 6, 1, '279.9900', 0, 9, '2009-02-03', '133.00000000', 2, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 0, 1, '2009-02-03 16:42:17', '2011-09-30 01:06:08', 0),
-(30, 'Product 3', '', '', '', '', '', '', '', 7, 6, 'data/demo/canon_eos_5d_1.jpg', 9, 1, '100.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 16:59:00', '2011-09-30 01:05:23', 0),
+(30, 'Product 3', '', '', '', '', '', '', '', 7, 6, 'data/demo/canon_eos_5d_1.jpg', 9, 1, '100.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 16:59:00', '2011-09-30 01:05:23', 1),
 (31, 'Product 4', '', '', '', '', '', '', '', 1000, 6, 'data/demo/nikon_d300_1.jpg', 0, 1, '80.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 0, 1, '2009-02-03 17:00:10', '2011-09-30 01:06:00', 0),
 (32, 'Product 5', '', '', '', '', '', '', '', 999, 6, 'data/demo/ipod_touch_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 17:07:26', '2011-09-30 01:07:22', 0),
 (33, 'Product 6', '', '', '', '', '', '', '', 1000, 6, 'data/demo/samsung_syncmaster_941bw.jpg', 0, 1, '200.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 17:08:31', '2011-09-30 01:06:29', 0),
@@ -1999,15 +2009,15 @@ INSERT INTO `product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`
 (35, 'Product 8', '', '', '', '', '', '', '', 1000, 5, '', 0, 0, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 18:08:31', '2011-09-30 01:06:17', 0),
 (36, 'Product 9', '', '', '', '', '', '', '', 994, 6, 'data/demo/ipod_nano_1.jpg', 8, 0, '100.0000', 100, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 18:09:19', '2011-09-30 01:07:12', 0),
 (40, 'product 11', '', '', '', '', '', '', '', 970, 5, 'data/demo/iphone_1.jpg', 8, 1, '101.0000', 0, 9, '2009-02-03', '10.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 21:07:12', '2011-09-30 01:06:53', 0),
-(41, 'Product 14', '', '', '', '', '', '', '', 977, 5, 'data/demo/imac_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 21:07:26', '2011-09-30 01:06:44', 0),
-(42, 'Product 15', '', '', '', '', '', '', '', 990, 5, 'data/demo/apple_cinema_30.jpg', 8, 1, '100.0000', 400, 9, '2009-02-04', '12.50000000', 1, '1.00000000', '2.00000000', '3.00000000', 1, 1, 2, 0, 1, '2009-02-03 21:07:37', '2013-10-07 10:06:53', 20),
+(41, 'Product 14', '', '', '', '', '', '', '', 977, 5, 'data/demo/imac_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 21:07:26', '2011-09-30 01:06:44', 5),
+(42, 'Product 15', '', '', '', '', '', '', '產地台灣', 990, 5, 'data/demo/apple_cinema_30.jpg', 8, 1, '100.0000', 400, 9, '2009-02-04', '12.50000000', 1, '1.00000000', '2.00000000', '3.00000000', 1, 1, 2, 1, 1, '2009-02-03 21:07:37', '2013-10-25 20:18:13', 25),
 (43, 'Product 16', '', '', '', '', '', '', '', 929, 5, 'data/demo/macbook_1.jpg', 8, 0, '500.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:07:49', '2011-09-30 01:05:46', 0),
 (44, 'Product 17', '', '', '', '', '', '', '', 1000, 5, 'data/demo/macbook_air_1.jpg', 8, 1, '1000.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:00', '2013-02-02 21:58:49', 0),
 (45, 'Product 18', '', '', '', '', '', '', '', 998, 5, 'data/demo/macbook_pro_1.jpg', 8, 1, '2000.0000', 0, 100, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:17', '2011-09-15 22:22:01', 0),
 (46, 'Product 19', '', '', '', '', '', '', '', 1000, 5, 'data/demo/sony_vaio_1.jpg', 10, 1, '1000.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:29', '2011-09-30 01:06:39', 0),
-(47, 'Product 21', '', '', '', '', '', '', '', 1000, 5, 'data/demo/hp_1.jpg', 7, 1, '100.0000', 400, 9, '2009-02-03', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 1, 0, 1, '2009-02-03 21:08:40', '2011-09-30 01:05:28', 1),
+(47, 'Product 21', '', '', '', '', '', '', '', 1000, 5, 'data/demo/hp_1.jpg', 7, 1, '100.0000', 400, 9, '2009-02-03', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 1, 0, 1, '2009-02-03 21:08:40', '2011-09-30 01:05:28', 8),
 (48, 'product 20', 'test 1', '', '', '', '', '', 'test 2', 995, 5, 'data/demo/ipod_classic_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-08', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-08 17:21:51', '2011-09-30 01:07:06', 0),
-(49, 'SAM1', '', '', '', '', '', '', '', 0, 8, 'data/demo/samsung_tab_1.jpg', 0, 1, '199.9900', 0, 9, '2011-04-25', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2011-04-26 08:57:34', '2013-05-28 18:58:00', 6);
+(49, 'SAM1', '', '', '', '', '', '', '', 0, 8, 'data/demo/samsung_tab_1.jpg', 0, 1, '199.9900', 0, 9, '2011-04-25', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2011-04-26 08:57:34', '2013-05-28 18:58:00', 7);
 
 -- --------------------------------------------------------
 
@@ -2019,9 +2029,9 @@ CREATE TABLE IF NOT EXISTS `product_attribute` (
   `product_id` int(11) NOT NULL,
   `attribute_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `text` text COLLATE utf8_bin NOT NULL,
+  `text` text NOT NULL,
   PRIMARY KEY (`product_id`,`attribute_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `product_attribute`
@@ -2047,16 +2057,16 @@ INSERT INTO `product_attribute` (`product_id`, `attribute_id`, `language_id`, `t
 CREATE TABLE IF NOT EXISTS `product_description` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_bin NOT NULL,
-  `description` text COLLATE utf8_bin NOT NULL,
-  `meta_description` varchar(255) COLLATE utf8_bin NOT NULL,
-  `meta_keyword` varchar(255) COLLATE utf8_bin NOT NULL,
-  `tag` text COLLATE utf8_bin NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `meta_description` varchar(255) NOT NULL,
+  `meta_keyword` varchar(255) NOT NULL,
+  `tag` text NOT NULL,
   PRIMARY KEY (`product_id`,`language_id`),
   KEY `name` (`name`),
   FULLTEXT KEY `description` (`description`),
   FULLTEXT KEY `tag` (`tag`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=50 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=50 ;
 
 --
 -- 转存表中的数据 `product_description`
@@ -2067,7 +2077,6 @@ INSERT INTO `product_description` (`product_id`, `language_id`, `name`, `descrip
 (48, 2, 'iPod Classic', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;More room to move.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			With 80GB or 160GB of storage and up to 40 hours of battery life, the new iPod classic lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Sleeker design.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Beautiful, durable, and sleeker than ever, iPod classic now features an anodized aluminum and polished stainless steel enclosure with rounded edges.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', ''),
 (40, 2, 'iPhone', '&lt;p class=&quot;intro&quot;&gt;\r\n	iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;\r\n', '', '', ''),
 (28, 2, 'HTC Touch HD', '&lt;p&gt;\r\n	HTC Touch - in High Definition. Watch music videos and streaming content in awe-inspiring high definition clarity for a mobile experience you never thought possible. Seductively sleek, the HTC Touch HD provides the next generation of mobile functionality, all at a simple touch. Fully integrated with Windows Mobile Professional 6.1, ultrafast 3.5G, GPS, 5MP camera, plus lots more - all delivered on a breathtakingly crisp 3.8&amp;quot; WVGA touchscreen - you can take control of your mobile world with the HTC Touch HD.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Processor Qualcomm&amp;reg; MSM 7201A&amp;trade; 528 MHz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows Mobile&amp;reg; 6.1 Professional Operating System&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Memory: 512 MB ROM, 288 MB RAM&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Dimensions: 115 mm x 62.8 mm x 12 mm / 146.4 grams&lt;/li&gt;\r\n	&lt;li&gt;\r\n		3.8-inch TFT-LCD flat touch-sensitive screen with 480 x 800 WVGA resolution&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HSDPA/WCDMA: Europe/Asia: 900/2100 MHz; Up to 2 Mbps up-link and 7.2 Mbps down-link speeds&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Quad-band GSM/GPRS/EDGE: Europe/Asia: 850/900/1800/1900 MHz (Band frequency, HSUPA availability, and data speed are operator dependent.)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Device Control via HTC TouchFLO&amp;trade; 3D &amp;amp; Touch-sensitive front panel buttons&lt;/li&gt;\r\n	&lt;li&gt;\r\n		GPS and A-GPS ready&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Bluetooth&amp;reg; 2.0 with Enhanced Data Rate and A2DP for wireless stereo headsets&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wi-Fi&amp;reg;: IEEE 802.11 b/g&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HTC ExtUSB&amp;trade; (11-pin mini-USB 2.0)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		5 megapixel color camera with auto focus&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VGA CMOS color camera&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in 3.5 mm audio jack, microphone, speaker, and FM radio&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Ring tone formats: AAC, AAC+, eAAC+, AMR-NB, AMR-WB, QCP, MP3, WMA, WAV&lt;/li&gt;\r\n	&lt;li&gt;\r\n		40 polyphonic and standard MIDI format 0 and 1 (SMF)/SP MIDI&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Rechargeable Lithium-ion or Lithium-ion polymer 1350 mAh battery&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Expansion Slot: microSD&amp;trade; memory card (SD 2.0 compatible)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AC Adapter Voltage range/frequency: 100 ~ 240V AC, 50/60 Hz DC output: 5V and 1A&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Special Features: FM Radio, G-Sensor&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', '', ''),
-(42, 2, 'Apple Cinema 30&quot;', '&lt;p&gt;\r\n	&lt;font face=&quot;helvetica,geneva,arial&quot; size=&quot;2&quot;&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there&amp;#39;s no limit to what you can achieve. &lt;/font&gt;&lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it&amp;#39;s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data. &lt;/font&gt;&lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;Offering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple&amp;#39;s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications. &lt;/font&gt;&lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;Housed in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment. &lt;/font&gt;&lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;/font&gt;&lt;/font&gt;&lt;/p&gt;\r\n&lt;h3&gt;\r\n	Features:&lt;/h3&gt;\r\n&lt;p&gt;\r\n	Unrivaled display performance&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Simple setup and operation&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Sleek, elegant design&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;h3&gt;\r\n	Technical specifications&lt;/h3&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen size (diagonal viewable image size)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen type&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Resolutions&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Display colors (maximum)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Viewing angle (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		170&amp;deg; horizontal; 170&amp;deg; vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Brightness (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Contrast ratio (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Response time (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Pixel pitch&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen treatment&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;User controls (hardware and software)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Display Power,&lt;/li&gt;\r\n	&lt;li&gt;\r\n		System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Brightness&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Connectors and cables&lt;/b&gt;&lt;br /&gt;\r\n	Cable&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;\r\n		USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;\r\n		DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Connectors&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;VESA mount adapter&lt;/b&gt;&lt;br /&gt;\r\n	Requires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Electrical requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Environmental requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Operating temperature: 50&amp;deg; to 95&amp;deg; F (10&amp;deg; to 35&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Storage temperature: -40&amp;deg; to 116&amp;deg; F (-40&amp;deg; to 47&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Agency approvals&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55024&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MPR II&lt;/li&gt;\r\n	&lt;li&gt;\r\n		IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		UL 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;\r\n		TCO &amp;#39;03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Size and weight&lt;/b&gt;&lt;br /&gt;\r\n	30-inch Apple Cinema HD Display&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;System Requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', '', ''),
 (45, 2, 'MacBook Pro', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Latest Intel mobile architecture&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Powered by the most advanced mobile processors from Intel, the new Core 2 Duo MacBook Pro is over 50% faster than the original Core Duo MacBook Pro and now supports up to 4GB of RAM.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Leading-edge graphics&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			The NVIDIA GeForce 8600M GT delivers exceptional graphics processing power. For the ultimate creative canvas, you can even configure the 17-inch model with a 1920-by-1200 resolution display.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Designed for life on the road&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Innovations such as a magnetic power connection and an illuminated keyboard with ambient light sensor put the MacBook Pro in a class by itself.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Connect. Create. Communicate.&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Quickly set up a video conference with the built-in iSight camera. Control presentations and media from up to 30 feet away with the included Apple Remote. Connect to high-bandwidth peripherals with FireWire 800 and DVI.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Next-generation wireless&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Featuring 802.11n wireless technology, the MacBook Pro delivers up to five times the performance and up to twice the range of previous-generation technologies.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', ''),
 (29, 2, 'Palm Treo Pro', '&lt;p&gt;\r\n	Redefine your workday with the Palm Treo Pro smartphone. Perfectly balanced, you can respond to business and personal email, stay on top of appointments and contacts, and use Wi-Fi or GPS when you&amp;rsquo;re out and about. Then watch a video on YouTube, catch up with news and sports on the web, or listen to a few songs. Balance your work and play the way you like it, with the Palm Treo Pro.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Windows Mobile&amp;reg; 6.1 Professional Edition&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Qualcomm&amp;reg; MSM7201 400MHz Processor&lt;/li&gt;\r\n	&lt;li&gt;\r\n		320x320 transflective colour TFT touchscreen&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HSDPA/UMTS/EDGE/GPRS/GSM radio&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Tri-band UMTS &amp;mdash; 850MHz, 1900MHz, 2100MHz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Quad-band GSM &amp;mdash; 850/900/1800/1900&lt;/li&gt;\r\n	&lt;li&gt;\r\n		802.11b/g with WPA, WPA2, and 801.1x authentication&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in GPS&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Bluetooth Version: 2.0 + Enhanced Data Rate&lt;/li&gt;\r\n	&lt;li&gt;\r\n		256MB storage (100MB user available), 128MB RAM&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2.0 megapixel camera, up to 8x digital zoom and video capture&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Removable, rechargeable 1500mAh lithium-ion battery&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Up to 5.0 hours talk time and up to 250 hours standby&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MicroSDHC card expansion (up to 32GB supported)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MicroUSB 2.0 for synchronization and charging&lt;/li&gt;\r\n	&lt;li&gt;\r\n		3.5mm stereo headset jack&lt;/li&gt;\r\n	&lt;li&gt;\r\n		60mm (W) x 114mm (L) x 13.5mm (D) / 133g&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', '', ''),
 (36, 2, 'iPod Nano', '&lt;div&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Video in your pocket.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Its the small iPod with one very big idea: video. The worlds most popular music player now lets you enjoy movies, TV shows, and more on a two-inch display thats 65% brighter than before.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;strong&gt;&amp;nbsp;&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Sleek and colorful.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		With an anodized aluminum and polished stainless steel enclosure and a choice of five colors, iPod nano is dressed to impress.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;iTunes.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Available as a free download, iTunes makes it easy to browse and buy millions of songs, movies, TV shows, audiobooks, and games and download free podcasts all at the iTunes Store. And you can import your own music, manage your whole media library, and sync your iPod or iPhone with ease.&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', '', ''),
@@ -2079,6 +2088,7 @@ INSERT INTO `product_description` (`product_id`, `language_id`, `name`, `descrip
 (34, 2, 'iPod Shuffle', '&lt;div&gt;\r\n	&lt;strong&gt;Born to be worn.&lt;/strong&gt;\r\n	&lt;p&gt;\r\n		Clip on the worlds most wearable music player and take up to 240 songs with you anywhere. Choose from five colors including four new hues to make your musical fashion statement.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Random meets rhythm.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		With iTunes autofill, iPod shuffle can deliver a new musical experience every time you sync. For more randomness, you can shuffle songs during playback with the slide of a switch.&lt;/p&gt;\r\n	&lt;strong&gt;Everything is easy.&lt;/strong&gt;\r\n	&lt;p&gt;\r\n		Charge and sync with the included USB dock. Operate the iPod shuffle controls with one hand. Enjoy up to 12 hours straight of skip-free music playback.&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', '', ''),
 (43, 2, 'MacBook', '&lt;div&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Intel Core 2 Duo processor&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Powered by an Intel Core 2 Duo processor at speeds up to 2.16GHz, the new MacBook is the fastest ever.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;1GB memory, larger hard drives&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		The new MacBook now comes with 1GB of memory standard and larger hard drives for the entire line perfect for running more of your favorite applications and storing growing media collections.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Sleek, 1.08-inch-thin design&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		MacBook makes it easy to hit the road thanks to its tough polycarbonate case, built-in wireless technologies, and innovative MagSafe Power Adapter that releases automatically if someone accidentally trips on the cord.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Built-in iSight camera&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Right out of the box, you can have a video chat with friends or family,2 record a video at your desk, or take fun pictures with Photo Booth&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', '', ''),
 (31, 2, 'Nikon D300', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		Engineered with pro-level features and performance, the 12.3-effective-megapixel D300 combines brand new technologies with advanced features inherited from Nikon&amp;#39;s newly announced D3 professional digital SLR camera to offer serious photographers remarkable performance combined with agility.&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		Similar to the D3, the D300 features Nikon&amp;#39;s exclusive EXPEED Image Processing System that is central to driving the speed and processing power needed for many of the camera&amp;#39;s new features. The D300 features a new 51-point autofocus system with Nikon&amp;#39;s 3D Focus Tracking feature and two new LiveView shooting modes that allow users to frame a photograph using the camera&amp;#39;s high-resolution LCD monitor. The D300 shares a similar Scene Recognition System as is found in the D3; it promises to greatly enhance the accuracy of autofocus, autoexposure, and auto white balance by recognizing the subject or scene being photographed and applying this information to the calculations for the three functions.&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		The D300 reacts with lightning speed, powering up in a mere 0.13 seconds and shooting with an imperceptible 45-millisecond shutter release lag time. The D300 is capable of shooting at a rapid six frames per second and can go as fast as eight frames per second when using the optional MB-D10 multi-power battery pack. In continuous bursts, the D300 can shoot up to 100 shots at full 12.3-megapixel resolution. (NORMAL-LARGE image setting, using a SanDisk Extreme IV 1GB CompactFlash card.)&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		The D300 incorporates a range of innovative technologies and features that will significantly improve the accuracy, control, and performance photographers can get from their equipment. Its new Scene Recognition System advances the use of Nikon&amp;#39;s acclaimed 1,005-segment sensor to recognize colors and light patterns that help the camera determine the subject and the type of scene being photographed before a picture is taken. This information is used to improve the accuracy of autofocus, autoexposure, and auto white balance functions in the D300. For example, the camera can track moving subjects better and by identifying them, it can also automatically select focus points faster and with greater accuracy. It can also analyze highlights and more accurately determine exposure, as well as infer light sources to deliver more accurate white balance detection.&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', ''),
+(42, 2, 'Apple Cinema 30&quot;', '&lt;p&gt;\r\n	&lt;font face=&quot;helvetica,geneva,arial&quot; size=&quot;2&quot;&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there&amp;#39;s no limit to what you can achieve. &lt;/font&gt;&lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it&amp;#39;s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data. &lt;/font&gt;&lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;Offering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple&amp;#39;s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications. &lt;/font&gt;&lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;Housed in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment. &lt;/font&gt;&lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;/font&gt;&lt;/font&gt;&lt;/p&gt;\r\n&lt;h3&gt;\r\n	Features:&lt;/h3&gt;\r\n&lt;p&gt;\r\n	Unrivaled display performance&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Simple setup and operation&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Sleek, elegant design&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;h3&gt;\r\n	Technical specifications&lt;/h3&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen size (diagonal viewable image size)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen type&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Resolutions&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Display colors (maximum)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Viewing angle (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		170&amp;deg; horizontal; 170&amp;deg; vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Brightness (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Contrast ratio (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Response time (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Pixel pitch&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen treatment&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;User controls (hardware and software)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Display Power,&lt;/li&gt;\r\n	&lt;li&gt;\r\n		System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Brightness&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Connectors and cables&lt;/b&gt;&lt;br /&gt;\r\n	Cable&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;\r\n		USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;\r\n		DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Connectors&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;VESA mount adapter&lt;/b&gt;&lt;br /&gt;\r\n	Requires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Electrical requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Environmental requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Operating temperature: 50&amp;deg; to 95&amp;deg; F (10&amp;deg; to 35&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Storage temperature: -40&amp;deg; to 116&amp;deg; F (-40&amp;deg; to 47&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Agency approvals&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55024&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MPR II&lt;/li&gt;\r\n	&lt;li&gt;\r\n		IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		UL 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;\r\n		TCO &amp;#39;03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Size and weight&lt;/b&gt;&lt;br /&gt;\r\n	30-inch Apple Cinema HD Display&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;System Requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Apple Cinema 30&quot;', 'Apple, Cinema 30&quot;', ''),
 (30, 2, 'Canon EOS 5D', '&lt;p&gt;\r\n	Canon''s press material for the EOS 5D states that it ''defines (a) new D-SLR category'', while we''re not typically too concerned with marketing talk this particular statement is clearly pretty accurate. The EOS 5D is unlike any previous digital SLR in that it combines a full-frame (35 mm sized) high resolution sensor (12.8 megapixels) with a relatively compact body (slightly larger than the EOS 20D, although in your hand it feels noticeably ''chunkier''). The EOS 5D is aimed to slot in between the EOS 20D and the EOS-1D professional digital SLR''s, an important difference when compared to the latter is that the EOS 5D doesn''t have any environmental seals. While Canon don''t specifically refer to the EOS 5D as a ''professional'' digital SLR it will have obvious appeal to professionals who want a high quality digital SLR in a body lighter than the EOS-1D. It will also no doubt appeal to current EOS 20D owners (although lets hope they''ve not bought too many EF-S lenses...) äë&lt;/p&gt;\r\n', '', '', ''),
 (35, 3, 'Product 8', '&lt;p&gt;\r\n	Product 8&lt;/p&gt;\r\n', '', '', ''),
 (48, 3, 'iPod Classic', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;More room to move.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			With 80GB or 160GB of storage and up to 40 hours of battery life, the new iPod classic lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Sleeker design.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Beautiful, durable, and sleeker than ever, iPod classic now features an anodized aluminum and polished stainless steel enclosure with rounded edges.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', ''),
@@ -2115,16 +2125,14 @@ CREATE TABLE IF NOT EXISTS `product_discount` (
   `date_end` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`product_discount_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=462 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=473 ;
 
 --
 -- 转存表中的数据 `product_discount`
 --
 
 INSERT INTO `product_discount` (`product_discount_id`, `product_id`, `customer_group_id`, `quantity`, `priority`, `price`, `date_start`, `date_end`) VALUES
-(461, 42, 1, 30, 1, '66.0000', '0000-00-00', '0000-00-00'),
-(460, 42, 1, 20, 1, '77.0000', '0000-00-00', '0000-00-00'),
-(459, 42, 1, 10, 1, '88.0000', '0000-00-00', '0000-00-00');
+(472, 42, 1, 10, 1, '88.0000', '2013-10-01', '2013-10-10');
 
 -- --------------------------------------------------------
 
@@ -2135,10 +2143,10 @@ INSERT INTO `product_discount` (`product_discount_id`, `product_id`, `customer_g
 CREATE TABLE IF NOT EXISTS `product_image` (
   `product_image_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
-  `image` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
   `sort_order` int(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`product_image_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2403 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2445 ;
 
 --
 -- 转存表中的数据 `product_image`
@@ -2201,12 +2209,12 @@ INSERT INTO `product_image` (`product_image_id`, `product_id`, `image`, `sort_or
 (2387, 49, 'data/demo/samsung_tab_5.jpg', 0),
 (2385, 49, 'data/demo/samsung_tab_7.jpg', 0),
 (2386, 49, 'data/demo/samsung_tab_6.jpg', 0),
-(2402, 42, 'data/logo.png', 0),
-(2401, 42, 'data/demo/canon_eos_5d_2.jpg', 0),
-(2400, 42, 'data/demo/canon_eos_5d_1.jpg', 0),
-(2399, 42, 'data/demo/compaq_presario.jpg', 0),
-(2398, 42, 'data/demo/hp_1.jpg', 0),
-(2397, 42, 'data/cart.png', 0);
+(2444, 42, 'data/cart.png', 0),
+(2443, 42, 'data/demo/hp_1.jpg', 0),
+(2442, 42, 'data/demo/compaq_presario.jpg', 0),
+(2441, 42, 'data/demo/canon_eos_5d_1.jpg', 0),
+(2440, 42, 'data/demo/canon_eos_5d_2.jpg', 0),
+(2439, 42, 'data/logo.png', 0);
 
 -- --------------------------------------------------------
 
@@ -2218,10 +2226,10 @@ CREATE TABLE IF NOT EXISTS `product_option` (
   `product_option_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL,
-  `option_value` text COLLATE utf8_bin NOT NULL,
+  `option_value` text NOT NULL,
   `required` tinyint(1) NOT NULL,
   PRIMARY KEY (`product_option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=228 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=228 ;
 
 --
 -- 转存表中的数据 `product_option`
@@ -2230,17 +2238,16 @@ CREATE TABLE IF NOT EXISTS `product_option` (
 INSERT INTO `product_option` (`product_option_id`, `product_id`, `option_id`, `option_value`, `required`) VALUES
 (224, 35, 11, '', 1),
 (225, 47, 12, '2011-04-22', 1),
+(220, 42, 10, '2011-02-20 22:25', 1),
+(221, 42, 9, '22:25', 1),
 (219, 42, 8, '2011-02-20', 1),
-(222, 42, 7, '', 1),
-(209, 42, 6, 'Textarea options', 1),
 (226, 30, 5, '', 1),
+(209, 42, 6, 'Textarea options', 1),
 (208, 42, 4, 'Text options', 1),
 (223, 42, 2, '', 1),
 (218, 42, 1, '', 1),
 (217, 42, 5, '', 1),
-(227, 42, 13, '', 1),
-(221, 42, 9, '22:25', 1),
-(220, 42, 10, '2011-02-20 22:25', 1);
+(227, 42, 13, '', 1);
 
 -- --------------------------------------------------------
 
@@ -2257,38 +2264,38 @@ CREATE TABLE IF NOT EXISTS `product_option_value` (
   `quantity` int(3) NOT NULL,
   `subtract` tinyint(1) NOT NULL,
   `price` decimal(15,4) NOT NULL,
-  `price_prefix` varchar(1) COLLATE utf8_bin NOT NULL,
+  `price_prefix` varchar(1) NOT NULL,
   `points` int(8) NOT NULL,
-  `points_prefix` varchar(1) COLLATE utf8_bin NOT NULL,
+  `points_prefix` varchar(1) NOT NULL,
   `weight` decimal(15,8) NOT NULL,
-  `weight_prefix` varchar(1) COLLATE utf8_bin NOT NULL,
+  `weight_prefix` varchar(1) NOT NULL,
   PRIMARY KEY (`product_option_value_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=20 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- 转存表中的数据 `product_option_value`
 --
 
 INSERT INTO `product_option_value` (`product_option_value_id`, `product_option_id`, `product_id`, `option_id`, `option_value_id`, `quantity`, `subtract`, `price`, `price_prefix`, `points`, `points_prefix`, `weight`, `weight_prefix`) VALUES
+(11, 223, 42, 2, 45, 3998, 1, '40.0000', '+', 0, '+', '40.00000000', '+'),
+(10, 223, 42, 2, 44, 2696, 1, '30.0000', '+', 0, '+', '30.00000000', '+'),
+(9, 223, 42, 2, 24, 194, 1, '20.0000', '+', 0, '+', '20.00000000', '+'),
+(8, 223, 42, 2, 23, 48, 1, '10.0000', '+', 0, '+', '10.00000000', '+'),
 (7, 218, 42, 1, 43, 300, 1, '30.0000', '+', 3, '+', '30.00000000', '+'),
-(6, 218, 42, 1, 31, 146, 1, '20.0000', '+', 2, '-', '20.00000000', '+'),
-(5, 218, 42, 1, 32, 96, 1, '10.0000', '+', 1, '+', '10.00000000', '+'),
-(3, 217, 42, 5, 40, 300, 0, '3.0000', '+', 0, '+', '3.00000000', '+'),
-(1, 217, 42, 5, 41, 100, 0, '1.0000', '+', 0, '+', '1.00000000', '+'),
-(2, 217, 42, 5, 42, 200, 1, '2.0000', '+', 0, '+', '2.00000000', '+'),
 (12, 224, 35, 11, 46, 0, 1, '5.0000', '+', 0, '+', '0.00000000', '+'),
 (13, 224, 35, 11, 47, 10, 1, '10.0000', '+', 0, '+', '0.00000000', '+'),
 (14, 224, 35, 11, 48, 15, 1, '15.0000', '+', 0, '+', '0.00000000', '+'),
 (16, 226, 30, 5, 40, 5, 1, '0.0000', '+', 0, '+', '0.00000000', '+'),
 (15, 226, 30, 5, 39, 2, 1, '0.0000', '+', 0, '+', '0.00000000', '+'),
+(5, 218, 42, 1, 32, 96, 1, '10.0000', '+', 1, '+', '10.00000000', '+'),
+(6, 218, 42, 1, 31, 146, 1, '20.0000', '+', 2, '-', '20.00000000', '+'),
+(2, 217, 42, 5, 42, 200, 1, '2.0000', '+', 0, '+', '2.00000000', '+'),
+(1, 217, 42, 5, 41, 100, 0, '1.0000', '+', 0, '+', '1.00000000', '+'),
+(3, 217, 42, 5, 40, 300, 0, '3.0000', '+', 0, '+', '3.00000000', '+'),
 (4, 217, 42, 5, 39, 92, 1, '4.0000', '+', 0, '+', '4.00000000', '+'),
 (19, 227, 42, 13, 49, 3, 1, '0.0000', '+', 0, '+', '0.00000000', '+'),
 (18, 227, 42, 13, 50, 2, 1, '0.0000', '+', 0, '+', '0.00000000', '+'),
-(17, 227, 42, 13, 51, 1, 1, '0.0000', '+', 0, '+', '0.00000000', '+'),
-(8, 223, 42, 2, 23, 48, 1, '10.0000', '+', 0, '+', '10.00000000', '+'),
-(9, 223, 42, 2, 24, 194, 1, '20.0000', '+', 0, '+', '20.00000000', '+'),
-(10, 223, 42, 2, 44, 2696, 1, '30.0000', '+', 0, '+', '30.00000000', '+'),
-(11, 223, 42, 2, 45, 3998, 1, '40.0000', '+', 0, '+', '40.00000000', '+');
+(17, 227, 42, 13, 51, 1, 1, '0.0000', '+', 0, '+', '0.00000000', '+');
 
 -- --------------------------------------------------------
 
@@ -2300,7 +2307,7 @@ CREATE TABLE IF NOT EXISTS `product_related` (
   `product_id` int(11) NOT NULL,
   `related_id` int(11) NOT NULL,
   PRIMARY KEY (`product_id`,`related_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `product_related`
@@ -2324,14 +2331,14 @@ CREATE TABLE IF NOT EXISTS `product_reward` (
   `customer_group_id` int(11) NOT NULL DEFAULT '0',
   `points` int(8) NOT NULL DEFAULT '0',
   PRIMARY KEY (`product_reward_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=555 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=562 ;
 
 --
 -- 转存表中的数据 `product_reward`
 --
 
 INSERT INTO `product_reward` (`product_reward_id`, `product_id`, `customer_group_id`, `points`) VALUES
-(554, 42, 1, 100),
+(561, 42, 1, 100),
 (519, 47, 1, 300),
 (379, 28, 1, 400),
 (329, 43, 1, 600),
@@ -2367,14 +2374,14 @@ CREATE TABLE IF NOT EXISTS `product_special` (
   `date_end` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`product_special_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=447 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=454 ;
 
 --
 -- 转存表中的数据 `product_special`
 --
 
 INSERT INTO `product_special` (`product_special_id`, `product_id`, `customer_group_id`, `priority`, `price`, `date_start`, `date_end`) VALUES
-(446, 42, 1, 1, '90.0000', '0000-00-00', '0000-00-00'),
+(453, 42, 1, 1, '90.0000', '0000-00-00', '0000-00-00'),
 (439, 30, 1, 2, '90.0000', '0000-00-00', '0000-00-00'),
 (438, 30, 1, 1, '80.0000', '0000-00-00', '0000-00-00');
 
@@ -2388,12 +2395,12 @@ CREATE TABLE IF NOT EXISTS `product_tag` (
   `product_tag_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `tag` varchar(32) COLLATE utf8_bin NOT NULL,
+  `tag` varchar(32) NOT NULL,
   PRIMARY KEY (`product_tag_id`),
   KEY `product_id` (`product_id`),
   KEY `language_id` (`language_id`),
   KEY `tag` (`tag`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=345 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=345 ;
 
 --
 -- 转存表中的数据 `product_tag`
@@ -2415,7 +2422,7 @@ CREATE TABLE IF NOT EXISTS `product_to_category` (
   `product_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   PRIMARY KEY (`product_id`,`category_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `product_to_category`
@@ -2461,7 +2468,7 @@ CREATE TABLE IF NOT EXISTS `product_to_download` (
   `product_id` int(11) NOT NULL,
   `download_id` int(11) NOT NULL,
   PRIMARY KEY (`product_id`,`download_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2474,7 +2481,7 @@ CREATE TABLE IF NOT EXISTS `product_to_layout` (
   `store_id` int(11) NOT NULL,
   `layout_id` int(11) NOT NULL,
   PRIMARY KEY (`product_id`,`store_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2486,7 +2493,7 @@ CREATE TABLE IF NOT EXISTS `product_to_store` (
   `product_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`product_id`,`store_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `product_to_store`
@@ -2524,23 +2531,23 @@ CREATE TABLE IF NOT EXISTS `return` (
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
-  `firstname` varchar(32) COLLATE utf8_bin NOT NULL,
-  `lastname` varchar(32) COLLATE utf8_bin NOT NULL,
-  `email` varchar(96) COLLATE utf8_bin NOT NULL,
-  `telephone` varchar(32) COLLATE utf8_bin NOT NULL,
-  `product` varchar(255) COLLATE utf8_bin NOT NULL,
-  `model` varchar(64) COLLATE utf8_bin NOT NULL,
+  `firstname` varchar(32) NOT NULL,
+  `lastname` varchar(32) NOT NULL,
+  `email` varchar(96) NOT NULL,
+  `telephone` varchar(32) NOT NULL,
+  `product` varchar(255) NOT NULL,
+  `model` varchar(64) NOT NULL,
   `quantity` int(4) NOT NULL,
   `opened` tinyint(1) NOT NULL,
   `return_reason_id` int(11) NOT NULL,
   `return_action_id` int(11) NOT NULL,
   `return_status_id` int(11) NOT NULL,
-  `comment` text COLLATE utf8_bin,
+  `comment` text,
   `date_ordered` date NOT NULL,
   `date_added` datetime NOT NULL,
   `date_modified` datetime NOT NULL,
   PRIMARY KEY (`return_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2551,9 +2558,9 @@ CREATE TABLE IF NOT EXISTS `return` (
 CREATE TABLE IF NOT EXISTS `return_action` (
   `return_action_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `name` varchar(64) NOT NULL DEFAULT '',
   PRIMARY KEY (`return_action_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `return_action`
@@ -2578,10 +2585,10 @@ CREATE TABLE IF NOT EXISTS `return_history` (
   `return_id` int(11) NOT NULL,
   `return_status_id` int(11) NOT NULL,
   `notify` tinyint(1) NOT NULL,
-  `comment` text COLLATE utf8_bin NOT NULL,
+  `comment` text NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`return_history_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2592,9 +2599,9 @@ CREATE TABLE IF NOT EXISTS `return_history` (
 CREATE TABLE IF NOT EXISTS `return_reason` (
   `return_reason_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(128) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `name` varchar(128) NOT NULL DEFAULT '',
   PRIMARY KEY (`return_reason_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `return_reason`
@@ -2621,9 +2628,9 @@ INSERT INTO `return_reason` (`return_reason_id`, `language_id`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `return_status` (
   `return_status_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `name` varchar(32) NOT NULL DEFAULT '',
   PRIMARY KEY (`return_status_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `return_status`
@@ -2632,10 +2639,7 @@ CREATE TABLE IF NOT EXISTS `return_status` (
 INSERT INTO `return_status` (`return_status_id`, `language_id`, `name`) VALUES
 (1, 2, 'Pending'),
 (3, 2, 'Complete'),
-(2, 2, 'Awaiting Products'),
-(1, 3, 'Pending'),
-(3, 3, 'Complete'),
-(2, 3, 'Awaiting Products');
+(2, 2, 'Awaiting Products');
 
 -- --------------------------------------------------------
 
@@ -2647,15 +2651,15 @@ CREATE TABLE IF NOT EXISTS `review` (
   `review_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
-  `author` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `text` text COLLATE utf8_bin NOT NULL,
+  `author` varchar(64) NOT NULL DEFAULT '',
+  `text` text NOT NULL,
   `rating` int(1) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`review_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2666,12 +2670,12 @@ CREATE TABLE IF NOT EXISTS `review` (
 CREATE TABLE IF NOT EXISTS `setting` (
   `setting_id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` int(11) NOT NULL DEFAULT '0',
-  `group` varchar(32) COLLATE utf8_bin NOT NULL,
-  `key` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `value` text COLLATE utf8_bin NOT NULL,
+  `group` varchar(32) NOT NULL,
+  `key` varchar(64) NOT NULL DEFAULT '',
+  `value` text NOT NULL,
   `serialized` tinyint(1) NOT NULL,
   PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5058 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5695 ;
 
 --
 -- 转存表中的数据 `setting`
@@ -2728,98 +2732,98 @@ INSERT INTO `setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `seria
 (1651, 0, 'news', 'news_thumb_height', '80', 0),
 (1652, 0, 'news', 'news_popup_width', '800', 0),
 (4964, 0, 'latest', 'latest_module', 'a:1:{i:0;a:7:{s:5:"limit";s:1:"5";s:11:"image_width";s:2:"80";s:12:"image_height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:14:"content_bottom";s:6:"status";s:1:"1";s:10:"sort_order";s:0:"";}}', 1),
-(5057, 0, 'config', 'config_google_analytics', '&lt;script&gt; \r\n  (function(i,s,o,g,r,a,m){i[''GoogleAnalyticsObject'']=r;i[r]=i[r]||function(){ \r\n  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), \r\n  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) \r\n  })(window,document,''script'',''//www.google-analytics.com/analytics.js'',''ga''); \r\n \r\n  ga(''create'', ''UA-40899042-1'', ''ivy-bride.com''); \r\n  ga(''send'', ''pageview''); \r\n \r\n&lt;/script&gt;', 0),
-(5054, 0, 'config', 'config_error_display', '0', 0),
-(5055, 0, 'config', 'config_error_log', '0', 0),
-(5056, 0, 'config', 'config_error_filename', 'error.txt', 0),
-(5051, 0, 'config', 'config_maintenance', '0', 0),
-(5052, 0, 'config', 'config_encryption', '122c78205ddebdd284abc447c115035f', 0),
-(5053, 0, 'config', 'config_compression', '0', 0),
-(5050, 0, 'config', 'config_seo_url', '0', 0),
-(5049, 0, 'config', 'config_use_ssl', '0', 0),
-(5048, 0, 'config', 'config_fraud_status_id', '7', 0),
-(5047, 0, 'config', 'config_fraud_score', '', 0),
-(5046, 0, 'config', 'config_fraud_key', '', 0),
-(5045, 0, 'config', 'config_fraud_detection', '0', 0),
-(5044, 0, 'config', 'config_alert_emails', '', 0),
-(5043, 0, 'config', 'config_account_mail', '0', 0),
-(5042, 0, 'config', 'config_alert_mail', '0', 0),
-(5041, 0, 'config', 'config_smtp_timeout', '5', 0),
-(5040, 0, 'config', 'config_smtp_port', '25', 0),
-(5039, 0, 'config', 'config_smtp_password', 'oz3661000', 0),
-(5038, 0, 'config', 'config_smtp_username', 'oz_sam@163.com', 0),
-(5037, 0, 'config', 'config_smtp_host', 'smtp.163.com', 0),
-(5036, 0, 'config', 'config_mail_protocol', 'smtp', 0),
-(5035, 0, 'config', 'config_image_cart_height', '47', 0),
-(5034, 0, 'config', 'config_image_cart_width', '47', 0),
-(5033, 0, 'config', 'config_image_wishlist_height', '47', 0),
-(5032, 0, 'config', 'config_image_wishlist_width', '47', 0),
-(5031, 0, 'config', 'config_image_compare_height', '90', 0),
-(5030, 0, 'config', 'config_image_compare_width', '90', 0),
-(5029, 0, 'config', 'config_image_related_height', '80', 0),
-(5028, 0, 'config', 'config_image_related_width', '80', 0),
-(5027, 0, 'config', 'config_image_additional_height', '74', 0),
-(5026, 0, 'config', 'config_image_additional_width', '74', 0),
-(5025, 0, 'config', 'config_image_product_height', '80', 0),
-(5024, 0, 'config', 'config_image_product_width', '80', 0),
-(5023, 0, 'config', 'config_image_popup_height', '500', 0),
-(5022, 0, 'config', 'config_image_popup_width', '500', 0),
-(5021, 0, 'config', 'config_image_thumb_height', '228', 0),
-(5020, 0, 'config', 'config_image_thumb_width', '228', 0),
-(5019, 0, 'config', 'config_image_category_height', '80', 0),
-(5018, 0, 'config', 'config_image_category_width', '80', 0),
-(5017, 0, 'config', 'config_icon', 'data/cart.png', 0),
-(5016, 0, 'config', 'config_log', '', 0),
-(5015, 0, 'config', 'config_return_status_id', '2', 0),
-(5014, 0, 'config', 'config_commission', '5', 0),
-(5013, 0, 'config', 'config_affiliate_id', '4', 0),
-(5012, 0, 'config', 'config_stock_status_id', '5', 0),
-(5011, 0, 'config', 'config_stock_checkout', '0', 0),
-(5010, 0, 'config', 'config_stock_warning', '0', 0),
-(5009, 0, 'config', 'config_stock_display', '0', 0),
-(5008, 0, 'config', 'config_complete_status_id', '5', 0),
-(5007, 0, 'config', 'config_order_status_id', '1', 0),
-(5006, 0, 'config', 'config_invoice_prefix', 'INV-2012-00', 0),
-(5005, 0, 'config', 'config_order_edit', '100', 0),
-(5004, 0, 'config', 'config_checkout_id', '5', 0),
-(5003, 0, 'config', 'config_guest_checkout', '1', 0),
-(5002, 0, 'config', 'config_cart_weight', '0', 0),
-(5001, 0, 'config', 'config_account_id', '3', 0),
-(5000, 0, 'config', 'config_customer_price', '0', 0),
-(4999, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:"1";}', 1),
-(4998, 0, 'config', 'config_customer_group_id', '1', 0),
-(4997, 0, 'config', 'config_customer_online', '0', 0),
-(4996, 0, 'config', 'config_tax_customer', 'shipping', 0),
-(4995, 0, 'config', 'config_tax_default', 'shipping', 0),
-(4994, 0, 'config', 'config_vat', '0', 0),
-(4993, 0, 'config', 'config_tax', '1', 0),
-(4992, 0, 'config', 'config_voucher_max', '1000', 0),
-(4991, 0, 'config', 'config_voucher_min', '1', 0),
-(4990, 0, 'config', 'config_upload_allowed', 'jpg, JPG, jpeg, gif, png, txt', 0),
-(4989, 0, 'config', 'config_download', '0', 0),
-(4988, 0, 'config', 'config_review_status', '0', 0),
-(4987, 0, 'config', 'config_product_count', '0', 0),
-(4986, 0, 'config', 'config_admin_limit', '20', 0),
-(4985, 0, 'config', 'config_catalog_limit', '15', 0),
-(4984, 0, 'config', 'config_weight_class_id', '1', 0),
-(4983, 0, 'config', 'config_length_class_id', '1', 0),
-(4982, 0, 'config', 'config_currency_auto', '1', 0),
-(4981, 0, 'config', 'config_currency', 'TWD', 0),
-(4980, 0, 'config', 'config_admin_language', 'zh_HK', 0),
-(4979, 0, 'config', 'config_language', 'zh_HK', 0),
-(4978, 0, 'config', 'config_zone_id', '3151', 0),
-(4977, 0, 'config', 'config_country_id', '206', 0),
-(4976, 0, 'config', 'config_layout_id', '4', 0),
-(4975, 0, 'config', 'config_template', 'default', 0),
-(4974, 0, 'config', 'config_meta_description', 'My Store', 0),
+(5690, 0, 'config', 'config_compression', '0', 0),
+(5691, 0, 'config', 'config_error_display', '1', 0),
+(5692, 0, 'config', 'config_error_log', '1', 0),
+(5693, 0, 'config', 'config_error_filename', 'error.txt', 0),
+(5694, 0, 'config', 'config_google_analytics', '&lt;script&gt; \r\n // Google Analytics Code\r\n&lt;/script&gt;', 0),
+(5689, 0, 'config', 'config_encryption', '122c78205ddebdd284abc447c115035f', 0),
+(5688, 0, 'config', 'config_maintenance', '0', 0),
+(5687, 0, 'config', 'config_seo_url', '0', 0),
+(5686, 0, 'config', 'config_use_ssl', '0', 0),
+(5685, 0, 'config', 'config_fraud_status_id', '7', 0),
+(5684, 0, 'config', 'config_fraud_score', '', 0),
+(5683, 0, 'config', 'config_fraud_key', '', 0),
+(5682, 0, 'config', 'config_fraud_detection', '0', 0),
+(5681, 0, 'config', 'config_alert_emails', '', 0),
+(5680, 0, 'config', 'config_account_mail', '0', 0),
+(5679, 0, 'config', 'config_alert_mail', '0', 0),
+(5678, 0, 'config', 'config_smtp_timeout', '5', 0),
+(5677, 0, 'config', 'config_smtp_port', '25', 0),
+(5675, 0, 'config', 'config_smtp_username', 'oz_sam@163.com', 0),
+(5676, 0, 'config', 'config_smtp_password', 'oz3661000', 0),
+(5674, 0, 'config', 'config_smtp_host', 'smtp.163.com', 0),
+(5673, 0, 'config', 'config_mail_protocol', 'smtp', 0),
+(5672, 0, 'config', 'config_image_cart_height', '47', 0),
+(5671, 0, 'config', 'config_image_cart_width', '47', 0),
+(5670, 0, 'config', 'config_image_wishlist_height', '47', 0),
+(5669, 0, 'config', 'config_image_wishlist_width', '47', 0),
+(5668, 0, 'config', 'config_image_compare_height', '90', 0),
+(5667, 0, 'config', 'config_image_compare_width', '90', 0),
+(5666, 0, 'config', 'config_image_related_height', '80', 0),
+(5665, 0, 'config', 'config_image_related_width', '80', 0),
+(5664, 0, 'config', 'config_image_additional_height', '74', 0),
+(5663, 0, 'config', 'config_image_additional_width', '74', 0),
+(5662, 0, 'config', 'config_image_product_height', '80', 0),
+(5661, 0, 'config', 'config_image_product_width', '80', 0),
+(5660, 0, 'config', 'config_image_popup_height', '500', 0),
+(5659, 0, 'config', 'config_image_popup_width', '500', 0),
+(5658, 0, 'config', 'config_image_thumb_height', '228', 0),
+(5657, 0, 'config', 'config_image_thumb_width', '228', 0),
+(5656, 0, 'config', 'config_image_category_height', '80', 0),
+(5655, 0, 'config', 'config_image_category_width', '80', 0),
+(5654, 0, 'config', 'config_icon', 'data/cart.png', 0),
+(5653, 0, 'config', 'config_log', '', 0),
+(5652, 0, 'config', 'config_return_status_id', '2', 0),
+(5651, 0, 'config', 'config_commission', '5', 0),
+(5650, 0, 'config', 'config_affiliate_id', '4', 0),
+(5649, 0, 'config', 'config_stock_status_id', '5', 0),
+(5648, 0, 'config', 'config_stock_checkout', '0', 0),
+(5647, 0, 'config', 'config_stock_warning', '0', 0),
+(5646, 0, 'config', 'config_stock_display', '0', 0),
+(5645, 0, 'config', 'config_complete_status_id', '5', 0),
+(5644, 0, 'config', 'config_order_status_id', '1', 0),
+(5643, 0, 'config', 'config_invoice_prefix', 'INV-2012-00', 0),
+(5642, 0, 'config', 'config_order_edit', '100', 0),
+(5641, 0, 'config', 'config_checkout_id', '5', 0),
+(5640, 0, 'config', 'config_guest_checkout', '1', 0),
+(5639, 0, 'config', 'config_cart_weight', '0', 0),
+(5638, 0, 'config', 'config_account_id', '3', 0),
+(5637, 0, 'config', 'config_customer_price', '0', 0),
+(5636, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:"1";}', 1),
+(5635, 0, 'config', 'config_customer_group_id', '1', 0),
+(5634, 0, 'config', 'config_customer_online', '0', 0),
+(5633, 0, 'config', 'config_tax_customer', 'shipping', 0),
+(5632, 0, 'config', 'config_tax_default', 'shipping', 0),
+(5631, 0, 'config', 'config_vat', '0', 0),
+(5630, 0, 'config', 'config_tax', '1', 0),
+(5629, 0, 'config', 'config_voucher_max', '1000', 0),
+(5628, 0, 'config', 'config_voucher_min', '1', 0),
+(5627, 0, 'config', 'config_upload_allowed', 'jpg, JPG, jpeg, gif, png, txt', 0),
+(5626, 0, 'config', 'config_download', '0', 0),
+(5625, 0, 'config', 'config_review_status', '0', 0),
+(5624, 0, 'config', 'config_product_count', '0', 0),
+(5623, 0, 'config', 'config_admin_limit', '20', 0),
+(5622, 0, 'config', 'config_catalog_limit', '15', 0),
+(5621, 0, 'config', 'config_weight_class_id', '1', 0),
+(5620, 0, 'config', 'config_length_class_id', '1', 0),
+(5619, 0, 'config', 'config_currency_auto', '1', 0),
+(5618, 0, 'config', 'config_currency', 'TWD', 0),
+(5617, 0, 'config', 'config_admin_language', 'zh_HK', 0),
+(5616, 0, 'config', 'config_language', 'zh_HK', 0),
+(5615, 0, 'config', 'config_zone_id', '3973', 0),
+(5614, 0, 'config', 'config_country_id', '206', 0),
+(5613, 0, 'config', 'config_layout_id', '4', 0),
+(5612, 0, 'config', 'config_template', 'default', 0),
+(5611, 0, 'config', 'config_meta_description', 'My Store', 0),
 (2181, 0, 'banner', 'banner_module', 'a:1:{i:0;a:7:{s:9:"banner_id";s:1:"6";s:5:"width";s:3:"182";s:6:"height";s:3:"182";s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"3";}}', 1),
-(4973, 0, 'config', 'config_title', 'Your Store', 0),
-(4972, 0, 'config', 'config_fax', '', 0),
-(4971, 0, 'config', 'config_telephone', '123456789', 0),
-(4970, 0, 'config', 'config_email', 'sam@ozchamp.net', 0),
-(4969, 0, 'config', 'config_address', 'Address 1', 0),
-(4968, 0, 'config', 'config_owner', 'Your Name', 0),
-(4967, 0, 'config', 'config_name', 'Your Store', 0);
+(5610, 0, 'config', 'config_title', 'Your Store', 0),
+(5609, 0, 'config', 'config_fax', '', 0),
+(5608, 0, 'config', 'config_telephone', '123456789', 0),
+(5607, 0, 'config', 'config_email', 'sam@ozchamp.net', 0),
+(5606, 0, 'config', 'config_address', 'Address 1', 0),
+(5605, 0, 'config', 'config_owner', 'Your Name', 0),
+(5604, 0, 'config', 'config_name', 'Your Store', 0);
 
 -- --------------------------------------------------------
 
@@ -2830,9 +2834,9 @@ INSERT INTO `setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `seria
 CREATE TABLE IF NOT EXISTS `stock_status` (
   `stock_status_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
-  `name` varchar(32) COLLATE utf8_bin NOT NULL,
+  `name` varchar(32) NOT NULL,
   PRIMARY KEY (`stock_status_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `stock_status`
@@ -2842,11 +2846,7 @@ INSERT INTO `stock_status` (`stock_status_id`, `language_id`, `name`) VALUES
 (7, 2, 'In Stock'),
 (8, 2, 'Pre-Order'),
 (5, 2, 'Out Of Stock'),
-(6, 2, '2 - 3 Days'),
-(7, 3, 'In Stock'),
-(8, 3, 'Pre-Order'),
-(5, 3, 'Out Of Stock'),
-(6, 3, '2 - 3 Days');
+(6, 2, '2 - 3 Days');
 
 -- --------------------------------------------------------
 
@@ -2856,11 +2856,11 @@ INSERT INTO `stock_status` (`stock_status_id`, `language_id`, `name`) VALUES
 
 CREATE TABLE IF NOT EXISTS `store` (
   `store_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) COLLATE utf8_bin NOT NULL,
-  `url` varchar(255) COLLATE utf8_bin NOT NULL,
-  `ssl` varchar(255) COLLATE utf8_bin NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `ssl` varchar(255) NOT NULL,
   PRIMARY KEY (`store_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -2870,12 +2870,12 @@ CREATE TABLE IF NOT EXISTS `store` (
 
 CREATE TABLE IF NOT EXISTS `tax_class` (
   `tax_class_id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `description` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `title` varchar(32) NOT NULL DEFAULT '',
+  `description` varchar(255) NOT NULL DEFAULT '',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`tax_class_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- 转存表中的数据 `tax_class`
@@ -2894,13 +2894,13 @@ INSERT INTO `tax_class` (`tax_class_id`, `title`, `description`, `date_added`, `
 CREATE TABLE IF NOT EXISTS `tax_rate` (
   `tax_rate_id` int(11) NOT NULL AUTO_INCREMENT,
   `geo_zone_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(32) COLLATE utf8_bin NOT NULL,
+  `name` varchar(32) NOT NULL,
   `rate` decimal(15,4) NOT NULL DEFAULT '0.0000',
-  `type` char(1) COLLATE utf8_bin NOT NULL,
+  `type` char(1) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`tax_rate_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=88 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=88 ;
 
 --
 -- 转存表中的数据 `tax_rate`
@@ -2920,7 +2920,7 @@ CREATE TABLE IF NOT EXISTS `tax_rate_to_customer_group` (
   `tax_rate_id` int(11) NOT NULL,
   `customer_group_id` int(11) NOT NULL,
   PRIMARY KEY (`tax_rate_id`,`customer_group_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `tax_rate_to_customer_group`
@@ -2940,10 +2940,10 @@ CREATE TABLE IF NOT EXISTS `tax_rule` (
   `tax_rule_id` int(11) NOT NULL AUTO_INCREMENT,
   `tax_class_id` int(11) NOT NULL,
   `tax_rate_id` int(11) NOT NULL,
-  `based` varchar(10) COLLATE utf8_bin NOT NULL,
+  `based` varchar(10) NOT NULL,
   `priority` int(5) NOT NULL DEFAULT '1',
   PRIMARY KEY (`tax_rule_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=129 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=129 ;
 
 --
 -- 转存表中的数据 `tax_rule`
@@ -2964,388 +2964,387 @@ INSERT INTO `tax_rule` (`tax_rule_id`, `tax_class_id`, `tax_rate_id`, `based`, `
 CREATE TABLE IF NOT EXISTS `tw_zone` (
   `county_id` int(11) NOT NULL AUTO_INCREMENT,
   `zone_id` int(11) NOT NULL,
-  `sort_order` int(11) NOT NULL DEFAULT '0',
-  `postcode` varchar(32) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `name` varchar(128) CHARACTER SET utf8 NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `sort_order` int(11) NOT NULL,
+  `postcode` varchar(32) NOT NULL DEFAULT '',
+  `name` varchar(128) NOT NULL,
+  `status` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`county_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=377 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='郵區號' AUTO_INCREMENT=370 ;
 
 --
 -- 转存表中的数据 `tw_zone`
 --
 
 INSERT INTO `tw_zone` (`county_id`, `zone_id`, `sort_order`, `postcode`, `name`, `status`) VALUES
-(1, 3970, 1, '205', '暖暖區', 1),
-(2, 3970, 2, '206', '七堵區', 1),
-(3, 3970, 3, '203', '中山區', 1),
-(4, 3970, 4, '204', '安樂區', 1),
-(5, 3970, 5, '200', '仁愛區', 1),
-(6, 3970, 6, '201', '信義區', 1),
-(7, 3970, 7, '202', '中正區', 1),
-(8, 3971, 1, '238', '樹林區', 1),
-(9, 3971, 2, '221', '汐止區', 1),
-(10, 3971, 3, '247', '蘆洲區', 1),
-(11, 3971, 4, '236', '土城區', 1),
-(12, 3971, 5, '233', '烏來區', 1),
-(13, 3971, 6, '207', '萬里區', 1),
-(14, 3971, 7, '208', '金山區', 1),
-(15, 3971, 8, '228', '貢寮區', 1),
-(16, 3971, 9, '227', '雙溪區', 1),
-(17, 3971, 10, '226', '平溪區', 1),
-(18, 3971, 11, '249', '八里區', 1),
-(19, 3971, 12, '253', '石門區', 1),
-(20, 3971, 13, '252', '三芝區', 1),
-(21, 3971, 14, '232', '坪林區', 1),
-(22, 3971, 15, '223', '石碇區', 1),
-(23, 3971, 16, '222', '深坑區', 1),
-(24, 3971, 17, '244', '林口區', 1),
-(25, 3971, 18, '243', '泰山區', 1),
-(26, 3971, 19, '248', '五股區', 1),
-(27, 3971, 20, '224', '瑞芳區', 1),
-(28, 3971, 21, '251', '淡水區', 1),
-(29, 3971, 22, '237', '三峽區', 1),
-(30, 3971, 23, '239', '鶯歌區', 1),
-(31, 3971, 24, '231', '新店區', 1),
-(32, 3971, 25, '242', '新莊區', 1),
-(33, 3971, 26, '235', '中和區', 1),
-(34, 3971, 27, '234', '永和區', 1),
-(35, 3971, 28, '241', '三重區', 1),
-(36, 3971, 29, '220', '板橋區', 1),
-(37, 3972, 1, '116', '文山區', 1),
-(38, 3973, 1, '334', '八德市', 1),
-(39, 3974, 1, '302', '竹北市', 1),
-(40, 3975, 1, '', '香山區', 1),
-(41, 3977, 1, '411', '太平市', 1),
-(42, 3976, 1, '365', '泰安鄉', 1),
-(43, 3977, 2, '412', '大里市', 1),
-(44, 3972, 2, '108', '萬華區', 1),
-(45, 3972, 3, '100', ' 中正區', 1),
-(46, 3972, 4, '110', '信義區', 1),
-(48, 3972, 6, '111', '士林區 ', 1),
-(49, 3972, 7, '114', '內湖區', 1),
-(50, 3972, 8, '115', '南港區', 1),
-(371, 3972, 1, '104', '中山區', 1),
-(52, 3972, 10, '103', '大同區', 1),
-(53, 3972, 11, '106', '大安區', 1),
-(54, 3972, 12, '105', '松山區', 1),
-(55, 3973, 2, '324', '平鎮市 ', 1),
-(56, 3973, 3, '336', '復興鄉', 1),
-(57, 3973, 4, '328', ' 觀音鄉', 1),
-(58, 3973, 5, '327', ' 新屋鄉', 1),
-(59, 3973, 6, '325', '龍潭鄉', 1),
-(60, 3973, 7, '333', '龜山鄉', 1),
-(61, 3973, 8, '337', '大園鄉', 1),
-(62, 3973, 9, '338', '蘆竹鄉', 1),
-(63, 3973, 11, '326', '楊梅鎮', 1),
-(64, 3973, 12, '335', '大溪鎮', 1),
-(65, 3973, 13, '320', '中壢市', 1),
-(66, 3973, 14, '330', '桃園市 ', 1),
-(67, 3974, 2, '311', '五峰鄉', 1),
-(68, 3974, 3, '313', ' 尖石鄉 ', 1),
-(69, 3974, 4, '315', ' 峨眉鄉', 1),
-(70, 3974, 5, '314', '北埔鄉 ', 1),
-(71, 3974, 6, '308', ' 寶山鄉', 1),
-(72, 3974, 7, '307', ' 芎林鄉', 1),
-(73, 3974, 8, '304', '新豐鄉', 1),
-(74, 3974, 9, '312', '橫山鄉 ', 1),
-(75, 3974, 10, '303', '湖口鄉  ', 1),
-(76, 3974, 11, '310', '竹東鎮', 1),
-(77, 3974, 12, '305', '新埔鎮 ', 1),
-(78, 3974, 13, '306', '關西鎮', 1),
-(79, 3976, 2, '354', '獅潭鄉', 1),
-(80, 3976, 3, '352', ' 三灣鄉', 1),
-(81, 3976, 4, '361', '造橋鄉', 1),
-(82, 3976, 5, '368', '西湖鄉 ', 1),
-(83, 3976, 6, '367', '三義鄉', 1),
-(84, 3976, 7, '362', '頭屋鄉', 1),
-(85, 3976, 8, '353', '南庄鄉 ', 1),
-(86, 3976, 9, '366', ' 銅鑼鄉 ', 1),
-(87, 3976, 10, '363', '公館鄉 ', 1),
-(88, 3976, 11, '364', '大湖鄉', 1),
-(89, 3976, 12, '369', '卓蘭鎮 ', 1),
-(90, 3976, 13, '356', '後龍鎮', 1),
-(91, 3976, 14, '351', '頭份鎮', 1),
-(92, 3976, 15, '350', '竹南鎮', 1),
-(93, 3976, 16, '357', '通霄鎮', 1),
-(94, 3976, 17, '358', '苑裡鎮', 1),
-(95, 3976, 18, '360', '苗栗市', 1),
-(96, 3975, 2, '', '北區', 1),
-(97, 3975, 3, '', '東區', 1),
-(98, 3977, 3, '424', '和平區 ', 1),
-(99, 3977, 4, '413', '霧峰區 ', 1),
-(100, 3977, 5, '434', '龍井區 ', 1),
-(101, 3977, 6, '432', '大肚區 ', 1),
-(102, 3977, 7, '414', '烏日區 ', 1),
-(103, 3977, 8, '439', '大安區 ', 1),
-(104, 3977, 9, '438', '外埔區 ', 1),
-(105, 3977, 10, '422', '石岡區 ', 1),
-(106, 3977, 11, '426', '新社區 ', 1),
-(107, 3977, 12, '428', '大雅區 ', 1),
-(108, 3977, 13, '427', '潭子區 ', 1),
-(109, 3977, 14, '429', '神岡區 ', 1),
-(110, 3977, 20, '421', '后里區 ', 1),
-(111, 3977, 21, '435', '梧棲區 ', 1),
-(112, 3977, 22, '433', '沙鹿區 ', 1),
-(113, 3977, 22, '436', '清水區 ', 1),
-(114, 3977, 23, '437', '大甲區 ', 1),
-(115, 3977, 24, '423', '東勢區 ', 1),
-(116, 3977, 25, '420', '豐原區 ', 1),
-(117, 3977, 1, '406', '北屯區', 1),
-(118, 3977, 2, '408', '南屯區', 1),
-(119, 3977, 3, '407', '西屯區', 1),
-(120, 3977, 4, '404', '北區', 1),
-(121, 3977, 5, '402', '南區 ', 1),
-(122, 3977, 6, '403', '西區', 1),
-(123, 3977, 7, '401', '東區', 1),
-(124, 3977, 8, '400', '中區 ', 1),
-(125, 3979, 1, '524', '溪州鄉 ', 1),
-(126, 3979, 2, '525', '竹塘鄉 ', 1),
-(127, 3979, 3, '527', '大城鄉', 1),
-(128, 3979, 4, '528', '芳苑鄉', 1),
-(129, 3979, 5, '523', '埤頭鄉 ', 1),
-(130, 3979, 6, '522', '田尾鄉', 1),
-(131, 3979, 7, '530', '二水鄉', 1),
-(132, 3979, 8, '511', '社頭鄉 ', 1),
-(133, 3979, 9, '512', '永靖鄉', 1),
-(134, 3979, 10, '513', '埔心鄉', 1),
-(135, 3979, 11, '516', '埔鹽鄉 ', 1),
-(136, 3979, 12, '515', '大村鄉 ', 1),
-(137, 3979, 13, '502', '芬園鄉', 1),
-(138, 3979, 14, '503', '花壇鄉', 1),
-(139, 3979, 15, '504', '秀水鄉 ', 1),
-(140, 3979, 16, '506', '福興鄉', 1),
-(141, 3979, 17, '509', '伸港鄉 ', 1),
-(142, 3979, 18, '507', '線西鄉', 1),
-(143, 3979, 19, '526', '二林鎮', 1),
-(144, 3979, 20, '520', ' 田中鎮', 1),
-(145, 3979, 21, '514', '溪湖鎮', 1),
-(146, 3979, 22, '510', '員林鎮', 1),
-(147, 3979, 23, '521', '北斗鎮 ', 1),
-(148, 3979, 24, '508', '和美鎮 ', 1),
-(149, 3979, 25, '505', '鹿港鎮', 1),
-(150, 3979, 26, '500', '彰化市', 1),
-(151, 3980, 1, '546', ' 仁愛鄉 ', 1),
-(152, 3980, 2, '556', '信義鄉 ', 1),
-(153, 3980, 3, '553', ' 水里鄉', 1),
-(154, 3980, 4, '544', '國姓鄉', 1),
-(155, 3980, 5, '555', ' 魚池鄉 ', 1),
-(156, 3980, 6, '541', ' 中寮鄉', 1),
-(157, 3980, 7, '558', ' 鹿谷鄉', 1),
-(158, 3980, 8, '551', '名間鄉 ', 1),
-(159, 3980, 9, '552', '集集鎮', 1),
-(161, 3980, 11, '542', '草屯鎮', 1),
-(162, 3980, 12, '545', '埔里鎮 ', 1),
-(163, 3980, 13, '540', '南投市 ', 1),
-(164, 3981, 1, '652', '水林鄉', 1),
-(165, 3981, 2, '653', '口湖鄉 ', 1),
-(166, 3981, 3, '654', '四湖鄉', 1),
-(167, 3981, 4, '655', ' 元長鄉 ', 1),
-(168, 3981, 5, '636', ' 臺西鄉 ', 1),
-(169, 3981, 6, '634', ' 褒忠鄉', 1),
-(170, 3981, 7, '635', '東勢鄉', 1),
-(171, 3981, 8, '638', '麥寮鄉', 1),
-(172, 3981, 9, '637', '崙背鄉', 1),
-(173, 3981, 10, '649', '二崙鄉', 1),
-(174, 3981, 11, '643', '林內鄉', 1),
-(175, 3981, 12, '647', '莿桐鄉', 1),
-(176, 3981, 13, '631', '大埤鄉', 1),
-(177, 3981, 14, '646', ' 古坑鄉 ', 1),
-(178, 3981, 15, '651', '北港鎮', 1),
-(179, 3981, 16, '633', '土庫鎮', 1),
-(180, 3981, 17, '648', '西螺鎮', 1),
-(181, 3981, 18, '632', '虎尾鎮 ', 1),
-(182, 3981, 19, '630', '斗南鎮', 1),
-(183, 3981, 20, '640', '斗六市 ', 1),
-(184, 3982, 1, '613', '朴子市', 1),
-(185, 3982, 2, '612', '太保市', 1),
-(186, 3982, 3, '605', '阿里山鄉', 1),
-(187, 3982, 4, '607', '大埔鄉 ', 1),
-(188, 3982, 5, '602', '番路鄉 ', 1),
-(189, 3982, 6, '603', '梅山鄉', 1),
-(190, 3982, 7, '604', '竹崎鄉 ', 1),
-(191, 3982, 8, '606', '中埔鄉 ', 1),
-(192, 3982, 9, '608', '水上鄉 ', 1),
-(193, 3982, 12, '611', '鹿草鄉 ', 1),
-(194, 3982, 13, '624', '義竹鄉', 1),
-(195, 3982, 14, '614', ' 東石鄉', 1),
-(196, 3982, 15, '615', '六腳鄉', 1),
-(197, 3982, 16, '616', '新港鄉 ', 1),
-(198, 3982, 17, '623', '溪口鄉  ', 1),
-(199, 3982, 18, '621', '民雄鄉', 1),
-(200, 3982, 19, '622', '大林鎮 ', 1),
-(201, 3982, 20, '625', '布袋鎮', 1),
-(202, 3983, 1, '', '西區', 1),
-(203, 3983, 2, '', '東區 ', 1),
-(204, 3984, 1, '710', '永康區 ', 1),
-(205, 3984, 2, '719', '龍崎區 ', 1),
-(206, 3984, 3, '718', '關廟區 ', 1),
-(207, 3984, 4, '711', '歸仁區 ', 1),
-(208, 3984, 5, '717', '仁德區 ', 1),
-(209, 3984, 6, '713', '左鎮區 ', 1),
-(210, 3984, 7, '716', ' 南化區 ', 1),
-(211, 3984, 8, '715', '楠西區 ', 1),
-(212, 3984, 9, '714', ' 玉井區 ', 1),
-(213, 3984, 10, '743', '山上區 ', 1),
-(214, 3984, 11, '745', ' 安定區 ', 1),
-(215, 3984, 12, '744', '新市區 ', 1),
-(216, 3984, 13, '727', '北門區 ', 1),
-(217, 3984, 14, '725', '將軍區 ', 1),
-(218, 3984, 15, '724', '七股區 ', 1),
-(219, 3984, 16, '723', '西港區 ', 1),
-(220, 3984, 17, '742', '大內區 ', 1),
-(221, 3984, 18, '720', '官田區 ', 1),
-(222, 3984, 19, '734', '六甲區 ', 1),
-(223, 3984, 20, '735', '下營區 ', 1),
-(224, 3984, 21, '733', '東山區 ', 1),
-(225, 3984, 22, '731', '後壁區 ', 1),
-(226, 3984, 23, '736', '柳營區 ', 1),
-(227, 3984, 24, '726', '學甲區 ', 1),
-(228, 3984, 25, '741', '善化區 ', 1),
-(229, 3984, 26, '712', '新化區 ', 1),
-(230, 3984, 27, '722', '佳里區 ', 1),
-(231, 3984, 28, '721', '麻豆區 ', 1),
-(232, 3984, 29, '732', '白河區 ', 1),
-(233, 3984, 30, '737', '鹽水區 ', 1),
-(234, 3984, 31, '730', '新營區 ', 1),
-(235, 3984, 1, '709', '安南區', 1),
-(236, 3984, 2, '708', '安平區', 1),
-(237, 3984, 3, '704', '北區', 1),
-(372, 3986, 12, '817', '東沙', 1),
-(239, 3984, 5, '702', '南區', 1),
-(240, 3984, 6, '700', '中西區', 1),
-(241, 3984, 7, '701', '東區 ', 1),
-(242, 3986, 1, '849', '三民區 ', 1),
-(243, 3986, 2, '848', '桃源區 ', 1),
-(244, 3986, 3, '851', '茂林區 ', 1),
-(245, 3986, 4, '845', '內門區 ', 1),
-(246, 3986, 5, '846', '杉林區 ', 1),
-(247, 3986, 6, '847', '甲仙區 ', 1),
-(248, 3986, 7, '844', '六龜區 ', 1),
-(249, 3986, 8, '826', '梓官區 ', 1),
-(250, 3986, 9, '827', '彌陀區 ', 1),
-(251, 3986, 10, '828', '永安區 ', 1),
-(252, 3986, 11, '852', '茄萣區 ', 1),
-(253, 3986, 12, '829', '湖內區 ', 1),
-(254, 3986, 13, '821', '路竹區 ', 1),
-(255, 3986, 14, '822', '阿蓮區 ', 1),
-(256, 3986, 15, '823', '田寮區 ', 1),
-(257, 3986, 16, '824', '燕巢區 ', 1),
-(258, 3986, 17, '825', '橋頭區 ', 1),
-(259, 3986, 18, '833', '鳥松區 ', 1),
-(260, 3986, 19, '815', '大社區 ', 1),
-(261, 3986, 20, '814', '仁武區 ', 1),
-(262, 3986, 21, '840', '大樹區 ', 1),
-(263, 3986, 22, '831', '大寮區 ', 1),
-(264, 3986, 23, '832', '林園區 ', 1),
-(265, 3986, 24, '843', '美濃區 ', 1),
-(266, 3986, 25, '842', '旗山區 ', 1),
-(267, 3986, 26, '820', '岡山區 ', 1),
-(268, 3986, 27, '830', '鳳山區 ', 1),
-(269, 3986, 1, '812', '小港區', 1),
-(270, 3986, 2, '811', '楠梓區', 1),
-(271, 3986, 3, '813', '左營區', 1),
-(272, 3986, 4, '804', '鼓山區', 1),
-(273, 3986, 5, '803', '鹽埕區', 1),
-(275, 3986, 7, '801', '前金區', 1),
-(276, 3986, 8, '800', '新興區', 1),
-(277, 3986, 9, '806', '前鎮區', 1),
-(278, 3986, 10, '802', '苓雅區', 1),
-(279, 3986, 11, '805', '旗津區', 1),
-(280, 3988, 1, '901', '三地門鄉 ', 1),
-(281, 3988, 2, '945', '牡丹鄉', 1),
-(282, 3988, 3, '943', '獅子鄉 ', 1),
-(283, 3988, 4, '942', '春日鄉', 1),
-(284, 3988, 5, '922', '來義鄉', 1),
-(285, 3988, 6, '921', '泰武鄉', 1),
-(286, 3988, 7, '903', '瑪家鄉 ', 1),
-(287, 3988, 8, '902', '霧臺鄉 ', 1),
-(288, 3988, 9, '941', '枋山鄉', 1),
-(289, 3988, 10, '947', '滿州鄉 ', 1),
-(290, 3988, 11, '944', '車城鄉', 1),
-(291, 3988, 12, '929', '琉球鄉', 1),
-(292, 3988, 13, '931', '佳冬鄉', 1),
-(293, 3988, 14, '926', '南州鄉', 1),
-(294, 3988, 15, '927', '林邊鄉 ', 1),
-(295, 3988, 16, '924', '崁頂鄉 ', 1),
-(296, 3988, 17, '932', '新園鄉', 1),
-(297, 3988, 18, '940', '枋寮鄉 ', 1),
-(298, 3988, 19, '925', '新埤鄉', 1),
-(299, 3988, 20, '911', '竹田鄉', 1),
-(300, 3988, 21, '912', '內埔鄉 ', 1),
-(301, 3988, 22, '923', '萬巒鄉', 1),
-(302, 3988, 23, '906', '高樹鄉', 1),
-(303, 3988, 24, '907', '鹽埔鄉', 1),
-(304, 3988, 25, '905', '里港鄉', 1),
-(305, 3988, 26, '904', '九如鄉', 1),
-(306, 3988, 27, '909', '麟洛鄉 ', 1),
-(307, 3988, 28, '908', '長治鄉 ', 1),
-(308, 3988, 29, '913', '萬丹鄉', 1),
-(309, 3988, 30, '946', '恆春鎮 ', 1),
-(310, 3988, 31, '928', '東港鎮', 1),
-(311, 3988, 32, '920', '潮州鎮 ', 1),
-(312, 3988, 33, '900', '屏東市 ', 1),
-(313, 3989, 1, '272', '南澳鄉', 1),
-(314, 3989, 2, '267', '大同鄉', 1),
-(315, 3989, 3, '266', '三星鄉 ', 1),
-(316, 3989, 4, '268', '五結鄉', 1),
-(317, 3989, 5, '269', '冬山鄉', 1),
-(318, 3989, 6, '264', '員山鄉', 1),
-(319, 3989, 7, '263', '壯圍鄉 ', 1),
-(320, 3989, 8, '262', '礁溪鄉', 1),
-(321, 3989, 9, '261', '頭城鎮', 1),
-(322, 3989, 10, '270', '蘇澳鎮 ', 1),
-(323, 3989, 11, '265', '羅東鎮 ', 1),
-(324, 3989, 12, '260', '宜蘭市', 1),
-(325, 3990, 1, '979', '萬榮鄉', 1),
-(326, 3990, 2, '982', '卓溪鄉', 1),
-(327, 3990, 3, '972', '秀林鄉', 1),
-(328, 3990, 4, '983', '富里鄉 ', 1),
-(329, 3990, 5, '978', '瑞穗鄉  ', 1),
-(330, 3990, 6, '977', '豐濱鄉', 1),
-(331, 3990, 7, '976', '光復鄉', 1),
-(332, 3990, 8, '974', '壽豐鄉 ', 1),
-(333, 3990, 9, '973', '吉安鄉 ', 1),
-(334, 3990, 10, '971', '新城鄉', 1),
-(335, 3990, 11, '981', '玉里鎮 ', 1),
-(336, 3990, 12, '975', '鳳林鎮', 1),
-(337, 3990, 13, '970', '花蓮市', 1),
-(338, 3991, 1, '952', '蘭嶼鄉', 1),
-(339, 3991, 2, '964', '金峰鄉', 1),
-(340, 3991, 3, '966', '達仁鄉', 1),
-(341, 3991, 4, '957', '海端鄉', 1),
-(342, 3991, 5, '953', '延平鄉 ', 1),
-(343, 3991, 6, '951', '綠島鄉', 1),
-(344, 3991, 7, '958', '池上鄉', 1),
-(345, 3991, 8, '955', '鹿野鄉 ', 1),
-(346, 3991, 9, '962', '長濱鄉 ', 1),
-(347, 3991, 10, '959', '東河鄉', 1),
-(348, 3991, 11, '963', '太麻里鄉 ', 1),
-(349, 3991, 12, '965', '大武鄉 ', 1),
-(350, 3991, 13, '954', '卑南鄉 ', 1),
-(351, 3991, 14, '956', '關山鎮', 1),
-(352, 3991, 15, '961', '成功鎮  ', 1),
-(353, 3991, 17, '950', '臺東市', 1),
-(354, 3992, 1, '883', '七美鄉', 1),
-(355, 3992, 2, '882', '望安鄉', 1),
-(356, 3992, 3, '881', '西嶼鄉 ', 1),
-(357, 3992, 4, '884', '白沙鄉 ', 1),
-(358, 3992, 5, '885', '湖西鄉 ', 1),
-(359, 3992, 6, '880', '馬公市', 1),
-(360, 3993, 1, '896', '烏坵鄉', 1),
-(361, 3993, 2, '894', '烈嶼鄉 ', 1),
-(362, 3993, 3, '892', '金寧鄉', 1),
-(363, 3993, 4, '890', '金沙鎮', 1),
-(364, 3993, 5, '891', '金湖鎮', 1),
-(365, 3993, 6, '893', '金城鎮', 1),
-(366, 3994, 1, '212', '東引鄉', 1),
-(367, 3994, 2, '211', '莒光鄉 ', 1),
-(368, 3994, 3, '210', '北竿鄉 ', 1),
-(369, 3994, 4, '209', '南竿鄉 ', 1),
-(370, 3989, 13, '290', '釣魚台', 1),
-(373, 3986, 13, '819', '南沙', 1),
-(375, 3972, 12, '112', '北投區', 1),
-(376, 3980, 14, '557', '竹山鎮', 1);
+(1, 3970, 1, '205', '暖暖區', '1'),
+(2, 3970, 2, '206', '七堵區', '1'),
+(3, 3970, 3, '203', '中山區', '1'),
+(4, 3970, 4, '204', '安樂區', '1'),
+(5, 3970, 5, '200', '仁愛區', '1'),
+(6, 3970, 6, '201', '信義區', '1'),
+(7, 3970, 7, '202', '中正區', '1'),
+(8, 3971, 1, '238', '樹林區', '1'),
+(9, 3971, 2, '221', '汐止區', '1'),
+(10, 3971, 3, '247', '蘆洲區', '1'),
+(11, 3971, 4, '236', '土城區', '1'),
+(12, 3971, 5, '233', '烏來區', '1'),
+(13, 3971, 6, '207', '萬里區', '1'),
+(14, 3971, 7, '208', '金山區', '1'),
+(15, 3971, 8, '228', '貢寮區', '1'),
+(16, 3971, 9, '227', '雙溪區', '1'),
+(17, 3971, 10, '226', '平溪區', '1'),
+(18, 3971, 11, '249', '八里區', '1'),
+(19, 3971, 12, '253', '石門區', '1'),
+(20, 3971, 13, '252', '三芝區', '1'),
+(21, 3971, 14, '232', '坪林區', '1'),
+(22, 3971, 15, '223', '石碇區', '1'),
+(23, 3971, 16, '222', '深坑區', '1'),
+(24, 3971, 17, '244', '林口區', '1'),
+(25, 3971, 18, '243', '泰山區', '1'),
+(26, 3971, 19, '248', '五股區', '1'),
+(27, 3971, 20, '224', '瑞芳區', '1'),
+(28, 3971, 21, '251', '淡水區', '1'),
+(29, 3971, 22, '237', '三峽區', '1'),
+(30, 3971, 23, '239', '鶯歌區', '1'),
+(31, 3971, 24, '231', '新店區', '1'),
+(32, 3971, 25, '242', '新莊區', '1'),
+(33, 3971, 26, '235', '中和區', '1'),
+(34, 3971, 27, '234', '永和區', '1'),
+(35, 3971, 28, '241', '三重區', '1'),
+(36, 3971, 29, '220', '板橋區', '1'),
+(37, 3972, 1, '116', '文山區', '1'),
+(38, 3973, 1, '334', '八德市', '1'),
+(39, 3974, 1, '302', '竹北市', '1'),
+(40, 3975, 1, '', '香山區', '1'),
+(41, 3977, 1, '411', '太平市', '1'),
+(42, 3976, 1, '365', '泰安鄉', '1'),
+(43, 3977, 2, '412', '大里市', '1'),
+(44, 3972, 2, '108', '萬華區', '1'),
+(45, 3972, 3, '100', ' 中正區', '1'),
+(46, 3972, 4, '110', '信義區', '1'),
+(47, 3972, 6, '111', '士林區 ', '1'),
+(48, 3972, 7, '114', '內湖區', '1'),
+(49, 3972, 8, '115', '南港區', '1'),
+(50, 3972, 10, '103', '大同區', '1'),
+(51, 3972, 11, '106', '大安區', '1'),
+(52, 3972, 12, '105', '松山區', '1'),
+(53, 3973, 2, '324', '平鎮市 ', '1'),
+(54, 3973, 3, '336', '復興鄉', '1'),
+(55, 3973, 4, '328', ' 觀音鄉', '1'),
+(56, 3973, 5, '327', ' 新屋鄉', '1'),
+(57, 3973, 6, '325', '龍潭鄉', '1'),
+(58, 3973, 7, '333', '龜山鄉', '1'),
+(59, 3973, 8, '337', '大園鄉', '1'),
+(60, 3973, 9, '338', '蘆竹鄉', '1'),
+(61, 3973, 11, '326', '楊梅鎮', '1'),
+(62, 3973, 12, '335', '大溪鎮', '1'),
+(63, 3973, 13, '320', '中壢市', '1'),
+(64, 3973, 14, '330', '桃園市 ', '1'),
+(65, 3974, 2, '311', '五峰鄉', '1'),
+(66, 3974, 3, '313', ' 尖石鄉 ', '1'),
+(67, 3974, 4, '315', ' 峨眉鄉', '1'),
+(68, 3974, 5, '314', '北埔鄉 ', '1'),
+(69, 3974, 6, '308', ' 寶山鄉', '1'),
+(70, 3974, 7, '307', ' 芎林鄉', '1'),
+(71, 3974, 8, '304', '新豐鄉', '1'),
+(72, 3974, 9, '312', '橫山鄉 ', '1'),
+(73, 3974, 10, '303', '湖口鄉  ', '1'),
+(74, 3974, 11, '310', '竹東鎮', '1'),
+(75, 3974, 12, '305', '新埔鎮 ', '1'),
+(76, 3974, 13, '306', '關西鎮', '1'),
+(77, 3976, 2, '354', '獅潭鄉', '1'),
+(78, 3976, 3, '352', ' 三灣鄉', '1'),
+(79, 3976, 4, '361', '造橋鄉', '1'),
+(80, 3976, 5, '368', '西湖鄉 ', '1'),
+(81, 3976, 6, '367', '三義鄉', '1'),
+(82, 3976, 7, '362', '頭屋鄉', '1'),
+(83, 3976, 8, '353', '南庄鄉 ', '1'),
+(84, 3976, 9, '366', ' 銅鑼鄉 ', '1'),
+(85, 3976, 10, '363', '公館鄉 ', '1'),
+(86, 3976, 11, '364', '大湖鄉', '1'),
+(87, 3976, 12, '369', '卓蘭鎮 ', '1'),
+(88, 3976, 13, '356', '後龍鎮', '1'),
+(89, 3976, 14, '351', '頭份鎮', '1'),
+(90, 3976, 15, '350', '竹南鎮', '1'),
+(91, 3976, 16, '357', '通霄鎮', '1'),
+(92, 3976, 17, '358', '苑裡鎮', '1'),
+(93, 3976, 18, '360', '苗栗市', '1'),
+(94, 3975, 2, '', '北區', '1'),
+(95, 3975, 3, '', '東區', '1'),
+(96, 3977, 3, '424', '和平區 ', '1'),
+(97, 3977, 4, '413', '霧峰區 ', '1'),
+(98, 3977, 5, '434', '龍井區 ', '1'),
+(99, 3977, 6, '432', '大肚區 ', '1'),
+(100, 3977, 7, '414', '烏日區 ', '1'),
+(101, 3977, 8, '439', '大安區 ', '1'),
+(102, 3977, 9, '438', '外埔區 ', '1'),
+(103, 3977, 10, '422', '石岡區 ', '1'),
+(104, 3977, 11, '426', '新社區 ', '1'),
+(105, 3977, 12, '428', '大雅區 ', '1'),
+(106, 3977, 13, '427', '潭子區 ', '1'),
+(107, 3977, 14, '429', '神岡區 ', '1'),
+(108, 3977, 20, '421', '后里區 ', '1'),
+(109, 3977, 21, '435', '梧棲區 ', '1'),
+(110, 3977, 22, '433', '沙鹿區 ', '1'),
+(111, 3977, 22, '436', '清水區 ', '1'),
+(112, 3977, 23, '437', '大甲區 ', '1'),
+(113, 3977, 24, '423', '東勢區 ', '1'),
+(114, 3977, 25, '420', '豐原區 ', '1'),
+(115, 3977, 1, '406', '北屯區', '1'),
+(116, 3977, 2, '408', '南屯區', '1'),
+(117, 3977, 3, '407', '西屯區', '1'),
+(118, 3977, 4, '404', '北區', '1'),
+(119, 3977, 5, '402', '南區 ', '1'),
+(120, 3977, 6, '403', '西區', '1'),
+(121, 3977, 7, '401', '東區', '1'),
+(122, 3977, 8, '400', '中區 ', '1'),
+(123, 3978, 1, '524', '溪州鄉 ', '1'),
+(124, 3978, 2, '525', '竹塘鄉 ', '1'),
+(125, 3978, 3, '527', '大城鄉', '1'),
+(126, 3978, 4, '528', '芳苑鄉', '1'),
+(127, 3978, 5, '523', '埤頭鄉 ', '1'),
+(128, 3978, 6, '522', '田尾鄉', '1'),
+(129, 3978, 7, '530', '二水鄉', '1'),
+(130, 3978, 8, '511', '社頭鄉 ', '1'),
+(131, 3978, 9, '512', '永靖鄉', '1'),
+(132, 3978, 10, '513', '埔心鄉', '1'),
+(133, 3978, 11, '516', '埔鹽鄉 ', '1'),
+(134, 3978, 12, '515', '大村鄉 ', '1'),
+(135, 3978, 13, '502', '芬園鄉', '1'),
+(136, 3978, 14, '503', '花壇鄉', '1'),
+(137, 3978, 15, '504', '秀水鄉 ', '1'),
+(138, 3978, 16, '506', '福興鄉', '1'),
+(139, 3978, 17, '509', '伸港鄉 ', '1'),
+(140, 3978, 18, '507', '線西鄉', '1'),
+(141, 3978, 19, '526', '二林鎮', '1'),
+(142, 3978, 20, '520', ' 田中鎮', '1'),
+(143, 3978, 21, '514', '溪湖鎮', '1'),
+(144, 3978, 22, '510', '員林鎮', '1'),
+(145, 3978, 23, '521', '北斗鎮 ', '1'),
+(146, 3978, 24, '508', '和美鎮 ', '1'),
+(147, 3978, 25, '505', '鹿港鎮', '1'),
+(148, 3978, 26, '500', '彰化市', '1'),
+(149, 3979, 1, '546', ' 仁愛鄉 ', '1'),
+(150, 3979, 2, '556', '信義鄉 ', '1'),
+(151, 3979, 3, '553', ' 水里鄉', '1'),
+(152, 3979, 4, '544', '國姓鄉', '1'),
+(153, 3979, 5, '555', ' 魚池鄉 ', '1'),
+(154, 3979, 6, '541', ' 中寮鄉', '1'),
+(155, 3979, 7, '558', ' 鹿谷鄉', '1'),
+(156, 3979, 8, '551', '名間鄉 ', '1'),
+(157, 3979, 9, '552', '集集鎮', '1'),
+(158, 3979, 11, '542', '草屯鎮', '1'),
+(159, 3979, 12, '545', '埔里鎮 ', '1'),
+(160, 3979, 13, '540', '南投市 ', '1'),
+(161, 3980, 1, '652', '水林鄉', '1'),
+(162, 3980, 2, '653', '口湖鄉 ', '1'),
+(163, 3980, 3, '654', '四湖鄉', '1'),
+(164, 3980, 4, '655', ' 元長鄉 ', '1'),
+(165, 3980, 5, '636', ' 臺西鄉 ', '1'),
+(166, 3980, 6, '634', ' 褒忠鄉', '1'),
+(167, 3980, 7, '635', '東勢鄉', '1'),
+(168, 3980, 8, '638', '麥寮鄉', '1'),
+(169, 3980, 9, '637', '崙背鄉', '1'),
+(170, 3980, 10, '649', '二崙鄉', '1'),
+(171, 3980, 11, '643', '林內鄉', '1'),
+(172, 3980, 12, '647', '莿桐鄉', '1'),
+(173, 3980, 13, '631', '大埤鄉', '1'),
+(174, 3980, 14, '646', ' 古坑鄉 ', '1'),
+(175, 3980, 15, '651', '北港鎮', '1'),
+(176, 3980, 16, '633', '土庫鎮', '1'),
+(177, 3980, 17, '648', '西螺鎮', '1'),
+(178, 3980, 18, '632', '虎尾鎮 ', '1'),
+(179, 3980, 19, '630', '斗南鎮', '1'),
+(180, 3980, 20, '640', '斗六市 ', '1'),
+(181, 3981, 1, '613', '朴子市', '1'),
+(182, 3981, 2, '612', '太保市', '1'),
+(183, 3981, 3, '605', '阿里山鄉', '1'),
+(184, 3981, 4, '607', '大埔鄉 ', '1'),
+(185, 3981, 5, '602', '番路鄉 ', '1'),
+(186, 3981, 6, '603', '梅山鄉', '1'),
+(187, 3981, 7, '604', '竹崎鄉 ', '1'),
+(188, 3981, 8, '606', '中埔鄉 ', '1'),
+(189, 3981, 9, '608', '水上鄉 ', '1'),
+(190, 3981, 12, '611', '鹿草鄉 ', '1'),
+(191, 3981, 13, '624', '義竹鄉', '1'),
+(192, 3981, 14, '614', ' 東石鄉', '1'),
+(193, 3981, 15, '615', '六腳鄉', '1'),
+(194, 3981, 16, '616', '新港鄉 ', '1'),
+(195, 3981, 17, '623', '溪口鄉  ', '1'),
+(196, 3981, 18, '621', '民雄鄉', '1'),
+(197, 3981, 19, '622', '大林鎮 ', '1'),
+(198, 3981, 20, '625', '布袋鎮', '1'),
+(199, 3982, 1, '', '西區', '1'),
+(200, 3982, 2, '', '東區 ', '1'),
+(201, 3983, 1, '710', '永康區 ', '1'),
+(202, 3983, 2, '719', '龍崎區 ', '1'),
+(203, 3983, 3, '718', '關廟區 ', '1'),
+(204, 3983, 4, '711', '歸仁區 ', '1'),
+(205, 3983, 5, '717', '仁德區 ', '1'),
+(206, 3983, 6, '713', '左鎮區 ', '1'),
+(207, 3983, 7, '716', ' 南化區 ', '1'),
+(208, 3983, 8, '715', '楠西區 ', '1'),
+(209, 3983, 9, '714', ' 玉井區 ', '1'),
+(210, 3983, 10, '743', '山上區 ', '1'),
+(211, 3983, 11, '745', ' 安定區 ', '1'),
+(212, 3983, 12, '744', '新市區 ', '1'),
+(213, 3983, 13, '727', '北門區 ', '1'),
+(214, 3983, 14, '725', '將軍區 ', '1'),
+(215, 3983, 15, '724', '七股區 ', '1'),
+(216, 3983, 16, '723', '西港區 ', '1'),
+(217, 3983, 17, '742', '大內區 ', '1'),
+(218, 3983, 18, '720', '官田區 ', '1'),
+(219, 3983, 19, '734', '六甲區 ', '1'),
+(220, 3983, 20, '735', '下營區 ', '1'),
+(221, 3983, 21, '733', '東山區 ', '1'),
+(222, 3983, 22, '731', '後壁區 ', '1'),
+(223, 3983, 23, '736', '柳營區 ', '1'),
+(224, 3983, 24, '726', '學甲區 ', '1'),
+(225, 3983, 25, '741', '善化區 ', '1'),
+(226, 3983, 26, '712', '新化區 ', '1'),
+(227, 3983, 27, '722', '佳里區 ', '1'),
+(228, 3983, 28, '721', '麻豆區 ', '1'),
+(229, 3983, 29, '732', '白河區 ', '1'),
+(230, 3983, 30, '737', '鹽水區 ', '1'),
+(231, 3983, 31, '730', '新營區 ', '1'),
+(232, 3983, 1, '709', '安南區', '1'),
+(233, 3983, 2, '708', '安平區', '1'),
+(234, 3983, 3, '704', '北區', '1'),
+(235, 3983, 5, '702', '南區', '1'),
+(236, 3983, 6, '700', '中西區', '1'),
+(237, 3983, 7, '701', '東區 ', '1'),
+(238, 3984, 1, '849', '三民區 ', '1'),
+(239, 3984, 2, '848', '桃源區 ', '1'),
+(240, 3984, 3, '851', '茂林區 ', '1'),
+(241, 3984, 4, '845', '內門區 ', '1'),
+(242, 3984, 5, '846', '杉林區 ', '1'),
+(243, 3984, 6, '847', '甲仙區 ', '1'),
+(244, 3984, 7, '844', '六龜區 ', '1'),
+(245, 3984, 8, '826', '梓官區 ', '1'),
+(246, 3984, 9, '827', '彌陀區 ', '1'),
+(247, 3984, 10, '828', '永安區 ', '1'),
+(248, 3984, 11, '852', '茄萣區 ', '1'),
+(249, 3984, 12, '829', '湖內區 ', '1'),
+(250, 3984, 13, '821', '路竹區 ', '1'),
+(251, 3984, 14, '822', '阿蓮區 ', '1'),
+(252, 3984, 15, '823', '田寮區 ', '1'),
+(253, 3984, 16, '824', '燕巢區 ', '1'),
+(254, 3984, 17, '825', '橋頭區 ', '1'),
+(255, 3984, 18, '833', '鳥松v', '1'),
+(256, 3984, 19, '815', '大社區 ', '1'),
+(257, 3984, 20, '814', '仁武區 ', '1'),
+(258, 3984, 21, '840', '大樹區 ', '1'),
+(259, 3984, 22, '831', '大寮區 ', '1'),
+(260, 3984, 23, '832', '林園區 ', '1'),
+(261, 3984, 24, '843', '美濃區 ', '1'),
+(262, 3984, 25, '842', '旗山區 ', '1'),
+(263, 3984, 26, '820', '岡山區 ', '1'),
+(264, 3984, 27, '830', '鳳山區 ', '1'),
+(265, 3984, 1, '812', '小港區', '1'),
+(266, 3984, 2, '811', '楠梓區', '1'),
+(267, 3984, 3, '813', '左營區', '1'),
+(268, 3984, 4, '804', '鼓山區', '1'),
+(269, 3984, 5, '803', '鹽埕區', '1'),
+(270, 3984, 6, '807', '三民區', '1'),
+(271, 3984, 7, '801', '前金區', '1'),
+(272, 3984, 8, '800', '新興區', '1'),
+(273, 3984, 9, '806', '前鎮區', '1'),
+(274, 3984, 10, '802', '苓雅區', '1'),
+(275, 3984, 11, '805', '旗津區', '1'),
+(276, 3985, 1, '901', '三地門鄉 ', '1'),
+(277, 3985, 2, '945', '牡丹鄉', '1'),
+(278, 3985, 3, '943', '獅子鄉 ', '1'),
+(279, 3985, 4, '942', '春日鄉', '1'),
+(280, 3985, 5, '922', '來義鄉', '1'),
+(281, 3985, 6, '921', '泰武鄉', '1'),
+(282, 3985, 7, '903', '瑪家鄉 ', '1'),
+(283, 3985, 8, '902', '霧臺鄉 ', '1'),
+(284, 3985, 9, '941', '枋山鄉', '1'),
+(285, 3985, 10, '947', '滿州鄉 ', '1'),
+(286, 3985, 11, '944', '車城鄉', '1'),
+(287, 3985, 12, '929', '琉球鄉', '1'),
+(288, 3985, 13, '931', '佳冬鄉', '1'),
+(289, 3985, 14, '926', '南州鄉', '1'),
+(290, 3985, 15, '927', '林邊鄉 ', '1'),
+(291, 3985, 16, '924', '崁頂鄉 ', '1'),
+(292, 3985, 17, '932', '新園鄉', '1'),
+(293, 3985, 18, '940', '枋寮鄉 ', '1'),
+(294, 3985, 19, '925', '新埤鄉', '1'),
+(295, 3985, 20, '911', '竹田鄉', '1'),
+(296, 3985, 21, '912', '內埔鄉 ', '1'),
+(297, 3985, 22, '923', '萬巒鄉', '1'),
+(298, 3985, 23, '906', '高樹鄉', '1'),
+(299, 3985, 24, '907', '鹽埔鄉', '1'),
+(300, 3985, 25, '905', '里港鄉', '1'),
+(301, 3985, 26, '904', '九如鄉', '1'),
+(302, 3985, 27, '909', '麟洛鄉 ', '1'),
+(303, 3985, 28, '908', '長治鄉 ', '1'),
+(304, 3985, 29, '913', '萬丹鄉', '1'),
+(305, 3985, 30, '946', '恆春鎮 ', '1'),
+(306, 3985, 31, '928', '東港鎮', '1'),
+(307, 3985, 32, '920', '潮州鎮 ', '1'),
+(308, 3985, 33, '900', '屏東市 ', '1'),
+(309, 3986, 1, '272', '南澳鄉', '1'),
+(310, 3986, 2, '267', '大同鄉', '1'),
+(311, 3986, 3, '266', '三星鄉 ', '1'),
+(312, 3986, 4, '268', '五結鄉', '1'),
+(313, 3986, 5, '269', '冬山鄉', '1'),
+(314, 3986, 6, '264', '員山鄉', '1'),
+(315, 3986, 7, '263', '壯圍鄉 ', '1'),
+(316, 3986, 8, '262', '礁溪鄉', '1'),
+(317, 3986, 9, '261', '頭城鎮', '1'),
+(318, 3986, 10, '270', '蘇澳鎮 ', '1'),
+(319, 3986, 11, '265', '羅東鎮 ', '1'),
+(320, 3986, 12, '260', '宜蘭市', '1'),
+(321, 3987, 1, '979', '萬榮鄉', '1'),
+(322, 3987, 2, '982', '卓溪鄉', '1'),
+(323, 3987, 3, '972', '秀林鄉', '1'),
+(324, 3987, 4, '983', '富里鄉 ', '1'),
+(325, 3987, 5, '978', '瑞穗鄉  ', '1'),
+(326, 3987, 6, '977', '豐濱鄉', '1'),
+(327, 3987, 7, '976', '光復鄉', '1'),
+(328, 3987, 8, '974', '壽豐鄉 ', '1'),
+(329, 3987, 9, '973', '吉安鄉 ', '1'),
+(330, 3987, 10, '971', '新城鄉', '1'),
+(331, 3987, 11, '981', '玉里鎮 ', '1'),
+(332, 3987, 12, '975', '鳳林鎮', '1'),
+(333, 3987, 13, '970', '花蓮市', '1'),
+(334, 3988, 1, '952', '蘭嶼鄉', '1'),
+(335, 3988, 2, '964', '金峰鄉', '1'),
+(336, 3988, 3, '966', '達仁鄉', '1'),
+(337, 3988, 4, '957', '海端鄉', '1'),
+(338, 3988, 5, '953', '延平鄉 ', '1'),
+(339, 3988, 6, '951', '綠島鄉', '1'),
+(340, 3988, 7, '958', '池上鄉', '1'),
+(341, 3988, 8, '955', '鹿野鄉 ', '1'),
+(342, 3988, 9, '962', '長濱鄉 ', '1'),
+(343, 3988, 10, '959', '東河鄉', '1'),
+(344, 3988, 11, '963', '太麻里鄉 ', '1'),
+(345, 3988, 12, '965', '大武鄉 ', '1'),
+(346, 3988, 13, '954', '卑南鄉 ', '1'),
+(347, 3988, 14, '956', '關山鎮', '1'),
+(348, 3988, 15, '961', '成功鎮  ', '1'),
+(349, 3988, 17, '950', '臺東市', '1'),
+(350, 3989, 1, '883', '七美鄉', '1'),
+(351, 3989, 2, '882', '望安鄉', '1'),
+(352, 3989, 3, '881', '西嶼鄉 ', '1'),
+(353, 3989, 4, '884', '白沙鄉 ', '1'),
+(354, 3989, 5, '885', '湖西鄉 ', '1'),
+(355, 3989, 6, '880', '馬公市', '1'),
+(356, 3990, 1, '896', '烏坵鄉', '1'),
+(357, 3990, 2, '894', '烈嶼鄉 ', '1'),
+(358, 3990, 3, '892', '金寧鄉', '1'),
+(359, 3990, 4, '890', '金沙鎮', '1'),
+(360, 3990, 5, '891', '金湖鎮', '1'),
+(361, 3990, 6, '893', '金城鎮', '1'),
+(362, 3991, 1, '212', '東引鄉', '1'),
+(363, 3991, 2, '211', '莒光鄉 ', '1'),
+(364, 3991, 3, '210', '北竿鄉 ', '1'),
+(365, 3991, 4, '209', '南竿鄉 ', '1'),
+(366, 3986, 13, '290', '釣魚台', '1'),
+(367, 3972, 1, '104', '中山區', '1'),
+(368, 3984, 12, '817', '東沙', '1'),
+(369, 3984, 13, '819', '南沙', '1');
 
 -- --------------------------------------------------------
 
@@ -3355,10 +3354,10 @@ INSERT INTO `tw_zone` (`county_id`, `zone_id`, `sort_order`, `postcode`, `name`,
 
 CREATE TABLE IF NOT EXISTS `url_alias` (
   `url_alias_id` int(11) NOT NULL AUTO_INCREMENT,
-  `query` varchar(255) COLLATE utf8_bin NOT NULL,
-  `keyword` varchar(255) COLLATE utf8_bin NOT NULL,
+  `query` varchar(255) NOT NULL,
+  `keyword` varchar(255) NOT NULL,
   PRIMARY KEY (`url_alias_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=793 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=800 ;
 
 --
 -- 转存表中的数据 `url_alias`
@@ -3371,7 +3370,7 @@ INSERT INTO `url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
 (505, 'category_id=27', 'mac'),
 (785, 'manufacturer_id=8', 'apple'),
 (790, 'information_id=4', 'about_us'),
-(792, 'product_id=42', 'test'),
+(799, 'product_id=42', 'test'),
 (767, 'category_id=34', 'mp3-players'),
 (536, 'category_id=36', 'Normal');
 
@@ -3384,18 +3383,18 @@ INSERT INTO `url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
 CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_group_id` int(11) NOT NULL,
-  `username` varchar(20) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `password` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `salt` varchar(9) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `firstname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `lastname` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `email` varchar(96) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `code` varchar(32) COLLATE utf8_bin NOT NULL,
-  `ip` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `username` varchar(20) NOT NULL DEFAULT '',
+  `password` varchar(40) NOT NULL DEFAULT '',
+  `salt` varchar(9) NOT NULL DEFAULT '',
+  `firstname` varchar(32) NOT NULL DEFAULT '',
+  `lastname` varchar(32) NOT NULL DEFAULT '',
+  `email` varchar(96) NOT NULL DEFAULT '',
+  `code` varchar(32) NOT NULL,
+  `ip` varchar(40) NOT NULL DEFAULT '',
   `status` tinyint(1) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- 转存表中的数据 `user`
@@ -3412,17 +3411,17 @@ INSERT INTO `user` (`user_id`, `user_group_id`, `username`, `password`, `salt`, 
 
 CREATE TABLE IF NOT EXISTS `user_group` (
   `user_group_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) COLLATE utf8_bin NOT NULL,
-  `permission` text COLLATE utf8_bin NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `permission` text NOT NULL,
   PRIMARY KEY (`user_group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- 转存表中的数据 `user_group`
 --
 
 INSERT INTO `user_group` (`user_group_id`, `name`, `permission`) VALUES
-(1, 'Top Administrator', 'a:2:{s:6:"access";a:127:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:19:"catalog/information";i:5;s:20:"catalog/manufacturer";i:6;s:12:"catalog/news";i:7;s:14:"catalog/option";i:8;s:15:"catalog/product";i:9;s:14:"catalog/review";i:10;s:11:"common/ajax";i:11;s:18:"common/filemanager";i:12;s:12:"common/image";i:13;s:11:"debug/debug";i:14;s:13:"design/banner";i:15;s:13:"design/layout";i:16;s:14:"extension/feed";i:17;s:16:"extension/module";i:18;s:17:"extension/payment";i:19;s:18:"extension/shipping";i:20;s:15:"extension/total";i:21;s:16:"feed/google_base";i:22;s:19:"feed/google_sitemap";i:23;s:20:"localisation/country";i:24;s:21:"localisation/currency";i:25;s:21:"localisation/geo_zone";i:26;s:21:"localisation/language";i:27;s:25:"localisation/length_class";i:28;s:25:"localisation/order_status";i:29;s:26:"localisation/return_action";i:30;s:26:"localisation/return_reason";i:31;s:26:"localisation/return_status";i:32;s:25:"localisation/stock_status";i:33;s:22:"localisation/tax_class";i:34;s:21:"localisation/tax_rate";i:35;s:25:"localisation/weight_class";i:36;s:17:"localisation/zone";i:37;s:14:"module/account";i:38;s:16:"module/affiliate";i:39;s:13:"module/banner";i:40;s:17:"module/bestseller";i:41;s:15:"module/carousel";i:42;s:15:"module/category";i:43;s:15:"module/featured";i:44;s:18:"module/google_talk";i:45;s:18:"module/information";i:46;s:13:"module/latest";i:47;s:16:"module/slideshow";i:48;s:14:"module/special";i:49;s:12:"module/store";i:50;s:14:"module/welcome";i:51;s:24:"payment/authorizenet_aim";i:52;s:21:"payment/bank_transfer";i:53;s:14:"payment/cheque";i:54;s:11:"payment/cod";i:55;s:21:"payment/free_checkout";i:56;s:22:"payment/klarna_invoice";i:57;s:17:"payment/klarna_pp";i:58;s:14:"payment/liqpay";i:59;s:20:"payment/moneybookers";i:60;s:14:"payment/nochex";i:61;s:15:"payment/paymate";i:62;s:16:"payment/paypoint";i:63;s:13:"payment/payza";i:64;s:26:"payment/perpetual_payments";i:65;s:14:"payment/pp_pro";i:66;s:17:"payment/pp_pro_uk";i:67;s:19:"payment/pp_standard";i:68;s:15:"payment/sagepay";i:69;s:22:"payment/sagepay_direct";i:70;s:18:"payment/sagepay_us";i:71;s:19:"payment/twocheckout";i:72;s:28:"payment/web_payment_software";i:73;s:16:"payment/worldpay";i:74;s:27:"report/affiliate_commission";i:75;s:22:"report/customer_credit";i:76;s:22:"report/customer_online";i:77;s:21:"report/customer_order";i:78;s:22:"report/customer_reward";i:79;s:24:"report/product_purchased";i:80;s:21:"report/product_viewed";i:81;s:18:"report/sale_coupon";i:82;s:17:"report/sale_order";i:83;s:18:"report/sale_return";i:84;s:20:"report/sale_shipping";i:85;s:15:"report/sale_tax";i:86;s:14:"sale/affiliate";i:87;s:12:"sale/contact";i:88;s:11:"sale/coupon";i:89;s:13:"sale/customer";i:90;s:23:"sale/customer_blacklist";i:91;s:19:"sale/customer_group";i:92;s:10:"sale/order";i:93;s:11:"sale/return";i:94;s:12:"sale/voucher";i:95;s:18:"sale/voucher_theme";i:96;s:15:"setting/setting";i:97;s:13:"setting/store";i:98;s:16:"shipping/auspost";i:99;s:17:"shipping/citylink";i:100;s:14:"shipping/fedex";i:101;s:13:"shipping/flat";i:102;s:13:"shipping/free";i:103;s:13:"shipping/item";i:104;s:23:"shipping/parcelforce_48";i:105;s:15:"shipping/pickup";i:106;s:19:"shipping/royal_mail";i:107;s:12:"shipping/ups";i:108;s:13:"shipping/usps";i:109;s:15:"shipping/weight";i:110;s:11:"tool/backup";i:111;s:10:"tool/cache";i:112;s:14:"tool/error_log";i:113;s:11:"tool/import";i:114;s:12:"total/coupon";i:115;s:12:"total/credit";i:116;s:14:"total/handling";i:117;s:16:"total/klarna_fee";i:118;s:19:"total/low_order_fee";i:119;s:12:"total/reward";i:120;s:14:"total/shipping";i:121;s:15:"total/sub_total";i:122;s:9:"total/tax";i:123;s:11:"total/total";i:124;s:13:"total/voucher";i:125;s:9:"user/user";i:126;s:20:"user/user_permission";}s:6:"modify";a:127:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:19:"catalog/information";i:5;s:20:"catalog/manufacturer";i:6;s:12:"catalog/news";i:7;s:14:"catalog/option";i:8;s:15:"catalog/product";i:9;s:14:"catalog/review";i:10;s:11:"common/ajax";i:11;s:18:"common/filemanager";i:12;s:12:"common/image";i:13;s:11:"debug/debug";i:14;s:13:"design/banner";i:15;s:13:"design/layout";i:16;s:14:"extension/feed";i:17;s:16:"extension/module";i:18;s:17:"extension/payment";i:19;s:18:"extension/shipping";i:20;s:15:"extension/total";i:21;s:16:"feed/google_base";i:22;s:19:"feed/google_sitemap";i:23;s:20:"localisation/country";i:24;s:21:"localisation/currency";i:25;s:21:"localisation/geo_zone";i:26;s:21:"localisation/language";i:27;s:25:"localisation/length_class";i:28;s:25:"localisation/order_status";i:29;s:26:"localisation/return_action";i:30;s:26:"localisation/return_reason";i:31;s:26:"localisation/return_status";i:32;s:25:"localisation/stock_status";i:33;s:22:"localisation/tax_class";i:34;s:21:"localisation/tax_rate";i:35;s:25:"localisation/weight_class";i:36;s:17:"localisation/zone";i:37;s:14:"module/account";i:38;s:16:"module/affiliate";i:39;s:13:"module/banner";i:40;s:17:"module/bestseller";i:41;s:15:"module/carousel";i:42;s:15:"module/category";i:43;s:15:"module/featured";i:44;s:18:"module/google_talk";i:45;s:18:"module/information";i:46;s:13:"module/latest";i:47;s:16:"module/slideshow";i:48;s:14:"module/special";i:49;s:12:"module/store";i:50;s:14:"module/welcome";i:51;s:24:"payment/authorizenet_aim";i:52;s:21:"payment/bank_transfer";i:53;s:14:"payment/cheque";i:54;s:11:"payment/cod";i:55;s:21:"payment/free_checkout";i:56;s:22:"payment/klarna_invoice";i:57;s:17:"payment/klarna_pp";i:58;s:14:"payment/liqpay";i:59;s:20:"payment/moneybookers";i:60;s:14:"payment/nochex";i:61;s:15:"payment/paymate";i:62;s:16:"payment/paypoint";i:63;s:13:"payment/payza";i:64;s:26:"payment/perpetual_payments";i:65;s:14:"payment/pp_pro";i:66;s:17:"payment/pp_pro_uk";i:67;s:19:"payment/pp_standard";i:68;s:15:"payment/sagepay";i:69;s:22:"payment/sagepay_direct";i:70;s:18:"payment/sagepay_us";i:71;s:19:"payment/twocheckout";i:72;s:28:"payment/web_payment_software";i:73;s:16:"payment/worldpay";i:74;s:27:"report/affiliate_commission";i:75;s:22:"report/customer_credit";i:76;s:22:"report/customer_online";i:77;s:21:"report/customer_order";i:78;s:22:"report/customer_reward";i:79;s:24:"report/product_purchased";i:80;s:21:"report/product_viewed";i:81;s:18:"report/sale_coupon";i:82;s:17:"report/sale_order";i:83;s:18:"report/sale_return";i:84;s:20:"report/sale_shipping";i:85;s:15:"report/sale_tax";i:86;s:14:"sale/affiliate";i:87;s:12:"sale/contact";i:88;s:11:"sale/coupon";i:89;s:13:"sale/customer";i:90;s:23:"sale/customer_blacklist";i:91;s:19:"sale/customer_group";i:92;s:10:"sale/order";i:93;s:11:"sale/return";i:94;s:12:"sale/voucher";i:95;s:18:"sale/voucher_theme";i:96;s:15:"setting/setting";i:97;s:13:"setting/store";i:98;s:16:"shipping/auspost";i:99;s:17:"shipping/citylink";i:100;s:14:"shipping/fedex";i:101;s:13:"shipping/flat";i:102;s:13:"shipping/free";i:103;s:13:"shipping/item";i:104;s:23:"shipping/parcelforce_48";i:105;s:15:"shipping/pickup";i:106;s:19:"shipping/royal_mail";i:107;s:12:"shipping/ups";i:108;s:13:"shipping/usps";i:109;s:15:"shipping/weight";i:110;s:11:"tool/backup";i:111;s:10:"tool/cache";i:112;s:14:"tool/error_log";i:113;s:11:"tool/import";i:114;s:12:"total/coupon";i:115;s:12:"total/credit";i:116;s:14:"total/handling";i:117;s:16:"total/klarna_fee";i:118;s:19:"total/low_order_fee";i:119;s:12:"total/reward";i:120;s:14:"total/shipping";i:121;s:15:"total/sub_total";i:122;s:9:"total/tax";i:123;s:11:"total/total";i:124;s:13:"total/voucher";i:125;s:9:"user/user";i:126;s:20:"user/user_permission";}}');
+(1, 'Top Administrator', 'a:2:{s:6:"access";a:127:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:19:"catalog/information";i:5;s:20:"catalog/manufacturer";i:6;s:12:"catalog/news";i:7;s:14:"catalog/option";i:8;s:15:"catalog/product";i:9;s:14:"catalog/review";i:10;s:11:"common/ajax";i:11;s:18:"common/filemanager";i:12;s:12:"common/image";i:13;s:13:"design/banner";i:14;s:13:"design/layout";i:15;s:7:"dev/dev";i:16;s:14:"extension/feed";i:17;s:16:"extension/module";i:18;s:17:"extension/payment";i:19;s:18:"extension/shipping";i:20;s:15:"extension/total";i:21;s:16:"feed/google_base";i:22;s:19:"feed/google_sitemap";i:23;s:20:"localisation/country";i:24;s:21:"localisation/currency";i:25;s:21:"localisation/geo_zone";i:26;s:21:"localisation/language";i:27;s:25:"localisation/length_class";i:28;s:25:"localisation/order_status";i:29;s:26:"localisation/return_action";i:30;s:26:"localisation/return_reason";i:31;s:26:"localisation/return_status";i:32;s:25:"localisation/stock_status";i:33;s:22:"localisation/tax_class";i:34;s:21:"localisation/tax_rate";i:35;s:25:"localisation/weight_class";i:36;s:17:"localisation/zone";i:37;s:14:"module/account";i:38;s:16:"module/affiliate";i:39;s:13:"module/banner";i:40;s:17:"module/bestseller";i:41;s:15:"module/carousel";i:42;s:15:"module/category";i:43;s:15:"module/featured";i:44;s:18:"module/google_talk";i:45;s:18:"module/information";i:46;s:13:"module/latest";i:47;s:16:"module/slideshow";i:48;s:14:"module/special";i:49;s:12:"module/store";i:50;s:14:"module/welcome";i:51;s:24:"payment/authorizenet_aim";i:52;s:21:"payment/bank_transfer";i:53;s:14:"payment/cheque";i:54;s:11:"payment/cod";i:55;s:21:"payment/free_checkout";i:56;s:22:"payment/klarna_invoice";i:57;s:17:"payment/klarna_pp";i:58;s:14:"payment/liqpay";i:59;s:20:"payment/moneybookers";i:60;s:14:"payment/nochex";i:61;s:15:"payment/paymate";i:62;s:16:"payment/paypoint";i:63;s:13:"payment/payza";i:64;s:26:"payment/perpetual_payments";i:65;s:14:"payment/pp_pro";i:66;s:17:"payment/pp_pro_uk";i:67;s:19:"payment/pp_standard";i:68;s:15:"payment/sagepay";i:69;s:22:"payment/sagepay_direct";i:70;s:18:"payment/sagepay_us";i:71;s:19:"payment/twocheckout";i:72;s:28:"payment/web_payment_software";i:73;s:16:"payment/worldpay";i:74;s:27:"report/affiliate_commission";i:75;s:22:"report/customer_credit";i:76;s:22:"report/customer_online";i:77;s:21:"report/customer_order";i:78;s:22:"report/customer_reward";i:79;s:24:"report/product_purchased";i:80;s:21:"report/product_viewed";i:81;s:18:"report/sale_coupon";i:82;s:17:"report/sale_order";i:83;s:18:"report/sale_return";i:84;s:20:"report/sale_shipping";i:85;s:15:"report/sale_tax";i:86;s:14:"sale/affiliate";i:87;s:12:"sale/contact";i:88;s:11:"sale/coupon";i:89;s:13:"sale/customer";i:90;s:23:"sale/customer_blacklist";i:91;s:19:"sale/customer_group";i:92;s:10:"sale/order";i:93;s:11:"sale/return";i:94;s:12:"sale/voucher";i:95;s:18:"sale/voucher_theme";i:96;s:15:"setting/setting";i:97;s:13:"setting/store";i:98;s:16:"shipping/auspost";i:99;s:17:"shipping/citylink";i:100;s:14:"shipping/fedex";i:101;s:13:"shipping/flat";i:102;s:13:"shipping/free";i:103;s:13:"shipping/item";i:104;s:23:"shipping/parcelforce_48";i:105;s:15:"shipping/pickup";i:106;s:19:"shipping/royal_mail";i:107;s:12:"shipping/ups";i:108;s:13:"shipping/usps";i:109;s:15:"shipping/weight";i:110;s:11:"tool/backup";i:111;s:10:"tool/cache";i:112;s:14:"tool/error_log";i:113;s:11:"tool/import";i:114;s:12:"total/coupon";i:115;s:12:"total/credit";i:116;s:14:"total/handling";i:117;s:16:"total/klarna_fee";i:118;s:19:"total/low_order_fee";i:119;s:12:"total/reward";i:120;s:14:"total/shipping";i:121;s:15:"total/sub_total";i:122;s:9:"total/tax";i:123;s:11:"total/total";i:124;s:13:"total/voucher";i:125;s:9:"user/user";i:126;s:20:"user/user_permission";}s:6:"modify";a:127:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:19:"catalog/information";i:5;s:20:"catalog/manufacturer";i:6;s:12:"catalog/news";i:7;s:14:"catalog/option";i:8;s:15:"catalog/product";i:9;s:14:"catalog/review";i:10;s:11:"common/ajax";i:11;s:18:"common/filemanager";i:12;s:12:"common/image";i:13;s:13:"design/banner";i:14;s:13:"design/layout";i:15;s:7:"dev/dev";i:16;s:14:"extension/feed";i:17;s:16:"extension/module";i:18;s:17:"extension/payment";i:19;s:18:"extension/shipping";i:20;s:15:"extension/total";i:21;s:16:"feed/google_base";i:22;s:19:"feed/google_sitemap";i:23;s:20:"localisation/country";i:24;s:21:"localisation/currency";i:25;s:21:"localisation/geo_zone";i:26;s:21:"localisation/language";i:27;s:25:"localisation/length_class";i:28;s:25:"localisation/order_status";i:29;s:26:"localisation/return_action";i:30;s:26:"localisation/return_reason";i:31;s:26:"localisation/return_status";i:32;s:25:"localisation/stock_status";i:33;s:22:"localisation/tax_class";i:34;s:21:"localisation/tax_rate";i:35;s:25:"localisation/weight_class";i:36;s:17:"localisation/zone";i:37;s:14:"module/account";i:38;s:16:"module/affiliate";i:39;s:13:"module/banner";i:40;s:17:"module/bestseller";i:41;s:15:"module/carousel";i:42;s:15:"module/category";i:43;s:15:"module/featured";i:44;s:18:"module/google_talk";i:45;s:18:"module/information";i:46;s:13:"module/latest";i:47;s:16:"module/slideshow";i:48;s:14:"module/special";i:49;s:12:"module/store";i:50;s:14:"module/welcome";i:51;s:24:"payment/authorizenet_aim";i:52;s:21:"payment/bank_transfer";i:53;s:14:"payment/cheque";i:54;s:11:"payment/cod";i:55;s:21:"payment/free_checkout";i:56;s:22:"payment/klarna_invoice";i:57;s:17:"payment/klarna_pp";i:58;s:14:"payment/liqpay";i:59;s:20:"payment/moneybookers";i:60;s:14:"payment/nochex";i:61;s:15:"payment/paymate";i:62;s:16:"payment/paypoint";i:63;s:13:"payment/payza";i:64;s:26:"payment/perpetual_payments";i:65;s:14:"payment/pp_pro";i:66;s:17:"payment/pp_pro_uk";i:67;s:19:"payment/pp_standard";i:68;s:15:"payment/sagepay";i:69;s:22:"payment/sagepay_direct";i:70;s:18:"payment/sagepay_us";i:71;s:19:"payment/twocheckout";i:72;s:28:"payment/web_payment_software";i:73;s:16:"payment/worldpay";i:74;s:27:"report/affiliate_commission";i:75;s:22:"report/customer_credit";i:76;s:22:"report/customer_online";i:77;s:21:"report/customer_order";i:78;s:22:"report/customer_reward";i:79;s:24:"report/product_purchased";i:80;s:21:"report/product_viewed";i:81;s:18:"report/sale_coupon";i:82;s:17:"report/sale_order";i:83;s:18:"report/sale_return";i:84;s:20:"report/sale_shipping";i:85;s:15:"report/sale_tax";i:86;s:14:"sale/affiliate";i:87;s:12:"sale/contact";i:88;s:11:"sale/coupon";i:89;s:13:"sale/customer";i:90;s:23:"sale/customer_blacklist";i:91;s:19:"sale/customer_group";i:92;s:10:"sale/order";i:93;s:11:"sale/return";i:94;s:12:"sale/voucher";i:95;s:18:"sale/voucher_theme";i:96;s:15:"setting/setting";i:97;s:13:"setting/store";i:98;s:16:"shipping/auspost";i:99;s:17:"shipping/citylink";i:100;s:14:"shipping/fedex";i:101;s:13:"shipping/flat";i:102;s:13:"shipping/free";i:103;s:13:"shipping/item";i:104;s:23:"shipping/parcelforce_48";i:105;s:15:"shipping/pickup";i:106;s:19:"shipping/royal_mail";i:107;s:12:"shipping/ups";i:108;s:13:"shipping/usps";i:109;s:15:"shipping/weight";i:110;s:11:"tool/backup";i:111;s:10:"tool/cache";i:112;s:14:"tool/error_log";i:113;s:11:"tool/import";i:114;s:12:"total/coupon";i:115;s:12:"total/credit";i:116;s:14:"total/handling";i:117;s:16:"total/klarna_fee";i:118;s:19:"total/low_order_fee";i:119;s:12:"total/reward";i:120;s:14:"total/shipping";i:121;s:15:"total/sub_total";i:122;s:9:"total/tax";i:123;s:11:"total/total";i:124;s:13:"total/voucher";i:125;s:9:"user/user";i:126;s:20:"user/user_permission";}}');
 
 -- --------------------------------------------------------
 
@@ -3433,18 +3432,18 @@ INSERT INTO `user_group` (`user_group_id`, `name`, `permission`) VALUES
 CREATE TABLE IF NOT EXISTS `voucher` (
   `voucher_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
-  `code` varchar(10) COLLATE utf8_bin NOT NULL,
-  `from_name` varchar(64) COLLATE utf8_bin NOT NULL,
-  `from_email` varchar(96) COLLATE utf8_bin NOT NULL,
-  `to_name` varchar(64) COLLATE utf8_bin NOT NULL,
-  `to_email` varchar(96) COLLATE utf8_bin NOT NULL,
+  `code` varchar(10) NOT NULL,
+  `from_name` varchar(64) NOT NULL,
+  `from_email` varchar(96) NOT NULL,
+  `to_name` varchar(64) NOT NULL,
+  `to_email` varchar(96) NOT NULL,
   `voucher_theme_id` int(11) NOT NULL,
-  `message` text COLLATE utf8_bin NOT NULL,
+  `message` text NOT NULL,
   `amount` decimal(15,4) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`voucher_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3459,7 +3458,7 @@ CREATE TABLE IF NOT EXISTS `voucher_history` (
   `amount` decimal(15,4) NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`voucher_history_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3469,9 +3468,9 @@ CREATE TABLE IF NOT EXISTS `voucher_history` (
 
 CREATE TABLE IF NOT EXISTS `voucher_theme` (
   `voucher_theme_id` int(11) NOT NULL AUTO_INCREMENT,
-  `image` varchar(255) COLLATE utf8_bin NOT NULL,
+  `image` varchar(255) NOT NULL,
   PRIMARY KEY (`voucher_theme_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `voucher_theme`
@@ -3491,9 +3490,9 @@ INSERT INTO `voucher_theme` (`voucher_theme_id`, `image`) VALUES
 CREATE TABLE IF NOT EXISTS `voucher_theme_description` (
   `voucher_theme_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(32) COLLATE utf8_bin NOT NULL,
+  `name` varchar(32) NOT NULL,
   PRIMARY KEY (`voucher_theme_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `voucher_theme_description`
@@ -3517,7 +3516,7 @@ CREATE TABLE IF NOT EXISTS `weight_class` (
   `weight_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `value` decimal(15,8) NOT NULL DEFAULT '0.00000000',
   PRIMARY KEY (`weight_class_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `weight_class`
@@ -3538,10 +3537,10 @@ INSERT INTO `weight_class` (`weight_class_id`, `value`) VALUES
 CREATE TABLE IF NOT EXISTS `weight_class_description` (
   `weight_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
-  `title` varchar(32) COLLATE utf8_bin NOT NULL,
-  `unit` varchar(4) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `title` varchar(32) NOT NULL,
+  `unit` varchar(4) NOT NULL DEFAULT '',
   PRIMARY KEY (`weight_class_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `weight_class_description`
@@ -3566,11 +3565,11 @@ INSERT INTO `weight_class_description` (`weight_class_id`, `language_id`, `title
 CREATE TABLE IF NOT EXISTS `zone` (
   `zone_id` int(11) NOT NULL AUTO_INCREMENT,
   `country_id` int(11) NOT NULL,
-  `name` varchar(128) COLLATE utf8_bin NOT NULL,
-  `code` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `name` varchar(128) NOT NULL,
+  `code` varchar(32) NOT NULL DEFAULT '',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`zone_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3992 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3992 ;
 
 --
 -- 转存表中的数据 `zone`
@@ -6712,28 +6711,6 @@ INSERT INTO `zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3132, 205, 'Idlib', 'ID', 1),
 (3133, 205, 'Rif Dimashq', 'RD', 1),
 (3134, 205, 'Tartus', 'TA', 1),
-(3991, 206, '連江縣', '', 1),
-(3990, 206, '金門縣', '', 1),
-(3989, 206, '澎湖縣', '', 1),
-(3988, 206, '臺東縣', '', 1),
-(3987, 206, '花蓮縣', '', 1),
-(3986, 206, '宜蘭縣', '', 1),
-(3985, 206, '屏東縣', '', 1),
-(3984, 206, '高雄市', '', 1),
-(3983, 206, '臺南市', '', 1),
-(3982, 206, '嘉義市', '', 1),
-(3981, 206, '嘉義縣', '', 1),
-(3980, 206, '雲林縣', '', 1),
-(3979, 206, '南投縣', '', 1),
-(3978, 206, '彰化縣', '', 1),
-(3977, 206, '臺中市', '', 1),
-(3976, 206, '苗栗縣', '', 1),
-(3975, 206, '新竹市', '', 1),
-(3974, 206, '新竹縣', '', 1),
-(3973, 206, '桃園縣', '', 1),
-(3972, 206, '臺北市', '', 1),
-(3971, 206, '新北市', '', 1),
-(3970, 206, '基隆市', '', 1),
 (3160, 207, 'Gorno-Badakhstan', 'GB', 1),
 (3161, 207, 'Khatlon', 'KT', 1),
 (3162, 207, 'Sughd', 'SU', 1),
@@ -7524,7 +7501,29 @@ INSERT INTO `zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3966, 190, 'Goriška', '11', 1),
 (3967, 190, 'Obalno-kraška', '12', 1),
 (3968, 33, 'Ruse', '', 1),
-(3969, 101, 'Alborz', 'ALB', 1);
+(3969, 101, 'Alborz', 'ALB', 1),
+(3970, 206, '基隆市', '', 1),
+(3971, 206, '新北市', '', 1),
+(3972, 206, '臺北市', '', 1),
+(3973, 206, '桃園縣', '', 1),
+(3974, 206, '新竹縣', '', 1),
+(3975, 206, '新竹市', '', 1),
+(3976, 206, '苗栗縣', '', 1),
+(3977, 206, '臺中市', '', 1),
+(3978, 206, '彰化縣', '', 1),
+(3979, 206, '南投縣', '', 1),
+(3980, 206, '雲林縣', '', 1),
+(3981, 206, '嘉義縣', '', 1),
+(3982, 206, '嘉義市', '', 1),
+(3983, 206, '臺南市', '', 1),
+(3984, 206, '高雄市', '', 1),
+(3985, 206, '屏東縣', '', 1),
+(3986, 206, '宜蘭縣', '', 1),
+(3987, 206, '花蓮縣', '', 1),
+(3988, 206, '臺東縣', '', 1),
+(3989, 206, '澎湖縣', '', 1),
+(3990, 206, '金門縣', '', 1),
+(3991, 206, '連江縣', '', 1);
 
 -- --------------------------------------------------------
 
@@ -7540,7 +7539,7 @@ CREATE TABLE IF NOT EXISTS `zone_to_geo_zone` (
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`zone_to_geo_zone_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=66 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
 
 --
 -- 转存表中的数据 `zone_to_geo_zone`
