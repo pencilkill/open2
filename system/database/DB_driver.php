@@ -886,6 +886,34 @@ class CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
+	 * Generate an select string
+	 *
+	 * @access	public
+	 * @param	string	the table upon which the query will be performed
+	 * @param	boolean  TRUE: resets AR values; FALSE: leave AR vaules alone
+	 * @return	string
+	 */
+	function select_string($table = '', $reset = TRUE)
+	{
+		if ($table != '')
+		{
+		  $this->_track_aliases($table);
+		  $this->from($table);
+		}
+
+		$select =  $this->_compile_select();
+
+		if ($reset === TRUE)
+		{
+		  $this->_reset_select();
+		}
+
+		return $select;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
 	 * Generate an insert string
 	 *
 	 * @access	public

@@ -20,6 +20,7 @@ $_['entry_status']          = '狀態:';
 $_['entry_store']       	= '網店:';
 $_['entry_keyword']     	= '關鍵字:';
 $_['entry_date_added']     	= '日期:';
+$_['entry_layout']     		= '佈局:';
 $_['entry_sort_order']  	= '選擇排序:';
 
 // Error
