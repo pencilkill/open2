@@ -34,8 +34,7 @@ class DB {
 			'username'	=> $username,
 			'password'	=> $password,
 			'database'	=> $database,
-			//'dbprefix'  => $dbprefix,
-			'dbprefix'  => '',	// be signed in each db action scene, this is still not updated
+			'dbprefix'  => $dbprefix,
 			'char_set'  => $char_set
 		);
 		/*

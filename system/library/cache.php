@@ -1,9 +1,12 @@
 <?php
 class Cache {
+	const DIRECTORY_CACHE = DIR_CACHE;
+	const PREFIX_CACHE = 'cache';
+
 	private $expire = 3600;
 
 	public function get($key) {
-		$files = glob(DIR_CACHE . 'cache.' . preg_replace('/[^A-Z0-9\._-]/i', '', $key) . '.*');
+		$files = glob(self::DIRECTORY_CACHE . self::PREFIX_CACHE . '.' . preg_replace('/[^A-Z0-9\._-]/i', '', $key) . '.*');
 
 		if ($files) {
 			$cache = file_get_contents($files[0]);
@@ -27,7 +30,7 @@ class Cache {
   	public function set($key, $value) {
     	$this->delete($key);
 
-		$file = DIR_CACHE . 'cache.' . preg_replace('/[^A-Z0-9\._-]/i', '', $key) . '.' . (time() + $this->expire);
+		$file = self::DIRECTORY_CACHE . self::PREFIX_CACHE . '.' . preg_replace('/[^A-Z0-9\._-]/i', '', $key) . '.' . (time() + $this->expire);
 
 		$handle = fopen($file, 'w');
 
@@ -37,7 +40,7 @@ class Cache {
   	}
 
   	public function delete($key) {
-		$files = glob(DIR_CACHE . 'cache.' . preg_replace('/[^A-Z0-9\._-]/i', '', $key) . '.*');
+		$files = glob(self::DIRECTORY_CACHE . self::PREFIX_CACHE . '.' . preg_replace('/[^A-Z0-9\._-]/i', '', $key) . '.*');
 
 		if ($files) {
     		foreach ($files as $file) {
@@ -51,7 +54,7 @@ class Cache {
   	public function clear($files) {
 		if ($files) {
     		foreach ($files as $file) {
-    			$file = DIR_CACHE . $file;
+    			$file = self::DIRECTORY_CACHE . $file;
       			if (file_exists($file)) {
 					unlink($file);
 				}
@@ -60,8 +63,8 @@ class Cache {
   	}
 
   	public function getCaches() {
-		$files = glob(DIR_CACHE . 'cache.*.*');
-		array_walk_recursive($files, function(&$v){$v = strtr($v, array(DIR_CACHE => ''));});
+		$files = glob(self::DIRECTORY_CACHE . self::PREFIX_CACHE . '.*.*');
+		array_walk_recursive($files, function(&$v){$v = strtr($v, array(self::DIRECTORY_CACHE => ''));});
 
 		return $files ? $files : array();
   	}

@@ -35,11 +35,11 @@ $config = new Config();
 $registry->set('config', $config);
 
 // Database
-$db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+$db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PREFIX);
 $registry->set('db', $db);
 
 // Settings
-$query = $db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '0'");
+$query = $db->get_where('setting', array('store_id' => 0));
 
 foreach ($query->rows as $setting) {
 	if (!$setting['serialized']) {
@@ -112,7 +112,7 @@ $registry->set('session', $session);
 // Language
 $languages = array();
 
-$query = $db->query("SELECT * FROM " . DB_PREFIX . "language");
+$query = $db->get('language');
 
 foreach ($query->rows as $result) {
 	$languages[$result['code']] = $result;

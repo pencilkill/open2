@@ -21,7 +21,7 @@ $_['text_year']                    = '本年度';
 $_['text_order']                   = '訂單總數';
 $_['text_customer']                = '客戶總數';
 
-// Column 
+// Column
 $_['column_order']                 = '訂單號';
 $_['column_customer']              = '客戶名稱';
 $_['column_status']                = '狀態';
@@ -40,5 +40,6 @@ $_['error_image']                   = '警告： 圖片目錄%s 不可寫！';
 $_['error_image_cache']             = '警告： 圖片緩存目錄%s 不可寫！';
 $_['error_cache']                   = '警告： 緩存目錄%s 不可寫！';
 $_['error_download']                = '警告： 下載目錄%s 不可寫！';
-$_['error_logs']                    = '警告： 日誌目錄%s 不可寫！';
+$_['error_logs']                    = '警告： 日誌緩存目錄%s 不可寫！';
+$_['error_data']                    = '警告： 數據緩存目錄%s 不可寫！';
 ?>
