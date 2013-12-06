@@ -1,85 +1,81 @@
 <?php
 class ModelLocalisationCountry extends Model {
 	public function addCountry($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "country SET name = " . $this->db->escape($data['name']) . ", iso_code_2 = " . $this->db->escape($data['iso_code_2']) . ", iso_code_3 = " . $this->db->escape($data['iso_code_3']) . ", address_format = " . $this->db->escape($data['address_format']) . ", postcode_required = '" . (int)$data['postcode_required'] . "', status = '" . (int)$data['status'] . "'");
-	
+		$this->db->insert('country', $data);
+
 		$this->cache->delete('country');
 	}
-	
+
 	public function editCountry($country_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "country SET name = " . $this->db->escape($data['name']) . ", iso_code_2 = " . $this->db->escape($data['iso_code_2']) . ", iso_code_3 = " . $this->db->escape($data['iso_code_3']) . ", address_format = " . $this->db->escape($data['address_format']) . ", postcode_required = '" . (int)$data['postcode_required'] . "', status = '" . (int)$data['status'] . "' WHERE country_id = '" . (int)$country_id . "'");
-	
+		$this->db->update('country', $data, array('country_id' => (int)$country_id));
+
 		$this->cache->delete('country');
 	}
-	
+
 	public function deleteCountry($country_id) {
-		$this->db->query("DELETE FROM " . DB_PREFIX . "country WHERE country_id = '" . (int)$country_id . "'");
-		
+		$this->db->delete('country', array('country_id' => (int)$country_id));
+
 		$this->cache->delete('country');
 	}
-	
+
 	public function getCountry($country_id) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "country WHERE country_id = '" . (int)$country_id . "'");
-		
+		$query = $this->db->distinct()->get_where('country', array('country_id' => (int)$country_id));
+
 		return $query->row;
 	}
-		
+
 	public function getCountries($data = array()) {
 		if ($data) {
-			$sql = "SELECT * FROM " . DB_PREFIX . "country";
-			
+			$query = $this->db->from('country');
+
 			$sort_data = array(
 				'name',
 				'iso_code_2',
 				'iso_code_3'
-			);	
-			
+			);
+
 			if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
-				$sql .= " ORDER BY " . $data['sort'];	
+				$sort = $data['sort'];
 			} else {
-				$sql .= " ORDER BY name";	
+				$sort = 'name';
 			}
-			
+
 			if (isset($data['order']) && ($data['order'] == 'DESC')) {
-				$sql .= " DESC";
+				$query->order_by($sort, 'DESC');
 			} else {
-				$sql .= " ASC";
+				$query->order_by($sort, 'ASC');
 			}
-			
+
 			if (isset($data['start']) || isset($data['limit'])) {
-				if ($data['start'] < 0) {
+				if (!isset($data['start']) || (int)$data['start'] < 0) {
 					$data['start'] = 0;
-				}					
+				}
 
-				if ($data['limit'] < 1) {
+				if (!isset($data['limit']) || (int)$data['limit'] < 1) {
 					$data['limit'] = 20;
-				}	
-			
-				$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
-			}		
-			
-			$query = $this->db->query($sql);
+				}
 
-			return $query->rows;
+				$query->limit((int)$data['limit'], (int)$data['start']);
+			}
+
+			return $query->get()->rows;
 		} else {
 			$country_data = $this->cache->get('country');
-		
+
 			if (!$country_data) {
-				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country ORDER BY name ASC");
-	
+				$query = $this->db->from('country')->order_by('name', 'ASC')->get();
+
 				$country_data = $query->rows;
-			
+
 				$this->cache->set('country', $country_data);
 			}
 
-			return $country_data;			
-		}	
+			return $country_data;
+		}
 	}
-	
+
 	public function getTotalCountries() {
-      	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "country");
-		
-		return $query->row['total'];
-	}	
+      	return $this->db->count_all('country');
+	}
 }
 ?>

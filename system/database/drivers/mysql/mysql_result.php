@@ -38,19 +38,11 @@ class CI_DB_mysql_result extends CI_DB_result {
 	 * @return	resource
 	 */
 	function initialize(){
-		$num_rows = $this->num_rows();
+		$this->num_rows = $this->num_rows();
 
-		$this->num_rows = $num_rows;
+		$this->row = $this->row_array(0);
 
-		if($num_rows){
-			$this->row = $this->row_array(0);
-
-			$this->rows = $this->result_array();
-		}else{
-			$this->row = array();
-
-			$this->rows = array();
-		}
+		$this->rows = $this->result_array();
 
 		return $this->result_id;
 	}

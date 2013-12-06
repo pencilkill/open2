@@ -17,10 +17,11 @@ $_['entry_description'] = '文章內容：';
 $_['entry_store']       = '&nbsp;&nbsp;網店：';
 $_['entry_keyword']     = 'SEO Keyword:<br /><span class="help">網址別名，請不要使用空格，使用「-」代替空格。</span>';
 $_['entry_status']      = '&nbsp;&nbsp;文章狀態：';
+$_['entry_bottom']      = '&nbsp;&nbsp;底部顯示：';
 $_['entry_sort_order']  = '&nbsp;&nbsp;頁面排序：';
 $_['entry_layout']      = '佈局覆蓋：';
 
-// Error 
+// Error
 $_['error_warning']     = '警告： 相關數據未鍵入！';
 $_['error_permission']  = '警告： 您沒有權限更改信息設置！';
 $_['error_title']       = '文章標題必須在3至64個字符之間！';

@@ -24,21 +24,21 @@ class ModelCatalogNews extends Model {
 		}
 
 		if (isset($data['news_layout'])) {
-			foreach ($data['news_layout'] as $store_id => $value) {
-				if ($value['layout_id']) {
-					$value['news_id']=(int)$news_id;
+			foreach ($data['news_layout'] as $store_id => $layout) {
+				if ($layout['layout_id']) {
+					$layout['news_id']=(int)$news_id;
 
-					$value['store_id'] = (int)$store_id;
+					$layout['store_id'] = (int)$store_id;
 
-					$this->db->insert('news_to_layout', $value);
+					$this->db->insert('news_to_layout', $layout);
 				}
 			}
 		}
 
 		if ($data['keyword']) {
-			$data['query']='news_id=' . (int)$news_id;
-
-			$this->db->insert('url_alias', $data);
+			$this->db->set('query', 'information_id=' . (int)$information_id);
+			$this->db->set('keyword', $data['keyword']);
+			$this->db->insert('url_alias');
 		}
 
 		$this->cache->delete('news');
@@ -72,13 +72,13 @@ class ModelCatalogNews extends Model {
 		$this->db->delete('news_to_layout', array('news_id' => (int)$news_id));
 
 		if (isset($data['news_layout'])) {
-			foreach ($data['news_layout'] as $store_id => $value) {
-				if ($value['layout_id']) {
-					$value['news_id']=(int)$news_id;
+			foreach ($data['news_layout'] as $store_id => $layout) {
+				if ($layout['layout_id']) {
+					$layout['news_id']=(int)$news_id;
 
-					$value['store_id']=(int)$store_id;
+					$layout['store_id']=(int)$store_id;
 
-					$this->db->insert('news_to_layout', $value);
+					$this->db->insert('news_to_layout', $layout);
 				}
 			}
 		}
@@ -86,9 +86,9 @@ class ModelCatalogNews extends Model {
 		$this->db->delete('url_alias', array('query'=>'news_id='.(int)$news_id));
 
 		if ($data['keyword']) {
-			$data['query']='news_id='.(int)$news_id;
-
-			$this->db->insert('url_alias', $data);
+			$this->db->set('query', 'new_id=' . (int)$new_id);
+			$this->db->set('keyword', $data['keyword']);
+			$this->db->insert('url_alias');
 		}
 
 		$this->cache->delete('news');
@@ -107,17 +107,17 @@ class ModelCatalogNews extends Model {
 	public function getNews($news_id) {
 		$s1 = $this->db->select('keyword')->from('url_alias')->where(array('query' => 'news_id=' . (int)$news_id))->select_string();
 
-		$query = $this->db->select('*, (' . $s1 . ') AS keyword')->from('news')->where(array('news_id' => (int)$news_id))->get();
+		$query = $this->db->distinct()->select('*, (' . $s1 . ') AS keyword')->get_where('news', array('news_id' => (int)$news_id));
 
 		return $query->row;
 	}
 
 	public function getNewses($data = array()) {
 		if ($data) {
-			$query =$this->db->from('news AS n')->join('news_description AS nd', 'n.news_id = nd.news_id')->where('nd.language_id' , (int)$this->config->get('config_language_id'));
+			$query =$this->db->from('news n')->join('news_description nd', 'n.news_id = nd.news_id')->where('nd.language_id' , (int)$this->config->get('config_language_id'));
 
 			if(!empty($data['filter_title'])){
-				$query->like('nd.title', utf8_strtolower($data['filter_title']));
+				$query->like('LCASE(nd.title)', utf8_strtolower($data['filter_title']));
 			}
 
 			if(!empty($data['filter_date_added'])){
@@ -164,12 +164,9 @@ class ModelCatalogNews extends Model {
 			$news_data = $this->cache->get('news.' . $this->config->get('config_language_id'));
 
 			if (!$news_data) {
-				$query = $this->db->from('news AS n')
-				->join('news_description AS nd', 'n.news_id = nd.news_id')
-				->where(array('nd.language_id' => (int)$this->config->get('config_language_id')))
-				->order_by('n.sort_order', 'ASC');
+				$query = $this->db->from('news n')->join('news_description nd', 'n.news_id = nd.news_id')->where(array('nd.language_id' => (int)$this->config->get('config_language_id')))->order_by('n.sort_order', 'ASC')->get();
 
-				$news_data = $query->get()->rows;
+				$news_data = $query->rows;
 
 				$this->cache->set('news.' . $this->config->get('config_language_id'), $news_data);
 			}

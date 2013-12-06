@@ -47,7 +47,7 @@ if (ini_get('magic_quotes_gpc')) {
 	$_COOKIE = clean($_COOKIE);
 }
 
-if (!ini_get('date.timezone')) {
+if (true || !ini_get('date.timezone')) {
 	date_default_timezone_set('PRC');
 }
 

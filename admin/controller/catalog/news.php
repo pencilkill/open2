@@ -135,12 +135,6 @@ class ControllerCatalogNews extends Controller {
 	}
 
 	private function getList() {
-		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
-		} else {
-			$page = 1;
-		}
-
 		if (isset($this->request->get['filter_title'])) {
 			$filter_title = $this->request->get['filter_title'];
 		} else {
@@ -171,6 +165,12 @@ class ControllerCatalogNews extends Controller {
 			$order = 'DESC';
 		}
 
+		if (isset($this->request->get['page'])) {
+			$page = $this->request->get['page'];
+		} else {
+			$page = 1;
+		}
+
 		$url = '';
 
 		if (isset($this->request->get['filter_title'])) {
@@ -185,16 +185,16 @@ class ControllerCatalogNews extends Controller {
 			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		}
 
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
-		}
-
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
 		}
 
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
+		}
+
+		if (isset($this->request->get['page'])) {
+			$url .= '&page=' . $this->request->get['page'];
 		}
 
   		$this->data['breadcrumbs'] = array();
@@ -208,7 +208,7 @@ class ControllerCatalogNews extends Controller {
    		$this->data['breadcrumbs'][] = array(
        		'href'      => $this->url->link('catalog/news', '&token=' . $this->session->data['token'] . $url, 'SSL'),
        		'text'      => $this->language->get('heading_title'),
-      		'separator' => ' :: '
+      		'separator' => $this->language->get('text_separator')
    		);
 
 		$this->data['insert'] = $this->url->link('catalog/news/insert', '&token=' . $this->session->data['token'] . $url, 'SSL');
