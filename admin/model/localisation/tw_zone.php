@@ -1,7 +1,7 @@
 <?php
 class ModelLocalisationTwZone extends Model {
 	public function addZone($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "tw_zone SET status = '" . (int)$data['status'] . "', name = " . $this->db->escape($data['name']) . ", postcode = " . $this->db->escape($data['postcode']) . ", zone_id = '" . (int)$data['zone_id'] . "'");
+		$this->db->insert('tw_zone', $data);
 
 		$this->cache->delete('tw_zone');
 	}
