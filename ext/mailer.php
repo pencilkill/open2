@@ -5,5 +5,23 @@ class Mailer extends PHPMailer{
 	public function __construct($exceptions = false){
 		parent::__construct($exceptions);
 	}
+
+	public function AddAddresses($addresses, $delimiter = ','){
+		$addresses = is_array($addresses) ? $addresses : explode($delimiter, $addresses);
+
+		if($addresses && ($addresses = array_filter($addresses))){
+			foreach($addresses as $key => $val){
+				$address = $key;
+				$name = $val;
+
+				if(is_numeric($key)){
+					$address = $val;
+					$name = '';		// PHPMailer default value
+				}
+
+				$this->AddAddress($address, $name);
+			}
+		}
+	}
 }
 ?>

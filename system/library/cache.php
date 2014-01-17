@@ -63,8 +63,11 @@ class Cache {
   	}
 
   	public function getCaches() {
-		$files = glob(self::DIRECTORY_CACHE . self::PREFIX_CACHE . '.*.*');
-		array_walk_recursive($files, function(&$v){$v = strtr($v, array(self::DIRECTORY_CACHE => ''));});
+		$files = array();
+
+		foreach(glob(self::DIRECTORY_CACHE . self::PREFIX_CACHE . '.*.*') as $file){
+			$files[] = strtr($file, array(self::DIRECTORY_CACHE => ''));
+		}
 
 		return $files ? $files : array();
   	}

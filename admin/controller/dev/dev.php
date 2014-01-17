@@ -283,6 +283,44 @@ class ControllerDevDev extends Controller {
 		imagedestroy($image);
 	}
 
+	public function twzone(){
+		$this->forward('error/not_found');
+		$zipcode = include_once DIR_PATH . 'sql/twzipcode.php';
+
+		$country_id = 206;
+
+		$this->db->delete('zone', array('country_id' => $country_id));
+		$this->db->truncate('county');
+
+		$r = 1;
+		foreach ($zipcode as $k => $v){
+			$data = array(
+				'country_id' => '206',
+				'sort_order' => $r,
+				'name' => $k,
+				'status' => '1'
+			);
+			$this->db->insert('zone', $data);
+
+			$zone_id = $this->db->getLastId();
+
+			$r1 = 1;
+			foreach($v as $k2 => $v2){
+				$data = array(
+					'zone_id' => $zone_id,
+					'sort_order' => $r1,
+					'postcode' => $v2,
+					'name' => $k2,
+					'status' => '1',
+				);
+				$this->db->insert('county', $data);
+				$r1++;
+			}
+
+			$r++;
+		}
+	}
+
 	private function validate(){
 		return (strpos(strtolower($_SERVER['HTTP_HOST']),'local')!==false) && $this->user->isLogged();
 	}

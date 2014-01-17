@@ -31,7 +31,7 @@ class Mail{
 			throw new Exception('Can not load mailer !');
 		}
 
-		if(! class_exists('Mailer')){
+		if(! class_exists('Mailer', false)){
 			throw new Exception('Can not load mailer !');
 		}
 		// Using clone without changing orignal object

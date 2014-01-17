@@ -64,7 +64,7 @@ class ModelLocalisationZone extends Model {
 		$zone_data = $this->cache->get('zone.' . (int)$country_id);
 
 		if (!$zone_data) {
-			$query = $this->db->from('zone')->where(array('country_id' => (int)$country_id))->order_by('name', 'ASC');
+			$query = $this->db->from('zone')->where(array('country_id' => (int)$country_id))->order_by('sort_order', 'ASC')->get();
 
 			$zone_data = $query->rows;
 

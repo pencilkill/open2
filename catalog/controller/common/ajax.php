@@ -16,9 +16,9 @@ class ControllerCommonAjax extends Controller{
 			return $return;
 		}
 
-		$this->load->model('localisation/tw_zone');
+		$this->load->model('localisation/county');
 
-		$twzones = $this->model_localisation_tw_zone->getZonesByCityId($this->request->get['zone_id']);	// Actually, getting counties By TW zone_id
+		$twzones = $this->model_localisation_county->getCountiesByZoneId($this->request->get['zone_id']);	// Actually, getting counties By TW zone_id
 
 		if(isset($this->request->get['opt']) && $this->request->get['opt']){
 			$kf = 'county_id';
