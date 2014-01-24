@@ -1,97 +1,95 @@
 <?php
 class ModelReportProduct extends Model {
 	public function getProductsViewed($data = array()) {
-		$sql = "SELECT pd.name, p.model, p.viewed FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.viewed > 0 ORDER BY p.viewed DESC";
-					
-		if (isset($data['start']) || isset($data['limit'])) {
-			if ($data['start'] < 0) {
-				$data['start'] = 0;
-			}			
+		$query = $this->db->select('pd.name, p.model, p.viewed')->from('product p')->join('product_description pd', 'p.product_id = pd.product_id')->where(array('pd.language_id' => (int)$this->config->get('config_language_id'), 'p.viewed >' => 0))->order_by('p.viewed', 'DESC');
 
-			if ($data['limit'] < 1) {
+		if (isset($data['start']) || isset($data['limit'])) {
+			if (!isset($data['start']) || (int)$data['start'] < 0) {
+				$data['start'] = 0;
+			}
+
+			if (!isset($data['limit']) || (int)$data['limit'] < 1) {
 				$data['limit'] = 20;
-			}	
-			
-			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
-		}	
-		
-		$query = $this->db->query($sql);
-		
-		return $query->rows;
-	}	
-	
+			}
+
+			$query->limit((int)$data['limit'], (int)$data['start']);
+		}
+
+		return $query->get()->rows;
+	}
+
 	public function getTotalProductsViewed() {
-      	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "product WHERE viewed > 0");
-		
+      	$query = $this->db->where('viewed > ', 0)->count_all_results('product');
+
 		return $query->row['total'];
 	}
-	
+
 	public function getTotalProductViews() {
-      	$query = $this->db->query("SELECT SUM(viewed) AS total FROM " . DB_PREFIX . "product");
-		
-		return $query->row['total'];
+      	$query = $this->db->select('SUM(viewed) AS total')->from('product');
+
+		return $query->get()->row['total'];
 	}
-			
+
 	public function reset() {
-		$this->db->query("UPDATE " . DB_PREFIX . "product SET viewed = '0'");
+		$this->db->update('product', array('viewed' => '0'));
 	}
-	
+
 	public function getPurchased($data = array()) {
-		$sql = "SELECT op.name, op.model, SUM(op.quantity) AS quantity, SUM(op.total + op.total * op.tax / 100) AS total FROM " . DB_PREFIX . "order_product op LEFT JOIN `" . DB_PREFIX . "order` o ON (op.order_id = o.order_id)";
-		
+		$query = $this->db->select('op.name, op.model, SUM(op.quantity) AS quantity, SUM(op.total + op.total * op.tax / 100) AS total')
+			->from('order_product op')
+			->join('order o', 'op.order_id = o.order_id');
+
 		if (!empty($data['filter_order_status_id'])) {
-			$sql .= " WHERE o.order_status_id = '" . (int)$data['filter_order_status_id'] . "'";
+			$query->where('o.order_status_id', (int)$data['filter_order_status_id']);
 		} else {
-			$sql .= " WHERE o.order_status_id > '0'";
+			$query->where('o.order_status_id > ', 0);
 		}
-		
+
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(o.date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
+			$query->where('DATE(o.date_added) >= ', $data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(o.date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
+			$query->where('DATE(o.date_added) <= ', $data['filter_date_end']);
 		}
-		
-		$sql .= " GROUP BY op.model ORDER BY total DESC";
-					
+
+		$query->group_by('op.model');
+
+		$query->order_by('total', 'DESC');
+
 		if (isset($data['start']) || isset($data['limit'])) {
-			if ($data['start'] < 0) {
+			if (!isset($data['start']) || (int)$data['start'] < 0) {
 				$data['start'] = 0;
-			}			
+			}
 
-			if ($data['limit'] < 1) {
+			if (!isset($data['limit']) || (int)$data['limit'] < 1) {
 				$data['limit'] = 20;
-			}	
-			
-			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+			}
+
+			$query->limit((int)$data['limit'], (int)$data['start']);
 		}
-		
-		$query = $this->db->query($sql);
-	
-		return $query->rows;
+
+		return $query->get()->rows;
 	}
-	
+
 	public function getTotalPurchased($data) {
-      	$sql = "SELECT COUNT(DISTINCT op.model) AS total FROM `" . DB_PREFIX . "order_product` op LEFT JOIN `" . DB_PREFIX . "order` o ON (op.order_id = o.order_id)";
+		$query = $this->db->select('COUNT(DISTINCT ' . $this->db->protect_identifiers('op.model') . ') AS total', false)->from('order_product op')->join('order o', 'op.order_id = o.order_id');
 
 		if (!empty($data['filter_order_status_id'])) {
-			$sql .= " WHERE o.order_status_id = '" . (int)$data['filter_order_status_id'] . "'";
+			$query->where('o.order_status_id', (int)$data['filter_order_status_id']);
 		} else {
-			$sql .= " WHERE o.order_status_id > '0'";
+			$query->where('o.order_status_id > ', 0);
 		}
-		
+
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(o.date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
+			$query->where('DATE(o.date_added) >= ', $data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(o.date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
+			$query->where('DATE(o.date_added) <= ', $data['filter_date_end']);
 		}
-		
-		$query = $this->db->query($sql);
-				
-		return $query->row['total'];
+
+		return $query->get()->row['total'];
 	}
 }
 ?>

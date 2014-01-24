@@ -1,61 +1,49 @@
 <?php
 class ModelReportCoupon extends Model {
 	public function getCoupons($data = array()) {
-		$sql = "SELECT ch.coupon_id, c.name, c.code, COUNT(DISTINCT ch.order_id) AS `orders`, SUM(ch.amount) AS total FROM `" . DB_PREFIX . "coupon_history` ch LEFT JOIN `" . DB_PREFIX . "coupon` c ON (ch.coupon_id = c.coupon_id)"; 
+		$query = $this->db->select($this->db->protect_identifiers('ch.coupon_id, c.name, c.code') . ', ' . 'COUNT(DISTINCT ' . $this->db->protect_identifiers('ch.order_id') . ') AS ' . $this->db->protect_identifiers('orders') . ', ' . $this->db->protect_identifiers('SUM(ch.amount) AS total'), false)
+			->from('coupon_history ch')
+			->join('coupon c', 'ch.coupon_id = c.coupon_id');
 
-		$implode = array();
-		
 		if (!empty($data['filter_date_start'])) {
-			$implode[] = "DATE(c.date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
+			$query->where('DATE(c.date_added) >= ', $data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$implode[] = "DATE(c.date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
+			$query->where('DATE(c.date_added) <= ', $data['filter_date_end']);
 		}
 
-		if ($implode) {
-			$sql .= " WHERE " . implode(" AND ", $implode);
-		}
-				
-		$sql .= " GROUP BY ch.coupon_id ORDER BY total DESC";
-		
+		$query->group_by('ch.coupon_id');
+
+		$query->order_by('total', 'DESC');
+
 		if (isset($data['start']) || isset($data['limit'])) {
-			if ($data['start'] < 0) {
+			if (!isset($data['start']) || (int)$data['start'] < 0) {
 				$data['start'] = 0;
-			}			
+			}
 
-			if ($data['limit'] < 1) {
+			if (!isset($data['limit']) || (int)$data['limit'] < 1) {
 				$data['limit'] = 20;
-			}	
-			
-			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
-		}	
-		
-		$query = $this->db->query($sql);
-		
-		return $query->rows;
-	}	
-	
+			}
+
+			$query->limit((int)$data['limit'], (int)$data['start']);
+		}
+
+		return $query->get()->rows;
+	}
+
 	public function getTotalCoupons($data = array()) {
-		$sql = "SELECT COUNT(DISTINCT coupon_id) AS total FROM `" . DB_PREFIX . "coupon_history`";
-		
-		$implode = array();
-		
+		$query = $this->db->select('COUNT(DISTINCT ' . $this->db->protected_identifiers('coupon_id') . ') AS total', false)->from('coupon_history');
+
 		if (!empty($data['filter_date_start'])) {
-			$implode[] = "DATE(date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
+			$query->where('DATE(date_added) >= ', $data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$implode[] = "DATE(date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
+			$query->where('DATE(date_added) <= ', $data['filter_date_end']);
 		}
 
-		if ($implode) {
-			$sql .= " WHERE " . implode(" AND ", $implode);
-		}
-
-		$query = $this->db->query($sql);
-
-		return $query->row['total'];	
-	}		
+		return $query->get()->row['total'];
+	}
 }
 ?>

@@ -1,101 +1,97 @@
 <?php
 class ModelReportReturn extends Model {
 	public function getReturns($data = array()) {
-		$sql = "SELECT MIN(r.date_added) AS date_start, MAX(r.date_added) AS date_end, COUNT(r.return_id) AS `returns` FROM `" . DB_PREFIX . "return` r"; 
+		$query = $this->db->select('MIN(r.date_added) AS date_start, MAX(r.date_added) AS date_end, COUNT(r.return_id) AS returns')->from('return r');
 
 		if (!empty($data['filter_return_status_id'])) {
-			$sql .= " WHERE r.return_status_id = '" . (int)$data['filter_return_status_id'] . "'";
+			$query->where('r.return_status_id', (int)$data['filter_return_status_id']);
 		} else {
-			$sql .= " WHERE r.return_status_id > '0'";
+			$query->where('r.return_status_id > ', 0);
 		}
-		
+
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(r.date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
+			$query->where('DATE(r.date_added) >= ', $data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(r.date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
+			$query->where('DATE(r.date_added) <= ', $data['filter_date_end']);
 		}
-		
+
 		if (isset($data['filter_group'])) {
 			$group = $data['filter_group'];
 		} else {
 			$group = 'week';
 		}
-		
+
 		switch($group) {
 			case 'day';
-				$sql .= " GROUP BY DAY(r.date_added)";
+				$query->where('DAY(r.date_added)');
 				break;
 			default:
 			case 'week':
-				$sql .= " GROUP BY WEEK(r.date_added)";
-				break;	
+				$query->where('WEEK(r.date_added)');
+				break;
 			case 'month':
-				$sql .= " GROUP BY MONTH(r.date_added)";
+				$query->where('MONTH(r.date_added)');
 				break;
 			case 'year':
-				$sql .= " GROUP BY YEAR(r.date_added)";
-				break;									
+				$query->where('YEAR(r.date_added)');
+				break;
 		}
-		
-		if (isset($data['start']) || isset($data['limit'])) {
-			if ($data['start'] < 0) {
-				$data['start'] = 0;
-			}			
 
-			if ($data['limit'] < 1) {
+		if (isset($data['start']) || isset($data['limit'])) {
+			if (!isset($data['start']) || (int)$data['start'] < 0) {
+				$data['start'] = 0;
+			}
+
+			if (!isset($data['limit']) || (int)$data['limit'] < 1) {
 				$data['limit'] = 20;
-			}	
-			
-			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
-		}	
-		
-		$query = $this->db->query($sql);
-		
-		return $query->rows;
-	}	
-	
+			}
+
+			$query->limit((int)$data['limit'], (int)$data['start']);
+		}
+
+		return $query->get()->rows;
+	}
+
 	public function getTotalReturns($data = array()) {
 		if (!empty($data['filter_group'])) {
 			$group = $data['filter_group'];
 		} else {
 			$group = 'week';
 		}
-		
+
 		switch($group) {
 			case 'day';
-				$sql = "SELECT COUNT(DISTINCT DAY(date_added)) AS total FROM `" . DB_PREFIX . "return`";
+				$query = $this->db->select("COUNT(DISTINCT DAY(" . $this->db->protect_identifiers('date_added') . ")) AS total", false)->from('return');
 				break;
 			default:
 			case 'week':
-				$sql = "SELECT COUNT(DISTINCT WEEK(date_added)) AS total FROM `" . DB_PREFIX . "return`";
-				break;	
+				$query = $this->db->select("COUNT(DISTINCT WEEK(" . $this->db->protect_identifiers('date_added') . ")) AS total", false)->from('return');
+				break;
 			case 'month':
-				$sql = "SELECT COUNT(DISTINCT MONTH(date_added)) AS total FROM `" . DB_PREFIX . "return`";
+				$query = $this->db->select("COUNT(DISTINCT MONTH(" . $this->db->protect_identifiers('date_added') . ")) AS total", false)->from('return');
 				break;
 			case 'year':
-				$sql = "SELECT COUNT(DISTINCT YEAR(date_added)) AS total FROM `" . DB_PREFIX . "return`";
-				break;									
+				$query = $this->db->select("COUNT(DISTINCT YEAR(" . $this->db->protect_identifiers('date_added') . ")) AS total", false)->from('return');
+				break;
 		}
-		
+
 		if (!empty($data['filter_return_status_id'])) {
-			$sql .= " WHERE return_status_id = '" . (int)$data['filter_return_status_id'] . "'";
+			$query->where('return_status_id', (int)$data['filter_return_status_id']);
 		} else {
-			$sql .= " WHERE return_status_id > '0'";
+			$query->where('return_status_id > ', 0);
 		}
-				
+
 		if (!empty($data['filter_date_start'])) {
-			$sql .= " AND DATE(date_added) >= " . $this->db->escape($data['filter_date_start']) . "";
+			$query->where('DATE(date_added) >= ', $data['filter_date_start']);
 		}
 
 		if (!empty($data['filter_date_end'])) {
-			$sql .= " AND DATE(date_added) <= " . $this->db->escape($data['filter_date_end']) . "";
+			$query->where('DATE(date_added) <= ', $data['filter_date_end']);
 		}
 
-		$query = $this->db->query($sql);
-
-		return $query->row['total'];	
-	}	
+		return $query->get()->row['total'];
+	}
 }
 ?>
