@@ -16,7 +16,7 @@
 // ------------------------------------------------------------------------
 
 /**
- * SQLite Result Class
+ * MS SQL Result Class
  *
  * This class extends the parent result class: CI_DB_result
  *
@@ -24,7 +24,7 @@
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/database/
  */
-class CI_DB_sqlite_result extends CI_DB_result {
+class CI_DB_mssql_result extends CI_DB_result {
 
 	/**
 	 * Number of rows in the result set
@@ -34,7 +34,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function num_rows()
 	{
-		return @sqlite_num_rows($this->result_id);
+		return @mssql_num_rows($this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -47,7 +47,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function num_fields()
 	{
-		return @sqlite_num_fields($this->result_id);
+		return @mssql_num_fields($this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -63,9 +63,9 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	function list_fields()
 	{
 		$field_names = array();
-		for ($i = 0; $i < $this->num_fields(); $i++)
+		while ($field = mssql_fetch_field($this->result_id))
 		{
-			$field_names[] = sqlite_field_name($this->result_id, $i);
+			$field_names[] = $field->name;
 		}
 
 		return $field_names;
@@ -84,12 +84,12 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	function field_data()
 	{
 		$retval = array();
-		for ($i = 0; $i < $this->num_fields(); $i++)
+		while ($field = mssql_fetch_field($this->result_id))
 		{
 			$F				= new stdClass();
-			$F->name		= sqlite_field_name($this->result_id, $i);
-			$F->type		= 'varchar';
-			$F->max_length	= 0;
+			$F->name		= $field->name;
+			$F->type		= $field->type;
+			$F->max_length	= $field->max_length;
 			$F->primary_key = 0;
 			$F->default		= '';
 
@@ -108,7 +108,11 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function free_result()
 	{
-		// Not implemented in SQLite
+		if (is_resource($this->result_id))
+		{
+			mssql_free_result($this->result_id);
+			$this->result_id = FALSE;
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -125,7 +129,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function _data_seek($n = 0)
 	{
-		return sqlite_seek($this->result_id, $n);
+		return mssql_data_seek($this->result_id, $n);
 	}
 
 	// --------------------------------------------------------------------
@@ -140,7 +144,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function _fetch_assoc()
 	{
-		return sqlite_fetch_array($this->result_id);
+		return mssql_fetch_assoc($this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -155,25 +159,11 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function _fetch_object()
 	{
-		if (function_exists('sqlite_fetch_object'))
-		{
-			return sqlite_fetch_object($this->result_id);
-		}
-		else
-		{
-			$arr = sqlite_fetch_array($this->result_id, SQLITE_ASSOC);
-			if (is_array($arr))
-			{
-				$obj = (object) $arr;
-				return $obj;
-			} else {
-				return NULL;
-			}
-		}
+		return mssql_fetch_object($this->result_id);
 	}
 
 }
 
 
-/* End of file sqlite_result.php */
-/* Location: ./system/database/drivers/sqlite/sqlite_result.php */
+/* End of file mssql_result.php */
+/* Location: ./system/database/drivers/mssql/mssql_result.php */

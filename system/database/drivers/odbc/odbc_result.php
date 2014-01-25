@@ -16,7 +16,7 @@
 // ------------------------------------------------------------------------
 
 /**
- * SQLite Result Class
+ * ODBC Result Class
  *
  * This class extends the parent result class: CI_DB_result
  *
@@ -24,7 +24,7 @@
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/database/
  */
-class CI_DB_sqlite_result extends CI_DB_result {
+class CI_DB_odbc_result extends CI_DB_result {
 
 	/**
 	 * Number of rows in the result set
@@ -34,7 +34,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function num_rows()
 	{
-		return @sqlite_num_rows($this->result_id);
+		return @odbc_num_rows($this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -47,7 +47,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function num_fields()
 	{
-		return @sqlite_num_fields($this->result_id);
+		return @odbc_num_fields($this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -65,7 +65,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 		$field_names = array();
 		for ($i = 0; $i < $this->num_fields(); $i++)
 		{
-			$field_names[] = sqlite_field_name($this->result_id, $i);
+			$field_names[]	= odbc_field_name($this->result_id, $i);
 		}
 
 		return $field_names;
@@ -87,9 +87,9 @@ class CI_DB_sqlite_result extends CI_DB_result {
 		for ($i = 0; $i < $this->num_fields(); $i++)
 		{
 			$F				= new stdClass();
-			$F->name		= sqlite_field_name($this->result_id, $i);
-			$F->type		= 'varchar';
-			$F->max_length	= 0;
+			$F->name		= odbc_field_name($this->result_id, $i);
+			$F->type		= odbc_field_type($this->result_id, $i);
+			$F->max_length	= odbc_field_len($this->result_id, $i);
 			$F->primary_key = 0;
 			$F->default		= '';
 
@@ -108,7 +108,11 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function free_result()
 	{
-		// Not implemented in SQLite
+		if (is_resource($this->result_id))
+		{
+			odbc_free_result($this->result_id);
+			$this->result_id = FALSE;
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -125,7 +129,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function _data_seek($n = 0)
 	{
-		return sqlite_seek($this->result_id, $n);
+		return FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -140,7 +144,14 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function _fetch_assoc()
 	{
-		return sqlite_fetch_array($this->result_id);
+		if (function_exists('odbc_fetch_object'))
+		{
+			return odbc_fetch_array($this->result_id);
+		}
+		else
+		{
+			return $this->_odbc_fetch_array($this->result_id);
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -155,25 +166,63 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function _fetch_object()
 	{
-		if (function_exists('sqlite_fetch_object'))
+		if (function_exists('odbc_fetch_object'))
 		{
-			return sqlite_fetch_object($this->result_id);
+			return odbc_fetch_object($this->result_id);
 		}
 		else
 		{
-			$arr = sqlite_fetch_array($this->result_id, SQLITE_ASSOC);
-			if (is_array($arr))
-			{
-				$obj = (object) $arr;
-				return $obj;
-			} else {
-				return NULL;
+			return $this->_odbc_fetch_object($this->result_id);
+		}
+	}
+
+
+	/**
+	 * Result - object
+	 *
+	 * subsititutes the odbc_fetch_object function when
+	 * not available (odbc_fetch_object requires unixODBC)
+	 *
+	 * @access	private
+	 * @return	object
+	 */
+	function _odbc_fetch_object(& $odbc_result) {
+		$rs = array();
+		$rs_obj = FALSE;
+		if (odbc_fetch_into($odbc_result, $rs)) {
+			foreach ($rs as $k=>$v) {
+				$field_name= odbc_field_name($odbc_result, $k+1);
+				$rs_obj->$field_name = $v;
 			}
 		}
+		return $rs_obj;
+	}
+
+
+	/**
+	 * Result - array
+	 *
+	 * subsititutes the odbc_fetch_array function when
+	 * not available (odbc_fetch_array requires unixODBC)
+	 *
+	 * @access	private
+	 * @return	array
+	 */
+	function _odbc_fetch_array(& $odbc_result) {
+		$rs = array();
+		$rs_assoc = FALSE;
+		if (odbc_fetch_into($odbc_result, $rs)) {
+			$rs_assoc=array();
+			foreach ($rs as $k=>$v) {
+				$field_name= odbc_field_name($odbc_result, $k+1);
+				$rs_assoc[$field_name] = $v;
+			}
+		}
+		return $rs_assoc;
 	}
 
 }
 
 
-/* End of file sqlite_result.php */
-/* Location: ./system/database/drivers/sqlite/sqlite_result.php */
+/* End of file odbc_result.php */
+/* Location: ./system/database/drivers/odbc/odbc_result.php */

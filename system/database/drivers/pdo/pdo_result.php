@@ -5,36 +5,48 @@
  * An open source application development framework for PHP 5.1.6 or newer
  *
  * @package		CodeIgniter
- * @author		ExpressionEngine Dev Team
  * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
+ * @author		EllisLab Dev Team
  * @link		http://codeigniter.com
- * @since		Version 1.0
+ * @since		Version 2.1.2
  * @filesource
  */
 
 // ------------------------------------------------------------------------
 
 /**
- * SQLite Result Class
+ * PDO Result Class
  *
  * This class extends the parent result class: CI_DB_result
  *
  * @category	Database
- * @author		ExpressionEngine Dev Team
+ * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/database/
  */
-class CI_DB_sqlite_result extends CI_DB_result {
+class CI_DB_pdo_result extends CI_DB_result {
+
+	public $num_rows;
 
 	/**
 	 * Number of rows in the result set
 	 *
-	 * @access	public
-	 * @return	integer
+	 * @return	int
 	 */
-	function num_rows()
+	public function num_rows()
 	{
-		return @sqlite_num_rows($this->result_id);
+		if (is_int($this->num_rows))
+		{
+			return $this->num_rows;
+		}
+		elseif (($this->num_rows = $this->result_id->rowCount()) > 0)
+		{
+			return $this->num_rows;
+		}
+
+		$this->num_rows = count($this->result_id->fetchAll());
+		$this->result_id->execute();
+		return $this->num_rows;
 	}
 
 	// --------------------------------------------------------------------
@@ -47,7 +59,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function num_fields()
 	{
-		return @sqlite_num_fields($this->result_id);
+		return $this->result_id->columnCount();
 	}
 
 	// --------------------------------------------------------------------
@@ -62,13 +74,11 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function list_fields()
 	{
-		$field_names = array();
-		for ($i = 0; $i < $this->num_fields(); $i++)
+		if ($this->db->db_debug)
 		{
-			$field_names[] = sqlite_field_name($this->result_id, $i);
+			return $this->db->display_error('db_unsuported_feature');
 		}
-
-		return $field_names;
+		return FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -83,20 +93,25 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function field_data()
 	{
-		$retval = array();
-		for ($i = 0; $i < $this->num_fields(); $i++)
+		$data = array();
+	
+		try
 		{
-			$F				= new stdClass();
-			$F->name		= sqlite_field_name($this->result_id, $i);
-			$F->type		= 'varchar';
-			$F->max_length	= 0;
-			$F->primary_key = 0;
-			$F->default		= '';
-
-			$retval[] = $F;
+			for($i = 0; $i < $this->num_fields(); $i++)
+			{
+				$data[] = $this->result_id->getColumnMeta($i);
+			}
+			
+			return $data;
 		}
-
-		return $retval;
+		catch (Exception $e)
+		{
+			if ($this->db->db_debug)
+			{
+				return $this->db->display_error('db_unsuported_feature');
+			}
+			return FALSE;
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -108,7 +123,10 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function free_result()
 	{
-		// Not implemented in SQLite
+		if (is_object($this->result_id))
+		{
+			$this->result_id = FALSE;
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -125,7 +143,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function _data_seek($n = 0)
 	{
-		return sqlite_seek($this->result_id, $n);
+		return FALSE;
 	}
 
 	// --------------------------------------------------------------------
@@ -140,7 +158,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	function _fetch_assoc()
 	{
-		return sqlite_fetch_array($this->result_id);
+		return $this->result_id->fetch(PDO::FETCH_ASSOC);
 	}
 
 	// --------------------------------------------------------------------
@@ -154,26 +172,12 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 * @return	object
 	 */
 	function _fetch_object()
-	{
-		if (function_exists('sqlite_fetch_object'))
-		{
-			return sqlite_fetch_object($this->result_id);
-		}
-		else
-		{
-			$arr = sqlite_fetch_array($this->result_id, SQLITE_ASSOC);
-			if (is_array($arr))
-			{
-				$obj = (object) $arr;
-				return $obj;
-			} else {
-				return NULL;
-			}
-		}
+	{	
+		return $this->result_id->fetchObject();
 	}
 
 }
 
 
-/* End of file sqlite_result.php */
-/* Location: ./system/database/drivers/sqlite/sqlite_result.php */
+/* End of file pdo_result.php */
+/* Location: ./system/database/drivers/pdo/pdo_result.php */

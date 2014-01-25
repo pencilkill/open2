@@ -16,7 +16,7 @@
 // ------------------------------------------------------------------------
 
 /**
- * Postgre Database Adapter Class
+ * MS SQL Database Adapter Class
  *
  * Note: _DB is an extender class that the app controller
  * creates dynamically based on whether the active record
@@ -28,11 +28,12 @@
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/database/
  */
-class CI_DB_postgre_driver extends CI_DB {
+class CI_DB_mssql_driver extends CI_DB {
 
-	var $dbdriver = 'postgre';
+	var $dbdriver = 'mssql';
 
-	var $_escape_char = '"';
+	// The character used for escaping
+	var $_escape_char = '';
 
 	// clause and character used for LIKE escape sequences
 	var $_like_escape_str = " ESCAPE '%s' ";
@@ -44,36 +45,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 * used for the count_all() and count_all_results() functions.
 	 */
 	var $_count_string = "SELECT COUNT(*) AS ";
-	var $_random_keyword = ' RANDOM()'; // database specific random keyword
-
-	/**
-	 * Connection String
-	 *
-	 * @access	private
-	 * @return	string
-	 */
-	function _connect_string()
-	{
-		$components = array(
-								'hostname'	=> 'host',
-								'port'		=> 'port',
-								'database'	=> 'dbname',
-								'username'	=> 'user',
-								'password'	=> 'password'
-							);
-
-		$connect_string = "";
-		foreach ($components as $key => $val)
-		{
-			if (isset($this->$key) && $this->$key != '')
-			{
-				$connect_string .= " $val=".$this->$key;
-			}
-		}
-		return trim($connect_string);
-	}
-
-	// --------------------------------------------------------------------
+	var $_random_keyword = ' ASC'; // not currently supported
 
 	/**
 	 * Non-persistent database connection
@@ -83,7 +55,12 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function db_connect()
 	{
-		return @pg_connect($this->_connect_string());
+		if ($this->port != '')
+		{
+			$this->hostname .= ','.$this->port;
+		}
+
+		return @mssql_connect($this->hostname, $this->username, $this->password);
 	}
 
 	// --------------------------------------------------------------------
@@ -96,7 +73,12 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function db_pconnect()
 	{
-		return @pg_pconnect($this->_connect_string());
+		if ($this->port != '')
+		{
+			$this->hostname .= ','.$this->port;
+		}
+
+		return @mssql_pconnect($this->hostname, $this->username, $this->password);
 	}
 
 	// --------------------------------------------------------------------
@@ -112,10 +94,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function reconnect()
 	{
-		if (pg_ping($this->conn_id) === FALSE)
-		{
-			$this->conn_id = FALSE;
-		}
+		// not implemented in MSSQL
 	}
 
 	// --------------------------------------------------------------------
@@ -128,8 +107,9 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function db_select()
 	{
-		// Not needed for Postgre so we'll return TRUE
-		return TRUE;
+		// Note: The brackets are required in the event that the DB name
+		// contains reserved characters
+		return @mssql_select_db('['.$this->database.']', $this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -151,19 +131,6 @@ class CI_DB_postgre_driver extends CI_DB {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Version number query string
-	 *
-	 * @access	public
-	 * @return	string
-	 */
-	function _version()
-	{
-		return "SELECT version() AS ver";
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
 	 * Execute the query
 	 *
 	 * @access	private called by the base class
@@ -173,7 +140,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	function _execute($sql)
 	{
 		$sql = $this->_prep_query($sql);
-		return @pg_query($this->conn_id, $sql);
+		return @mssql_query($sql, $this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -218,7 +185,8 @@ class CI_DB_postgre_driver extends CI_DB {
 		// even if the queries produce a successful result.
 		$this->_trans_failure = ($test_mode === TRUE) ? TRUE : FALSE;
 
-		return @pg_exec($this->conn_id, "begin");
+		$this->simple_query('BEGIN TRAN');
+		return TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -242,7 +210,8 @@ class CI_DB_postgre_driver extends CI_DB {
 			return TRUE;
 		}
 
-		return @pg_exec($this->conn_id, "commit");
+		$this->simple_query('COMMIT TRAN');
+		return TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -266,7 +235,8 @@ class CI_DB_postgre_driver extends CI_DB {
 			return TRUE;
 		}
 
-		return @pg_exec($this->conn_id, "rollback");
+		$this->simple_query('ROLLBACK TRAN');
+		return TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -291,14 +261,17 @@ class CI_DB_postgre_driver extends CI_DB {
 			return $str;
 		}
 
-		$str = pg_escape_string($str);
+		// Escape single quotes
+		$str = str_replace("'", "''", remove_invisible_characters($str));
 
 		// escape LIKE condition wildcards
 		if ($like === TRUE)
 		{
-			$str = str_replace(	array('%', '_', $this->_like_escape_chr),
-								array($this->_like_escape_chr.'%', $this->_like_escape_chr.'_', $this->_like_escape_chr.$this->_like_escape_chr),
-								$str);
+			$str = str_replace(
+				array($this->_like_escape_chr, '%', '_'),
+				array($this->_like_escape_chr.$this->_like_escape_chr, $this->_like_escape_chr.'%', $this->_like_escape_chr.'_'),
+				$str
+			);
 		}
 
 		return $str;
@@ -314,48 +287,57 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function affected_rows()
 	{
-		return @pg_affected_rows($this->result_id);
+		return @mssql_rows_affected($this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
-	 * Insert ID
-	 *
-	 * @access	public
-	 * @return	integer
-	 */
+	* Insert ID
+	*
+	* Returns the last id created in the Identity column.
+	*
+	* @access public
+	* @return integer
+	*/
 	function insert_id()
 	{
-		$v = $this->_version();
-		$v = $v['server'];
-
-		$table	= func_num_args() > 0 ? func_get_arg(0) : NULL;
-		$column	= func_num_args() > 1 ? func_get_arg(1) : NULL;
-
-		if ($table == NULL && $v >= '8.1')
-		{
-			$sql='SELECT LASTVAL() as ins_id';
-		}
-		elseif ($table != NULL && $column != NULL && $v >= '8.0')
-		{
-			$sql = sprintf("SELECT pg_get_serial_sequence('%s','%s') as seq", $table, $column);
-			$query = $this->query($sql);
-			$row = $query->row();
-			$sql = sprintf("SELECT CURRVAL('%s') as ins_id", $row->seq);
-		}
-		elseif ($table != NULL)
-		{
-			// seq_name passed in table parameter
-			$sql = sprintf("SELECT CURRVAL('%s') as ins_id", $table);
-		}
-		else
-		{
-			return pg_last_oid($this->result_id);
-		}
+		$ver = self::_parse_major_version($this->version());
+		$sql = ($ver >= 8 ? "SELECT SCOPE_IDENTITY() AS last_id" : "SELECT @@IDENTITY AS last_id");
 		$query = $this->query($sql);
 		$row = $query->row();
-		return $row->ins_id;
+		return $row->last_id;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	* Parse major version
+	*
+	* Grabs the major version number from the
+	* database server version string passed in.
+	*
+	* @access private
+	* @param string $version
+	* @return int16 major version number
+	*/
+	function _parse_major_version($version)
+	{
+		preg_match('/([0-9]+)\.([0-9]+)\.([0-9]+)/', $version, $ver_info);
+		return $ver_info[1]; // return the major version b/c that's all we're interested in.
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	* Version number query string
+	*
+	* @access public
+	* @return string
+	*/
+	function _version()
+	{
+		return "SELECT @@VERSION AS ver";
 	}
 
 	// --------------------------------------------------------------------
@@ -392,7 +374,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Show table query
+	 * List table query
 	 *
 	 * Generates a platform-specific query string so that the table names can be fetched
 	 *
@@ -402,11 +384,13 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function _list_tables($prefix_limit = FALSE)
 	{
-		$sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'";
+		$sql = "SELECT name FROM sysobjects WHERE type = 'U' ORDER BY name";
 
+		// for future compatibility
 		if ($prefix_limit !== FALSE AND $this->dbprefix != '')
 		{
-			$sql .= " AND table_name LIKE '".$this->escape_like_str($this->dbprefix)."%' ".sprintf($this->_like_escape_str, $this->_like_escape_chr);
+			//$sql .= " LIKE '".$this->escape_like_str($this->dbprefix)."%' ".sprintf($this->_like_escape_str, $this->_like_escape_chr);
+			return FALSE; // not currently supported
 		}
 
 		return $sql;
@@ -415,17 +399,17 @@ class CI_DB_postgre_driver extends CI_DB {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Show column query
+	 * List column query
 	 *
 	 * Generates a platform-specific query string so that the column names can be fetched
 	 *
-	 * @access	public
+	 * @access	private
 	 * @param	string	the table name
 	 * @return	string
 	 */
 	function _list_columns($table = '')
 	{
-		return "SELECT column_name FROM information_schema.columns WHERE table_name ='".$table."'";
+		return "SELECT * FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME = '".$table."'";
 	}
 
 	// --------------------------------------------------------------------
@@ -441,7 +425,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function _field_data($table)
 	{
-		return "SELECT * FROM ".$table." LIMIT 1";
+		return "SELECT TOP 1 * FROM ".$table;
 	}
 
 	// --------------------------------------------------------------------
@@ -454,7 +438,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function _error_message()
 	{
-		return pg_last_error($this->conn_id);
+		return mssql_get_last_message();
 	}
 
 	// --------------------------------------------------------------------
@@ -467,6 +451,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function _error_number()
 	{
+		// Are error numbers supported?
 		return '';
 	}
 
@@ -555,24 +540,6 @@ class CI_DB_postgre_driver extends CI_DB {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Insert_batch statement
-	 *
-	 * Generates a platform-specific insert string from the supplied data
-	 *
-	 * @access  public
-	 * @param   string  the table name
-	 * @param   array   the insert keys
-	 * @param   array   the insert values
-	 * @return  string
-	 */
-	function _insert_batch($table, $keys, $values)
-	{
-		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES ".implode(', ', $values);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
 	 * Update statement
 	 *
 	 * Generates a platform-specific update string from the supplied data
@@ -604,6 +571,7 @@ class CI_DB_postgre_driver extends CI_DB {
 
 		return $sql;
 	}
+
 
 	// --------------------------------------------------------------------
 
@@ -658,6 +626,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	}
 
 	// --------------------------------------------------------------------
+
 	/**
 	 * Limit string
 	 *
@@ -671,14 +640,9 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function _limit($sql, $limit, $offset)
 	{
-		$sql .= "LIMIT ".$limit;
+		$i = $limit + $offset;
 
-		if ($offset > 0)
-		{
-			$sql .= " OFFSET ".$offset;
-		}
-
-		return $sql;
+		return preg_replace('/(^\SELECT (DISTINCT)?)/i','\\1 TOP '.$i.' ', $sql);
 	}
 
 	// --------------------------------------------------------------------
@@ -692,12 +656,12 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function _close($conn_id)
 	{
-		@pg_close($conn_id);
+		@mssql_close($conn_id);
 	}
-
 
 }
 
 
-/* End of file postgre_driver.php */
-/* Location: ./system/database/drivers/postgre/postgre_driver.php */
+
+/* End of file mssql_driver.php */
+/* Location: ./system/database/drivers/mssql/mssql_driver.php */

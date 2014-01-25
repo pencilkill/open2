@@ -1,9 +1,9 @@
 <?php
 class ModelReportSale extends Model {
 	public function getOrders($data = array()) {
-		$s1 = $this->db->select('SUM(op.quantity)')->from('order_product op')->where('op.order_id', $this->db->protect_identifiers('o.order_id'))->group_by('op.order_id')->select_string();
+		$s1 = $this->db->select('SUM(op.quantity)')->from('order_product op')->where('op.order_id = ' . $this->db->protect_identifiers('o.order_id'))->group_by('op.order_id')->select_string();
 
-		$s2 = $this->db->select('SUM(ot.value)')->from('order_total ot')->where(array('ot.order_id' => $this->db->protect_identifiers('o.order_id'), 'ot.code' => 'tax'))->group_by('ot.order_id')->select_string();
+		$s2 = $this->db->select('SUM(ot.value)')->from('order_total ot')->where('ot.order_id = ' . $this->db->protect_identifiers('o.order_id'))->where(array('ot.code' => 'tax'))->group_by('ot.order_id')->select_string();
 
 		$s3 = $this->db->select('o.order_id, (' . $s1 . ') AS products, (' . $s2 . ') AS tax, o.total, o.date_added')->from('order o');
 
@@ -23,7 +23,7 @@ class ModelReportSale extends Model {
 
 		$s3 = $s3->group_by('o.order_id')->select_string();
 
-		$query = $this->db->select('MIN(tmp.date_added) AS date_start, MAX(tmp.date_added) AS date_end, COUNT(tmp.order_id) AS orders, SUM(tmp.products) AS products, SUM(tmp.tax) AS tax, SUM(tmp.total) AS total')->from('(' . $s3 . ') tmp');
+		$query = $this->db->select('MIN(tmp.date_added) AS date_start, MAX(tmp.date_added) AS date_end, COUNT(tmp.order_id) AS orders, SUM(tmp.products) AS products, SUM(tmp.tax) AS tax, SUM(tmp.total) AS total')->from('(' . $s3 . ') tmp', false);
 
 		if (!empty($data['filter_group'])) {
 			$group = $data['filter_group'];
@@ -73,17 +73,17 @@ class ModelReportSale extends Model {
 
 		switch($group) {
 			case 'day';
-				$query = $this->db->select('COUNT(DISTINCT ' . $this->protect_identifiers('DAY(date_added)') . ') AS total')->from('order');
+				$query = $this->db->select('COUNT(DISTINCT ' . $this->db->protect_identifiers('DAY(date_added)') . ') AS total')->from('order');
 				break;
 			default:
 			case 'week':
-				$query = $this->db->select('COUNT(DISTINCT ' . $this->protect_identifiers('WEEK(date_added)') . ') AS total')->from('order');
+				$query = $this->db->select('COUNT(DISTINCT ' . $this->db->protect_identifiers('WEEK(date_added)') . ') AS total')->from('order');
 				break;
 			case 'month':
-				$query = $this->db->select('COUNT(DISTINCT ' . $this->protect_identifiers('MONTH(date_added)') . ') AS total')->from('order');
+				$query = $this->db->select('COUNT(DISTINCT ' . $this->db->protect_identifiers('MONTH(date_added)') . ') AS total')->from('order');
 				break;
 			case 'year':
-				$query = $this->db->select('COUNT(DISTINCT ' . $this->protect_identifiers('YEAR(date_added)') . ') AS total')->from('order');
+				$query = $this->db->select('COUNT(DISTINCT ' . $this->db->protect_identifiers('YEAR(date_added)') . ') AS total')->from('order');
 				break;
 		}
 
@@ -205,7 +205,7 @@ class ModelReportSale extends Model {
 
 		$s1 = $s1->select_string();
 
-		$query = $this->db->select('COUNT(*) AS total')->from('(' . $s1 . ') tmp');
+		$query = $this->db->select('COUNT(*) AS total')->from('(' . $s1 . ') tmp', false);
 
 		return $query->get()->row['total'];
 	}
@@ -310,7 +310,7 @@ class ModelReportSale extends Model {
 
 		$s1 = $s1->select_string();
 
-		$query = $this->db->select('COUNT(*) AS total')->from('(' . $s1 . ') tmp');
+		$query = $this->db->select('COUNT(*) AS total')->from('(' . $s1 . ') tmp', false);
 
 		return $query->get()->row['total'];
 	}

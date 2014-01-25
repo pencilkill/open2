@@ -2,11 +2,11 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP 4.3.2 or newer
+ * An open source application development framework for PHP 5.1.6 or newer
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2009, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -216,13 +216,19 @@ class CI_DB_driver {
 			return FALSE;
 		}
 
-		if ($this->dbdriver == 'oci8')
+		// Some DBs have functions that return the version, and don't run special
+		// SQL queries per se. In these instances, just return the result.
+		$driver_version_exceptions = array('oci8', 'sqlite', 'cubrid');
+
+		if (in_array($this->dbdriver, $driver_version_exceptions))
 		{
 			return $sql;
 		}
-
-		$query = $this->query($sql);
-		return $query->row('ver');
+		else
+		{
+			$query = $this->query($sql);
+			return $query->row('ver');
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -259,6 +265,12 @@ class CI_DB_driver {
 			$sql = preg_replace("/(\W)".$this->swap_pre."(\S+?)/", "\\1".$this->dbprefix."\\2", $sql);
 		}
 
+		// Compile binds if needed
+		if ($binds !== FALSE)
+		{
+			$sql = $this->compile_binds($sql, $binds);
+		}
+
 		// Is query caching enabled?  If the query is a "read type"
 		// we will load the caching class and return the previously
 		// cached query if it exists
@@ -272,12 +284,6 @@ class CI_DB_driver {
 					return $cache;
 				}
 			}
-		}
-
-		// Compile binds if needed
-		if ($binds !== FALSE)
-		{
-			$sql = $this->compile_binds($sql, $binds);
 		}
 
 		// Save the  query for debugging
@@ -363,8 +369,8 @@ class CI_DB_driver {
 
 		// Load and instantiate the result driver
 
-		$driver 		= $this->load_rdriver();
-		$RES 			= new $driver();
+		$driver			= $this->load_rdriver();
+		$RES			= new $driver();
 		$RES->conn_id	= $this->conn_id;
 		$RES->result_id	= $this->result_id;
 
@@ -376,7 +382,7 @@ class CI_DB_driver {
 			$this->stmt_id		= FALSE;
 		}
 
-		// result driver initialize, sam@ozchamp.net
+		// Result driver initialize, sam@ozchamp.net
 		$RES->initialize();
 
 		// Is query caching enabled?  If so, we'll serialize the
@@ -390,7 +396,7 @@ class CI_DB_driver {
 			// result object, so we'll have to compile the data
 			// and save it)
 			$CR = new CI_DB_result();
-			$CR->num_rows 		= $RES->num_rows();
+			$CR->num_rows		= $RES->num_rows();
 			$CR->result_object	= $RES->result_object();
 			$CR->result_array	= $RES->result_array();
 
@@ -410,7 +416,7 @@ class CI_DB_driver {
 	 * Load the result drivers
 	 *
 	 * @access	public
-	 * @return	string 	the name of the result class
+	 * @return	string	the name of the result class
 	 */
 	function load_rdriver()
 	{
@@ -702,9 +708,9 @@ class CI_DB_driver {
 	 * @param	string
 	 * @return	mixed
 	 */
-    function escape_like_str($str)
-    {
-    	return $this->escape_str($str, TRUE);
+	function escape_like_str($str)
+	{
+		return $this->escape_str($str, TRUE);
 	}
 
 	// --------------------------------------------------------------------
@@ -761,7 +767,7 @@ class CI_DB_driver {
 
 		if ($query->num_rows() > 0)
 		{
-			foreach($query->result_array() as $row)
+			foreach ($query->result_array() as $row)
 			{
 				if (isset($row['TABLE_NAME']))
 				{
@@ -816,7 +822,7 @@ class CI_DB_driver {
 			return FALSE;
 		}
 
-		if (FALSE === ($sql = $this->_list_columns($this->_protect_identifiers($table, TRUE, NULL, FALSE))))
+		if (FALSE === ($sql = $this->_list_columns($table)))
 		{
 			if ($this->db_debug)
 			{
@@ -828,7 +834,7 @@ class CI_DB_driver {
 		$query = $this->query($sql);
 
 		$retval = array();
-		foreach($query->result_array() as $row)
+		foreach ($query->result_array() as $row)
 		{
 			if (isset($row['COLUMN_NAME']))
 			{
@@ -861,32 +867,9 @@ class CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Returns an object with field data
-	 *
-	 * @access	public
-	 * @param	string	the table name
-	 * @return	object
-	 */
-	function field_data($table = '')
-	{
-		if ($table == '')
-		{
-			if ($this->db_debug)
-			{
-				return $this->display_error('db_field_param_missing');
-			}
-			return FALSE;
-		}
-
-		$query = $this->query($this->_field_data($this->_protect_identifiers($table, TRUE, NULL, FALSE)));
-
-		return $query->field_data();
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
 	 * Generate an select string
+	 *
+	 * @author sam@ozchamp.net
 	 *
 	 * @access	public
 	 * @param	string	the table upon which the query will be performed
@@ -914,6 +897,31 @@ class CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
+	 * Returns an object with field data
+	 *
+	 * @access	public
+	 * @param	string	the table name
+	 * @return	object
+	 */
+	function field_data($table = '')
+	{
+		if ($table == '')
+		{
+			if ($this->db_debug)
+			{
+				return $this->display_error('db_field_param_missing');
+			}
+			return FALSE;
+		}
+
+		$query = $this->query($this->_field_data($this->_protect_identifiers($table, TRUE, NULL, FALSE)));
+
+		return $query->field_data();
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
 	 * Generate an insert string
 	 *
 	 * @access	public
@@ -926,7 +934,7 @@ class CI_DB_driver {
 		$fields = array();
 		$values = array();
 
-		foreach($data as $key => $val)
+		foreach ($data as $key => $val)
 		{
 			$fields[] = $this->_escape_identifiers($key);
 			$values[] = $this->escape($val);
@@ -954,7 +962,7 @@ class CI_DB_driver {
 		}
 
 		$fields = array();
-		foreach($data as $key => $val)
+		foreach ($data as $key => $val)
 		{
 			$fields[$this->_protect_identifiers($key)] = $this->escape($val);
 		}
@@ -1037,8 +1045,14 @@ class CI_DB_driver {
 		else
 		{
 			$args = (func_num_args() > 1) ? array_splice(func_get_args(), 1) : null;
-
-			return call_user_func_array($function, $args);
+			if (is_null($args))
+			{
+				return call_user_func($function);
+			}
+			else
+			{
+				return call_user_func_array($function, $args);
+			}
 		}
 	}
 
@@ -1137,7 +1151,7 @@ class CI_DB_driver {
 
 		if ( ! class_exists('CI_DB_Cache'))
 		{
-			if ( ! @include(DIR_DATABASE.'DB_cache.php'))
+			if ( ! @include(DIR_DATABASE.'database/DB_cache.php'))
 			{
 				return $this->cache_off();
 			}
@@ -1177,7 +1191,7 @@ class CI_DB_driver {
 	 */
 	function display_error($error = '', $swap = '', $native = FALSE)
 	{
-		$LANG =& load_class('Language');
+		$LANG =& load_class('Lang', 'core');
 		$LANG->load('db');
 
 		$heading = $LANG->line('db_error_heading');
@@ -1191,7 +1205,25 @@ class CI_DB_driver {
 			$message = ( ! is_array($error)) ? array(str_replace('%s', $swap, $LANG->line($error))) : $error;
 		}
 
-		$error =& load_class('Exceptions');
+		// Find the most likely culprit of the error by going through
+		// the backtrace until the source file is no longer in the
+		// database folder.
+
+		$trace = debug_backtrace();
+
+		foreach ($trace as $call)
+		{
+			if (isset($call['file']) && strpos($call['file'], DIR_DATABASE.'database') === FALSE)
+			{
+				// Found it - use a relative path for safety
+				$message[] = 'Filename: '.str_replace(array(DIR_DATABASE, APPPATH), '', $call['file']);
+				$message[] = 'Line Number: '.$call['line'];
+
+				break;
+			}
+		}
+
+		$error =& load_class('Exceptions', 'core');
 		echo $error->show_error($heading, $message, 'error_db');
 		exit;
 	}
@@ -1252,7 +1284,7 @@ class CI_DB_driver {
 		{
 			$escaped_array = array();
 
-			foreach($item as $k => $v)
+			foreach ($item as $k => $v)
 			{
 				$escaped_array[$this->_protect_identifiers($k)] = $this->_protect_identifiers($v);
 			}
@@ -1265,11 +1297,14 @@ class CI_DB_driver {
 
 		// If the item has an alias declaration we remove it and set it aside.
 		// Basically we remove everything to the right of the first space
-		$alias = '';
 		if (strpos($item, ' ') !== FALSE)
 		{
-			$alias = strstr($item, " ");
+			$alias = strstr($item, ' ');
 			$item = substr($item, 0, - strlen($alias));
+		}
+		else
+		{
+			$alias = '';
 		}
 
 		// This is basically a bug fix for queries that use MAX, MIN, etc.
@@ -1386,9 +1421,20 @@ class CI_DB_driver {
 		return $item.$alias;
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * Dummy method that allows Active Record class to be disabled
+	 *
+	 * This function is used extensively by every db driver.
+	 *
+	 * @return	void
+	 */
+	protected function _reset_select()
+	{
+	}
 
 }
-
 
 /* End of file DB_driver.php */
 /* Location: ./system/database/DB_driver.php */

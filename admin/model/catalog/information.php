@@ -150,7 +150,7 @@ class ModelCatalogInformation extends Model {
 			$information_data = $this->cache->get('information.' . (int)$this->config->get('config_language_id'));
 
 			if (!$information_data) {
-				$query = $this->db->from('information i')->join('information_description id', 'i.information_id = id.information_id')->where(array('id.language_id' => (int)$this->config->get('config_language_id')))->order_by('n.sort_order', 'ASC');
+				$query = $this->db->from('information i')->join('information_description id', 'i.information_id = id.information_id')->where(array('id.language_id' => (int)$this->config->get('config_language_id')))->order_by('i.sort_order', 'ASC');
 
 				$information_data = $query->get()->rows;
 

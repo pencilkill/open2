@@ -16,7 +16,7 @@
 // ------------------------------------------------------------------------
 
 /**
- * Postgre Database Adapter Class
+ * ODBC Database Adapter Class
  *
  * Note: _DB is an extender class that the app controller
  * creates dynamically based on whether the active record
@@ -28,14 +28,15 @@
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/database/
  */
-class CI_DB_postgre_driver extends CI_DB {
+class CI_DB_odbc_driver extends CI_DB {
 
-	var $dbdriver = 'postgre';
+	var $dbdriver = 'odbc';
 
-	var $_escape_char = '"';
+	// the character used to excape - not necessary for ODBC
+	var $_escape_char = '';
 
 	// clause and character used for LIKE escape sequences
-	var $_like_escape_str = " ESCAPE '%s' ";
+	var $_like_escape_str = " {escape '%s'} ";
 	var $_like_escape_chr = '!';
 
 	/**
@@ -44,36 +45,15 @@ class CI_DB_postgre_driver extends CI_DB {
 	 * used for the count_all() and count_all_results() functions.
 	 */
 	var $_count_string = "SELECT COUNT(*) AS ";
-	var $_random_keyword = ' RANDOM()'; // database specific random keyword
+	var $_random_keyword;
 
-	/**
-	 * Connection String
-	 *
-	 * @access	private
-	 * @return	string
-	 */
-	function _connect_string()
+
+	function __construct($params)
 	{
-		$components = array(
-								'hostname'	=> 'host',
-								'port'		=> 'port',
-								'database'	=> 'dbname',
-								'username'	=> 'user',
-								'password'	=> 'password'
-							);
+		parent::__construct($params);
 
-		$connect_string = "";
-		foreach ($components as $key => $val)
-		{
-			if (isset($this->$key) && $this->$key != '')
-			{
-				$connect_string .= " $val=".$this->$key;
-			}
-		}
-		return trim($connect_string);
+		$this->_random_keyword = ' RND('.time().')'; // database specific random keyword
 	}
-
-	// --------------------------------------------------------------------
 
 	/**
 	 * Non-persistent database connection
@@ -83,7 +63,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function db_connect()
 	{
-		return @pg_connect($this->_connect_string());
+		return @odbc_connect($this->hostname, $this->username, $this->password);
 	}
 
 	// --------------------------------------------------------------------
@@ -96,7 +76,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function db_pconnect()
 	{
-		return @pg_pconnect($this->_connect_string());
+		return @odbc_pconnect($this->hostname, $this->username, $this->password);
 	}
 
 	// --------------------------------------------------------------------
@@ -112,10 +92,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function reconnect()
 	{
-		if (pg_ping($this->conn_id) === FALSE)
-		{
-			$this->conn_id = FALSE;
-		}
+		// not implemented in odbc
 	}
 
 	// --------------------------------------------------------------------
@@ -128,7 +105,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function db_select()
 	{
-		// Not needed for Postgre so we'll return TRUE
+		// Not needed for ODBC
 		return TRUE;
 	}
 
@@ -173,7 +150,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	function _execute($sql)
 	{
 		$sql = $this->_prep_query($sql);
-		return @pg_query($this->conn_id, $sql);
+		return @odbc_exec($this->conn_id, $sql);
 	}
 
 	// --------------------------------------------------------------------
@@ -218,7 +195,7 @@ class CI_DB_postgre_driver extends CI_DB {
 		// even if the queries produce a successful result.
 		$this->_trans_failure = ($test_mode === TRUE) ? TRUE : FALSE;
 
-		return @pg_exec($this->conn_id, "begin");
+		return odbc_autocommit($this->conn_id, FALSE);
 	}
 
 	// --------------------------------------------------------------------
@@ -242,7 +219,9 @@ class CI_DB_postgre_driver extends CI_DB {
 			return TRUE;
 		}
 
-		return @pg_exec($this->conn_id, "commit");
+		$ret = odbc_commit($this->conn_id);
+		odbc_autocommit($this->conn_id, TRUE);
+		return $ret;
 	}
 
 	// --------------------------------------------------------------------
@@ -266,7 +245,9 @@ class CI_DB_postgre_driver extends CI_DB {
 			return TRUE;
 		}
 
-		return @pg_exec($this->conn_id, "rollback");
+		$ret = odbc_rollback($this->conn_id);
+		odbc_autocommit($this->conn_id, TRUE);
+		return $ret;
 	}
 
 	// --------------------------------------------------------------------
@@ -291,7 +272,8 @@ class CI_DB_postgre_driver extends CI_DB {
 			return $str;
 		}
 
-		$str = pg_escape_string($str);
+		// ODBC doesn't require escaping
+		$str = remove_invisible_characters($str);
 
 		// escape LIKE condition wildcards
 		if ($like === TRUE)
@@ -314,7 +296,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function affected_rows()
 	{
-		return @pg_affected_rows($this->result_id);
+		return @odbc_num_rows($this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -327,35 +309,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function insert_id()
 	{
-		$v = $this->_version();
-		$v = $v['server'];
-
-		$table	= func_num_args() > 0 ? func_get_arg(0) : NULL;
-		$column	= func_num_args() > 1 ? func_get_arg(1) : NULL;
-
-		if ($table == NULL && $v >= '8.1')
-		{
-			$sql='SELECT LASTVAL() as ins_id';
-		}
-		elseif ($table != NULL && $column != NULL && $v >= '8.0')
-		{
-			$sql = sprintf("SELECT pg_get_serial_sequence('%s','%s') as seq", $table, $column);
-			$query = $this->query($sql);
-			$row = $query->row();
-			$sql = sprintf("SELECT CURRVAL('%s') as ins_id", $row->seq);
-		}
-		elseif ($table != NULL)
-		{
-			// seq_name passed in table parameter
-			$sql = sprintf("SELECT CURRVAL('%s') as ins_id", $table);
-		}
-		else
-		{
-			return pg_last_oid($this->result_id);
-		}
-		$query = $this->query($sql);
-		$row = $query->row();
-		return $row->ins_id;
+		return @odbc_insert_id($this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -402,11 +356,12 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function _list_tables($prefix_limit = FALSE)
 	{
-		$sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'";
+		$sql = "SHOW TABLES FROM `".$this->database."`";
 
 		if ($prefix_limit !== FALSE AND $this->dbprefix != '')
 		{
-			$sql .= " AND table_name LIKE '".$this->escape_like_str($this->dbprefix)."%' ".sprintf($this->_like_escape_str, $this->_like_escape_chr);
+			//$sql .= " LIKE '".$this->escape_like_str($this->dbprefix)."%' ".sprintf($this->_like_escape_str, $this->_like_escape_chr);
+			return FALSE; // not currently supported
 		}
 
 		return $sql;
@@ -425,7 +380,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function _list_columns($table = '')
 	{
-		return "SELECT column_name FROM information_schema.columns WHERE table_name ='".$table."'";
+		return "SHOW COLUMNS FROM ".$table;
 	}
 
 	// --------------------------------------------------------------------
@@ -441,7 +396,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function _field_data($table)
 	{
-		return "SELECT * FROM ".$table." LIMIT 1";
+		return "SELECT TOP 1 FROM ".$table;
 	}
 
 	// --------------------------------------------------------------------
@@ -454,7 +409,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function _error_message()
 	{
-		return pg_last_error($this->conn_id);
+		return odbc_errormsg($this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -467,7 +422,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function _error_number()
 	{
-		return '';
+		return odbc_error($this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -531,7 +486,7 @@ class CI_DB_postgre_driver extends CI_DB {
 			$tables = array($tables);
 		}
 
-		return implode(', ', $tables);
+		return '('.implode(', ', $tables).')';
 	}
 
 	// --------------------------------------------------------------------
@@ -550,24 +505,6 @@ class CI_DB_postgre_driver extends CI_DB {
 	function _insert($table, $keys, $values)
 	{
 		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Insert_batch statement
-	 *
-	 * Generates a platform-specific insert string from the supplied data
-	 *
-	 * @access  public
-	 * @param   string  the table name
-	 * @param   array   the insert keys
-	 * @param   array   the insert values
-	 * @return  string
-	 */
-	function _insert_batch($table, $keys, $values)
-	{
-		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES ".implode(', ', $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -605,6 +542,7 @@ class CI_DB_postgre_driver extends CI_DB {
 		return $sql;
 	}
 
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -620,7 +558,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function _truncate($table)
 	{
-		return "TRUNCATE ".$table;
+		return $this->_delete($table);
 	}
 
 	// --------------------------------------------------------------------
@@ -658,6 +596,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	}
 
 	// --------------------------------------------------------------------
+
 	/**
 	 * Limit string
 	 *
@@ -671,13 +610,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function _limit($sql, $limit, $offset)
 	{
-		$sql .= "LIMIT ".$limit;
-
-		if ($offset > 0)
-		{
-			$sql .= " OFFSET ".$offset;
-		}
-
+		// Does ODBC doesn't use the LIMIT clause?
 		return $sql;
 	}
 
@@ -692,12 +625,13 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function _close($conn_id)
 	{
-		@pg_close($conn_id);
+		@odbc_close($conn_id);
 	}
 
 
 }
 
 
-/* End of file postgre_driver.php */
-/* Location: ./system/database/drivers/postgre/postgre_driver.php */
+
+/* End of file odbc_driver.php */
+/* Location: ./system/database/drivers/odbc/odbc_driver.php */

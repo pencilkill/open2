@@ -2,11 +2,11 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP 4.3.2 or newer
+ * An open source application development framework for PHP 5.1.6 or newer
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2009, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -25,27 +25,7 @@
  * @link		http://codeigniter.com/user_guide/database/
  */
 class CI_DB_postgre_result extends CI_DB_result {
-	var $row = array();
-	var $rows = array();
 
-	// --------------------------------------------------------------------
-
-	/**
-	 * sam@ozchamp.net
-	 * Initialize for opencart row and rows
-	 * Seeing CI_DB_driver->query()
-	 * @access	public
-	 * @return	resource
-	 */
-	function initialize(){
-		$this->num_rows = $this->num_rows();
-
-		$this->row = $this->row_array(0);
-
-		$this->rows = $this->result_array();
-
-		return $this->result_id;
-	}
 	/**
 	 * Number of rows in the result set
 	 *
@@ -106,9 +86,9 @@ class CI_DB_postgre_result extends CI_DB_result {
 		$retval = array();
 		for ($i = 0; $i < $this->num_fields(); $i++)
 		{
-			$F 				= new stdClass();
-			$F->name 		= pg_field_name($this->result_id, $i);
-			$F->type 		= pg_field_type($this->result_id, $i);
+			$F				= new stdClass();
+			$F->name		= pg_field_name($this->result_id, $i);
+			$F->type		= pg_field_type($this->result_id, $i);
 			$F->max_length	= pg_field_size($this->result_id, $i);
 			$F->primary_key = 0;
 			$F->default		= '';

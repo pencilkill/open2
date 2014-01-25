@@ -19,7 +19,7 @@ define('HTTPS_IMAGE', HTTPS_PATH . 'upload/');
 // DIR
 define('DIR_APPLICATION', DIR_PATH . 'catalog/');
 define('DIR_SYSTEM', DIR_PATH . 'system/');
-define('DIR_DATABASE', DIR_PATH . 'system/database/');
+define('DIR_DATABASE', DIR_PATH . 'system/database/');	//Notice that the DB libaray is replaced using CodeIgniter DAO fully
 define('DIR_LANGUAGE', DIR_PATH . 'catalog/language/');
 define('DIR_TEMPLATE', DIR_PATH . 'catalog/view/theme/');
 define('DIR_CONFIG', DIR_PATH . 'system/config/');

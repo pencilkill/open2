@@ -1,9 +1,6 @@
 <?php
 // Error Reporting
 error_reporting(E_ALL);
-// Display errors
-// Actually administrator can handler error message and error log in backend
-ini_set('display_errors',0);
 
 // Check Version
 if (version_compare(phpversion(), '5.1.0', '<') == true) {
