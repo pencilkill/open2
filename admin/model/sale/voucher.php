@@ -119,7 +119,7 @@ class ModelSaleVoucher extends Model {
 				$mail = new Mail();
 
 				$mail->setFrom($this->config->get('config_email'), $order_info['store_name']);
-				$mail->AddAddress($voucher_info['to_email']);
+				$mail->AddAddresses($voucher_info['to_email']);
 				$mail->Subject = html_entity_decode(sprintf($language->get('text_subject'), $voucher_info['from_name']), ENT_QUOTES, 'UTF-8');
 				$mail->MsgHTML($template->fetch('mail/voucher.tpl'));
 				$mail->send();
@@ -155,7 +155,7 @@ class ModelSaleVoucher extends Model {
 				$mail = new Mail();
 
 				$mail->setFrom($this->config->get('config_email'), $this->config->get('config_name'));
-				$mail->AddAddress($voucher_info['to_email']);
+				$mail->AddAddresses($voucher_info['to_email']);
 				$mail->Subject = html_entity_decode(sprintf($this->language->get('text_subject'), $voucher_info['from_name']), ENT_QUOTES, 'UTF-8');
 				$mail->MsgHTML($template->fetch('mail/voucher.tpl'));
 				$mail->send();

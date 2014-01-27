@@ -193,15 +193,13 @@ class ControllerSaleContact extends Controller {
 					$message .= '  <body>' . html_entity_decode($this->request->post['message'], ENT_QUOTES, 'UTF-8') . '</body>' . "\n";
 					$message .= '</html>' . "\n";
 
-					foreach ($emails as $email) {
-						$mail = new Mail();
+					$mail = new Mail();
 
-						$mail->SetFrom($this->config->get('config_email'), $store_name);
-					    $mail->AddAddress($email);
-					    $mail->Subject = html_entity_decode($this->request->post['subject'], ENT_QUOTES, 'UTF-8');
-					    $mail->MsgHTML($message);
-					    $mail->Send();
-					}
+					$mail->SetFrom($this->config->get('config_email'), $store_name);
+				    $mail->AddAddresses($emails);
+				    $mail->Subject = html_entity_decode($this->request->post['subject'], ENT_QUOTES, 'UTF-8');
+				    $mail->MsgHTML($message);
+				    $mail->Send();
 				}
 			}
 		}

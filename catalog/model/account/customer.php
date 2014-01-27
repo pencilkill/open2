@@ -41,26 +41,19 @@ class ModelAccountCustomer extends Model {
 		$mail = new Mail();
 
 		$mail->setFrom($this->config->get('config_email'), $this->config->get('config_name'));
-		$mail->AddAddress($data['email']);
+		$mail->AddAddresses($data['email']);
 		$mail->Subject = html_entity_decode($subject, ENT_QUOTES, 'UTF-8');
 		$mail->MsgHTML(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
-		$mail->send();
 
 		// Send to main admin email if new account email is enabled
 		if ($this->config->get('config_account_mail')) {
-			$mail->AddAddress($this->config->get('config_email'));
-			$mail->send();
+			$mail->AddAddresses($this->config->get('config_email'));
 
 			// Send to additional alert emails if new account email is enabled
-			$emails = explode(',', $this->config->get('config_alert_emails'));
-
-			foreach ($emails as $email) {
-				if (strlen($email) > 0 && preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email)) {
-					$mail->AddAddress($email);
-					$mail->send();
-				}
-			}
+			$mail->AddAddresses($this->config->get('config_alert_emails'));
 		}
+
+		$mail->send();
 	}
 
 	public function editCustomer($data) {

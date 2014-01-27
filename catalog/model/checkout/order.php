@@ -483,7 +483,7 @@ class ModelCheckoutOrder extends Model {
 			$mail = new Mail();
 
 			$mail->setFrom($this->config->get('config_email'), $order_info['store_name']);
-			$mail->AddAddress($order_info['email']);
+			$mail->AddAddresses($order_info['email']);
 			$mail->Subject = html_entity_decode($subject, ENT_QUOTES, 'UTF-8');
 			$mail->MsgHTML(html_entity_decode($html, ENT_QUOTES, 'UTF-8'));
 			//$mail->MsgHTML(html_entity_decode($text, ENT_QUOTES, 'UTF-8'));
@@ -538,18 +538,13 @@ class ModelCheckoutOrder extends Model {
 				$mail = new Mail();
 
 				$mail->setFrom($this->config->get('config_email'), $order_info['store_name']);
-				$mail->AddAddress($this->config->get('config_email'));
+				$mail->AddAddresses($this->config->get('config_email'));
 				$mail->Subject = html_entity_decode($subject, ENT_QUOTES, 'UTF-8');
 				$mail->MsgHTML(html_entity_decode($text, ENT_QUOTES, 'UTF-8'));
 
 				// Send to additional alert emails
-				$emails = explode(',', $this->config->get('config_alert_emails'));
+				$mail->AddAddresses($this->config->get('config_alert_emails'));
 
-				foreach ($emails as $email) {
-					if ($email && preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email)) {
-						$mail->AddAddress($email);
-					}
-				}
 				$mail->send();
 			}
 		}
@@ -637,7 +632,7 @@ class ModelCheckoutOrder extends Model {
 				$mail = new Mail();
 
 				$mail->setFrom($this->config->get('config_email'), $order_info['store_name']);
-				$mail->AddAddress($order_info['email']);
+				$mail->AddAddresses($order_info['email']);
 				$mail->Subject = html_entity_decode($subject, ENT_QUOTES, 'UTF-8');
 				$mail->MsgHTML(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 				$mail->send();

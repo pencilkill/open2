@@ -674,7 +674,7 @@ class ModelSaleOrder extends Model {
 			$mail = new Mail();
 
 			$mail->setFrom($this->config->get('config_email'), $order_info['store_name']);
-			$mail->AddAddress($order_info['email']);
+			$mail->AddAddresses($order_info['email']);
 			$mail->Subject = html_entity_decode($subject, ENT_QUOTES, 'UTF-8');
 			$mail->MsgHTML(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 			$mail->send();

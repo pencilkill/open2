@@ -29,7 +29,7 @@ class ControllerDevDev extends Controller {
 		$mail = new Mail();
 
 		$mail->SetFrom('cmd.dos@hotmail.com', $this->config->get('config_name'));
-		$mail->AddAddress('sam@ozchamp.net');
+		$mail->AddAddresses('sam@ozchamp.net');
 		$mail->Subject = html_entity_decode($subject, ENT_QUOTES, 'UTF-8');
 		$mail->MsgHTML(html_entity_decode($html, ENT_QUOTES, 'UTF-8'));
 		$mail->Send();

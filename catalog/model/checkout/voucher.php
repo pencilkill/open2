@@ -105,7 +105,7 @@ class ModelCheckoutVoucher extends Model {
 				$mail = new Mail();
 
 				$mail->setFrom($this->config->get('config_email'), $order_info['store_name']);
-				$mail->AddAddress($voucher['to_email']);
+				$mail->AddAddresses($voucher['to_email']);
 				$mail->Subject = html_entity_decode(sprintf($language->get('text_subject'), $voucher['from_name']), ENT_QUOTES, 'UTF-8');
 				$mail->MsgHTML($html);
 				$mail->send();

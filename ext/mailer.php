@@ -9,7 +9,7 @@ class Mailer extends PHPMailer{
 	public function AddAddresses($addresses, $delimiter = ','){
 		$addresses = is_array($addresses) ? $addresses : explode($delimiter, $addresses);
 
-		if($addresses && ($addresses = array_filter($addresses))){
+		if($addresses){
 			foreach($addresses as $key => $val){
 				$address = $key;
 				$name = $val;
@@ -19,7 +19,9 @@ class Mailer extends PHPMailer{
 					$name = '';		// PHPMailer default value
 				}
 
-				$this->AddAddress($address, $name);
+				if(trim($address)){
+					$this->AddAddress($address, $name);
+				}
 			}
 		}
 	}

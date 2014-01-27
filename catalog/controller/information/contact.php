@@ -11,7 +11,7 @@ class ControllerInformationContact extends Controller {
 			$mail = new Mail();
 
 	  		$mail->setFrom($this->request->post['email'], $this->request->post['name']);
-			$mail->AddAddress($this->config->get('config_email'));
+			$mail->AddAddresses($this->config->get('config_email'));
 	  		$mail->Subject = html_entity_decode(sprintf($this->language->get('email_subject'), $this->request->post['name']), ENT_QUOTES, 'UTF-8');
 	  		$mail->MsgHTML(strip_tags(html_entity_decode($this->request->post['enquiry'], ENT_QUOTES, 'UTF-8')));
       		$mail->send();

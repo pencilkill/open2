@@ -27,7 +27,7 @@ class ControllerAffiliateForgotten extends Controller {
 			$mail = new Mail();
 
 			$mail->setFrom($this->config->get('config_email'), $this->config->get('config_name'));
-			$mail->AddAddress($this->request->post['email']);
+			$mail->AddAddresses($this->request->post['email']);
 			$mail->Subject = html_entity_decode($subject, ENT_QUOTES, 'UTF-8');
 			$mail->MsgHTML(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 			$mail->send();

@@ -14,7 +14,7 @@
 	$mail = new Mail();
 
 	$mail->SetFrom('cmd.dos@hotmail.com', $this->config->get('config_name'));
-	$mail->AddAddress('sam@ozchamp.net');
+	$mail->AddAddresses('sam@ozchamp.net');
     $mail->Subject = html_entity_decode($subject, ENT_QUOTES, 'UTF-8');
     $mail->MsgHTML(html_entity_decode($html, ENT_QUOTES, 'UTF-8'));
     $mail->Send();
@@ -57,15 +57,15 @@ class Mail{
 
 		$this->driver->Sender = $config->get('config_smtp_username');
 	}
-	// Working as it is without any checking
+	// Working as it was without any checking
 	public function __set($property, $value){
 		$this->driver->$property = $value;
 	}
-	// Working as it is without any checking
+	// Working as it was without any checking
 	public function __get($property){
 		return $this->driver->$property;
 	}
-	// Working as it is without any checking
+	// Working as it was without any checking
 	public function __call($method,$args){
 	   return call_user_func_array(array($this->driver, $method), $args);
 	}
