@@ -922,7 +922,7 @@ class CI_DB_active_record extends CI_DB_driver {
 
 		foreach ($key as $k => $v)
 		{
-			if($this->field_exists($key,$table) == FALSE){
+			if($this->set_exist && $this->field_exists($key,$table) == FALSE){
 				continue;
 			}
 

@@ -120,6 +120,15 @@
 		config.width = config.height = '100%';
 
 		var ckfinder = new CKFinder( config );
+
+		ckfinder.callback = function( api ) {
+			api.disableFolderContextMenuOption( 'CreateSubFolder', false );
+			api.disableFolderContextMenuOption( 'RenameFolder', false );
+			api.disableFolderContextMenuOption( 'DeleteFolder', false );
+			// Disable contextmenu
+			api.disableFileContextMenuOption( 'viewFile', false );
+		};
+		
 		ckfinder.replace( 'ckfinder', config );
 })();
 	</script>

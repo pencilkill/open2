@@ -221,7 +221,7 @@ class ModelSaleAffiliate extends Model {
 			$limit = 10;
 		}
 
-		$query = $this->db->select('affiliate_transaction')->where('affiliate_id', (int)$affiliate_id)->order_by('date_added', 'DESC')->limit((int)$start, (int)$limit);
+		$query = $this->db->select('affiliate_transaction')->where('affiliate_id', (int)$affiliate_id)->order_by('date_added', 'DESC')->limit((int)$limit, (int)$start);
 
 		return $query->get()->rows;
 	}

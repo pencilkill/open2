@@ -12,6 +12,7 @@
  */
 class DB {
 	private $driver=null;
+	private $params=array();
 
 	public function __construct($driver, $hostname, $username, $password, $database, $dbprefix = '', $char_set = 'UTF-8') {
 		require_once(DIR_DATABASE.'CI_function.php');
@@ -37,6 +38,8 @@ class DB {
 			'dbprefix'  => $dbprefix,
 			'char_set'  => $char_set
 		);
+		//
+		$this->params = $params;
 		/*
 		 * CI_DB_mysql_driver 繼承 CI_DB
 		 */

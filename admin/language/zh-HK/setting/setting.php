@@ -99,7 +99,7 @@ $_['entry_fraud_key']            = 'MaxMind許可證密鑰：</span>';
 $_['entry_fraud_score']          = 'MaxMind風險得分：<br /><span class="help">得分越高風險越大。設置一個介於0 - 100的得分。</span>';
 $_['entry_fraud_status']         = 'MaxMind欺詐訂單狀態：<br /><span class="help">MaxMind風險得分超過您所設定的得分訂單將被分配到的狀態，超過得分的訂單將不能成功結算。</span>';
 $_['entry_use_ssl']              = '使用 SSL：<br /><span class="help">要使用SSL, 你需要在你的服務安裝SSL及在設定檔有SSL地址。</span>';
-$_['entry_seo_url']              = '高級URL Rewrite\'s：<br /><span class="help">要使用搜索引擎優化網址\'s 您的服務器必須支持 Apache Rewrite Mod 功能，在啟用此項功能前你需要重新命名 htaccess.txt 文件為 .htaccess</span>';
+$_['entry_seo_url']              = '高級URL Rewrite\'s：<br /><span class="help">要使用搜尋引擎優化網址\'s 您的服務器必須支持 Apache Rewrite Mod 功能，在啟用此項功能前你需要重新命名 htaccess.txt 文件為 .htaccess</span>';
 $_['entry_maintenance']          = '系列維護模式：<br /><span class="help">本功能將在前台首頁顯示系統維護信息。 但在後台您可以正常使用本系統。</span>';
 $_['entry_encryption']           = '加密密鑰：<br /><span class="help">請提供一個密鑰, 讓處理訂單時可加密個人的資料。</span>';
 $_['entry_compression']          = '輸出壓縮等級：<br /><span class="help">GZIP 可更有效地轉移到要求的客戶端。壓縮級別必須在0 - 9</span>';

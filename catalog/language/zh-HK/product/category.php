@@ -1,6 +1,6 @@
 <?php
 // Text
-$_['text_refine']       = '高級搜索';
+$_['text_refine']       = '高級搜尋';
 $_['text_product']      = '商品';
 $_['text_error']        = '分類不存在！';
 $_['text_empty']        = '抱歉！ 此分類暫時沒有相關商品。';

@@ -12,7 +12,7 @@ $_['text_history']     = '訂單記錄';
 $_['text_download']    = '下載商品';
 $_['text_cart']        = '購物車';
 $_['text_checkout']    = '結帳';
-$_['text_search']      = '搜索';
+$_['text_search']      = '搜尋';
 $_['text_information'] = '信息中心';
 $_['text_contact']     = '聯繫我們';
 ?>

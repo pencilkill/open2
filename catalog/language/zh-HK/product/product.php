@@ -1,6 +1,6 @@
 <?php
 // Text
-$_['text_search']         = '搜索';
+$_['text_search']         = '搜尋';
 $_['text_brand']          = '品牌';
 $_['text_manufacturer']   = '品　牌：';
 $_['text_model']          = '型　號：';
