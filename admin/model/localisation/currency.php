@@ -31,7 +31,7 @@ class ModelLocalisationCurrency extends Model {
 	}
 
 	public function getCurrencyByCode($currency) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "currency WHERE code = " . $this->db->escape($currency) . "");
+		$query = $this->db->distinct()->get_where('currency', array('code' => $currency));
 
 		return $query->row;
 	}
@@ -106,9 +106,9 @@ class ModelLocalisationCurrency extends Model {
 			$data = array();
 
 			if ($force) {
-				$query = $this->db->from('currency')->where(array('code != ', $this->config->get('config_currency')))->get();
+				$query = $this->db->from('currency')->where(array('code != ' => $this->config->get('config_currency')))->get();
 			} else {
-				$query = $this->db->from('currency')->where(array('code != ', $this->config->get('config_currency'), 'date_modified < ' => date('Y-m-d H:i:s', strtotime('-1 day'))))->get();
+				$query = $this->db->from('currency')->where(array('code != ' => $this->config->get('config_currency'), 'date_modified < ' => date('Y-m-d H:i:s', strtotime('-1 day'))))->get();
 			}
 
 			foreach ($query->rows as $result) {

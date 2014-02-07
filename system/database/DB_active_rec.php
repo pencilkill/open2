@@ -904,6 +904,24 @@ class CI_DB_active_record extends CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
+	  *	filter data which key not existed in table
+	  * @param $keys
+	  * @param $table
+	  */
+
+	public function filter($keys, $table)
+	{
+ 		foreach ($keys as $key => $val)
+		{
+  			if($this->set_exist && !$this->field_exists($key, $table)){
+ 				unset($this->ar_set[$this->_protect_identifiers($key)], $this->ar_set[$this->_protect_identifiers($key, FALSE, TRUE)]);
+ 			}
+		}
+  		return $this;
+	}
+	// --------------------------------------------------------------------
+
+	/**
 	 * The "set" function.  Allows key/value pairs to be set for inserting or updating
 	 *
 	 * @param	mixed
@@ -922,10 +940,6 @@ class CI_DB_active_record extends CI_DB_driver {
 
 		foreach ($key as $k => $v)
 		{
-			if($this->set_exist && $this->field_exists($key,$table) == FALSE){
-				continue;
-			}
-
 			if ($escape === FALSE)
 			{
 				$this->ar_set[$this->_protect_identifiers($k)] = $v;
@@ -1197,6 +1211,8 @@ class CI_DB_active_record extends CI_DB_driver {
 			$table = $this->ar_from[0];
 		}
 
+		$this->filter($set,$table);
+
 		$sql = $this->_insert($this->_protect_identifiers($table, TRUE, NULL, FALSE), array_keys($this->ar_set), array_values($this->ar_set));
 
 		$this->_reset_write();
@@ -1243,6 +1259,8 @@ class CI_DB_active_record extends CI_DB_driver {
 
 			$table = $this->ar_from[0];
 		}
+
+		$this->filter($set,$table);
 
 		$sql = $this->_replace($this->_protect_identifiers($table, TRUE, NULL, FALSE), array_keys($this->ar_set), array_values($this->ar_set));
 
@@ -1304,6 +1322,8 @@ class CI_DB_active_record extends CI_DB_driver {
 		{
 			$this->limit($limit);
 		}
+
+		$this->filter($set,$table);
 
 		$sql = $this->_update($this->_protect_identifiers($table, TRUE, NULL, FALSE), $this->ar_set, $this->ar_where, $this->ar_orderby, $this->ar_limit);
 
