@@ -460,7 +460,7 @@ class ModelSaleOrder extends Model {
 		}
 
 		if (!empty($data['filter_date_added'])) {
-			$query->where('DATE(o.date_added)', date('Y-m-d', strtotime($data['filter_date_added'])));
+			$query->where('DATE(o.date_added)', $data['filter_date_added']);
 		}
 
 		if (!empty($data['filter_total'])) {
@@ -563,7 +563,7 @@ class ModelSaleOrder extends Model {
 		}
 
 		if (!empty($data['filter_date_added'])) {
-			$query->where('DATE(date_added)', date('Y-m-d', strtotime($data['filter_date_added'])));
+			$query->where('DATE(date_added)', $data['filter_date_added']);
 		}
 
 		if (!empty($data['filter_total'])) {

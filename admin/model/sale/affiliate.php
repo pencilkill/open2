@@ -68,7 +68,7 @@ class ModelSaleAffiliate extends Model {
 		}
 
 		if (!empty($data['filter_date_added'])) {
-			$query->where('DATE(a.date_added)', date('Y-m-d', strtotime($data['filter_date_added'])));
+			$query->where('DATE(a.date_added)', $data['filter_date_added']);
 		}
 
 		$sort_data = array(
@@ -158,7 +158,7 @@ class ModelSaleAffiliate extends Model {
 		}
 
 		if (!empty($data['filter_date_added'])) {
-			$query->where('DATE(date_added)', date('Y-m-d', strtotime($data['filter_date_added'])));
+			$query->where('DATE(date_added)', $data['filter_date_added']);
 		}
 
 		return $query->get()->row['total'];

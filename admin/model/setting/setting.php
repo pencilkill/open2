@@ -3,7 +3,7 @@ class ModelSettingSetting extends Model {
 	public function getSetting($group, $store_id = 0) {
 		$data = array();
 
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '" . (int)$store_id . "' AND `group` = " . $this->db->escape($group) . "");
+		$query = $this->db->get_where('setting', array('store_id' => (int)$store_id, 'group' => $group));
 
 		foreach ($query->rows as $result) {
 			if (!$result['serialized']) {
@@ -17,19 +17,26 @@ class ModelSettingSetting extends Model {
 	}
 
 	public function editSetting($group, $data, $store_id = 0) {
-		$this->db->query("DELETE FROM " . DB_PREFIX . "setting WHERE store_id = '" . (int)$store_id . "' AND `group` = " . $this->db->escape($group) . "");
+		$this->db->delete('setting', array('store_id' => (int)$store_id, 'group' => $group));
 
 		foreach ($data as $key => $value) {
+			$this->db->set('store_id', (int)$store_id);
+			$this->db->set('group', $group);
+			$this->db->set('key', $key);
 			if (!is_array($value)) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "setting SET store_id = '" . (int)$store_id . "', `group` = " . $this->db->escape($group) . ", `key` = " . $this->db->escape($key) . ", `value` = " . $this->db->escape($value) . "");
+				$this->db->set('value', $value);
+				$this->db->set('serialized', 0);
 			} else {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "setting SET store_id = '" . (int)$store_id . "', `group` = " . $this->db->escape($group) . ", `key` = " . $this->db->escape($key) . ", `value` = " . $this->db->escape(serialize($value)) . ", serialized = '1'");
+				$this->db->set('value', serialize($value));
+				$this->db->set('serialized', 1);
 			}
+
+			$this->db->insert('setting');
 		}
 	}
 
 	public function deleteSetting($group, $store_id = 0) {
-		$this->db->query("DELETE FROM " . DB_PREFIX . "setting WHERE store_id = '" . (int)$store_id . "' AND `group` = " . $this->db->escape($group) . "");
+		$this->db->delete('setting', array('store_id' => (int)$store_id, 'group' => $group));
 	}
 }
 ?>

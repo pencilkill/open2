@@ -112,7 +112,7 @@ class ModelSaleCustomer extends Model {
 		}
 
 		if (!empty($data['filter_date_added'])) {
-			$query->where('DATE(c.date_added)', date('Y-m-d', strtotime($data['filter_date_added'])));
+			$query->where('DATE(c.date_added)', $data['filter_date_added']);
 		}
 
 		$sort_data = array(
@@ -293,7 +293,7 @@ class ModelSaleCustomer extends Model {
 		}
 
 		if (!empty($data['filter_date_added'])) {
-			$query->where('DATE(date_added)', date('Y-m-d', strtotime($data['filter_date_added'])));
+			$query->where('DATE(date_added)', $data['filter_date_added']);
 		}
 
 		return $query->get()->row['total'];

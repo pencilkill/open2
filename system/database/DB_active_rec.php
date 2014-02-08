@@ -904,16 +904,16 @@ class CI_DB_active_record extends CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
-	  *	filter data which key not existed in table
-	  * @param $keys
+	  *	filter data which key not existed in table, sam@ozchamp.net
+	  * @param $set
 	  * @param $table
 	  */
 
-	public function filter($keys, $table)
+	public function filter($set, $table)
 	{
- 		foreach ($keys as $key => $val)
+ 		foreach ($set as $key => $val)
 		{
-  			if($this->set_exist && !$this->field_exists($key, $table)){
+  			if($this->set_exists && !$this->field_exists(trim($key, $this->_escape_char), $table)){
  				unset($this->ar_set[$this->_protect_identifiers($key)], $this->ar_set[$this->_protect_identifiers($key, FALSE, TRUE)]);
  			}
 		}
@@ -1188,6 +1188,8 @@ class CI_DB_active_record extends CI_DB_driver {
 			$this->set($set);
 		}
 
+		$this->filter($this->ar_set, $table);	// sam@ozchamp.net
+
 		if (count($this->ar_set) == 0)
 		{
 			if ($this->db_debug)
@@ -1211,11 +1213,10 @@ class CI_DB_active_record extends CI_DB_driver {
 			$table = $this->ar_from[0];
 		}
 
-		$this->filter($set,$table);
-
 		$sql = $this->_insert($this->_protect_identifiers($table, TRUE, NULL, FALSE), array_keys($this->ar_set), array_values($this->ar_set));
 
 		$this->_reset_write();
+
 		return $this->query($sql);
 	}
 
@@ -1237,6 +1238,8 @@ class CI_DB_active_record extends CI_DB_driver {
 			$this->set($set);
 		}
 
+		$this->filter($this->ar_set, $table);
+
 		if (count($this->ar_set) == 0)
 		{
 			if ($this->db_debug)
@@ -1259,8 +1262,6 @@ class CI_DB_active_record extends CI_DB_driver {
 
 			$table = $this->ar_from[0];
 		}
-
-		$this->filter($set,$table);
 
 		$sql = $this->_replace($this->_protect_identifiers($table, TRUE, NULL, FALSE), array_keys($this->ar_set), array_values($this->ar_set));
 
@@ -1289,6 +1290,8 @@ class CI_DB_active_record extends CI_DB_driver {
 		{
 			$this->set($set);
 		}
+
+		$this->filter($this->ar_set, $table);	// sam@ozchamp.net
 
 		if (count($this->ar_set) == 0)
 		{
@@ -1323,11 +1326,10 @@ class CI_DB_active_record extends CI_DB_driver {
 			$this->limit($limit);
 		}
 
-		$this->filter($set,$table);
-
 		$sql = $this->_update($this->_protect_identifiers($table, TRUE, NULL, FALSE), $this->ar_set, $this->ar_where, $this->ar_orderby, $this->ar_limit);
 
 		$this->_reset_write();
+
 		return $this->query($sql);
 	}
 

@@ -19,7 +19,7 @@ class ControllerCommonAjax extends Controller{
 
 			$fk = isset($this->request->get['fk']) ? $this->request->get['fk'] : $t . '_id';	//鍵名
 
-			$this->db->update(DB_PREFIX . $t, $_POST, array($fk=>$k));		//更新數據
+			$this->db->update($t, $_POST, array($fk=>$k));		//更新數據
 
 			$this->cache->delete($t);		//清除緩存，即時生效
 		}

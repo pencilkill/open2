@@ -185,7 +185,7 @@ class ControllerToolImport extends Controller {
 			$add['product_category'] = array($category_id);
 
 			if($add['model']){
-				$query = $this->db->query("SELECT p.product_id FROM " . DB_PREFIX . "product p WHERE LCASE(p.model) = " . $this->db->escape(strtolower($add['model'])) . "");
+				$query = $this->db->select('product_id')->get_where('product', array('LCASE(model)' => strtolower($add['model'])));
 
 				$num_rows = $query->num_rows;
 

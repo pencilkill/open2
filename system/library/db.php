@@ -8,7 +8,6 @@
  *
  * Most of all DAO method access except cache cause the opencart has cache system owned itself
  *
- * TODO The dbprefix is still not supportted well cause there are so many scene using query method directly while the time is short ~~~
  */
 class DB {
 	private $driver=null;

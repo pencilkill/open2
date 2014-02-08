@@ -71,7 +71,7 @@ class CI_DB_driver {
 	var $limit_used;
 
 	// set using field_exist for filter fields when db insert and update data, sam@ozchamp.net
-	var $set_exist = TRUE;
+	var $set_exists = TRUE;
 
 	/**
 	 * Constructor.  Accepts one parameter containing the database
