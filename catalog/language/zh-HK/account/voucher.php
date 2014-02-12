@@ -20,8 +20,8 @@ $_['entry_message']    = '信息：<br /><span class="help">(可選)</span>';
 $_['entry_amount']     = '合計：<br /><span class="help">(券額必須在 %s 到 %s之間)</span>';
 
 // Error
-$_['error_to_name']    = '收券人的姓名必須為1 到64 個字符！';
-$_['error_from_name']  = '您的姓名必須為1 到64 個字符！';
+$_['error_to_name']    = '收券人的姓名必須為1 到64 個字元！';
+$_['error_from_name']  = '您的姓名必須為1 到64 個字元！';
 $_['error_email']      = '無效的郵箱地址！';
 $_['error_theme']      = '您必須選擇一個樣式！';
 $_['error_amount']     = '券額必須在 %s 到 %s之間！';

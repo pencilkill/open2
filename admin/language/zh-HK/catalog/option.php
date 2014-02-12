@@ -34,8 +34,8 @@ $_['entry_sort_order']   = '&nbsp;&nbsp;排序：';
 
 // Error
 $_['error_permission']   = '警告：您沒有權限修改的選擇！';
-$_['error_name']         = '選項名稱必須介於3和128字符！';
+$_['error_name']         = '選項名稱必須介於3和128字元！';
 $_['error_type']         = '警告：填寫的數據不符合要求！';
-$_['error_option_value'] = '選項的值的名稱必須為3到128個字符！';
+$_['error_option_value'] = '選項的值的名稱必須為3到128個字元！';
 $_['error_product']      = '警告：該選項不能被刪除，因為它是目前分配給 %s 的產品！';
 ?>

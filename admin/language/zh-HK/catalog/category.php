@@ -34,5 +34,5 @@ $_['entry_layout']               = '佈局覆蓋：';
 // Error
 $_['error_warning']              = '警告： 相關數據未鍵入！';
 $_['error_permission']           = '警告： 您沒有權限更改商品分類！';
-$_['error_name']                 = '分類名稱必須在3到32個字符之間！';
+$_['error_name']                 = '分類名稱必須在3到32個字元之間！';
 ?>

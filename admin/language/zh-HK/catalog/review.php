@@ -25,7 +25,7 @@ $_['entry_bad']         = '壞評';
 // Error
 $_['error_permission']  = '警告： 您沒有權限更改評論！';
 $_['error_product']     = '產品要求！';
-$_['error_author']      = '作者名稱必須在3至64個字符之間！';
-$_['error_text']        = '評論內容必須在大於1個字符！';
+$_['error_author']      = '作者名稱必須在3至64個字元之間！';
+$_['error_text']        = '評論內容必須在大於1個字元！';
 $_['error_rating']      = '必須回復評級！';
 ?>

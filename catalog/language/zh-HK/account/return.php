@@ -52,12 +52,12 @@ $_['entry_captcha']      = '請在下框輸入驗證碼：';
 
 // Error
 $_['error_order_id']     = '請輸入訂單號。';
-$_['error_firstname']    = '名字必須在1到32字符之間。';
-$_['error_lastname']     = '姓氏必須在1到32字符之間。';
+$_['error_firstname']    = '名字必須在1到32字元之間。';
+$_['error_lastname']     = '姓氏必須在1到32字元之間。';
 $_['error_email']        = '無效的郵箱地址。';
-$_['error_telephone']    = '電話號碼必須為3到32字符。';
+$_['error_telephone']    = '電話號碼必須為3到32字元。';
 $_['error_product']      = '請至少選擇一個商品。';
-$_['error_model']        = '商品名稱必須在3-64字符之間。';
+$_['error_model']        = '商品名稱必須在3-64字元之間。';
 $_['error_reason']       = '請選擇一個退換原因。';
 $_['error_captcha']      = '驗證碼與圖像提供的驗證號碼不一致。';
 ?>

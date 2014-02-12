@@ -62,10 +62,10 @@ $_['entry_action']        = '退換管理：';
 $_['error_warning']       = '警告： 請認真查看錯誤信息！';
 $_['error_permission']    = '警告： 您沒有權限更改訂單！';
 $_['error_order_id']      = '訂單 ID 必須！';
-$_['error_firstname']     = '名字必須在1至32個字符之間！';
-$_['error_lastname']      = '姓氏必須在1至32個字符之間！';
+$_['error_firstname']     = '名字必須在1至32個字元之間！';
+$_['error_lastname']      = '姓氏必須在1至32個字元之間！';
 $_['error_email']         = '郵箱地址無效！';
-$_['error_telephone']     = '電話號碼必須在3至32個字符之間！';
-$_['error_product']       = '商品名稱必須在3至255個字符之間！';
-$_['error_model']         = '商品型號必須在3至64個字符之間！';
+$_['error_telephone']     = '電話號碼必須在3至32個字元之間！';
+$_['error_product']       = '商品名稱必須在3至255個字元之間！';
+$_['error_model']         = '商品型號必須在3至64個字元之間！';
 ?>

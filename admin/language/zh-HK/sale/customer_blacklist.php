@@ -15,5 +15,5 @@ $_['entry_ip']         = 'IP：';
 
 // Error
 $_['error_permission'] = '警告：您沒有權限修改客戶的IP黑名單！';
-$_['error_ip']         = 'IP必須在1至15個字符之間！';
+$_['error_ip']         = 'IP必須在1至15個字元之間！';
 ?>

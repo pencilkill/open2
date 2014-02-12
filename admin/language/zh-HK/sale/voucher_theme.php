@@ -19,7 +19,7 @@ $_['entry_image']        = '&nbsp;&nbsp;圖片：';
 
 // Error
 $_['error_permission']  = '警告： 您沒有權限更改禮品券主題！';
-$_['error_name']        = '禮品券主題名稱必須在3至32個字符之間！';
+$_['error_name']        = '禮品券主題名稱必須在3至32個字元之間！';
 $_['error_image']       = '請輸入商品！';
 $_['error_voucher']     = '警告：此券主題不能被刪除因為它是目前分配到%s 禮品券！';
 ?>

@@ -36,9 +36,9 @@ $_['entry_status']      = '&nbsp;&nbsp;狀態：';
 // Error
 $_['error_permission']  = '警告：您沒有權限修改券主題！';
 $_['error_exists']      = '警告：禮品券已經使用！';
-$_['error_code']        = '代碼必須在3至10個字符之間！';
-$_['error_to_name']     = '收券人名稱必須在1至64個字符之間！';
-$_['error_from_name']   = '您的名稱必須在1至64個字符之間！';
+$_['error_code']        = '代碼必須在3至10個字元之間！';
+$_['error_to_name']     = '收券人名稱必須在1至64個字元之間！';
+$_['error_from_name']   = '您的名稱必須在1至64個字元之間！';
 $_['error_email']       = '無效的郵件地址！';
 $_['error_amount']      = '總計必須大於等於1！';
 $_['error_order']       = '警告： 本禮品券不能被刪除，因為已經應用到一個<a href="%s">訂單</a>上！';

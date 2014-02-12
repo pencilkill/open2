@@ -69,7 +69,7 @@ class ExcelI
 
 			//預設的分隔符
 
-			//預設的輸出字符集
+			//預設的輸出字元集
 
 			if(!$PHPReader->canRead($this->filePath)){
 				return array();

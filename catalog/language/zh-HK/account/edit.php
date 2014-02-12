@@ -1,5 +1,5 @@
 <?php
-// Heading 
+// Heading
 $_['heading_title']       = '我的帳戶信息';
 
 // Text
@@ -17,8 +17,8 @@ $_['entry_fax']           = '&nbsp;&nbsp;&nbsp;傳真號碼：';
 
 // Error
 $_['error_exists']        = '警告： 該郵箱地址已被註冊，請換一個電子郵箱！';
-$_['error_firstname']     = '名字必須為1到32字符之間！';
-$_['error_lastname']      = '姓氏必須在1到32字節之間！';
+$_['error_firstname']     = '名字必須為1到32字元之間！';
+$_['error_lastname']      = '姓氏必須在1到32字元之間！';
 $_['error_email']         = '無效的郵箱地址！';
-$_['error_telephone']     = '電話號碼必須在3到32字符之間！';
+$_['error_telephone']     = '電話號碼必須在3到32字元之間！';
 ?>

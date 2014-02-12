@@ -20,11 +20,11 @@ $_['entry_update']     = '&nbsp;&nbsp;發送給老客戶：<br /><span class="he
 
 // Error
 $_['error_permission'] = '警告： 您沒有權限更改下載設置！';
-$_['error_name']       = '名稱必須在3至64個字符之間！';
+$_['error_name']       = '名稱必須在3至64個字元之間！';
 $_['error_upload']     = '請選擇文檔！';
-$_['error_filename']   = '文件名稱必須在3到128個字符之間！';
+$_['error_filename']   = '文件名稱必須在3到128個字元之間！';
 $_['error_exists']     = '文件不存在！';
-$_['error_mask']       = '擾碼必須是3-128字符！';
+$_['error_mask']       = '擾碼必須是3-128字元！';
 $_['error_filetype']   = '無效的文件類型！';
 $_['error_product']    = '警告： 該下載不能被刪除, 因為它與 %s 綁定！';
 ?>

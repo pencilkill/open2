@@ -26,13 +26,13 @@ $_['entry_zone']        = '地區/省份：';
 
 // Error
 $_['error_exists']         = '警告： 該郵箱地址已被註冊、請換一個電子郵箱！';
-$_['error_firstname']      = '名字必須在1到32字符之間！';
-$_['error_lastname']       = '姓氏必須在1到32字符之間！';
+$_['error_firstname']      = '名字必須在1到32字元之間！';
+$_['error_lastname']       = '姓氏必須在1到32字元之間！';
 $_['error_email']          = '無效的郵箱地址！';
-$_['error_telephone']      = '電話號碼必須為3到32字節！';
-$_['error_address_1']      = '地址 1長度必須在3到128字符之間！';
-$_['error_city']           = '城市名必須在2到128字節之間！';
+$_['error_telephone']      = '電話號碼必須為3到32字元！';
+$_['error_address_1']      = '地址 1長度必須在3到128字元之間！';
+$_['error_city']           = '城市名必須在2到128字元之間！';
 $_['error_country']        = '請選擇一個國家！';
 $_['error_zone']           = '請選擇地區/省份！';
-$_['error_postcode']       = '郵編必須在2到10字符之間！';
+$_['error_postcode']       = '郵編必須在2到10字元之間！';
 ?>

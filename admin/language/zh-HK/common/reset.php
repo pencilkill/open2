@@ -12,6 +12,6 @@ $_['entry_password'] = '密碼：';
 $_['entry_confirm']  = '密碼確認：';
 
 // Error
-$_['error_password'] = '密碼必須在5至20個字符之間！';
+$_['error_password'] = '密碼必須在5至20個字元之間！';
 $_['error_confirm']  = '密碼和確認密碼不匹配！';
 ?>   

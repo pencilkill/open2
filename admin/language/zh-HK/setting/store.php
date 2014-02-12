@@ -70,11 +70,11 @@ $_['entry_use_ssl']             = '使用 SSL：<br /><span class="help">請確�
 // Error
 $_['error_warning']             = '警告： 請認真查看錯誤信息！';
 $_['error_permission']          = '警告： 您沒有權限更改商店設置！';
-$_['error_name']                = '商店名稱必須在3至32個字符之間！';
-$_['error_owner']               = '商店擁有者必須在3至64個字符之間！';
-$_['error_address']             = '網店地址必須在10 到256個字符！';
+$_['error_name']                = '商店名稱必須在3至32個字元之間！';
+$_['error_owner']               = '商店擁有者必須在3至64個字元之間！';
+$_['error_address']             = '網店地址必須在10 到256個字元！';
 $_['error_email']               = '無效的郵件地址！';
-$_['error_telephone']           = '電話號碼必須在3到32個字符！';
+$_['error_telephone']           = '電話號碼必須在3到32個字元！';
 $_['error_url']                 = '網店網址無效！';
 $_['error_title']               = '首頁標題必須在3到32個數字之間！';
 $_['error_limit']                = '限制規定！';

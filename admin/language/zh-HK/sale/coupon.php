@@ -39,6 +39,6 @@ $_['entry_status']        = '&nbsp;&nbsp;&nbsp;狀態：';
 // Error
 $_['error_permission']    = '警告： 您沒有權限更改優惠券設置！';
 $_['error_exists']        = '警告：優惠券已經使用！';
-$_['error_name']          = '優惠券名稱必須在3至64個字符之間！';
-$_['error_code']          = '代碼必須在3到10個字符之間！';
+$_['error_name']          = '優惠券名稱必須在3至64個字元之間！';
+$_['error_code']          = '代碼必須在3到10個字元之間！';
 ?>

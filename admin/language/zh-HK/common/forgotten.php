@@ -15,6 +15,6 @@ $_['entry_confirm']   = '確認密碼：';
 
 // Error
 $_['error_email']     = '警告：沒有找到相應的E-Mail地址，請再試一次！';
-$_['error_password']  = '密碼必須在3至20個字符之間！';
+$_['error_password']  = '密碼必須在3至20個字元之間！';
 $_['error_confirm']   = '密碼和確認密碼不匹配！';
 ?>

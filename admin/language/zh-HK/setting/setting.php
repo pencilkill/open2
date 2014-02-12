@@ -111,9 +111,9 @@ $_['entry_google_analytics']     = 'Google Analytics Code：<br /><span class="h
 // Error
 $_['error_warning']              = '警告： 相關數據未鍵入！';
 $_['error_permission']           = '警告： 您沒有權限更改商店設置！';
-$_['error_name']                 = '商店名稱必須在3至32個字符之間！';
+$_['error_name']                 = '商店名稱必須在3至32個字元之間！';
 $_['error_owner']                = '店主名稱必須在3到64個數字之間！';
-$_['error_address']              = '商店地址必須在10到256個字符之間！';
+$_['error_address']              = '商店地址必須在10到256個字元之間！';
 $_['error_email']                = '郵箱地址無效！';
 $_['error_telephone']            = '電話必須在3到32個數字之間！';
 $_['error_title']                = '首頁標題必須在3到32個數字之間！';

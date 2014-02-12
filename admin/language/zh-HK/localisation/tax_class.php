@@ -22,10 +22,10 @@ $_['entry_priority']    = '優先次序：';
 
 // Error
 $_['error_permission']  = '警告： 您沒有權限更改稅類！';
-$_['error_title']       = '稅類標題必須在3至32個字符之間！';
-$_['error_description'] = '描述長度必須在3至255個字符之間！';
+$_['error_title']       = '稅類標題必須在3至32個字元之間！';
+$_['error_description'] = '描述長度必須在3至255個字元之間！';
 $_['error_priority']    = '稅率優先次序必須要填上的！';
 $_['error_rate']        = '稅率是必須要填上的！';
-$_['error_description'] = '稅類描述長度必須在3至255個字符之間！';
+$_['error_description'] = '稅類描述長度必須在3至255個字元之間！';
 $_['error_product']     = '警告： 該稅類不能被刪除，因為它和 %s 綁定！';
 ?>

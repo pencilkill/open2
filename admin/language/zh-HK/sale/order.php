@@ -106,14 +106,14 @@ $_['text_bin_phone_match'] 					='bin_phone_match：<br /> class="help">客戶�
 $_['text_bin_phone']             ='BIN電話：<br /> class="help">客戶服務電話號碼，信用卡背面所列。約75％的BIN號碼。在某些情況下的電話號碼可能會過時返回</span>';
 $_['text_customer_phone_in_billing_location的']             ='客戶在結算地點的電話號碼：<br /> class="help">客戶的電話號碼是否是在帳單郵政編碼。一個是返回值列出的電話號碼屬於持卡人提供了一個積極的跡象。一個無返回值表示的電話號碼可能在不同的領域，或可能不會在我們的數據庫中列出。 NOTFOUND返回電話號碼前綴時不能被我們的數據庫中找到的所有。目前我們只支持美國電話號碼</span>';
 $_['text_ship_forward']             		 ='船舶前進。<br /> class="help">送貨地址是否是在數據庫中已知的郵件滴</span>';
-$_['text_city_postal_match']             ='市郵政比賽：<br /> class="help">無論開票城市和狀態匹配的郵政編碼。目前美國的地址，返回美國以外的空字符串</span>';
-$_['text_ship_city_postal_match']         ='航運市郵政比賽：<br /> class="help">無論航運城市和狀態匹配的郵政編碼。目前美國的地址，返回美國以外的空字符串</span>';
+$_['text_city_postal_match']             ='市郵政比賽：<br /> class="help">無論開票城市和狀態匹配的郵政編碼。目前美國的地址，返回美國以外的空字元串</span>';
+$_['text_ship_city_postal_match']         ='航運市郵政比賽：<br /> class="help">無論航運城市和狀態匹配的郵政編碼。目前美國的地址，返回美國以外的空字元串</span>';
 $_['text_score']            						 ='分數：<br /> class="help">根據上面列出的產出總體欺詐得分。這是原來的欺詐得分，是基於一個簡單的公式。它已取代風險評分（見下文），但為保持向後兼容性</span>';
 $_['text_explanation']             ='說明：<br /> class="help">一個得分的簡要說明，詳細說明是什麼因素促成的，根據我們的公式。請注意，這對應的得分，而不是riskScore </span>';
 $_['text_risk_score']             ='風險分數：<br /> class="help">概率的估計，該命令是欺詐的分析過去minFraud交易，根據新的欺詐得分。需要為客戶升級之前，2007年2月簽署了</span>';
 $_['text_queries_remaining']      ='查詢剩餘：<br /> class="help">留在您的帳戶的查詢號碼，可以用來提醒你時，你可能需要新增更多的查詢到您的帳戶。 </span>';
 $_['text_maxmind_id']             ='Maxmind編號：<br /> class="help">唯一的標識符，用於參考交易欺詐活動報告時，以MaxMind。這一報告將有助於MaxMind改善其服務，將使計劃功能來定制欺詐得分公式您扣款歷史上為基礎</span>';
-$_['text_error']                  ='錯誤：<br /> class="help">返回一條警告消息或請求失敗原因的錯誤字符串</span>';
+$_['text_error']                  ='錯誤：<br /> class="help">返回一條警告消息或請求失敗原因的錯誤字元串</span>';
 
 // Column
 $_['column_order_id']         = '訂單號';
@@ -176,24 +176,24 @@ $_['entry_reward']            = '積分：';
 // Error
 $_['error_warning']           = '警告： 請認真查看錯誤信息！';
 $_['error_permission']        = '警告： 您沒有權限更改訂單！';
-$_['error_firstname']         = '名字必須在1至32個字符之間！';
-$_['error_lastname']          = '姓氏必須在1至32個字符之間！';
+$_['error_firstname']         = '名字必須在1至32個字元之間！';
+$_['error_lastname']          = '姓氏必須在1至32個字元之間！';
 $_['error_email']             = '郵箱地址無效！';
-$_['error_telephone']         = '電話號碼必須在3至32個字符之間！';
-$_['error_password']          = '密碼長度必須在3到20個字符之間！';
+$_['error_telephone']         = '電話號碼必須在3至32個字元之間！';
+$_['error_password']          = '密碼長度必須在3到20個字元之間！';
 $_['error_confirm']           = '密碼和確認密碼不一致！';
 $_['error_company_id']        = '請填寫公司編碼！';
 $_['error_tax_id']            = '請填寫稅務編碼！';
 $_['error_vat']               = 'VAT 編號沒有填寫！';
-$_['error_address_1']         = '地址必須在3至128個字符之間！';
-$_['error_city']              = '城市名必須在3至128個字符之間！';
-$_['error_postcode']          = '郵編必須在2至10個字符之間！';
+$_['error_address_1']         = '地址必須在3至128個字元之間！';
+$_['error_city']              = '城市名必須在3至128個字元之間！';
+$_['error_postcode']          = '郵編必須在2至10個字元之間！';
 $_['error_country']           = '請選擇國家！';
 $_['error_zone']              = '請選擇區域/省/市！';
 $_['error_shipping']          = '警告：配送方式未填寫！';
 $_['error_payment']           = '警告：付款方式未填寫！';
 $_['error_upload']            = '請上傳文件！';
-$_['error_filename']          = '文件名必須在3至128個字符之間！';
+$_['error_filename']          = '文件名必須在3至128個字元之間！';
 $_['error_filetype']          = '非法的文件類型！';
 $_['error_action']            = '警告： 不能完成本操作！';
 ?>
