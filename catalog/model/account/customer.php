@@ -11,15 +11,37 @@ class ModelAccountCustomer extends Model {
 
 		$customer_group_info = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
 
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "customer SET store_id = '" . (int)$this->config->get('config_store_id') . "', firstname = " . $this->db->escape($data['firstname']) . ", lastname = " . $this->db->escape($data['lastname']) . ", email = " . $this->db->escape($data['email']) . ", telephone = " . $this->db->escape($data['telephone']) . ", fax = " . $this->db->escape($data['fax']) . ", salt = " . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . ", password = " . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . ", newsletter = '" . (isset($data['newsletter']) ? (int)$data['newsletter'] : 0) . "', customer_group_id = '" . (int)$customer_group_id . "', ip = " . $this->db->escape($this->request->server['REMOTE_ADDR']) . ", status = '1', approved = '" . (int)!$customer_group_info['approval'] . "', date_added = NOW()");
+		//
+		$this->db->set('store_id', (int)$this->config->get('config_store_id'));
+
+		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
+		$this->db->set('salt', $salt);
+
+		$this->db->set('password', sha1($salt . sha1($salt . sha1($data['password']))));
+		unset($data['password']);
+
+		$this->db->set('customer_group_id', $customer_group_id);
+
+		$this->db->set('ip', $this->db->escape($this->request->server['REMOTE_ADDR']));
+
+		$this->db->set('status', 1);
+
+		$this->db->set('approved', (int)!$customer_group_info['approval']);
+
+		$this->db->set('date_added', date('Y-m-d H:i:s'));
+
+      	$this->db->insert('customer', $data);
 
 		$customer_id = $this->db->getLastId();
 
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "address SET customer_id = '" . (int)$customer_id . "', firstname = " . $this->db->escape($data['firstname']) . ", lastname = " . $this->db->escape($data['lastname']) . ", company = " . $this->db->escape($data['company']) . ", company_id = " . $this->db->escape($data['company_id']) . ", tax_id = " . $this->db->escape($data['tax_id']) . ", address_1 = " . $this->db->escape($data['address_1']) . ", address_2 = " . $this->db->escape($data['address_2']) . ", city = " . $this->db->escape($data['city']) . ", postcode = " . $this->db->escape($data['postcode']) . ", country_id = '" . (int)$data['country_id'] . "', zone_id = '" . (int)$data['zone_id'] . "'");
+		//
+		$this->db->set('customer_id', (int)$customer_id);
+
+      	$this->db->insert('address', $data);
 
 		$address_id = $this->db->getLastId();
 
-      	$this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int)$address_id . "' WHERE customer_id = '" . (int)$customer_id . "'");
+      	$this->db->update('customer', array('address_id' => (int)$address_id), array('customer_id', (int)$customer_id));
 
 		$this->language->load('mail/customer');
 
@@ -57,72 +79,80 @@ class ModelAccountCustomer extends Model {
 	}
 
 	public function editCustomer($data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "customer SET firstname = " . $this->db->escape($data['firstname']) . ", lastname = " . $this->db->escape($data['lastname']) . ", email = " . $this->db->escape($data['email']) . ", telephone = " . $this->db->escape($data['telephone']) . ", fax = " . $this->db->escape($data['fax']) . " WHERE customer_id = '" . (int)$this->customer->getId() . "'");
+		if(isset($data['password'])){
+			$salt = substr(md5(uniqid(rand(), true)), 0, 9);
+
+			$this->db->set('salt', $salt);
+			$this->db->set('password', sha1($salt . sha1($salt . sha1($data['password']))));
+
+			unset($data['password']);
+		}
+
+		$this->db->update('customer', $data, array('customer_id' => (int)$this->customer->getId()));
 	}
 
 	public function editPassword($email, $password) {
-      	$this->db->query("UPDATE " . DB_PREFIX . "customer SET salt = " . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . ", password = " . $this->db->escape(sha1($salt . sha1($salt . sha1($password)))) . " WHERE email = " . $this->db->escape($email) . "");
+		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
+
+		$this->db->set('salt', $salt);
+		$this->db->set('password', sha1($salt . sha1($salt . sha1($password))));
+
+      	$this->db->update('customer', NULL, array('email' => $email));
 	}
 
 	public function editNewsletter($newsletter) {
-		$this->db->query("UPDATE " . DB_PREFIX . "customer SET newsletter = '" . (int)$newsletter . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
+      	$this->db->update('customer', array('newsletter' => (int)$newsletter), array('customer_id' => (int)$this->customer->getId()));
 	}
 
 	public function getCustomer($customer_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE customer_id = '" . (int)$customer_id . "'");
+		$query = $this->db->get_where('customer', array('customer_id' => (int)$customer_id));
 
 		return $query->row;
 	}
 
 	public function getCustomerByEmail($email) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE email = " . $this->db->escape($email) . "");
+		$query = $this->db->get_where('customer', array('email' => $email));
 
 		return $query->row;
 	}
 
 	public function getCustomerByToken($token) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE token = " . $this->db->escape($token) . " AND token != ''");
+		$query = $this->db->get_where('customer', array('token' => $token, 'token != ' => ''));
 
-		$this->db->query("UPDATE " . DB_PREFIX . "customer SET token = ''");
+		$this->db->update('customer', array('token' => ''));
 
 		return $query->row;
 	}
 
 	public function getCustomers($data = array()) {
-		$sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS name, cg.name AS customer_group FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group cg ON (c.customer_group_id = cg.customer_group_id) ";
-
-		$implode = array();
+		$query = $this->db->select("*, CONCAT(c.firstname, ' ', c.lastname) AS name, cg.name AS customer_group", false)->from('customer c')->join('customer_group cg', 'c.customer_group_id = cg.customer_group_id');
 
 		if (isset($data['filter_name']) && !is_null($data['filter_name'])) {
-			$implode[] = "LCASE(CONCAT(c.firstname, ' ', c.lastname)) LIKE '%" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
+			$query->like("LCASE(CONCAT(c.firstname, ' ', c.lastname))", utf8_strtolower($data['filter_name']));
 		}
 
 		if (isset($data['filter_email']) && !is_null($data['filter_email'])) {
-			$implode[] = "c.email = " . $this->db->escape($data['filter_email']) . "";
+			$query->where('c.email', $data['filter_email']);
 		}
 
 		if (isset($data['filter_customer_group_id']) && !is_null($data['filter_customer_group_id'])) {
-			$implode[] = "cg.customer_group_id = " . $this->db->escape($data['filter_customer_group_id']) . "";
+			$query->where('cg.customer_group_id', $data['filter_customer_group_id']);
 		}
 
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
-			$implode[] = "c.status = '" . (int)$data['filter_status'] . "'";
+			$query->where('c.status', (int)$data['filter_status']);
 		}
 
 		if (isset($data['filter_approved']) && !is_null($data['filter_approved'])) {
-			$implode[] = "c.approved = '" . (int)$data['filter_approved'] . "'";
+			$query->where('c.approved', (int)$data['filter_approved']);
 		}
 
 		if (isset($data['filter_ip']) && !is_null($data['filter_ip'])) {
-			$implode[] = "c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "customer_ip WHERE ip = " . $this->db->escape($data['filter_ip']) . ")";
+			$query->where("c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "customer_ip WHERE ip = " . $this->db->escape($data['filter_ip']) . ")", NULL, false);
 		}
 
 		if (isset($data['filter_date_added']) && !is_null($data['filter_date_added'])) {
-			$implode[] = "DATE(c.date_added) = DATE(" . $this->db->escape($data['filter_date_added']) . ")";
-		}
-
-		if ($implode) {
-			$sql .= " WHERE " . implode(" AND ", $implode);
+			$query->where('DATE(c.date_added)', $data['filter_date_added']);
 		}
 
 		$sort_data = array(
@@ -135,48 +165,46 @@ class ModelAccountCustomer extends Model {
 		);
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
-			$sql .= " ORDER BY " . $data['sort'];
+			$sort = $data['sort'];
 		} else {
-			$sql .= " ORDER BY name";
+			$sort = 'name';
 		}
 
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
-			$sql .= " DESC";
+			$query->order_by($sort, 'DESC');
 		} else {
-			$sql .= " ASC";
+			$query->order_by($sort, 'ASC');
 		}
 
 		if (isset($data['start']) || isset($data['limit'])) {
-			if ($data['start'] < 0) {
+			if (!isset($data['start']) || (int)$data['start'] < 0) {
 				$data['start'] = 0;
 			}
 
-			if ($data['limit'] < 1) {
+			if (!isset($data['limit']) || (int)$data['limit'] < 1) {
 				$data['limit'] = 20;
 			}
 
-			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+			$query->limit((int)$data['limit'], (int)$data['start']);
 		}
 
-		$query = $this->db->query($sql);
-
-		return $query->rows;
+		return $query->get()->rows;
 	}
 
 	public function getTotalCustomersByEmail($email) {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer WHERE LOWER(email) = " . $this->db->escape(strtolower($email)) . "");
+		$query = $this->db->select('COUNT(*) AS total')->get_where('customer', array('LOWER(email)' => strtolower($email)));
 
 		return $query->row['total'];
 	}
 
 	public function getIps($customer_id) {
-		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_ip` WHERE customer_id = '" . (int)$customer_id . "'");
+		$query = $this->db->get_where('customer_ip', array('customer_id' => (int)$customer_id));
 
 		return $query->rows;
 	}
 
 	public function isBlacklisted($ip) {
-		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_ip_blacklist` WHERE ip = " . $this->db->escape($ip) . "");
+		$query = $this->db->get_where('customer_ip_blacklist', array('ip' => $ip));
 
 		return $query->num_rows;
 	}
