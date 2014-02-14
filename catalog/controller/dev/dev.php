@@ -275,12 +275,11 @@ class ControllerDevDev extends Controller {
 
 	public function bus() {
 		// Using clone without modify orignal object
-		$config = clone Registry::instance()->get('config');
-		var_dump($config->get('config_smtp_host'));
-		$config->set('config_smtp_host', 'abc');
-		var_dump($config->get('config_smtp_host'));
-		$config = Registry::instance()->get('config');
-		var_dump($config->get('config_smtp_host'));
+		$this->load->model('account/transaction');
+
+		$this->model_account_transaction->getTotalAmount();
+
+		echo $this->db->last_query();
 	}
 
 	private function validate(){

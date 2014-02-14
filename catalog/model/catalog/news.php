@@ -1,61 +1,67 @@
 <?php
 class ModelCatalogNews extends Model {
 	public function getNews($news_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "news n LEFT JOIN " . DB_PREFIX . "news_description nd ON (n.news_id = nd.news_id) WHERE nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.news_id='".(int)$news_id."'");
+		$query = $this->db->from('news n')
+			->join('news_description nd', 'n.news_id = nd.news_id')
+			->where(array('nd.language_id' => (int)$this->config->get('config_language_id'), 'n.news_id' => (int)$news_id))
+			->get();
 
 		return $query->row;
 	}
 
 	public function getNewses($start=0,$limit=10, $kw=null) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "news n LEFT JOIN " . DB_PREFIX . "news_description nd ON (n.news_id = nd.news_id) WHERE nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.status='1' ORDER BY n.sort_order DESC,n.date_added DESC LIMIT " . (int)$start . "," . (int)$limit;
+		$query = $this->db->from('news n')
+			->join('news_description nd', 'n.news_id = nd.news_id')
+			->where(array('nd.language_id' => (int)$this->config->get('config_language_id'), 'n.status' => 1));
 
 		if($kw){
-			$sql .= " AND (nd.title LIKE '%".$kw."%' OR nd.keyword LIKE '%".$kw."%')";
+			$query->where("nd.title LIKE '%".$kw."%' OR nd.keyword LIKE '%".$kw."%')");
 		}
 
-		$query = $this->db->query($sql);
+		$query->order_by('n.sort_order', 'DESC')->order_by('n.date_added', 'DESC');
 
-		return $query->rows;
+		return $query->get()->rows;
 	}
 
 	public function getTotalNews($kw=null) {
-      	$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "news n LEFT JOIN " . DB_PREFIX . "news_description nd ON (n.news_id = nd.news_id) WHERE nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.status = '1'";
+      	$query = $this->db->select('COUNT(*) AS total')->from('news n')
+			->join('news_description nd', 'n.news_id = nd.news_id')
+			->where(array('nd.language_id' => (int)$this->config->get('config_language_id'), 'n.status' => 1));
 
-      	if($kw){
-			$sql .= " AND (nd.title LIKE '%".$kw."%' OR nd.keyword LIKE '%".$kw."%')";
+		if($kw){
+			$query->where("nd.title LIKE '%".$kw."%' OR nd.keyword LIKE '%".$kw."%')");
 		}
 
-		$query = $this->db->query($sql);
-
-		return $query->row['total'];
+		return $query->get()->row['total'];
 	}
 
 	public function getLastNews($news_id, $sort_order, $date_added) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "news n LEFT JOIN " . DB_PREFIX . "news_description nd ON (n.news_id = nd.news_id) WHERE nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.status='1'";
+		$query = $this->db->from('news n')
+			->join('news_description nd', 'n.news_id = nd.news_id')
+			->where(array('nd.language_id' => (int)$this->config->get('config_language_id'), 'n.status' => 1))
+			->where("((n.sort_order = '" . $sort_order . "' AND UNIX_TIMESTAMP(n.date_added) >= UNIX_TIMESTAMP('" . $date_added . "')) OR (n.sort_order > '" . $sort_order . "')) AND n.news_id <> '" . $news_id . "'", NULL, false)
+			->order_by('n.sort_order', 'ASC')
+			->order_by('n.date_added', 'ASC')
+			->limit(1, 0);
 
-		$sql .= " AND ((n.sort_order = '" . $sort_order . "' AND UNIX_TIMESTAMP(n.date_added) >= UNIX_TIMESTAMP('" . $date_added . "')) OR (n.sort_order > '" . $sort_order . "')) AND n.news_id <> '" . $news_id . "'";
 
-		$sql .= " ORDER BY n.sort_order ASC,n.date_added ASC LIMIT 0,1";
-
-		$query = $this->db->query($sql);
-
-		return $query->row;
+		return $query->get()->row;
 	}
 
 	public function getNextNews($news_id, $sort_order, $date_added) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "news n LEFT JOIN " . DB_PREFIX . "news_description nd ON (n.news_id = nd.news_id) WHERE nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.status='1' ";
+		$query = $this->db->from('news n')
+			->join('news_description nd', 'n.news_id = nd.news_id')
+			->where(array('nd.language_id' => (int)$this->config->get('config_language_id'), 'n.status' => 1))
+			->where("((n.sort_order = '" . $sort_order . "' AND UNIX_TIMESTAMP(n.date_added) <= UNIX_TIMESTAMP('" . $date_added . "')) OR (n.sort_order < '" . $sort_order . "')) AND n.news_id <> '" . $news_id . "'", NULL, false)
+			->order_by('n.sort_order', 'DESC')
+			->order_by('n.date_added', 'DESC')
+			->limit(1, 0);
 
-		$sql .= " AND ((n.sort_order = '" . $sort_order . "' AND UNIX_TIMESTAMP(n.date_added) <= UNIX_TIMESTAMP('" . $date_added . "')) OR (n.sort_order < '" . $sort_order . "')) AND n.news_id <> '" . $news_id . "'";
-
-		$sql .= " ORDER BY n.sort_order DESC,n.date_added DESC LIMIT 0,1";
-
-		$query = $this->db->query($sql);
-
-		return $query->row;
+		return $query->get()->row;
 	}
 
 	public function getNewsLayoutId($news_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "news_to_layout WHERE news_id = '" . (int)$news_id . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "'");
+		$query = $this->db->get_where('news_to_layout', array('news_id' => (int)$news_id, 'store_id' => (int)$this->config->get('config_store_id')));
 
 		if ($query->num_rows) {
 			return $query->row['layout_id'];

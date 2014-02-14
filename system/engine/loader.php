@@ -20,7 +20,7 @@ final class Loader {
 		if (file_exists($file)) {
 			include_once($file);
 		} else {
-			trigger_error('Error: Could not load library ' . $library . '!');
+			trigger_error('Error: Could not load library ' . $library . ' !');
 			exit();
 		}
 	}
@@ -31,7 +31,7 @@ final class Loader {
 		if (file_exists($file)) {
 			include_once($file);
 		} else {
-			trigger_error('Error: Could not load helper ' . $helper . '!');
+			trigger_error('Error: Could not load helper ' . $helper . ' !');
 			exit();
 		}
 	}
@@ -42,7 +42,7 @@ final class Loader {
 		if (file_exists($file)) {
 			include_once($file);
 		} else {
-			trigger_error('Error: Could not load ext ' . $ext . '!');
+			trigger_error('Error: Could not load ext ' . $ext . ' !');
 			exit();
 		}
 	}
@@ -60,7 +60,7 @@ final class Loader {
 			$this->registry->set('model_' . str_replace('/', '_', $model), new $class($this->registry));	// Slash will be replaced with dash while others will be ignore.
 			// Now , $this->model_folder_modelFileName->mothod() is accessable !
 		} else {
-			trigger_error('Error: Could not load model ' . $model . '!');
+			trigger_error('Error: Could not load model ' . $model . ' !');
 			exit();
 		}
 	}
