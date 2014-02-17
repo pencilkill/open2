@@ -10,6 +10,14 @@ class ModelCatalogNews extends Model {
 	}
 
 	public function getNewses($start=0,$limit=10, $kw=null) {
+		if ($start < 0) {
+			$start = 0;
+		}
+
+		if ($limit < 1) {
+			$limit = 20;
+		}
+
 		$query = $this->db->from('news n')
 			->join('news_description nd', 'n.news_id = nd.news_id')
 			->where(array('nd.language_id' => (int)$this->config->get('config_language_id'), 'n.status' => 1));
@@ -19,6 +27,8 @@ class ModelCatalogNews extends Model {
 		}
 
 		$query->order_by('n.sort_order', 'DESC')->order_by('n.date_added', 'DESC');
+
+		$query->limit((int)$limit, (int)$start);
 
 		return $query->get()->rows;
 	}

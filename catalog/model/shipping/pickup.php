@@ -2,9 +2,12 @@
 class ModelShippingPickup extends Model {
 	function getQuote($address) {
 		$this->load->language('shipping/pickup');
-		
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('pickup_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
-	
+
+		$query = $this->db->from('zone_to_geo_zone')
+			->where(array('geo_zone_id' => (int)$this->config->get('pickup_geo_zone_id'), 'country_id' => (int)$address['country_id']))
+			->where("(zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')", NULL ,false)
+			->get();
+
 		if (!$this->config->get('pickup_geo_zone_id')) {
 			$status = true;
 		} elseif ($query->num_rows) {
@@ -12,12 +15,12 @@ class ModelShippingPickup extends Model {
 		} else {
 			$status = false;
 		}
-		
+
 		$method_data = array();
-	
+
 		if ($status) {
 			$quote_data = array();
-			
+
       		$quote_data['pickup'] = array(
         		'code'         => 'pickup.pickup',
         		'title'        => $this->language->get('text_description'),
@@ -34,7 +37,7 @@ class ModelShippingPickup extends Model {
         		'error'      => false
       		);
 		}
-	
+
 		return $method_data;
 	}
 }

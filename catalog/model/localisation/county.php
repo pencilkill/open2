@@ -1,17 +1,23 @@
 <?php
 class ModelLocalisationCounty extends Model {
 	public function getCounty($county_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "county WHERE county_id = '" . (int)$county_id . "' AND status = '1'");
+		$query = $this->db->get_where('county', array('county_id' => (int)$county_id, 'status' => 1));
 
 		return $query->row;
 	}
 
 	public function getCountiesByZoneId($zone_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "county WHERE zone_id = '" . (int)$zone_id . "' AND status = '1' ORDER BY sort_order DESC");
+		$county_data = $this->cache->get('county.' . (int)$zone_id);
 
-		$zone_data = $query->rows;
+		if (!$county_data) {
+			$query = $this->db->from('county', array('zone_id' => (int)$zone_id, 'status' => 1))->order_by('sort_order', 'DESC')->get();
 
-		return $query->rows;
+			$county_data = $query->rows;
+
+			$this->cache->set('county.' . (int)$zone_id, $county_data);
+		}
+
+		return $county_data;
 	}
 }
 ?>
