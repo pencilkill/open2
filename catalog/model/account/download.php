@@ -3,7 +3,8 @@ class ModelAccountDownload extends Model {
 	public function getDownload($order_download_id) {
 		$query = $this->db->from('order_download od')
 			->join('order o', 'od.order_id = o.order_id')
-			->get_where(array('o.customer_id' => (int)$this->customer->getId(), 'o.order_status_id > ' => 0, 'o.order_status_id' => (int)$this->config->get('config_complete_status_id'), 'od.order_download_id' => (int)$order_download_id, 'od.remaining > ' => 0));
+			->where(array('o.customer_id' => (int)$this->customer->getId(), 'o.order_status_id > ' => 0, 'o.order_status_id' => (int)$this->config->get('config_complete_status_id'), 'od.order_download_id' => (int)$order_download_id, 'od.remaining > ' => 0))
+			->get();
 
 		return $query->row;
 	}
@@ -38,7 +39,8 @@ class ModelAccountDownload extends Model {
 		$query = $this->db->select('COUNT(*) AS total')
 			->from('order_download od')
 			->join('order o', 'od.order_id = o.order_id')
-			->get_where(array('o.customer_id' => (int)$this->customer->getId(), 'o.order_status_id > ' => 0, 'o.order_status_id' => (int)$this->config->get('config_complete_status_id')));
+			->where(array('o.customer_id' => (int)$this->customer->getId(), 'o.order_status_id > ' => 0, 'o.order_status_id' => (int)$this->config->get('config_complete_status_id')))
+			->get();
 
 		return $query->row['total'];
 	}

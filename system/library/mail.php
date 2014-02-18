@@ -67,7 +67,15 @@ class Mail{
 	}
 	// Working as it was without any checking
 	public function __call($method,$args){
-	   return call_user_func_array(array($this->driver, $method), $args);
+		$class = $this->driver;
+
+		if(method_exists($this, $method)){
+			$class = $this;
+		}
+
+		$ref = new ReflectionMethod($class, $method);
+
+		return $ref->invokeArgs($class, $args);
 	}
 }
 ?>
