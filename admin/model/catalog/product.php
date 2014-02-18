@@ -387,6 +387,20 @@ class ModelCatalogProduct extends Model {
 
 	public function getProducts($data = array()) {
 		if ($data) {
+			if (!empty($data['filter_category_id'])) {
+				$category_data = array((int)$data['filter_category_id']);
+
+				if (!empty($data['filter_sub_category'])) {
+					$this->load->model('catalog/category');
+
+					$categories = $this->model_catalog_category->getCategories($data['filter_category_id']);
+
+					foreach ($categories as $category) {
+						$category_data[] = (int)$category['category_id'];
+					}
+				}
+			}
+
 			$query = $this->db->from('product p')->join('product_description pd',  'p.product_id = pd.product_id');
 
 			if (!empty($data['filter_category_id'])) {
@@ -415,24 +429,8 @@ class ModelCatalogProduct extends Model {
 				$query->where('p.status', (int)$data['filter_status']);
 			}
 
-			if (!empty($data['filter_category_id'])) {
-				if (!empty($data['filter_sub_category'])) {
-					$implode_data = array();
-
-					$implode_data[] = "category_id = '" . (int)$data['filter_category_id'] . "'";
-
-					$this->load->model('catalog/category');
-
-					$categories = $this->model_catalog_category->getCategories($data['filter_category_id']);
-
-					foreach ($categories as $category) {
-						$implode_data[] = "p2c.category_id = '" . (int)$category['category_id'] . "'";
-					}
-
-					$query->where('(' . implode(' OR ', $implode_data) . ')');
-				} else {
-					$query->where('p2c.category_id', (int)$data['filter_category_id']);
-				}
+			if(!empty($category_data)){
+				$query->where_in('p2c.category_id', $category_data);
 			}
 
 			$query->group_by('p.product_id');
@@ -676,6 +674,20 @@ class ModelCatalogProduct extends Model {
 	}
 
 	public function getTotalProducts($data = array()) {
+		if (!empty($data['filter_category_id'])) {
+			$category_data = array((int)$data['filter_category_id']);
+
+			if (!empty($data['filter_sub_category'])) {
+				$this->load->model('catalog/category');
+
+				$categories = $this->model_catalog_category->getCategories($data['filter_category_id']);
+
+				foreach ($categories as $category) {
+					$category_data[] = (int)$category['category_id'];
+				}
+			}
+		}
+
 		$query = $this->db->select('COUNT(DISTINCT ' . $this->db->protect_identifiers('p.product_id') . ') AS total', false)->from('product p')->join('product_description pd', 'p.product_id = pd.product_id');
 
 		if (!empty($data['filter_category_id'])) {
@@ -704,24 +716,8 @@ class ModelCatalogProduct extends Model {
 			$query->where('p.status', (int)$data['filter_status']);
 		}
 
-		if (!empty($data['filter_category_id'])) {
-			if (!empty($data['filter_sub_category'])) {
-				$implode_data = array();
-
-				$implode_data[] = "p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
-
-				$this->load->model('catalog/category');
-
-				$categories = $this->model_catalog_category->getCategories($data['filter_category_id']);
-
-				foreach ($categories as $category) {
-					$implode_data[] = "p2c.category_id = '" . (int)$category['category_id'] . "'";
-				}
-
-				$query->where('(' . implode(' OR ', $implode_data) . ')');
-			} else {
-				$query->where('p2c.category_id', (int)$data['filter_category_id']);
-			}
+		if(!empty($category_data)){
+			$query->where_in('p2c.category_id', $category_data);
 		}
 
 		return $query->get()->row['total'];

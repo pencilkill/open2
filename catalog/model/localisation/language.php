@@ -12,7 +12,7 @@ class ModelLocalisationLanguage extends Model {
 		if (!$language_data) {
 			$language_data = array();
 
-			$query = $this->db->from('language')->order_by('sort_order', 'ASC')->order_by('name', 'ASC');
+			$query = $this->db->from('language')->order_by('sort_order', 'ASC')->order_by('name', 'ASC')->get();
 
     		foreach ($query->rows as $result) {
       			$language_data[$result['language_id']] = $result;

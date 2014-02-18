@@ -14,7 +14,7 @@ class ModelLocalisationCurrency extends Model {
 
 			$query = $this->db->from('currency')->order_by('title', 'ASC');
 
-			foreach ($query->rows as $result) {
+			foreach ($query->get()->rows as $result) {
       			$currency_data[$result['code']] = $result;
     		}
 

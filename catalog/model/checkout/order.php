@@ -197,7 +197,7 @@ class ModelCheckoutOrder extends Model {
 			}
 
 			// Order Totals
-			$order_total_query = $this->db->from('order_total')->where(array('order_id' => (int)$order_id))->order_by('sort_order', 'ASC');
+			$order_total_query = $this->db->from('order_total')->where(array('order_id' => (int)$order_id))->order_by('sort_order', 'ASC')->get();
 
 			foreach ($order_total_query->rows as $order_total) {
 				$this->load->model('total/' . $order_total['code']);

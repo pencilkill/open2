@@ -74,7 +74,8 @@ class ModelCatalogProduct extends Model {
 			->join('product_description pd', 'p.product_id = pd.product_id')
 			->join('product_to_store p2s', 'p.product_id = p2s.product_id')
 			->join('manufacturer m', 'p.manufacturer_id = m.manufacturer_id')
-			->where(array('p.product_id' => (int)$product_id, 'pd.language_id' => (int)$this->config->get('config_language_id'), 'p.status' => 1, 'p.date_available <= ' => date('Y-m-d H:i:s'), 'p2s.store_id' => (int)$this->config->get('config_store_id')));
+			->where(array('p.product_id' => (int)$product_id, 'pd.language_id' => (int)$this->config->get('config_language_id'), 'p.status' => 1, 'p.date_available <= ' => date('Y-m-d H:i:s'), 'p2s.store_id' => (int)$this->config->get('config_store_id')))
+			->get();
 
 		if ($query->num_rows) {
 			return array_merge($query->row, array(
@@ -105,6 +106,20 @@ class ModelCatalogProduct extends Model {
 				->group_by('r1.product_id')
 				->select_string();
 
+			if (!empty($data['filter_category_id'])) {
+				$category_data = array((int)$data['filter_category_id']);
+
+				if (!empty($data['filter_sub_category'])) {
+					$this->load->model('catalog/category');
+
+					$categories = $this->model_catalog_category->getCategoriesByParentId($data['filter_category_id']);
+
+					foreach ($categories as $category_id) {
+						$category_data[] = (int)$category_id;
+					}
+				}
+			}
+
 			$query = $this->db->select("p.product_id, ({$s1}) AS total", false)
 				->from('product p')
 				->join('product_description pd', 'p.product_id = pd.product_id')
@@ -114,7 +129,7 @@ class ModelCatalogProduct extends Model {
 				$query->join('product_to_category p2c', 'p.product_id = p2c.product_id');
 			}
 
-			$query->where(array('pd.language_id' => (int)$this->config->get('config_language_id'), 'p.status' => 1, 'p.date_available <= ' < date('Y-m-d H:i:s'), 'p2s.store_id' => (int)$this->config->get('config_store_id')));
+			$query->where(array('pd.language_id' => (int)$this->config->get('config_language_id'), 'p.status' => 1, 'p.date_available <= ' => date('Y-m-d H:i:s'), 'p2s.store_id' => (int)$this->config->get('config_store_id')));
 
 			if (!empty($data['filter_name']) || !empty($data['filter_tag'])) {
 				$sql = "(";
@@ -168,31 +183,13 @@ class ModelCatalogProduct extends Model {
 				}
 			}
 
-			if (!empty($data['filter_category_id'])) {
-				if (!empty($data['filter_sub_category'])) {
-					$implode_data = array();
-
-					$implode_data[] = (int)$data['filter_category_id'];
-
-					$this->load->model('catalog/category');
-
-					$categories = $this->model_catalog_category->getCategoriesByParentId($data['filter_category_id']);
-
-					foreach ($categories as $category_id) {
-						$implode_data[] = (int)$category_id;
-					}
-
-					$query->where("p2c.category_id IN (" . implode(', ', $implode_data) . ")", NULL, false);
-				} else {
-					$query->where('p2c.category_id', (int)$data['filter_category_id']);
-				}
+			if(!empty($category_data)){
+				$query->where_in('p2c.category_id', $category_data);
 			}
 
 			if (!empty($data['filter_manufacturer_id'])) {
 				$query->where('p.manufacturer_id', (int)$data['filter_manufacturer_id']);
 			}
-
-			$query->where('p.product_id');
 
 			$sort_data = array(
 				'pd.name',
@@ -301,7 +298,7 @@ class ModelCatalogProduct extends Model {
 				$query->limit((int)$data['limit'], (int)$data['start']);
 			}
 
-		foreach ($query->rows as $result) {
+		foreach ($query->get()->rows as $result) {
 			$product_data[$result['product_id']] = $this->getProduct($result['product_id']);
 		}
 
@@ -433,7 +430,8 @@ class ModelCatalogProduct extends Model {
 					->join('option_value ov', 'pov.option_value_id = ov.option_value_id')
 					->join('option_value_description ovd', 'ov.option_value_id = ovd.option_value_id')
 					->where(array('pov.product_id' => (int)$product_id, 'pov.product_option_id' => (int)$product_option['product_option_id'], 'ovd.language_id' => (int)$this->config->get('config_language_id')))
-					->order_by('ov.sort_order', 'ASC');
+					->order_by('ov.sort_order', 'ASC')
+					->get();
 
 				$product_option['option_value'] = $product_option_value_query->rows;
 
@@ -512,6 +510,20 @@ class ModelCatalogProduct extends Model {
 		$product_data = $this->cache->get('product.total.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . (int)$customer_group_id . '.' . $cache);
 
 		if (!$product_data) {
+			if (!empty($data['filter_category_id'])) {
+				$category_data = array((int)$data['filter_category_id']);
+
+				if (!empty($data['filter_sub_category'])) {
+					$this->load->model('catalog/category');
+
+					$categories = $this->model_catalog_category->getCategoriesByParentId($data['filter_category_id']);
+
+					foreach ($categories as $category_id) {
+						$category_data[] = (int)$category_id;
+					}
+				}
+			}
+
 			$query = $this->db->select('COUNT(DISTINCT p.product_id) AS total', false)
 				->from('product p')
 				->join('product_description pd', 'p.product_id = pd.product_id')
@@ -575,24 +587,8 @@ class ModelCatalogProduct extends Model {
 				}
 			}
 
-			if (!empty($data['filter_category_id'])) {
-				if (!empty($data['filter_sub_category'])) {
-					$implode_data = array();
-
-					$implode_data[] = (int)$data['filter_category_id'];
-
-					$this->load->model('catalog/category');
-
-					$categories = $this->model_catalog_category->getCategoriesByParentId($data['filter_category_id']);
-
-					foreach ($categories as $category_id) {
-						$implode_data[] = (int)$category_id;
-					}
-
-					$query->where("p2c.category_id IN (" . implode(', ', $implode_data) . ")", NULL, false);
-				} else {
-					$query->where('p2c.category_id', (int)$data['filter_category_id']);
-				}
+			if(!empty($category_data)){
+				$query->where_in('p2c.category_id', $category_data);
 			}
 
 			if (!empty($data['filter_manufacturer_id'])) {

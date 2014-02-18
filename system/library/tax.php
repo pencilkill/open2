@@ -95,7 +95,7 @@ final class Tax {
 				->join('zone_to_geo_zone z2gz', 'tr2.geo_zone_id = z2gz.geo_zone_id')
 				->join('geo_zone gz', 'tr2.geo_zone_id = gz.geo_zone_id')
 				->where(array('tr1.tax_class_id' => (int)$tax_class_id, 'tr1.based' => 'shipping', 'tr2cg.customer_group_id' => (int)$customer_group_id, 'z2gz.country_id' => (int)$this->shipping_address['country_id']))
-				->where("(z2gz.zone_id = '0' OR z2gz.zone_id = '" . (int)$this->shipping_address['zone_id'] . "'")
+				->where("(z2gz.zone_id = '0' OR z2gz.zone_id = '" . (int)$this->shipping_address['zone_id'] . "')")
 				->order_by('tr1.priority', 'ASC')
 				->get();
 
@@ -105,14 +105,14 @@ final class Tax {
 		}
 
 		if ($this->payment_address) {
-			$tax_query = $this->db->$this->db->select('tr2.tax_rate_id, tr2.name, tr2.rate, tr2.type, tr1.priority')
+			$tax_query = $this->db->select('tr2.tax_rate_id, tr2.name, tr2.rate, tr2.type, tr1.priority')
 				->from('tax_rule tr1')
 				->join('tax_rate tr2', 'tr1.tax_rate_id = tr2.tax_rate_id')
 				->join('tax_rate_to_customer_group tr2cg', 'tr2.tax_rate_id = tr2cg.tax_rate_id', 'inner')
 				->join('zone_to_geo_zone z2gz', 'tr2.geo_zone_id = z2gz.geo_zone_id')
 				->join('geo_zone gz', 'tr2.geo_zone_id = gz.geo_zone_id')
 				->where(array('tr1.tax_class_id' => (int)$tax_class_id, 'tr1.based' => 'payment', 'tr2cg.customer_group_id' => (int)$customer_group_id, 'z2gz.country_id' => (int)$this->payment_address['country_id']))
-				->where("(z2gz.zone_id = '0' OR z2gz.zone_id = '" . (int)$this->payment_address['zone_id'] . "'")
+				->where("(z2gz.zone_id = '0' OR z2gz.zone_id = '" . (int)$this->payment_address['zone_id'] . "')")
 				->order_by('tr1.priority', 'ASC')
 				->get();
 
@@ -122,14 +122,14 @@ final class Tax {
 		}
 
 		if ($this->store_address) {
-			$tax_query = $this->db->$this->db->select('tr2.tax_rate_id, tr2.name, tr2.rate, tr2.type, tr1.priority')
+			$tax_query = $this->db->select('tr2.tax_rate_id, tr2.name, tr2.rate, tr2.type, tr1.priority')
 				->from('tax_rule tr1')
 				->join('tax_rate tr2', 'tr1.tax_rate_id = tr2.tax_rate_id')
 				->join('tax_rate_to_customer_group tr2cg', 'tr2.tax_rate_id = tr2cg.tax_rate_id', 'inner')
 				->join('zone_to_geo_zone z2gz', 'tr2.geo_zone_id = z2gz.geo_zone_id')
 				->join('geo_zone gz', 'tr2.geo_zone_id = gz.geo_zone_id')
 				->where(array('tr1.tax_class_id' => (int)$tax_class_id, 'tr1.based' => 'payment', 'tr2cg.customer_group_id' => (int)$customer_group_id, 'z2gz.country_id' => (int)$this->store_address['country_id']))
-				->where("(z2gz.zone_id = '0' OR z2gz.zone_id = '" . (int)$this->store_address['zone_id'] . "'")
+				->where("(z2gz.zone_id = '0' OR z2gz.zone_id = '" . (int)$this->store_address['zone_id'] . "')")
 				->order_by('tr1.priority', 'ASC')
 				->get();
 
