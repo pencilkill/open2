@@ -31,5 +31,5 @@ define('DIR_LOGS', DIR_PATH . 'cache/logs/');
 define('DIR_EXT', DIR_PATH . 'ext/');
 
 // DB
-require_once DIR_CONFIG . 'db.php';	// database configuration
+require_once DIR_CONFIG . 'DB.php';	// database configuration
 ?>
