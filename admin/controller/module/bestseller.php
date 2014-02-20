@@ -1,8 +1,8 @@
 <?php
 class ControllerModuleBestSeller extends Controller {
-	protected $preload_language = array('module/bestseller');
+	protected $_language = array('module/bestseller');
 
-	protected $preload_model = array('setting/setting', 'design/layout');
+	protected $_model = array('setting/setting', 'design/layout');
 
 	private $error = array(); 
 	

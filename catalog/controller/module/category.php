@@ -1,8 +1,8 @@
 <?php  
 class ControllerModuleCategory extends Controller {
-	protected $preload_language = array('module/category');
+	protected $_language = array('module/category');
 
-	protected $preload_model = array('catalog/category', 'catalog/product');
+	protected $_model = array('catalog/category', 'catalog/product');
 
 	protected function index($setting) {
 		if (isset($this->request->get['path'])) {

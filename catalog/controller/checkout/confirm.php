@@ -1,8 +1,8 @@
 <?php 
 class ControllerCheckoutConfirm extends Controller {
-	protected $preload_language = array('checkout/checkout');
+	protected $_language = array('checkout/checkout');
 
-	protected $preload_model = array('account/address', 'setting/extension', 'affiliate/affiliate', 'checkout/order');
+	protected $_model = array('account/address', 'setting/extension', 'affiliate/affiliate', 'checkout/order');
  
 	public function index() {
 		$redirect = '';

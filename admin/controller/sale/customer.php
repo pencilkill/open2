@@ -1,8 +1,8 @@
 <?php
 class ControllerSaleCustomer extends Controller {
-	protected $preload_language = array('sale/customer', 'error/not_found');
+	protected $_language = array('sale/customer', 'error/not_found');
 
-	protected $preload_model = array('sale/customer', 'sale/customer_group', 'setting/store', 'localisation/country', 'localisation/zone');
+	protected $_model = array('sale/customer', 'sale/customer_group', 'setting/store', 'localisation/country', 'localisation/zone');
 
 	private $error = array();
 

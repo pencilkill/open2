@@ -1,8 +1,8 @@
 <?php
 class ControllerPaymentPayza extends Controller {
-	protected $preload_language = array('payment/payza');
+	protected $_language = array('payment/payza');
 
-	protected $preload_model = array('setting/setting', 'localisation/order_status', 'localisation/geo_zone');
+	protected $_model = array('setting/setting', 'localisation/order_status', 'localisation/geo_zone');
 
 	private $error = array(); 
 

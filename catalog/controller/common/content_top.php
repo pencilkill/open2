@@ -1,6 +1,6 @@
 <?php  
 class ControllerCommonContentTop extends Controller {
-	protected $preload_model = array('design/layout', 'catalog/category', 'catalog/product', 'catalog/information', 'setting/extension');
+	protected $_model = array('design/layout', 'catalog/category', 'catalog/product', 'catalog/information', 'setting/extension');
 
 	public function index() {
 		if (isset($this->request->get['route'])) {

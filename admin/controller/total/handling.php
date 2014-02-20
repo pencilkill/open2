@@ -1,8 +1,8 @@
 <?php 
 class ControllerTotalHandling extends Controller {
-	protected $preload_language = array('total/handling');
+	protected $_language = array('total/handling');
 
-	protected $preload_model = array('setting/setting', 'localisation/tax_class');
+	protected $_model = array('setting/setting', 'localisation/tax_class');
  
 	private $error = array(); 
 	 

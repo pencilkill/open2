@@ -1,6 +1,6 @@
 <?php 
 class ControllerAffiliateSuccess extends Controller {
-	protected $preload_language = array('affiliate/success');
+	protected $_language = array('affiliate/success');
   
 	public function index() {
     	$this->document->setTitle($this->language->get('heading_title'));

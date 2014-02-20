@@ -1,8 +1,8 @@
 <?php   
 class ControllerModuleStore extends Controller {
-	protected $preload_language = array('module/store');
+	protected $_language = array('module/store');
 
-	protected $preload_model = array('setting/store');
+	protected $_model = array('setting/store');
 
 	protected function index() {
 		$status = true;

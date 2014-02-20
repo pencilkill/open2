@@ -1,8 +1,8 @@
 <?php
 class ControllerCatalogReview extends Controller {
-	protected $preload_language = array('catalog/review');
+	protected $_language = array('catalog/review');
 
-	protected $preload_model = array('catalog/review', 'catalog/product');
+	protected $_model = array('catalog/review', 'catalog/product');
 
 	private $error = array();
  

@@ -1,8 +1,8 @@
 <?php 
 class ControllerAccountReturn extends Controller {
-	protected $preload_language = array('account/return');
+	protected $_language = array('account/return');
 
-	protected $preload_model = array('account/return', 'account/order', 'catalog/product', 'localisation/return_reason');
+	protected $_model = array('account/return', 'account/order', 'catalog/product', 'localisation/return_reason');
  
 	private $error = array();
 	

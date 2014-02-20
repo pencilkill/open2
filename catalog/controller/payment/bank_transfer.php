@@ -1,8 +1,8 @@
 <?php
 class ControllerPaymentBankTransfer extends Controller {
-	protected $preload_language = array('payment/bank_transfer');
+	protected $_language = array('payment/bank_transfer');
 
-	protected $preload_model = array('checkout/order');
+	protected $_model = array('checkout/order');
 
 	protected function index() {
 		$this->data['bank'] = nl2br($this->config->get('bank_transfer_bank_' . $this->config->get('config_language_id')));

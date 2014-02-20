@@ -1,8 +1,8 @@
 <?php
 class ControllerPaymentWebPaymentSoftware extends Controller {
-	protected $preload_language = array('payment/web_payment_software');
+	protected $_language = array('payment/web_payment_software');
 
-	protected $preload_model = array('checkout/order');
+	protected $_model = array('checkout/order');
 
 	protected function index() {
 		$this->data['months'] = array();

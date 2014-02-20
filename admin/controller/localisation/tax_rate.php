@@ -1,8 +1,8 @@
 <?php
 class ControllerLocalisationTaxRate extends Controller {
-	protected $preload_language = array('localisation/tax_rate');
+	protected $_language = array('localisation/tax_rate');
 
-	protected $preload_model = array('localisation/tax_rate', 'sale/customer_group', 'localisation/geo_zone', 'localisation/tax_class');
+	protected $_model = array('localisation/tax_rate', 'sale/customer_group', 'localisation/geo_zone', 'localisation/tax_class');
 
 	private $error = array();
  

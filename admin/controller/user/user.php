@@ -1,8 +1,8 @@
 <?php  
 class ControllerUserUser extends Controller {
-	protected $preload_language = array('user/user');
+	protected $_language = array('user/user');
 
-	protected $preload_model = array('user/user', 'user/user_group');
+	protected $_model = array('user/user', 'user/user_group');
   
 	private $error = array();
    

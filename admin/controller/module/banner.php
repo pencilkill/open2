@@ -1,8 +1,8 @@
 <?php
 class ControllerModuleBanner extends Controller {
-	protected $preload_language = array('module/banner');
+	protected $_language = array('module/banner');
 
-	protected $preload_model = array('setting/setting', 'design/layout', 'design/banner');
+	protected $_model = array('setting/setting', 'design/layout', 'design/banner');
 
 	private $error = array(); 
 	

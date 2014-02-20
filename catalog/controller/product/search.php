@@ -1,8 +1,8 @@
 <?php 
 class ControllerProductSearch extends Controller {
-	protected $preload_language = array('product/search');
+	protected $_language = array('product/search');
 
-	protected $preload_model = array('catalog/category', 'catalog/product', 'tool/image');
+	protected $_model = array('catalog/category', 'catalog/product', 'tool/image');
  	
 	public function index() { 
 		if (isset($this->request->get['filter_name'])) {

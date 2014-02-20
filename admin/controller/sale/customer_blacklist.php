@@ -1,8 +1,8 @@
 <?php    
 class ControllerSaleCustomerBlacklist extends Controller {
-	protected $preload_language = array('sale/customer_blacklist');
+	protected $_language = array('sale/customer_blacklist');
 
-	protected $preload_model = array('sale/customer_blacklist');
+	protected $_model = array('sale/customer_blacklist');
  
 	private $error = array();
   

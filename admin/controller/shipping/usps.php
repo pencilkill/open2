@@ -1,8 +1,8 @@
 <?php
 class ControllerShippingUsps extends Controller {
-	protected $preload_language = array('shipping/usps');
+	protected $_language = array('shipping/usps');
 
-	protected $preload_model = array('setting/setting', 'localisation/weight_class', 'localisation/tax_class', 'localisation/geo_zone');
+	protected $_model = array('setting/setting', 'localisation/weight_class', 'localisation/tax_class', 'localisation/geo_zone');
 
 	private $error = array();
 

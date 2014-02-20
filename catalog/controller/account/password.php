@@ -1,8 +1,8 @@
 <?php
 class ControllerAccountPassword extends Controller {
-	protected $preload_language = array('account/password');
+	protected $_language = array('account/password');
 
-	protected $preload_model = array('account/customer');
+	protected $_model = array('account/customer');
 
 	private $error = array();
 	     

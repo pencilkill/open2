@@ -1,8 +1,8 @@
 <?php
 class ControllerShippingFree extends Controller {
-	protected $preload_language = array('shipping/free');
+	protected $_language = array('shipping/free');
 
-	protected $preload_model = array('setting/setting', 'localisation/geo_zone');
+	protected $_model = array('setting/setting', 'localisation/geo_zone');
 
 	private $error = array(); 
 	

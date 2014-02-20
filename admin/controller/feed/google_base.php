@@ -1,8 +1,8 @@
 <?php 
 class ControllerFeedGoogleBase extends Controller {
-	protected $preload_language = array('feed/google_base');
+	protected $_language = array('feed/google_base');
 
-	protected $preload_model = array('setting/setting');
+	protected $_model = array('setting/setting');
 
 	private $error = array(); 
 	

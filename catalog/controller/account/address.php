@@ -1,8 +1,8 @@
 <?php 
 class ControllerAccountAddress extends Controller {
-	protected $preload_language = array('account/address');
+	protected $_language = array('account/address');
 
-	protected $preload_model = array('account/address', 'account/customer_group', 'localisation/country', 'localisation/zone');
+	protected $_model = array('account/address', 'account/customer_group', 'localisation/country', 'localisation/zone');
 
 	private $error = array();
 	  

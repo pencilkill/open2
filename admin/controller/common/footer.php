@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonFooter extends Controller {
-	protected $preload_language = array('common/footer');
+	protected $_language = array('common/footer');
 
 	protected function index() {
 		$this->data['text_footer'] = sprintf($this->language->get('text_footer'), $this->config->get('config_name'));

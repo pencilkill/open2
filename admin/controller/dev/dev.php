@@ -1,8 +1,8 @@
 <?php
 class ControllerDevDev extends Controller {
-	protected $preload_language = array();
+	protected $_language = array();
 
-	protected $preload_model = array();
+	protected $_model = array();
 
 	private $error = array();
 

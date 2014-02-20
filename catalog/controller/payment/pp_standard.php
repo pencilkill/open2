@@ -1,8 +1,8 @@
 <?php
 class ControllerPaymentPPStandard extends Controller {
-	protected $preload_language = array('payment/pp_standard');
+	protected $_language = array('payment/pp_standard');
 
-	protected $preload_model = array('checkout/order');
+	protected $_model = array('checkout/order');
 
 	protected function index() {
 		$this->data['testmode'] = $this->config->get('pp_standard_test');

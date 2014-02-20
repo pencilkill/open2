@@ -1,8 +1,8 @@
 <?php
 class ControllerCommonReset extends Controller {
-	protected $preload_language = array('common/reset');
+	protected $_language = array('common/reset');
 
-	protected $preload_model = array('user/user');
+	protected $_model = array('user/user');
 
 	private $error = array();
 	

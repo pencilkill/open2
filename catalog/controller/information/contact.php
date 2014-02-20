@@ -1,6 +1,6 @@
 <?php
 class ControllerInformationContact extends Controller {
-	protected $preload_language = array('information/contact');
+	protected $_language = array('information/contact');
 
 	private $error = array();
 

@@ -1,8 +1,8 @@
 <?php
 class ControllerReportSaleCoupon extends Controller {
-	protected $preload_language = array('report/sale_coupon');
+	protected $_language = array('report/sale_coupon');
 
-	protected $preload_model = array('report/coupon');
+	protected $_model = array('report/coupon');
 
 	public function index() {     
 		$this->document->setTitle($this->language->get('heading_title'));

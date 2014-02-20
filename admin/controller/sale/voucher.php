@@ -1,8 +1,8 @@
 <?php  
 class ControllerSaleVoucher extends Controller {
-	protected $preload_language = array('sale/voucher');
+	protected $_language = array('sale/voucher');
 
-	protected $preload_model = array('sale/voucher', 'sale/voucher_theme', 'sale/order');
+	protected $_model = array('sale/voucher', 'sale/voucher_theme', 'sale/order');
 
 	private $error = array();
      

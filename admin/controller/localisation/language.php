@@ -1,8 +1,8 @@
 <?php 
 class ControllerLocalisationLanguage extends Controller {
-	protected $preload_language = array('localisation/language');
+	protected $_language = array('localisation/language');
 
-	protected $preload_model = array('localisation/language', 'setting/store', 'sale/order');
+	protected $_model = array('localisation/language', 'setting/store', 'sale/order');
 
 	private $error = array();
   

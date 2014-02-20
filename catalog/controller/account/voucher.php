@@ -1,8 +1,8 @@
 <?php 
 class ControllerAccountVoucher extends Controller {
-	protected $preload_language = array('account/voucher');
+	protected $_language = array('account/voucher');
 
-	protected $preload_model = array('checkout/voucher_theme');
+	protected $_model = array('checkout/voucher_theme');
  
 	private $error = array();
 	

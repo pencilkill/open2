@@ -1,6 +1,6 @@
 <?php 
 class ControllerFeedGoogleBase extends Controller {
-	protected $preload_model = array('catalog/category', 'catalog/product', 'tool/image');
+	protected $_model = array('catalog/category', 'catalog/product', 'tool/image');
 
 	public function index() {
 		if ($this->config->get('google_base_status')) { 

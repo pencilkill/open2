@@ -1,8 +1,8 @@
 <?php
 class ControllerSaleOrder extends Controller {
-	protected $preload_language = array('sale/order', 'error/not_found');
+	protected $_language = array('sale/order', 'error/not_found');
 
-	protected $preload_model = array('sale/order', 'localisation/order_status', 'sale/customer', 'setting/store', 'sale/customer_group', 'localisation/country', 'catalog/product', 'sale/voucher_theme', 'localisation/zone', 'sale/affiliate', 'sale/fraud', 'setting/setting');
+	protected $_model = array('sale/order', 'localisation/order_status', 'sale/customer', 'setting/store', 'sale/customer_group', 'localisation/country', 'catalog/product', 'sale/voucher_theme', 'localisation/zone', 'sale/affiliate', 'sale/fraud', 'setting/setting');
 
 	private $error = array();
 

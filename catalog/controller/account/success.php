@@ -1,8 +1,8 @@
 <?php 
 class ControllerAccountSuccess extends Controller {
-	protected $preload_language = array('account/success');
+	protected $_language = array('account/success');
 
-	protected $preload_model = array('account/customer_group');
+	protected $_model = array('account/customer_group');
   
 	public function index() {
     	$this->document->setTitle($this->language->get('heading_title'));

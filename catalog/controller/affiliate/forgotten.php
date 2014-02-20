@@ -1,8 +1,8 @@
 <?php
 class ControllerAffiliateForgotten extends Controller {
-	protected $preload_language = array('affiliate/forgotten', 'mail/forgotten');
+	protected $_language = array('affiliate/forgotten', 'mail/forgotten');
 
-	protected $preload_model = array('affiliate/affiliate');
+	protected $_model = array('affiliate/affiliate');
 
 	private $error = array();
 

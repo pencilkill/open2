@@ -1,8 +1,8 @@
 <?php 
 class ControllerLocalisationCurrency extends Controller {
-	protected $preload_language = array('localisation/currency');
+	protected $_language = array('localisation/currency');
 
-	protected $preload_model = array('localisation/currency', 'setting/store', 'sale/order');
+	protected $_model = array('localisation/currency', 'setting/store', 'sale/order');
 
 	private $error = array();
  

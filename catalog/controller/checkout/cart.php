@@ -1,8 +1,8 @@
 <?php 
 class ControllerCheckoutCart extends Controller {
-	protected $preload_language = array('checkout/cart');
+	protected $_language = array('checkout/cart');
 
-	protected $preload_model = array('tool/image', 'localisation/country', 'setting/extension', 'checkout/coupon', 'checkout/voucher', 'catalog/product', 'localisation/zone');
+	protected $_model = array('tool/image', 'localisation/country', 'setting/extension', 'checkout/coupon', 'checkout/voucher', 'catalog/product', 'localisation/zone');
 
 	private $error = array();
 	

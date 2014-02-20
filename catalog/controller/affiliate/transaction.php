@@ -1,8 +1,8 @@
 <?php
 class ControllerAffiliateTransaction extends Controller {
-	protected $preload_language = array('affiliate/transaction');
+	protected $_language = array('affiliate/transaction');
 
-	protected $preload_model = array('affiliate/transaction');
+	protected $_model = array('affiliate/transaction');
 
 	public function index() {
 		if (!$this->affiliate->isLogged()) {

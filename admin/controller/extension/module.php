@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionModule extends Controller {
-	protected $preload_language = array('extension/module');
+	protected $_language = array('extension/module');
 
-	protected $preload_model = array('setting/extension', 'user/user_group', 'setting/setting');
+	protected $_model = array('setting/extension', 'user/user_group', 'setting/setting');
 
 	public function index() {
 		$this->document->setTitle($this->language->get('heading_title')); 

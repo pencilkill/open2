@@ -1,8 +1,8 @@
 <?php
 class ControllerModuleFeatured extends Controller {
-	protected $preload_language = array('module/featured');
+	protected $_language = array('module/featured');
 
-	protected $preload_model = array('catalog/product', 'tool/image');
+	protected $_model = array('catalog/product', 'tool/image');
 
 	protected function index($setting) {
 		$this->data['products'] = array();

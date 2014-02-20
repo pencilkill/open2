@@ -1,8 +1,8 @@
 <?php  
 class ControllerSaleCoupon extends Controller {
-	protected $preload_language = array('sale/coupon');
+	protected $_language = array('sale/coupon');
 
-	protected $preload_model = array('sale/coupon', 'catalog/product', 'catalog/category');
+	protected $_model = array('sale/coupon', 'catalog/product', 'catalog/category');
 
 	private $error = array();
      

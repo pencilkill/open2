@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonLogin extends Controller {
-	protected $preload_language = array('common/login');
+	protected $_language = array('common/login');
 
 	private $error = array();
 

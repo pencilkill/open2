@@ -1,8 +1,8 @@
 <?php  
 class ControllerProductCompare extends Controller {
-	protected $preload_language = array('product/compare');
+	protected $_language = array('product/compare');
 
-	protected $preload_model = array('catalog/product', 'tool/image');
+	protected $_model = array('catalog/product', 'tool/image');
 
 	public function index() { 
 		if (!isset($this->session->data['compare'])) {

@@ -1,8 +1,8 @@
 <?php
 class ControllerPaymentSagepayDirect extends Controller {
-	protected $preload_language = array('payment/sagepay_direct');
+	protected $_language = array('payment/sagepay_direct');
 
-	protected $preload_model = array('checkout/order');
+	protected $_model = array('checkout/order');
 
 	protected function index() {
 		$this->data['cards'] = array();

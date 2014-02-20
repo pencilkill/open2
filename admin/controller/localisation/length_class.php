@@ -1,8 +1,8 @@
 <?php
 class ControllerLocalisationLengthClass extends Controller {
-	protected $preload_language = array('localisation/length_class');
+	protected $_language = array('localisation/length_class');
 
-	protected $preload_model = array('localisation/length_class', 'localisation/language', 'catalog/product');
+	protected $_model = array('localisation/length_class', 'localisation/language', 'catalog/product');
 
 	private $error = array();  
  

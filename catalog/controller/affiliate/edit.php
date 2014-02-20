@@ -1,8 +1,8 @@
 <?php
 class ControllerAffiliateEdit extends Controller {
-	protected $preload_language = array('affiliate/edit');
+	protected $_language = array('affiliate/edit');
 
-	protected $preload_model = array('affiliate/affiliate', 'localisation/country', 'localisation/zone');
+	protected $_model = array('affiliate/affiliate', 'localisation/country', 'localisation/zone');
 
 	private $error = array();
 

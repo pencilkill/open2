@@ -1,8 +1,8 @@
 <?php
 class ControllerAccountTransaction extends Controller {
-	protected $preload_language = array('account/transaction');
+	protected $_language = array('account/transaction');
 
-	protected $preload_model = array('account/transaction');
+	protected $_model = array('account/transaction');
 
 	public function index() {
 		if (!$this->customer->isLogged()) {

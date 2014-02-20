@@ -1,8 +1,8 @@
 <?php
 class ControllerModulespecial extends Controller {
-	protected $preload_language = array('module/special');
+	protected $_language = array('module/special');
 
-	protected $preload_model = array('setting/setting', 'design/layout');
+	protected $_model = array('setting/setting', 'design/layout');
 
 	private $error = array(); 
 	

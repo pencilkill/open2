@@ -1,8 +1,8 @@
 <?php
 class ControllerPaymentSagepay extends Controller {
-	protected $preload_language = array('payment/sagepay');
+	protected $_language = array('payment/sagepay');
 
-	protected $preload_model = array('checkout/order');
+	protected $_model = array('checkout/order');
 
 	protected function index() {
 		if ($this->config->get('sagepay_test') == 'live') {

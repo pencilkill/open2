@@ -1,8 +1,8 @@
 <?php 
 class ControllerLocalisationReturnReason extends Controller {
-	protected $preload_language = array('localisation/return_reason');
+	protected $_language = array('localisation/return_reason');
 
-	protected $preload_model = array('localisation/return_reason', 'localisation/language', 'sale/return');
+	protected $_model = array('localisation/return_reason', 'localisation/language', 'sale/return');
  
 	private $error = array();
    

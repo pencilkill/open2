@@ -8,15 +8,15 @@ abstract class Controller {
 	protected $data = array();
 	protected $output;
 
-	protected $preload_language=array();
-	protected $preload_model=array();
+	protected $_language = array();
+	protected $_model = array();
 
 	public function __construct($registry) {
 		$this->registry = $registry;
 
-		$this->preload_language();
+		$this->_language();
 
-		$this->preload_model();
+		$this->_model();
 	}
 
 	public function __get($key) {
@@ -79,16 +79,16 @@ abstract class Controller {
     	}
 	}
 
-	private function preload_language(){
-		foreach($this->preload_language as $language){
+	private function _language(){
+		foreach($this->_language as $language){
 			foreach($this->load->language($language) as $key => $val) {
 				$this->data[$key] = $val;
 			}
 		}
 	}
 
-	private function preload_model(){
-		foreach($this->preload_model as $model){
+	private function _model(){
+		foreach($this->_model as $model){
 			$this->load->model($model);
 		}
 	}

@@ -1,8 +1,8 @@
 <?php
 class ControllerModuleWelcome extends Controller {
-	protected $preload_language = array('module/welcome');
+	protected $_language = array('module/welcome');
 
-	protected $preload_model = array('setting/setting', 'design/layout', 'localisation/language');
+	protected $_model = array('setting/setting', 'design/layout', 'localisation/language');
 
 	private $error = array(); 
 	 

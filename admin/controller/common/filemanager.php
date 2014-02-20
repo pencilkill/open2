@@ -1,8 +1,8 @@
 <?php
 class ControllerCommonFileManager extends Controller {
-	protected $preload_language = array('common/filemanager');
+	protected $_language = array('common/filemanager');
 
-	protected $preload_model = array('tool/image');
+	protected $_model = array('tool/image');
 
 	private $error = array();
 

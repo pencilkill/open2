@@ -1,6 +1,6 @@
 <?php
 class ControllerCheckoutSuccess extends Controller {
-	protected $preload_language = array('checkout/success');
+	protected $_language = array('checkout/success');
  
 	public function index() { 	
 		

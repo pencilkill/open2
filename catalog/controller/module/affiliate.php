@@ -1,6 +1,6 @@
 <?php  
 class ControllerModuleAffiliate extends Controller {
-	protected $preload_language = array('module/affiliate');
+	protected $_language = array('module/affiliate');
 
 	protected function index() {
 		$this->data['logged'] = $this->affiliate->isLogged();

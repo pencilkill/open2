@@ -1,8 +1,8 @@
 <?php  
 class ControllerReportCustomerOnline extends Controller {
-	protected $preload_language = array('report/customer_online');
+	protected $_language = array('report/customer_online');
 
-	protected $preload_model = array('report/online', 'sale/customer');
+	protected $_model = array('report/online', 'sale/customer');
   
   	public function index() {
     	$this->document->setTitle($this->language->get('heading_title'));

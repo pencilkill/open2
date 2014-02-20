@@ -1,8 +1,8 @@
 <?php 
 class ControllerAccountNewsletter extends Controller {
-	protected $preload_language = array('account/newsletter');
+	protected $_language = array('account/newsletter');
 
-	protected $preload_model = array('account/customer');
+	protected $_model = array('account/customer');
   
 	public function index() {
 		if (!$this->customer->isLogged()) {

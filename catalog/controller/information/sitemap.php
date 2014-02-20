@@ -1,8 +1,8 @@
 <?php  
 class ControllerInformationSitemap extends Controller {
-	protected $preload_language = array('information/sitemap');
+	protected $_language = array('information/sitemap');
 
-	protected $preload_model = array('catalog/category', 'catalog/product', 'catalog/information');
+	protected $_model = array('catalog/category', 'catalog/product', 'catalog/information');
 
 	public function index() {
 		$this->document->setTitle($this->language->get('heading_title')); 

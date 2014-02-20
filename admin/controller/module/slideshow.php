@@ -1,8 +1,8 @@
 <?php
 class ControllerModuleSlideshow extends Controller {
-	protected $preload_language = array('module/slideshow');
+	protected $_language = array('module/slideshow');
 
-	protected $preload_model = array('setting/setting', 'design/layout', 'design/banner');
+	protected $_model = array('setting/setting', 'design/layout', 'design/banner');
 
 	private $error = array(); 
 	

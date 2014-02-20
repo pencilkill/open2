@@ -1,8 +1,8 @@
 <?php  
 class ControllerModuleCurrency extends Controller {
-	protected $preload_language = array('module/currency');
+	protected $_language = array('module/currency');
 
-	protected $preload_model = array('localisation/currency');
+	protected $_model = array('localisation/currency');
 
 	public function index() {
 		if (isset($this->request->post['currency_code'])) {

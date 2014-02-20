@@ -1,8 +1,8 @@
 <?php
 class ControllerPaymentMoneybookers extends Controller {
-	protected $preload_language = array('payment/moneybookers');
+	protected $_language = array('payment/moneybookers');
 
-	protected $preload_model = array('checkout/order');
+	protected $_model = array('checkout/order');
 
 	protected function index() {
 		$this->data['action'] = 'https://www.moneybookers.com/app/payment.pl?p=OpenCart';

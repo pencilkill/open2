@@ -1,8 +1,8 @@
 <?php 
 class ControllerCheckoutShippingMethod extends Controller {
-	protected $preload_language = array('checkout/checkout');
+	protected $_language = array('checkout/checkout');
 
-	protected $preload_model = array('account/address', 'setting/extension');
+	protected $_model = array('account/address', 'setting/extension');
 
   	public function index() {
 		if ($this->customer->isLogged() && isset($this->session->data['shipping_address_id'])) {					

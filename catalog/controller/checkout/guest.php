@@ -1,8 +1,8 @@
 <?php 
 class ControllerCheckoutGuest extends Controller {
-	protected $preload_language = array('checkout/checkout');
+	protected $_language = array('checkout/checkout');
 
-	protected $preload_model = array('account/customer_group', 'localisation/country', 'localisation/zone');
+	protected $_model = array('account/customer_group', 'localisation/country', 'localisation/zone');
 
   	public function index() {
 		if (isset($this->session->data['guest']['firstname'])) {

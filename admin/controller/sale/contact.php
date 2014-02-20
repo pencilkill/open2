@@ -1,8 +1,8 @@
 <?php
 class ControllerSaleContact extends Controller {
-	protected $preload_language = array('sale/contact');
+	protected $_language = array('sale/contact');
 
-	protected $preload_model = array('setting/store', 'sale/customer_group', 'sale/customer', 'sale/affiliate', 'sale/order');
+	protected $_model = array('setting/store', 'sale/customer_group', 'sale/customer', 'sale/affiliate', 'sale/order');
 
 	private $error = array();
 

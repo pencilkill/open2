@@ -1,8 +1,8 @@
 <?php
 class ControllerCatalogNews extends Controller {
-	protected $preload_language=array('catalog/news');
+	protected $_language=array('catalog/news');
 
-	protected $preload_model = array('catalog/news', 'localisation/language', 'setting/store', 'design/layout');
+	protected $_model = array('catalog/news', 'localisation/language', 'setting/store', 'design/layout');
 
 	private $error = array();
 

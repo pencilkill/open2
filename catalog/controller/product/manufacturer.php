@@ -1,8 +1,8 @@
 <?php 
 class ControllerProductManufacturer extends Controller {
-	protected $preload_language = array('product/manufacturer');
+	protected $_language = array('product/manufacturer');
 
-	protected $preload_model = array('catalog/manufacturer', 'tool/image', 'catalog/product');
+	protected $_model = array('catalog/manufacturer', 'tool/image', 'catalog/product');
   
 	public function index() { 
 		$this->document->setTitle($this->language->get('heading_title'));

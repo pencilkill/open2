@@ -1,8 +1,8 @@
 <?php
 class ControllerShippingWeight extends Controller {
-	protected $preload_language = array('shipping/weight');
+	protected $_language = array('shipping/weight');
 
-	protected $preload_model = array('setting/setting', 'localisation/geo_zone', 'localisation/tax_class');
+	protected $_model = array('setting/setting', 'localisation/geo_zone', 'localisation/tax_class');
  
 	private $error = array();
 	

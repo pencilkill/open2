@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonForgotten extends Controller {
-	protected $preload_model = array('user/user');
+	protected $_model = array('user/user');
 
 	private $error = array();
 

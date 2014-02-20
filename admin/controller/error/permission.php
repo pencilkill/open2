@@ -1,6 +1,6 @@
 <?php    
 class ControllerErrorPermission extends Controller {
-	protected $preload_language = array('error/permission');
+	protected $_language = array('error/permission');
     
 	public function index() { 
     	$this->document->setTitle($this->language->get('heading_title'));

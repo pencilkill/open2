@@ -1,8 +1,8 @@
 <?php
 class ControllerPaymentPPPro extends Controller {
-	protected $preload_language = array('payment/pp_pro');
+	protected $_language = array('payment/pp_pro');
 
-	protected $preload_model = array('checkout/order');
+	protected $_model = array('checkout/order');
 
 	protected function index() {
 		$this->data['cards'] = array();

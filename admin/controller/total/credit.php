@@ -1,8 +1,8 @@
 <?php 
 class ControllerTotalCredit extends Controller {
-	protected $preload_language = array('total/credit');
+	protected $_language = array('total/credit');
 
-	protected $preload_model = array('setting/setting');
+	protected $_model = array('setting/setting');
  
 	private $error = array(); 
 	 

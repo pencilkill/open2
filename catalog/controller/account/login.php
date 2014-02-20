@@ -1,8 +1,8 @@
 <?php 
 class ControllerAccountLogin extends Controller {
-	protected $preload_language = array('account/login');
+	protected $_language = array('account/login');
 
-	protected $preload_model = array('account/customer', 'account/address');
+	protected $_model = array('account/customer', 'account/address');
 
 	private $error = array();
 	

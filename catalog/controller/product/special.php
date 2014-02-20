@@ -1,8 +1,8 @@
 <?php 
 class ControllerProductSpecial extends Controller {
-	protected $preload_language = array('product/special');
+	protected $_language = array('product/special');
 
-	protected $preload_model = array('catalog/product', 'tool/image');
+	protected $_model = array('catalog/product', 'tool/image');
  	
 	public function index() { 
 		if (isset($this->request->get['sort'])) {

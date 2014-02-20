@@ -1,8 +1,8 @@
 <?php  
 class ControllerCheckoutPaymentMethod extends Controller {
-	protected $preload_language = array('checkout/checkout');
+	protected $_language = array('checkout/checkout');
 
-	protected $preload_model = array('account/address', 'setting/extension', 'catalog/information');
+	protected $_model = array('account/address', 'setting/extension', 'catalog/information');
 
   	public function index() {
 		if ($this->customer->isLogged() && isset($this->session->data['payment_address_id'])) {

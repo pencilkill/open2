@@ -1,8 +1,8 @@
 <?php 
 class ControllerTotalTotal extends Controller {
-	protected $preload_language = array('total/total');
+	protected $_language = array('total/total');
 
-	protected $preload_model = array('setting/setting');
+	protected $_model = array('setting/setting');
  
 	private $error = array(); 
 	 

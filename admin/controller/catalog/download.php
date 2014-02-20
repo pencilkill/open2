@@ -1,8 +1,8 @@
 <?php  
 class ControllerCatalogDownload extends Controller {
-	protected $preload_language = array('catalog/download');
+	protected $_language = array('catalog/download');
 
-	protected $preload_model = array('catalog/download', 'localisation/language', 'catalog/product');
+	protected $_model = array('catalog/download', 'localisation/language', 'catalog/product');
   
 	private $error = array();
    

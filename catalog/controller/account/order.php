@@ -1,8 +1,8 @@
 <?php 
 class ControllerAccountOrder extends Controller {
-	protected $preload_language = array('account/order');
+	protected $_language = array('account/order');
 
-	protected $preload_model = array('account/order');
+	protected $_model = array('account/order');
 
 	private $error = array();
 		

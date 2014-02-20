@@ -1,8 +1,8 @@
 <?php
 class ControllerSettingSetting extends Controller {
-	protected $preload_language = array('setting/setting');
+	protected $_language = array('setting/setting');
 
-	protected $preload_model = array('setting/setting', 'localisation/currency', 'design/layout', 'localisation/country', 'localisation/language', 'localisation/length_class', 'localisation/weight_class', 'sale/customer_group', 'catalog/information', 'localisation/order_status', 'localisation/stock_status', 'localisation/return_status', 'tool/image', 'localisation/zone');
+	protected $_model = array('setting/setting', 'localisation/currency', 'design/layout', 'localisation/country', 'localisation/language', 'localisation/length_class', 'localisation/weight_class', 'sale/customer_group', 'catalog/information', 'localisation/order_status', 'localisation/stock_status', 'localisation/return_status', 'tool/image', 'localisation/zone');
 
 	private $error = array();
 

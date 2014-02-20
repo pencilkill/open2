@@ -1,6 +1,6 @@
 <?php  
 class ControllerModuleGoogleTalk extends Controller {
-	protected $preload_language = array('module/google_talk');
+	protected $_language = array('module/google_talk');
 
 	protected function index() {
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {

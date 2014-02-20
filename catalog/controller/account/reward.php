@@ -1,8 +1,8 @@
 <?php
 class ControllerAccountReward extends Controller {
-	protected $preload_language = array('account/reward');
+	protected $_language = array('account/reward');
 
-	protected $preload_model = array('account/reward');
+	protected $_model = array('account/reward');
 
 	public function index() {
 		if (!$this->customer->isLogged()) {

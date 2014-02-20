@@ -1,8 +1,8 @@
 <?php
 class ControllerShippingItem extends Controller {
-	protected $preload_language = array('shipping/item');
+	protected $_language = array('shipping/item');
 
-	protected $preload_model = array('setting/setting', 'localisation/tax_class', 'localisation/geo_zone');
+	protected $_model = array('setting/setting', 'localisation/tax_class', 'localisation/geo_zone');
  
 	private $error = array(); 
 	

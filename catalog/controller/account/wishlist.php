@@ -1,8 +1,8 @@
 <?php 
 class ControllerAccountWishList extends Controller {
-	protected $preload_language = array('account/wishlist');
+	protected $_language = array('account/wishlist');
 
-	protected $preload_model = array('catalog/product', 'tool/image');
+	protected $_model = array('catalog/product', 'tool/image');
 
 	public function index() {
     	if (!$this->customer->isLogged()) {

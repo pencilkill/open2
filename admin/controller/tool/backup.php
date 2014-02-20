@@ -1,8 +1,8 @@
 <?php
 class ControllerToolBackup extends Controller {
-	protected $preload_language = array('tool/backup');
+	protected $_language = array('tool/backup');
 
-	protected $preload_model = array('tool/backup', 'catalog/product');
+	protected $_model = array('tool/backup', 'catalog/product');
 
 	private $error = array();
 

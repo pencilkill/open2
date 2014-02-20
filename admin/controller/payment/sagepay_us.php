@@ -1,8 +1,8 @@
 <?php 
 class ControllerPaymentSagepayUS extends Controller {
-	protected $preload_language = array('payment/sagepay_us');
+	protected $_language = array('payment/sagepay_us');
 
-	protected $preload_model = array('setting/setting', 'localisation/order_status', 'localisation/geo_zone');
+	protected $_model = array('setting/setting', 'localisation/order_status', 'localisation/geo_zone');
 
 	private $error = array(); 
 

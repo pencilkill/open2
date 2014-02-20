@@ -1,8 +1,8 @@
 <?php
 class ControllerModuleCarousel extends Controller {
-	protected $preload_language = array('module/carousel');
+	protected $_language = array('module/carousel');
 
-	protected $preload_model = array('setting/setting', 'design/layout', 'design/banner');
+	protected $_model = array('setting/setting', 'design/layout', 'design/banner');
 
 	private $error = array(); 
 	

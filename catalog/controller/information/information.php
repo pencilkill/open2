@@ -1,8 +1,8 @@
 <?php 
 class ControllerInformationInformation extends Controller {
-	protected $preload_language = array('information/information');
+	protected $_language = array('information/information');
 
-	protected $preload_model = array('catalog/information');
+	protected $_model = array('catalog/information');
 
 	public function index() {  
 		$this->data['breadcrumbs'] = array();

@@ -1,8 +1,8 @@
 <?php  
 class ControllerCheckoutLogin extends Controller {
-	protected $preload_language = array('checkout/checkout');
+	protected $_language = array('checkout/checkout');
 
-	protected $preload_model = array('account/customer', 'account/address');
+	protected $_model = array('account/customer', 'account/address');
  
 	public function index() {
 		$this->data['guest_checkout'] = ($this->config->get('config_guest_checkout') && !$this->config->get('config_customer_price') && !$this->cart->hasDownload());

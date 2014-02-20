@@ -1,8 +1,8 @@
 <?php 
 class ControllerLocalisationStockStatus extends Controller {
-	protected $preload_language = array('localisation/stock_status');
+	protected $_language = array('localisation/stock_status');
 
-	protected $preload_model = array('localisation/stock_status', 'localisation/language', 'setting/store', 'catalog/product');
+	protected $_model = array('localisation/stock_status', 'localisation/language', 'setting/store', 'catalog/product');
 
 	private $error = array(); 
    

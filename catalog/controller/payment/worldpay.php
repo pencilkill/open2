@@ -1,8 +1,8 @@
 <?php
 class ControllerPaymentWorldPay extends Controller {
-	protected $preload_language = array('payment/worldpay');
+	protected $_language = array('payment/worldpay');
 
-	protected $preload_model = array('checkout/order');
+	protected $_model = array('checkout/order');
 
 	protected function index() {
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);

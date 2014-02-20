@@ -1,8 +1,8 @@
 <?php  
 class ControllerModuleInformation extends Controller {
-	protected $preload_language = array('module/information');
+	protected $_language = array('module/information');
 
-	protected $preload_model = array('catalog/information');
+	protected $_model = array('catalog/information');
 
 	protected function index() {
 		$this->data['informations'] = array();

@@ -1,8 +1,8 @@
 <?php
 class ControllerPaymentPPProUK extends Controller {
-	protected $preload_language = array('payment/pp_pro_uk');
+	protected $_language = array('payment/pp_pro_uk');
 
-	protected $preload_model = array('checkout/order');
+	protected $_model = array('checkout/order');
 
 	protected function index() {
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);

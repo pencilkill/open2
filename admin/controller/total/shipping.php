@@ -1,8 +1,8 @@
 <?php 
 class ControllerTotalShipping extends Controller {
-	protected $preload_language = array('total/shipping');
+	protected $_language = array('total/shipping');
 
-	protected $preload_model = array('setting/setting');
+	protected $_model = array('setting/setting');
  
 	private $error = array(); 
 	 

@@ -1,6 +1,6 @@
 <?php  
 class ControllerModuleAccount extends Controller {
-	protected $preload_language = array('module/account');
+	protected $_language = array('module/account');
 
 	protected function index() {
 		$this->data['logged'] = $this->customer->isLogged();

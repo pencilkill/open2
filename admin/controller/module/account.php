@@ -1,8 +1,8 @@
 <?php
 class ControllerModuleAccount extends Controller {
-	protected $preload_language = array('module/account');
+	protected $_language = array('module/account');
 
-	protected $preload_model = array('setting/setting', 'design/layout');
+	protected $_model = array('setting/setting', 'design/layout');
 
 	private $error = array(); 
 	

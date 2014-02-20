@@ -1,8 +1,8 @@
 <?php 
 class ControllerPaymentAuthorizenetAim extends Controller {
-	protected $preload_language = array('payment/authorizenet_aim');
+	protected $_language = array('payment/authorizenet_aim');
 
-	protected $preload_model = array('setting/setting', 'localisation/order_status', 'localisation/geo_zone');
+	protected $_model = array('setting/setting', 'localisation/order_status', 'localisation/geo_zone');
 
 	private $error = array(); 
 

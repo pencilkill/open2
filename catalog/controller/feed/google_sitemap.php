@@ -1,6 +1,6 @@
 <?php
 class ControllerFeedGoogleSitemap extends Controller {
-	protected $preload_model = array('catalog/product', 'catalog/category', 'catalog/manufacturer', 'catalog/information');
+	protected $_model = array('catalog/product', 'catalog/category', 'catalog/manufacturer', 'catalog/information');
 
    public function index() {
 	  if ($this->config->get('google_sitemap_status')) {

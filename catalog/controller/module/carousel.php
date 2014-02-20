@@ -1,6 +1,6 @@
 <?php  
 class ControllerModuleCarousel extends Controller {
-	protected $preload_model = array('design/banner', 'tool/image');
+	protected $_model = array('design/banner', 'tool/image');
 
 	protected function index($setting) {
 		static $module = 0;

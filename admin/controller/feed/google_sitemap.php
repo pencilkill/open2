@@ -1,8 +1,8 @@
 <?php 
 class ControllerFeedGoogleSitemap extends Controller {
-	protected $preload_language = array('feed/google_sitemap');
+	protected $_language = array('feed/google_sitemap');
 
-	protected $preload_model = array('setting/setting');
+	protected $_model = array('setting/setting');
 
 	private $error = array(); 
 	

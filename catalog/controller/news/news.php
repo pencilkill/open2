@@ -1,8 +1,8 @@
 <?php
 class ControllerNewsNews extends Controller {
-	protected $preload_language=array('news/news');
+	protected $_language=array('news/news');
 
-	protected $preload_model=array('catalog/news');
+	protected $_model=array('catalog/news');
 
 	public function index() {
 

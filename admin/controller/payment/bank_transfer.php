@@ -1,8 +1,8 @@
 <?php 
 class ControllerPaymentBankTransfer extends Controller {
-	protected $preload_language = array('payment/bank_transfer');
+	protected $_language = array('payment/bank_transfer');
 
-	protected $preload_model = array('setting/setting', 'localisation/language', 'localisation/order_status', 'localisation/geo_zone');
+	protected $_model = array('setting/setting', 'localisation/language', 'localisation/order_status', 'localisation/geo_zone');
 
 	private $error = array(); 
 

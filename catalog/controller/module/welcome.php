@@ -1,6 +1,6 @@
 <?php  
 class ControllerModuleWelcome extends Controller {
-	protected $preload_language = array('module/welcome');
+	protected $_language = array('module/welcome');
 
 	protected function index($setting) {
     	$this->data['heading_title'] = sprintf($this->language->get('heading_title'), $this->config->get('config_name'));

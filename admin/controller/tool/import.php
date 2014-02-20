@@ -1,8 +1,8 @@
 <?php
 class ControllerToolImport extends Controller {
-	protected $preload_language = array('tool/import');
+	protected $_language = array('tool/import');
 
-	protected $preload_model = array('catalog/product');
+	protected $_model = array('catalog/product');
 
 	private $error = array();
 

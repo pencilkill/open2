@@ -1,6 +1,6 @@
 <?php 
 class ControllerCheckoutManual extends Controller {
-	protected $preload_model = array('setting/setting', 'account/customer', 'catalog/product', 'checkout/voucher', 'setting/extension', 'localisation/country', 'localisation/zone', 'checkout/coupon');
+	protected $_model = array('setting/setting', 'account/customer', 'catalog/product', 'checkout/voucher', 'setting/extension', 'localisation/country', 'localisation/zone', 'checkout/coupon');
 
 	public function index() {
 		$this->load->language('checkout/manual');

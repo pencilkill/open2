@@ -1,8 +1,8 @@
 <?php 
 class ControllerTotalTax extends Controller {
-	protected $preload_language = array('total/tax');
+	protected $_language = array('total/tax');
 
-	protected $preload_model = array('setting/setting');
+	protected $_model = array('setting/setting');
  
 	private $error = array();
 	 

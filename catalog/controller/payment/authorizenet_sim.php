@@ -1,6 +1,6 @@
 <?php
 class ControllerPaymentAuthorizeNetSim extends Controller {
-	protected $preload_model = array('checkout/order');
+	protected $_model = array('checkout/order');
 
 	protected function index() {
     	$this->data['button_confirm'] = $this->language->get('button_confirm');
@@ -57,7 +57,7 @@ class ControllerPaymentAuthorizeNetSim extends Controller {
 		 * HMAC-MD5  hash from the merchant's transaction key and 
 		 * concatenation of the values for "x_login", "x_fp_sequence", 
 		 * "x_fp_timestamp", "x_amount", and (if given) "x_currency_code" 
-		 * – all separated by the  "^" character. Note that if 
+		 * ï¿½ all separated by the  "^" character. Note that if 
 		 * "x_currency_code" is not present, then a "^" character is still 
 		 * added. The transaction key is generated within the payment page 
 		 * configuration section of the Administration console tab, 

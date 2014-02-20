@@ -1,8 +1,8 @@
 <?php 
 class ControllerTotalReward extends Controller {
-	protected $preload_language = array('total/reward');
+	protected $_language = array('total/reward');
 
-	protected $preload_model = array('setting/setting');
+	protected $_model = array('setting/setting');
  
 	private $error = array(); 
 	 

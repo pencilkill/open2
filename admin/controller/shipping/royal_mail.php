@@ -1,8 +1,8 @@
 <?php
 class ControllerShippingRoyalMail extends Controller {
-	protected $preload_language = array('shipping/royal_mail');
+	protected $_language = array('shipping/royal_mail');
 
-	protected $preload_model = array('setting/setting', 'localisation/weight_class', 'localisation/tax_class', 'localisation/geo_zone');
+	protected $_model = array('setting/setting', 'localisation/weight_class', 'localisation/tax_class', 'localisation/geo_zone');
 
 	private $error = array(); 
 	

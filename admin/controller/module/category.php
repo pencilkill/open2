@@ -1,8 +1,8 @@
 <?php
 class ControllerModuleCategory extends Controller {
-	protected $preload_language = array('module/category');
+	protected $_language = array('module/category');
 
-	protected $preload_model = array('setting/setting', 'design/layout');
+	protected $_model = array('setting/setting', 'design/layout');
 
 	private $error = array(); 
 	

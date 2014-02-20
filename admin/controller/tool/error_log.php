@@ -1,6 +1,6 @@
 <?php 
 class ControllerToolErrorLog extends Controller {
-	protected $preload_language = array('tool/error_log');
+	protected $_language = array('tool/error_log');
  
 	private $error = array();
 	

@@ -1,8 +1,8 @@
 <?php
 class ControllerReportCustomerReward extends Controller {
-	protected $preload_language = array('report/customer_reward');
+	protected $_language = array('report/customer_reward');
 
-	protected $preload_model = array('report/customer');
+	protected $_model = array('report/customer');
 
 	public function index() {     
 		$this->document->setTitle($this->language->get('heading_title'));

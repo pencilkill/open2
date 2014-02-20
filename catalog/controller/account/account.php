@@ -1,6 +1,6 @@
 <?php 
 class ControllerAccountAccount extends Controller {
-	protected $preload_language = array('account/account');
+	protected $_language = array('account/account');
  
 	public function index() {
 		if (!$this->customer->isLogged()) {

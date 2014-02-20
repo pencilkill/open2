@@ -1,8 +1,8 @@
 <?php  
 class ControllerCommonFooter extends Controller {
-	protected $preload_language = array('common/footer');
+	protected $_language = array('common/footer');
 
-	protected $preload_model = array('catalog/information');
+	protected $_model = array('catalog/information');
 
 	protected function index() {
 		$this->data['informations'] = array();

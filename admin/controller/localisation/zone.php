@@ -1,8 +1,8 @@
 <?php 
 class ControllerLocalisationZone extends Controller {
-	protected $preload_language = array('localisation/zone');
+	protected $_language = array('localisation/zone');
 
-	protected $preload_model = array('localisation/zone', 'localisation/country', 'setting/store', 'sale/customer', 'sale/affiliate', 'localisation/geo_zone');
+	protected $_model = array('localisation/zone', 'localisation/country', 'setting/store', 'sale/customer', 'sale/affiliate', 'localisation/geo_zone');
 
 	private $error = array(); 
 

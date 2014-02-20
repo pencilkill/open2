@@ -1,8 +1,8 @@
 <?php
 class ControllerLocalisationWeightClass extends Controller {
-	protected $preload_language = array('localisation/weight_class');
+	protected $_language = array('localisation/weight_class');
 
-	protected $preload_model = array('localisation/weight_class', 'localisation/language', 'catalog/product');
+	protected $_model = array('localisation/weight_class', 'localisation/language', 'catalog/product');
 
 	private $error = array();  
  

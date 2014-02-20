@@ -1,8 +1,8 @@
 <?php
 class ControllerPaymentPerpetualPayments extends Controller {
-	protected $preload_language = array('payment/perpetual_payments');
+	protected $_language = array('payment/perpetual_payments');
 
-	protected $preload_model = array('checkout/order');
+	protected $_model = array('checkout/order');
 
 	protected function index() {
 		$this->data['months'] = array();

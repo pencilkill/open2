@@ -1,8 +1,8 @@
 <?php    
 class ControllerSaleReturn extends Controller {
-	protected $preload_language = array('sale/return', 'error/not_found');
+	protected $_language = array('sale/return', 'error/not_found');
 
-	protected $preload_model = array('sale/return', 'localisation/return_status', 'localisation/return_reason', 'localisation/return_action', 'sale/order');
+	protected $_model = array('sale/return', 'localisation/return_status', 'localisation/return_reason', 'localisation/return_action', 'sale/order');
  
 	private $error = array();
    

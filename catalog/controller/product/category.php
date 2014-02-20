@@ -1,8 +1,8 @@
 <?php
 class ControllerProductCategory extends Controller {
-	protected $preload_language = array('product/category');
+	protected $_language = array('product/category');
 
-	protected $preload_model = array('catalog/category', 'catalog/product', 'tool/image');
+	protected $_model = array('catalog/category', 'catalog/product', 'tool/image');
 
 	public function index() {
 		if (isset($this->request->get['sort'])) {

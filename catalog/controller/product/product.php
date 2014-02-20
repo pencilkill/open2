@@ -1,8 +1,8 @@
 <?php
 class ControllerProductProduct extends Controller {
-	protected $preload_language = array('product/product');
+	protected $_language = array('product/product');
 
-	protected $preload_model = array('catalog/category', 'catalog/manufacturer', 'catalog/product', 'catalog/review', 'tool/image');
+	protected $_model = array('catalog/category', 'catalog/manufacturer', 'catalog/product', 'catalog/review', 'tool/image');
 
 	private $error = array();
 

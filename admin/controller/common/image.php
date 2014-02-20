@@ -1,8 +1,8 @@
 <?php
 class ControllerCommonImage extends Controller {
 	private $error = array();
-	protected $preload_language=array('common/image');
-	protected $preload_model=array('tool/image');
+	protected $_language=array('common/image');
+	protected $_model=array('tool/image');
 
 	public function index() {
 		$data = array();

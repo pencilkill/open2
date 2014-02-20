@@ -1,6 +1,6 @@
 <?php 
 class ControllerAccountLogout extends Controller {
-	protected $preload_language = array('account/logout');
+	protected $_language = array('account/logout');
 
 	public function index() {
     	if ($this->customer->isLogged()) {

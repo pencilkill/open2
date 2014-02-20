@@ -1,8 +1,8 @@
 <?php 
 class ControllerPaymentPPProUK extends Controller {
-	protected $preload_language = array('payment/pp_pro_uk');
+	protected $_language = array('payment/pp_pro_uk');
 
-	protected $preload_model = array('setting/setting', 'localisation/order_status', 'localisation/geo_zone');
+	protected $_model = array('setting/setting', 'localisation/order_status', 'localisation/geo_zone');
 
 	private $error = array(); 
 

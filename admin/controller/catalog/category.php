@@ -2,9 +2,9 @@
 class ControllerCatalogCategory extends Controller {
 	private $error = array();
 
-	protected $preload_language = array('catalog/category');
+	protected $_language = array('catalog/category');
 
-	protected $preload_model = array('catalog/category', 'localisation/language', 'setting/store', 'tool/image', 'design/layout');
+	protected $_model = array('catalog/category', 'localisation/language', 'setting/store', 'tool/image', 'design/layout');
 
 	public function index() {
 		$this->document->setTitle($this->language->get('heading_title'));

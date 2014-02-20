@@ -1,8 +1,8 @@
 <?php
 class ControllerShippingUPS extends Controller {
-	protected $preload_language = array('shipping/ups');
+	protected $_language = array('shipping/ups');
 
-	protected $preload_model = array('setting/setting', 'localisation/weight_class', 'localisation/length_class', 'localisation/tax_class', 'localisation/geo_zone');
+	protected $_model = array('setting/setting', 'localisation/weight_class', 'localisation/length_class', 'localisation/tax_class', 'localisation/geo_zone');
 
 	private $error = array(); 
 	

@@ -1,8 +1,8 @@
 <?php
 class ControllerPaymentCheque extends Controller {
-	protected $preload_language = array('payment/cheque');
+	protected $_language = array('payment/cheque');
 
-	protected $preload_model = array('checkout/order');
+	protected $_model = array('checkout/order');
 
 	protected function index() {
 		$this->data['payable'] = $this->config->get('cheque_payable');

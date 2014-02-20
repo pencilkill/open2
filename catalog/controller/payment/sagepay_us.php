@@ -1,8 +1,8 @@
 <?php
 class ControllerPaymentSagepayUS extends Controller {
-	protected $preload_language = array('payment/sagepay_us');
+	protected $_language = array('payment/sagepay_us');
 
-	protected $preload_model = array('checkout/order');
+	protected $_model = array('checkout/order');
 
 	protected function index() {
 		$this->data['months'] = array();

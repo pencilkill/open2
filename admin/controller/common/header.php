@@ -1,8 +1,8 @@
 <?php
 class ControllerCommonHeader extends Controller {
-	protected $preload_language = array('common/header');
+	protected $_language = array('common/header');
 
-	protected $preload_model = array('setting/store');
+	protected $_model = array('setting/store');
 
 	protected function index() {
 		$this->data['title'] = $this->document->getTitle();

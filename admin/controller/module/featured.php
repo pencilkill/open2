@@ -1,8 +1,8 @@
 <?php
 class ControllerModuleFeatured extends Controller {
-	protected $preload_language = array('module/featured');
+	protected $_language = array('module/featured');
 
-	protected $preload_model = array('setting/setting', 'catalog/product', 'design/layout');
+	protected $_model = array('setting/setting', 'catalog/product', 'design/layout');
 
 	private $error = array(); 
 	

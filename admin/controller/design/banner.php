@@ -1,8 +1,8 @@
 <?php 
 class ControllerDesignBanner extends Controller {
-	protected $preload_language = array('design/banner');
+	protected $_language = array('design/banner');
 
-	protected $preload_model = array('design/banner', 'localisation/language', 'tool/image');
+	protected $_model = array('design/banner', 'localisation/language', 'tool/image');
 
 	private $error = array();
  

@@ -1,8 +1,8 @@
 <?php 
 class ControllerPaymentPerpetualPayments extends Controller {
-	protected $preload_language = array('payment/perpetual_payments');
+	protected $_language = array('payment/perpetual_payments');
 
-	protected $preload_model = array('setting/setting', 'localisation/order_status', 'localisation/geo_zone');
+	protected $_model = array('setting/setting', 'localisation/order_status', 'localisation/geo_zone');
 
 	private $error = array(); 
 

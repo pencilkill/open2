@@ -1,8 +1,8 @@
 <?php 
 class ControllerCatalogAttributeGroup extends Controller {
-	protected $preload_language = array('catalog/attribute_group');
+	protected $_language = array('catalog/attribute_group');
 
-	protected $preload_model = array('catalog/attribute_group', 'localisation/language', 'catalog/attribute');
+	protected $_model = array('catalog/attribute_group', 'localisation/language', 'catalog/attribute');
  
 	private $error = array();
    

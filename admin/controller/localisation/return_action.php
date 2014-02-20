@@ -1,8 +1,8 @@
 <?php 
 class ControllerLocalisationReturnAction extends Controller {
-	protected $preload_language = array('localisation/return_action');
+	protected $_language = array('localisation/return_action');
 
-	protected $preload_model = array('localisation/return_action', 'localisation/language', 'sale/return');
+	protected $_model = array('localisation/return_action', 'localisation/language', 'sale/return');
  
 	private $error = array();
    

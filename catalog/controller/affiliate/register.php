@@ -1,8 +1,8 @@
 <?php 
 class ControllerAffiliateRegister extends Controller {
-	protected $preload_language = array('affiliate/register');
+	protected $_language = array('affiliate/register');
 
-	protected $preload_model = array('affiliate/affiliate', 'localisation/country', 'catalog/information', 'localisation/zone');
+	protected $_model = array('affiliate/affiliate', 'localisation/country', 'catalog/information', 'localisation/zone');
 
 	private $error = array();
 	      

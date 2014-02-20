@@ -1,8 +1,8 @@
 <?php
 class ControllerCatalogInformation extends Controller {
-	protected $preload_language = array('catalog/information');
+	protected $_language = array('catalog/information');
 
-	protected $preload_model = array('catalog/information', 'localisation/language', 'setting/store', 'design/layout');
+	protected $_model = array('catalog/information', 'localisation/language', 'setting/store', 'design/layout');
  
 	private $error = array();
 

@@ -1,8 +1,8 @@
 <?php 
 class ControllerPaymentFreeCheckout extends Controller {
-	protected $preload_language = array('payment/free_checkout');
+	protected $_language = array('payment/free_checkout');
 
-	protected $preload_model = array('setting/setting', 'localisation/order_status');
+	protected $_model = array('setting/setting', 'localisation/order_status');
 
 	private $error = array(); 
 	 

@@ -1,8 +1,8 @@
 <?php
 class ControllerTotalCoupon extends Controller {
-	protected $preload_language = array('total/coupon');
+	protected $_language = array('total/coupon');
 
-	protected $preload_model = array('setting/setting');
+	protected $_model = array('setting/setting');
 
 	private $error = array(); 
 	 

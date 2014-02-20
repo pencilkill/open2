@@ -1,8 +1,8 @@
 <?php
 class ControllerCommonHome extends Controller {
-	protected $preload_language = array('common/home');
+	protected $_language = array('common/home');
 
-	protected $preload_model = array('sale/order', 'sale/customer', 'catalog/review', 'sale/affiliate', 'localisation/currency');
+	protected $_model = array('sale/order', 'sale/customer', 'catalog/review', 'sale/affiliate', 'localisation/currency');
 
 	public function index() {
 		$this->document->setTitle($this->language->get('heading_title'));

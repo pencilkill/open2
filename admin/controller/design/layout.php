@@ -1,8 +1,8 @@
 <?php 
 class ControllerDesignLayout extends Controller {
-	protected $preload_language = array('design/layout');
+	protected $_language = array('design/layout');
 
-	protected $preload_model = array('design/layout', 'setting/store', 'catalog/product', 'catalog/category', 'catalog/information');
+	protected $_model = array('design/layout', 'setting/store', 'catalog/product', 'catalog/category', 'catalog/information');
 
 	private $error = array();
  

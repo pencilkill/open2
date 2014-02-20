@@ -1,8 +1,8 @@
 <?php
 class ControllerAccountDownload extends Controller {
-	protected $preload_language = array('account/download');
+	protected $_language = array('account/download');
 
-	protected $preload_model = array('account/download');
+	protected $_model = array('account/download');
 
 	public function index() {
 		if (!$this->customer->isLogged()) {

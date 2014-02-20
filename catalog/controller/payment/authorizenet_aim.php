@@ -1,8 +1,8 @@
 <?php
 class ControllerPaymentAuthorizeNetAim extends Controller {
-	protected $preload_language = array('payment/authorizenet_aim');
+	protected $_language = array('payment/authorizenet_aim');
 
-	protected $preload_model = array('checkout/order');
+	protected $_model = array('checkout/order');
 
 	protected function index() {
 		$this->data['months'] = array();

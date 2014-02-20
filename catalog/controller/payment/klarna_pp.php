@@ -1,8 +1,8 @@
 <?php
 class ControllerPaymentKlarnaPP extends Controller {
-	protected $preload_language = array('payment/klarna_invoice');
+	protected $_language = array('payment/klarna_invoice');
 
-	protected $preload_model = array('checkout/order');
+	protected $_model = array('checkout/order');
 
 	protected function index() {
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);

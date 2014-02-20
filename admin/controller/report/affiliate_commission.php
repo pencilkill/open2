@@ -1,8 +1,8 @@
 <?php
 class ControllerReportAffiliateCommission extends Controller {
-	protected $preload_language = array('report/affiliate_commission');
+	protected $_language = array('report/affiliate_commission');
 
-	protected $preload_model = array('report/affiliate');
+	protected $_model = array('report/affiliate');
 
 	public function index() {     
 		$this->document->setTitle($this->language->get('heading_title'));

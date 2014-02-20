@@ -1,8 +1,8 @@
 <?php
 class ControllerAffiliatePayment extends Controller {
-	protected $preload_language = array('affiliate/payment');
+	protected $_language = array('affiliate/payment');
 
-	protected $preload_model = array('affiliate/affiliate');
+	protected $_model = array('affiliate/affiliate');
 
 	private $error = array();
 

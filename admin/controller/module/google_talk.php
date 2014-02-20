@@ -1,8 +1,8 @@
 <?php
 class ControllerModuleGoogleTalk extends Controller {
-	protected $preload_language = array('module/google_talk');
+	protected $_language = array('module/google_talk');
 
-	protected $preload_model = array('setting/setting', 'design/layout');
+	protected $_model = array('setting/setting', 'design/layout');
 
 	private $error = array(); 
 	

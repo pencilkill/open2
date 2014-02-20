@@ -1,8 +1,8 @@
 <?php
 class ControllerReportProductPurchased extends Controller {
-	protected $preload_language = array('report/product_purchased');
+	protected $_language = array('report/product_purchased');
 
-	protected $preload_model = array('report/product', 'localisation/order_status');
+	protected $_model = array('report/product', 'localisation/order_status');
  
 	public function index() {   
 		$this->document->setTitle($this->language->get('heading_title'));

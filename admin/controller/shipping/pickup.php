@@ -1,8 +1,8 @@
 <?php
 class ControllerShippingPickup extends Controller {
-	protected $preload_language = array('shipping/pickup');
+	protected $_language = array('shipping/pickup');
 
-	protected $preload_model = array('setting/setting', 'localisation/geo_zone');
+	protected $_model = array('setting/setting', 'localisation/geo_zone');
 
 	private $error = array(); 
 	

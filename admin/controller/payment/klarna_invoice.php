@@ -1,8 +1,8 @@
 <?php
 class ControllerPaymentKlarnaInvoice extends Controller {
-	protected $preload_language = array('payment/klarna_invoice');
+	protected $_language = array('payment/klarna_invoice');
 
-	protected $preload_model = array('setting/setting', 'localisation/order_status', 'localisation/geo_zone');
+	protected $_model = array('setting/setting', 'localisation/order_status', 'localisation/geo_zone');
 
     private $error = array();
 

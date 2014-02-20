@@ -1,8 +1,8 @@
 <?php 
 class ControllerModuleCart extends Controller {
-	protected $preload_language = array('module/cart');
+	protected $_language = array('module/cart');
 
-	protected $preload_model = array('setting/extension', 'tool/image');
+	protected $_model = array('setting/extension', 'tool/image');
 
 	public function index() {
       	if (isset($this->request->get['remove'])) {

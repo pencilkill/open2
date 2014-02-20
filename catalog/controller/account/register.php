@@ -1,8 +1,8 @@
 <?php 
 class ControllerAccountRegister extends Controller {
-	protected $preload_language = array('account/register');
+	protected $_language = array('account/register');
 
-	protected $preload_model = array('account/customer', 'account/customer_group', 'localisation/country', 'catalog/information', 'localisation/zone');
+	protected $_model = array('account/customer', 'account/customer_group', 'localisation/country', 'catalog/information', 'localisation/zone');
 
 	private $error = array();
 	      

@@ -1,6 +1,6 @@
 <?php   
 class ControllerErrorNotFound extends Controller {
-	protected $preload_language = array('error/not_found');
+	protected $_language = array('error/not_found');
 
 	public function index() {		
 		$this->document->setTitle($this->language->get('heading_title'));

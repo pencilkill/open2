@@ -1,8 +1,8 @@
 <?php 
 class ControllerLocalisationOrderStatus extends Controller {
-	protected $preload_language = array('localisation/order_status');
+	protected $_language = array('localisation/order_status');
 
-	protected $preload_model = array('localisation/order_status', 'localisation/language', 'setting/store', 'sale/order');
+	protected $_model = array('localisation/order_status', 'localisation/language', 'setting/store', 'sale/order');
  
 	private $error = array();
    

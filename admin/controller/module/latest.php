@@ -1,8 +1,8 @@
 <?php
 class ControllerModuleLatest extends Controller {
-	protected $preload_language = array('module/latest');
+	protected $_language = array('module/latest');
 
-	protected $preload_model = array('setting/setting', 'design/layout');
+	protected $_model = array('setting/setting', 'design/layout');
 
 	private $error = array(); 
 	

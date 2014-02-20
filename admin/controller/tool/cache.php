@@ -1,6 +1,6 @@
 <?php
 class ControllerToolCache extends Controller {
-	protected $preload_language = array('tool/cache');
+	protected $_language = array('tool/cache');
 
 	private $error = array();
 

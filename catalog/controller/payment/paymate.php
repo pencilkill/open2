@@ -1,6 +1,6 @@
 <?php 
 class ControllerPaymentPaymate extends Controller {
-	protected $preload_model = array('checkout/order');
+	protected $_model = array('checkout/order');
 
 	protected function index() {
     	$this->data['button_confirm'] = $this->language->get('button_confirm');

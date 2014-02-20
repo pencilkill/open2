@@ -1,8 +1,8 @@
 <?php 
 class ControllerTotalKlarnaFee extends Controller {
-	protected $preload_language = array('total/klarna_fee');
+	protected $_language = array('total/klarna_fee');
 
-	protected $preload_model = array('setting/setting', 'localisation/tax_class');
+	protected $_model = array('setting/setting', 'localisation/tax_class');
  
 	private $error = array(); 
 	 

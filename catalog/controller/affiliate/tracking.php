@@ -1,8 +1,8 @@
 <?php 
 class ControllerAffiliateTracking extends Controller {
-	protected $preload_language = array('affiliate/tracking');
+	protected $_language = array('affiliate/tracking');
 
-	protected $preload_model = array('catalog/product');
+	protected $_model = array('catalog/product');
  
 	public function index() {
 		if (!$this->affiliate->isLogged()) {

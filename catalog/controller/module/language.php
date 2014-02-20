@@ -1,8 +1,8 @@
 <?php  
 class ControllerModuleLanguage extends Controller {
-	protected $preload_language = array('module/language');
+	protected $_language = array('module/language');
 
-	protected $preload_model = array('localisation/language');
+	protected $_model = array('localisation/language');
 
 	public function index() {
     	if (isset($this->request->post['language_code'])) {

@@ -1,8 +1,8 @@
 <?php
 class ControllerAccountEdit extends Controller {
-	protected $preload_language = array('account/edit');
+	protected $_language = array('account/edit');
 
-	protected $preload_model = array('account/customer');
+	protected $_model = array('account/customer');
 
 	private $error = array();
 

@@ -1,6 +1,6 @@
 <?php 
 class ControllerAffiliateLogout extends Controller {
-	protected $preload_language = array('affiliate/logout');
+	protected $_language = array('affiliate/logout');
 
 	public function index() {
     	if ($this->affiliate->isLogged()) {

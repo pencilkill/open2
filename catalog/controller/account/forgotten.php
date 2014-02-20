@@ -1,8 +1,8 @@
 <?php
 class ControllerAccountForgotten extends Controller {
-	protected $preload_language = array('account/forgotten', 'mail/forgotten');
+	protected $_language = array('account/forgotten', 'mail/forgotten');
 
-	protected $preload_model = array('account/customer');
+	protected $_model = array('account/customer');
 
 	private $error = array();
 
