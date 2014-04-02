@@ -276,7 +276,7 @@ class ControllerDevDev extends Controller {
 
 		$textcolor = imagecolorallocate($image, 255, 255, 255);
 
-		imagettftext($image, 25, 0, 10, 45, $textcolor, __DIR__.'/SIMKAI.TTF', $this->config->get('config_name') . '网站后台管理');
+		imagettftext($image, 25, 0, 10, 45, $textcolor, __DIR__.'/SIMKAI.TTF', $this->config->get('config_name') . ' - Administrator');
 
 		imagepng($image, DIR_TEMPLATE . '../image/' . $logo);
 
