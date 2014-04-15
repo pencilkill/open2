@@ -599,7 +599,7 @@
               <td><?php echo $entry_logo; ?></td>
               <td>
 
-              <?php echo Fck::image('config_log', $config_logo, $logo)?>
+              <?php echo html::image('config_log', $config_logo, $logo)?>
 
                </td>
             </tr>
@@ -607,7 +607,7 @@
               <td><?php echo $entry_icon; ?></td>
               <td>
 
-              <?php echo Fck::image('config_icon', $config_icon, $icon)?>
+              <?php echo html::image('config_icon', $config_icon, $icon)?>
 
               </td>
             </tr>

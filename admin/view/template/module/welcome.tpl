@@ -35,7 +35,7 @@
             <table class="form">
               <tr>
                 <td><?php echo $entry_description; ?></td>
-                <td><textarea rows="" cols="" name="welcome_module[<?php echo $module_row; ?>][description][<?php echo $language['language_id']; ?>]" class="fck"><?php echo isset($module['description'][$language['language_id']]) ? $module['description'][$language['language_id']] : ''; ?></textarea></td>
+                <td><textarea rows="" cols="" name="welcome_module[<?php echo $module_row; ?>][description][<?php echo $language['language_id']; ?>]" class="ckeditor"><?php echo isset($module['description'][$language['language_id']]) ? $module['description'][$language['language_id']] : ''; ?></textarea></td>
               </tr>
             </table>
           </div>
@@ -160,12 +160,12 @@ function addModule() {
 	html += '      <td><input type="text" name="welcome_module[' + module_row + '][sort_order]" value="" size="3" /></td>';
 	html += '    </tr>';
 	html += '  </table>';
+	html += '  <textarea name="welcome_module_' + module_row + '_description"></textarea>';
 	html += '</div>';
 
-	//fck格式化
-	$.get('index.php?route=common/ajax/fck&c=welcome_module_' + module_row + '_description&token=<?php echo $token; ?>', function(data){ $(html).append(data); });
-
 	$('#form').append(html);
+
+	$('[name="welcome_module_' + module_row + '_description"]').ckeditor();
 
 	$('#language-' + module_row + ' a').tabs();
 

@@ -117,7 +117,7 @@
                 <?php } ?></td>
               <td class="left">
 
-              <?php echo Fck::image('option_value[' . $option_value_row . '][image]', $option_value['image'], $option_value['thumb'])?>
+              <?php echo html::image('option_value[' . $option_value_row . '][image]', $option_value['image'], $option_value['thumb'])?>
 
               </td>
               <td class="right"><input type="text" name="option_value[<?php echo $option_value_row; ?>][sort_order]" value="<?php echo $option_value['sort_order']; ?>" size="1" /></td>

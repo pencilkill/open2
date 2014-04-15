@@ -2,8 +2,8 @@
 /*
  * CKFinder
  * ========
- * http://ckfinder.com
- * Copyright (C) 2007-2011, CKSource - Frederico Knabben. All rights reserved.
+ * http://cksource.com/ckfinder
+ * Copyright (C) 2007-2013, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -33,7 +33,7 @@ ob_start();
 /**
  * define required constants
  */
-require_once "./constants.php";
+require_once dirname(__FILE__) . '/constants.php';
 
 // @ob_end_clean();
 // header("Content-Encoding: none");
@@ -41,19 +41,20 @@ require_once "./constants.php";
 /**
  * we need this class in each call
  */
-require_once CKFINDER_CONNECTOR_LIB_DIR . "/CommandHandler/CommandHandlerBase.php";
+require_once CKFINDER_CONNECTOR_LIB_DIR . '/CommandHandler/CommandHandlerBase.php';
 /**
  * singleton factory
  */
-require_once CKFINDER_CONNECTOR_LIB_DIR . "/Core/Factory.php";
+require_once CKFINDER_CONNECTOR_LIB_DIR . '/Core/Factory.php';
 /**
  * utils class
  */
-require_once CKFINDER_CONNECTOR_LIB_DIR . "/Utils/Misc.php";
+require_once CKFINDER_CONNECTOR_LIB_DIR . '/Utils/Misc.php';
 /**
  * hooks class
  */
-require_once CKFINDER_CONNECTOR_LIB_DIR . "/Core/Hooks.php";
+require_once CKFINDER_CONNECTOR_LIB_DIR . '/Core/Hooks.php';
+
 /**
  * Simple function required by config.php - discover the server side path
  * to the directory relative to the "$baseUrl" attribute
@@ -64,11 +65,9 @@ require_once CKFINDER_CONNECTOR_LIB_DIR . "/Core/Hooks.php";
  * @return string
  */
 function resolveUrl($baseUrl) {
-    //$fileSystem =& CKFinder_Connector_Core_Factory::getInstance("Utils_FileSystem");
-    //return $fileSystem->getDocumentRootPath() . $baseUrl;
-    $dir_path = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
-    $dir_path = str_replace('\\', '/', $dir_path);
-    return $dir_path.'/'.$baseUrl;
+    $fileSystem =& CKFinder_Connector_Core_Factory::getInstance("Utils_FileSystem");
+    $baseUrl = preg_replace("|^http(s)?://[^/]+|i", "", $baseUrl);
+    return $fileSystem->getDocumentRootPath() . $baseUrl;
 }
 
 $utilsSecurity =& CKFinder_Connector_Core_Factory::getInstance("Utils_Security");
@@ -80,6 +79,16 @@ $utilsSecurity->getRidOfMagicQuotes();
 $config = array();
 $config['Hooks'] = array();
 $config['Plugins'] = array();
+
+/**
+ * Fix cookies bug in Flash.
+ */
+if (!empty($_GET['command']) && $_GET['command'] == 'FileUpload' && !empty($_POST)) {
+	foreach ($_POST as $key => $val) {
+		if (strpos($key, "ckfcookie_") === 0)
+			$_COOKIE[str_replace("ckfcookie_", "", $key)] = $val;
+	}
+}
 
 /**
  * read config file

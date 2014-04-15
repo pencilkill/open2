@@ -25,7 +25,7 @@ jQuery(function($) {
 	});
 });
 
-//模板對應, Fck::image()
+//模板對應, html::image()
 function addImageUploader(name, image, preview){
 	var prefix = arguments[3] ? arguments[3] : name.replace(/(\[|\])/gi, '_');
 
@@ -136,9 +136,11 @@ function edit(o){
 	});
 }
 </script>
-<!-- FCK格式化 -->
-<?php echo Fck::htmlReplaceAll('fck');?>
-<!-- //FCK格式化 -->
+<!-- CKEditor -->
+<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="../ckeditor/adapters/jquery.js"></script>
+<script type="text/javascript">CKEDITOR.config.customConfig = '../ckeditor/config.js.php?uri=../'</script>
+<!-- //CKEditor-->
 <?php endif;?>
 </body>
 </html>

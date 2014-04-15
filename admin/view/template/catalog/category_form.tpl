@@ -42,7 +42,7 @@
               </tr>
               <tr>
                 <td><?php echo $entry_description; ?></td>
-                <td><textarea rows="" cols="" name="category_description[<?php echo $language['language_id']; ?>][description]" class="fck"><?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['description'] : ''; ?></textarea></td>
+                <td><textarea rows="" cols="" name="category_description[<?php echo $language['language_id']; ?>][description]" class="ckeditor"><?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['description'] : ''; ?></textarea></td>
               </tr>
             </table>
           </div>
@@ -98,7 +98,7 @@
               <td><?php echo $entry_image; ?></td>
               <td valign="top">
 
-              <?php echo Fck::image('image', $image, $thumb)?>
+              <?php echo html::image('image', $image, $thumb)?>
 
               </td>
             </tr>

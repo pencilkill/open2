@@ -59,7 +59,7 @@
               <td class="left"><input type="text" name="banner_image[<?php echo $image_row; ?>][link]" value="<?php echo $banner_image['link']; ?>" /></td>
               <td class="left">
 
-              <?php echo Fck::image('banner_image[' .$image_row .'][image]', $banner_image['image'], $banner_image['thumb'])?>
+              <?php echo html::image('banner_image[' .$image_row .'][image]', $banner_image['image'], $banner_image['thumb'])?>
 
 				</td>
               <td class="left"><a onclick="$('#image-row<?php echo $image_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>

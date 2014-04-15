@@ -32,18 +32,6 @@ class ControllerCommonAjax extends Controller{
 	public function sys(){
 
 	}
-	/**
-	 * fck format html tags which has class argument $this->request->get['c']
-	 * output javascript code
-	 * @see core class fck
-	 */
-	public function fck(){
-		$js='';
-		if(isset($this->request->get['c']) && $classname=$this->request->get['c']){
-			$js = urlencode(Fck::htmlReplaceAll($classname));
-		}
-		$this->response->setOutput($js);
-	}
 
 	public function county(){
 		$return = '';

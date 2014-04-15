@@ -20,8 +20,8 @@ require_once(DIR_SYSTEM . 'library/user.php');
 require_once(DIR_SYSTEM . 'library/weight.php');
 require_once(DIR_SYSTEM . 'library/length.php');
 
-// Fck
-require_once(DIR_SYSTEM . 'library/fck.php');
+// html
+require_once(DIR_SYSTEM . 'library/html.php');
 
 // Registry
 $registry = new Registry();

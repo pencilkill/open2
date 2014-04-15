@@ -2,8 +2,8 @@
 /*
 * CKFinder
 * ========
-* http://ckfinder.com
-* Copyright (C) 2007-2011, CKSource - Frederico Knabben. All rights reserved.
+* http://cksource.com/ckfinder
+* Copyright (C) 2007-2013, CKSource - Frederico Knabben. All rights reserved.
 *
 * The software, this file and its contents are subject to the CKFinder
 * License. Please read the license.txt file before using, installing, copying,
@@ -43,10 +43,10 @@ class CKFinder_Connector_CommandHandler_RenameFile extends CKFinder_Connector_Co
 
     /**
      * handle request and build XML
-     * @access public
+     * @access protected
      *
      */
-    public function buildXml()
+    protected function buildXml()
     {
         if (empty($_POST['CKFinderCommand']) || $_POST['CKFinderCommand'] != 'true') {
             $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_REQUEST);

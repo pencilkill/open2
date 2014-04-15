@@ -1,6 +1,6 @@
 <?php
 // DIR_PATH
-define('DIR_PATH', strtr(dirname(__FILE__) . '/', array('\\'=>'/','\/'=>'/')));
+define('DIR_PATH', strtr(dirname(__FILE__) . '/', array('\\'=>'/')));
 
 // HTTP
 define('HTTP_PATH', strtr('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'], array(strtr($_SERVER['SCRIPT_FILENAME'], array(DIR_PATH=>''))=>'')));

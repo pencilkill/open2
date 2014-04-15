@@ -42,7 +42,7 @@
               </tr>
               <tr>
                 <td><?php echo $entry_description; ?></td>
-                <td><textarea name="product_description[<?php echo $language['language_id']; ?>][description]" class="fck"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea></td>
+                <td><textarea name="product_description[<?php echo $language['language_id']; ?>][description]" class="ckeditor"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea></td>
               </tr>
               <tr>
                 <td><?php echo $entry_tag; ?></td>
@@ -160,7 +160,7 @@
               <td><?php echo $entry_image; ?></td>
               <td>
 
-				<?php echo Fck::image('image', $image, $thumb)?>
+				<?php echo html::image('image', $image, $thumb)?>
 
              </td>
             </tr>
@@ -620,7 +620,7 @@
               <tr>
                 <td class="left">
 
-                <?php echo Fck::image('product_image['.$image_row.'][image]', $product_image['image'], $product_image['thumb'])?>
+                <?php echo html::image('product_image['.$image_row.'][image]', $product_image['image'], $product_image['thumb'])?>
 
                 </td>
                 <td class="right"><input type="text" name="product_image[<?php echo $image_row; ?>][sort_order]" value="<?php echo $product_image['sort_order']; ?>" size="2" /></td>

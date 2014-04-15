@@ -35,7 +35,7 @@
 	          <tr>
 	            <td><span class="required">*</span> <?php echo $entry_description; ?></td>
 	            <td>
-	            	<textarea rows="" cols="" name="news_description[<?php echo $language['language_id']; ?>][description]" class="fck"><?php echo isset($news_description[$language['language_id']]) ? $news_description[$language['language_id']]['description'] : ''; ?></textarea>
+	            	<textarea rows="" cols="" name="news_description[<?php echo $language['language_id']; ?>][description]" class="ckeditor"><?php echo isset($news_description[$language['language_id']]) ? $news_description[$language['language_id']]['description'] : ''; ?></textarea>
 	              <?php if (isset($error_description[$language['language_id']])) { ?>
 	              <span class="error"><?php echo $error_description[$language['language_id']]; ?></span>
 	              <?php } ?></td>

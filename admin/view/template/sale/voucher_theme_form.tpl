@@ -30,7 +30,7 @@
             <td><?php echo $entry_image; ?></td>
             <td valign="top">
 
-				<?php echo Fck::image('name', $image, $thumb)?>
+				<?php echo html::image('name', $image, $thumb)?>
 
               <?php if ($error_image) { ?>
               <span class="error"><?php echo $error_image; ?></span>

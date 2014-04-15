@@ -2,8 +2,8 @@
 /*
  * CKFinder
  * ========
- * http://ckfinder.com
- * Copyright (C) 2007-2011, CKSource - Frederico Knabben. All rights reserved.
+ * http://cksource.com/ckfinder
+ * Copyright (C) 2007-2013, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -35,10 +35,10 @@ class CKFinder_Connector_CommandHandler_QuickUpload extends CKFinder_Connector_C
     /**
      * Command name
      *
-     * @access public
+     * @access protected
      * @var string
      */
-    public $command = "QuickUpload";
+    protected $command = "QuickUpload";
 
     function sendResponse()
     {

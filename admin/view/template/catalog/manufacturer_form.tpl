@@ -60,7 +60,7 @@
               <td><?php echo $entry_image; ?></td>
               <td valign="top">
 
-              <?php echo Fck::image('image', $image, $thumb)?>
+              <?php echo html::image('image', $image, $thumb)?>
 
               </td>
             </tr>
