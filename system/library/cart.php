@@ -266,7 +266,6 @@ class Cart {
 		return $product_data;
 	}
 
-
   	public function getProducts() {
 		if (!$this->data) {
 			foreach ($this->session->data['cart'] as $key => $quantity) {

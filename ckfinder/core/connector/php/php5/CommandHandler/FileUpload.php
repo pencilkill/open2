@@ -60,6 +60,13 @@ class CKFinder_Connector_CommandHandler_FileUpload extends CKFinder_Connector_Co
         if ($sFileName != $sUnsafeFileName) {
           $iErrorNumber = CKFINDER_CONNECTOR_ERROR_UPLOADED_INVALID_NAME_RENAMED;
         }
+
+        // Rename, update by sam@ozchamp.net
+        /**
+         * $sExtension=CKFinder_Connector_Utils_FileSystem::getExtension($sFileName);
+         * $sFileName=date('YmdHis').'.'.$sExtension;
+         */
+
         $oRegistry->set("FileUpload_fileName", $sFileName);
 
         $this->checkConnector();
