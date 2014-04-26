@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * @author Sam@ozchamp.net
+ * @author Sam <mail.song.de.qiang@gmail.com>
  * This DB class was not the opencart orignal DB class
  * It is using codeigniter DAO which was a little changed to be compatible with opencart
  * Try to read the driver method named 'query' and the result class method named 'initialize'

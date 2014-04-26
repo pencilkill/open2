@@ -133,7 +133,7 @@
 			config.action = action;
 		}
 
-		// sam@ozchamp.net
+		// Sam <mail.song.de.qiang@gmail.com>
 		config.width = config.height = '100%';
 		config.disableThumbnailSelection = true;
 

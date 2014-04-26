@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * @author Sam@ozchamp.net
+ * @author Sam <mail.song.de.qiang@gmail.com>
  *
  */
 /**

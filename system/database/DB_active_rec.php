@@ -250,7 +250,7 @@ class CI_DB_active_record extends CI_DB_driver {
 	 *
 	 * Generates the FROM portion of the query
 	 *
-	 * Support subquery by using $protect_identifiers, sam@ozchamp.net
+	 * Support subquery by using $protect_identifiers, Sam <mail.song.de.qiang@gmail.com>
 	 *
 	 * @param	mixed	can be a string or array
 	 * @param	bool	whether protect identifiers, this can support a subquery string from escape by setting as false
@@ -904,7 +904,7 @@ class CI_DB_active_record extends CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
-	  *	filter data which key not existed in table, sam@ozchamp.net
+	  *	filter data which key not existed in table, Sam <mail.song.de.qiang@gmail.com>
 	  * @param $set
 	  * @param $table
 	  */
@@ -1188,7 +1188,7 @@ class CI_DB_active_record extends CI_DB_driver {
 			$this->set($set);
 		}
 
-		$this->filter($this->ar_set, $table);	// sam@ozchamp.net
+		$this->filter($this->ar_set, $table);	// Sam <mail.song.de.qiang@gmail.com>
 
 		if (count($this->ar_set) == 0)
 		{
@@ -1291,7 +1291,7 @@ class CI_DB_active_record extends CI_DB_driver {
 			$this->set($set);
 		}
 
-		$this->filter($this->ar_set, $table);	// sam@ozchamp.net
+		$this->filter($this->ar_set, $table);	// Sam <mail.song.de.qiang@gmail.com>
 
 		if (count($this->ar_set) == 0)
 		{

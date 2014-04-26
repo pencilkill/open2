@@ -70,7 +70,7 @@ class CI_DB_driver {
 	var $curs_id;
 	var $limit_used;
 
-	// set using field_exist for filter fields when db insert and update data, sam@ozchamp.net
+	// set using field_exist for filter fields when db insert and update data, Sam <mail.song.de.qiang@gmail.com>
 	var $set_exists = TRUE;
 
 	/**
@@ -383,7 +383,7 @@ class CI_DB_driver {
 			$this->stmt_id		= FALSE;
 		}
 
-		// Result driver initialize, sam@ozchamp.net
+		// Result driver initialize, Sam <mail.song.de.qiang@gmail.com>
 		$RES->initialize();
 
 		// Is query caching enabled?  If so, we'll serialize the
@@ -870,7 +870,7 @@ class CI_DB_driver {
 	/**
 	 * Generate an select string
 	 *
-	 * @author sam@ozchamp.net
+	 * @author Sam <mail.song.de.qiang@gmail.com>
 	 *
 	 * @access	public
 	 * @param	string	the table upon which the query will be performed

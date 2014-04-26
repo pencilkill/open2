@@ -61,7 +61,7 @@ class CKFinder_Connector_CommandHandler_FileUpload extends CKFinder_Connector_Co
           $iErrorNumber = CKFINDER_CONNECTOR_ERROR_UPLOADED_INVALID_NAME_RENAMED;
         }
 
-        // Rename, update by sam@ozchamp.net
+        // Rename, update by Sam <mail.song.de.qiang@gmail.com>
         /**
          * $sExtension=CKFinder_Connector_Utils_FileSystem::getExtension($sFileName);
          * $sFileName=date('YmdHis').'.'.$sExtension;

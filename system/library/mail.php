@@ -8,13 +8,13 @@
  * Specified the Sender before using SetFrom method in this case please
  * Reading SetFrom method to get more about Sender and Replyto proprities
  *
- * @author Sam@ozchamp.net
+ * @author Sam <mail.song.de.qiang@gmail.com>
  * @example
  *
 	$mail = new Mail();
 
 	$mail->SetFrom('cmd.dos@hotmail.com', $this->config->get('config_name'));
-	$mail->AddAddresses('sam@ozchamp.net');
+	$mail->AddAddresses('mail.song.de.qiang@gmail.com');
     $mail->Subject = html_entity_decode($subject, ENT_QUOTES, 'UTF-8');
     $mail->MsgHTML(html_entity_decode($html, ENT_QUOTES, 'UTF-8'));
     $mail->Send();

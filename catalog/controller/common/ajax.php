@@ -1,6 +1,6 @@
 <?php
 /**
- * @author sam@ozchamp.net
+ * @author Sam <mail.song.de.qiang@gmail.com>
  */
 class ControllerCommonAjax extends Controller{
 	private $error=array();

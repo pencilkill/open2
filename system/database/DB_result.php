@@ -37,14 +37,14 @@ class CI_DB_result {
 	var $num_rows				= 0;
 	var $row_data				= NULL;
 
-	//Added $row, $rows for opencart, sam@ozchamp.net
+	//Added $row, $rows for opencart, Sam <mail.song.de.qiang@gmail.com>
 	var $row = array();
 	var $rows = array();
 
 	// --------------------------------------------------------------------
 
 	/**
-	 * sam@ozchamp.net
+	 * Sam <mail.song.de.qiang@gmail.com>
 	 * Initialize for opencart row and rows
 	 * Checking CI_DB_driver->query()
 	 * @access	public

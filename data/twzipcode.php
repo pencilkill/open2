@@ -1,6 +1,6 @@
 <?php
 /**
- * @author sam@ozchamp.net
+ * @author Sam <mail.song.de.qiang@gmail.com>
  * @link http://www.formosalife.com/website.formosalife.com/plugin/js/jquery.twzipcode-1.6.0.js
  * twzipcode
  * based on jquery.twzipcode-1.6.0.js

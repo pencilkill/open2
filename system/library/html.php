@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Sam, sam@ozchamp.net
+ * @author Sam <mail.song.de.qiang@gmail.com>
  */
 final class html{
 	public static function image($name,$image,$preview, $prefix=NULL){
