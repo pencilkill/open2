@@ -117,7 +117,7 @@ class ExcelI
 		$dataSrc=$data=array();
 
 		//獲取列標題
-		for($currentColumnIndex=0; $currentColumnIndex<= $highestColumnIndex; $currentColumnIndex++){
+		for($currentColumnIndex=0; $currentColumnIndex < $highestColumnIndex; $currentColumnIndex++){
 			$val = $currentSheet->getCellByColumnAndRow($currentColumnIndex, 1)->getValue();
 
 			$dataSrc[$currentColumnIndex]=strtolower(trim($val));
@@ -132,7 +132,7 @@ class ExcelI
 		for($currentRow = $beginRow ;$currentRow <= $endRow ;$currentRow++){
 			$dataRow=array();
 
-			for($currentColumnIndex=0; $currentColumnIndex<= $highestColumnIndex; $currentColumnIndex++){
+			for($currentColumnIndex=0; $currentColumnIndex < $highestColumnIndex; $currentColumnIndex++){
 				$val = $currentSheet->getCellByColumnAndRow($currentColumnIndex,$currentRow)->getValue();
 
 				$dataRow[$dataSrc[$currentColumnIndex]]=$val;
